@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+ http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+ 
+ <!-- http:localhost:8088/Board_Ajax -->
+ 
+<welcome-file-list>
+	<welcome-file>index.jsp</welcome-file>
+	<welcome-file>index.html</welcome-file>
+	<welcome-file>index.htm</welcome-file>
+</welcome-file-list>
+  
+  <resource-ref>
+	<description>My SQL Resource</description><!-- 리소스 설명 -->
+	<res-ref-name>jdbc/OracleDB</res-ref-name><!-- 리소스 이름(JNDI명) -->
+	<res-type>javax.sql.DataSource</res-type><!-- 리턴 Type -->
+	<res-auth>Container</res-auth><!-- 관리 계층 -->
+
+</resource-ref>
+   
+  </web-app>

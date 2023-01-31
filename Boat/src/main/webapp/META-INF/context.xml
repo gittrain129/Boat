@@ -1,0 +1,15 @@
+<Context>
+
+   <Resource
+      name="jdbc/OracleDB" auth="Container"
+      type="javax.sql.DataSource"
+      username="boat"
+      password="1234"
+      driverClassName="oracle.jdbc.driver.OracleDriver"
+      factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+      url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
+   
+   />
+
+</Context>
+<!-- 0112캡쳐에 설명있음 -->
