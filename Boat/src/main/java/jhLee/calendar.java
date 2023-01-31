@@ -18,12 +18,15 @@ public class calendar extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Calendarbean vo = new Calendarbean();
-		
-		vo.setSchedule_code();
+		//json파일을 변환 후 vo 객체에 담아서 dao에서 db insert 예정
+		//session id 추가해야함
+		//2. 본인 아이디의 캘린더만 보일건지 3.admin의 캘린더도 보여줄건지 정해야함
+		//3. calendar 내에서 색 변화가능한지 확인 필요
+		/*vo.setSchedule_code();
 		vo.setEvent_name();
 		vo.setStart_date();
 		vo.setEnd_date();
-		vo.setAllday();
+		vo.setAllday();*/
 		
 		CalendarDAO dao = new CalendarDAO();
 		System.out.println("확인");
@@ -41,4 +44,3 @@ public class calendar extends HttpServlet {
 		
 	}
 
-}

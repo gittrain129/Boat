@@ -65,9 +65,14 @@
     max-width: 1100px;
     margin: 0 auto;
   }
+  #cal_save_wrap{
+  text-align:right;  display: block;
+  margin : 20px;
+  }
   #cal_save{
   width : 120px; height : 40px; background-color : blue; color : white; 
-  font-size:17px; cursor:pointer}
+  font-size:17px; cursor:pointer; margin-botton: 50px;
+}
 </style>
  <script>
  var calendar =null;
@@ -147,12 +152,51 @@
      });
      calendar.render();
    });
-
+	    //전체 이벤트 뽑아냄
+	    function allSave(){
+	   	 var allEvent =	 calendar.getEvents();
+	   	 console.log(allEvent);
+	   	 
+	   	 var events = new Array();
+	   	 
+	   	 for(var i=0; i<allEvent.length;i++){
+	   		 var obj = new Object();
+	   		 
+	   		 obj.title = allEvent[i]._def.title; //이벤트 명칭
+	   		 obj.allday =allEvent[i]._def.allDay; //하루종일 이벤트인지 알려주는boolean값
+	   		 obj.start = allEvent[i]._instance.range.start//시작날짜 및 시간
+	   		 obj.end = allEvent[i]._instance.range.end//마침 날짜 및 시간
+	   		 
+	   		 events.push(obj);
+	   	 }
+	   	 //json형으로 변환함.
+	   	 var jsondata = JSON.stringify(events);
+	   	 console.log(jsondata);
+	   	 
+	   	 savedata(jsondata);
+	    }
+	    
+	    function savedata(jsondata){
+	   		$.ajax({
+	   			type:'POST',
+	   			url:'${pageContext.request.contextPath}/project_calendar',
+	   			data:{"alldata":jsondata},
+	   			dataType:"json",
+	   			async:true,
+	   			success:function(rdata){
+	   				
+	   				
+	   			},
+	   			error:function(request,status,error){},
+	   			complete:function(){}
+	   		}) 
+	   	 
+	    }
+	    
  </script>
 </head>
 
 <body>
-<button id ="cal_save" onclick="allSave();">전체 저장</button>
  <div id = drag_wrap>
 	 <div id='external-events'>
 	    <p>
@@ -183,50 +227,15 @@
   </div>
   
   
+ <div id = "cal_save_wrap">
+ <button id ="cal_save" onclick="allSave();">전체 저장</button>
+ </div>
+ 
  <div id = cal_wrap>
  	<div id='calendar'></div>
  </div>
  <script>
- //전체 이벤트 뽑아냄
- function allSave(){
-	 var allEvent =	 calendar.getEvents();
-	 console.log(allEvent);
-	 
-	 var events = new Array();
-	 
-	 for(var i=0; i<allEvent.length;i++){
-		 var obj = new Object();
-		 
-		 obj.title = allEvent[i]._def.title; //이벤트 명칭
-		 obj.allday =allEvent[i]._def.allDay; //하루종일 이벤트인지 알려주는boolean값
-		 obj.start = allEvent[i]._instance.range.start//시작날짜 및 시간
-		 obj.end = allEvent[i]._instance.range.end//마침 날짜 및 시간
-		 
-		 events.push(obj);
-	 }
-	 //json형으로 변환함.
-	 var jsondata = JSON.stringify(events);
-	 console.log(jsondata);
-	 
-	 savedata(jsondata);
- }
- 
- function savedata(jsondata){
-		$.ajax({
-			type:'POST',
-			url:'${pageContext.request.contextPath}/project_calendar',
-			data:{"alldata":jsondata},
-			dataType:"json",
-			success:function(rdata){
-				
-				
-			},
-			error:function(request.status,error){},
-			complete:function(){}
-		}) 
-	 
- }
- 
+
  </script>
 </body>
 </html>
