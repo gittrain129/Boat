@@ -10,6 +10,13 @@
 <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <style>
+table{
+	width:100%;
+	height:100%
+	padding:0;
+	margin:0;
+	background-color: #A8C0D6;
+}
 * {
     padding: 0;
     margin: 0;
@@ -21,7 +28,7 @@ a {
 }
 
 .wrap {
-    padding: 40px 0;
+    padding: 10px 0;
     background-color: #A8C0D6;
 }
 
@@ -98,11 +105,11 @@ a {
      <table class="display">
             <tr>
                 <td class="title">Status:</td>
-                <td><div id="status" class="status"></div></td>
-           </tr>
+            </tr>
            <tr>
            <td>
 		<div class="wrap">
+		<!-- c:if  -->
         		<div class="chat ch1">
             		<div class="icon"><i class="fa-solid fa-user"></i></div>
             		<div class="textbox" id="your_box">안녕하세요.</div>
@@ -138,6 +145,7 @@ a {
                <div id="receiver-id" style="font-weight: bold;" title="Copy this ID to the input on send.html.">ID:</div>
          </td>
          </tr>
+         <tr> <td><div id="status" class="status"></div></td> </tr>
      </table>
      
      
