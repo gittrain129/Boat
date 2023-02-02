@@ -12,10 +12,97 @@
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <title>Peer-to-Peer Cue System --- Sender</title>
         <link rel="stylesheet" href="style.css">
+        <style>
+        * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+table{
+width:100%;
+background-color: #A8C0D6;
+
+}
+.message {
+    padding: 40px 0;
+    background-color: #A8C0D6;
+}
+
+.message .chat {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.message .chat .icon {
+    position: relative;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #eee;
+}
+
+.message .chat .icon i {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    font-size: 2.5rem;
+    color: #aaa;
+    transform: translateX(-50%);
+}
+
+.message .chat .textbox {
+    position: relative;
+    display: inline-block;
+    max-width: calc(100% - 70px);
+    padding: 10px;
+    margin-top: 7px;
+    font-size: 13px;
+    border-radius: 10px;
+}
+
+.message .chat .textbox::before {
+    position: absolute;
+    display: block;
+    top: 0;
+    font-size: 1.5rem;
+}
+
+.message .ch1 .textbox {
+    margin-left: 20px;
+    background-color: #ddd;
+}
+
+.message .ch1 .textbox::before {
+    left: -15px;
+    content: "◀";
+    color: #ddd;
+}
+
+.message .ch2 {
+    flex-direction: row-reverse;
+}
+
+.message .ch2 .textbox {
+    margin-right: 20px;
+    background-color: #F9EB54;
+}
+
+.message .ch2 .textbox::before {
+    right: -15px;
+    content: "▶";
+    color: #F9EB54;
+}
+</style>
+        
     </head>
     <body>
-        <h1>Peer-to-Peer Cue System --- Sender</h1>
-
+       
         <table class="control">
             <tr>
                 <td class="title">Status:</td>
@@ -37,22 +124,7 @@
                 <td><div id="status" class="status"></div></td>
                 <td><div class="message" id="message"></div></td>
             </tr>
-            <tr>
-                <td>
-                    <button type="button" class="control-button" id="resetButton">Reset</button>
-                </td>
-                <td>
-                    <button type="button" class="control-button" id="goButton">Go</button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button type="button" class="control-button" id="fadeButton">Fade</button>
-                </td>
-                <td>
-                    <button type="button" class="control-button" id="offButton">Off</button>
-                </td>
-            </tr>
+            
         </table>
 
         <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
@@ -220,8 +292,8 @@
                             t = "0" + t;
                         return t;
                     };
-
-                    message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
+                    message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
+                    //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
                 };
 
                 function clearMessages() {

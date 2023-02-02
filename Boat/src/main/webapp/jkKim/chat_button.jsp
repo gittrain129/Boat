@@ -9,6 +9,7 @@
 <body>
 <div>
 <button onclick="window.open('chatView.jsp','BoaTalk','width=400, height=450, location=no, status=no, scrollbars=yes')">채팅뷰 (window.open)열기</button>
+<button onclick="window.open('Sender.jsp','BoaTalk','width=400, height=450, location=no, status=no, scrollbars=yes')">채팅뷰 (window.open)열기</button>
 </div>
 
 <div>
