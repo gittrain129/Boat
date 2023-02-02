@@ -1,159 +1,230 @@
+<!DOCTYPE html>
 <html>
 <head>
-   
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
-  
-    <title>Boat</title>
-    
+<meta charset="UTF-8">
+<title>Insert title here</title>
 <style>
-.container-doc {
-    min-width: 1280px;
+
+div.logo{
+	width: 10%;
+    float: left;
+    box-sizing: border-box;
+    position: left top;
 }
 
-div {
-	margin:0;
-	padding:0;
+div.topmenu {
+	 width: 90%;
+     float: right;
+     box-sizing: border-box;
 }
-div {
-	display:block;
-}
-
-img {
-	max-width: 100%;
-	max-height: 100%;
-}
-
-.icon_b{
-	height:200px;
-	width:200px;
-}
-
-.doc-header.no_border:not(:hover) {
-    border-color: transparent;
-}
-
-.doc-header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 1000;
-    min-width: 1280px;
-    border-bottom: 1px solid #e6e6e6;
-    text-align: center;
-    background: #fff;
-}
+/* header */
 
 header {
-    display: block;
+	width:100%;
+	height:100px;
 }
 
-h1 {
-    display: block;
-    font-size: 2em;
-    margin-block-start: 0.67em;
-    margin-block-end: 0.67em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
+/*
+* {
+	margin: 0; 
+	padding: 0; 
+}
+*/
+
+li {
+	list-style: none; 
+}
+body {
+	font-family: 'Nanum Gothic', sans-serif; 
+	width: 100%; 
+	margin: 0 auto; 
+	}
+            
+/* .logo {
+	margin: 50px 0; 
+	font-size: 30px; 
+	text-align: center; 
+	font-family: 'Nanum Brush Script', cursive; 
+	} */
+            
+.topMenu {
+position: relative;
+	width: 100%; 
+	margin-top: 50px;
+	margin-bottom: 20px; 
+	text-align: center; 
+	height: 40px; 
+	}
+	
+.topMenu:after {
+	content: ""; 
+	display: block; 
+	clear: both; 
+	 
+	}
+	
+.menu01>li {
+	float: left; 
+	width: 20%; 
+	line-height: 40px; 
+	}
+	
+.menu01 span {
+	font-size: 20px; 
+	font-weight: bold; 
+	}
+            
+.dept01 {	
+	position: absolute; 
+	top: 40px; 
+	display: none; 
+	width: 20%; 
+	 padding: 20px 0; 
+	 border-bottom: 1px solid #ccc; 
+	 background: #fff;
+	}
+            
+#nop {
+	float: none; 
+	}
+            
+.none:after {
+	content: ""; 
+	display: block; 
+	clear: both; 
+	}
+	
+	
+	/*footer*/
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
+#wrap {
+  height:10%;
+  width: 100%; 
+  background-color: #f2f2f2;
+}
+
+section {
+  padding-bottom: 105px;
+}
+
+footer {
+  width: 100%;
+  height: 90px;
+  bottom: 0px;
+  position: absolute;
+  border-top: 1px solid #c4c4c4;
+  padding-top: 15px;
+  color: #808080;
+  font-size: 11px;
+}
+
+footer a {
+  display: inline-block;
+  margin: 0 20px 10px 20px;
+  color: #808080; font-size: 11px;
+}
+
+footer a:visited {
+  color: #808080;
+}
+
+footer p {
+  margin-top: 0; margin-bottom: 0;   
+}
+
+footer p span {
+  display: inline-block;
+  margin-left: 20px;
+}
 
 </style>
 </head>
-
 <body>
-<div class="dropdown_menu">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).on('mouseover', '.topMenu span', function() {
+	    $('.dept01').slideDown(300);
+	});
+	$(document).on('mouseover', 'div', function () {
+	    if (!$(this).hasClass('topMenu')) {
+	        $('.dept01').slideUp(300);
+	    }
+	});
 
-		<h1 class="doc-title">
-			<a href="https://localhost8088" class="active">
-				<i class="icon_b"></i>
-				<img src="../image/logo.jpg">
-			</a>
-		</h1>
-		
-		<nav id="menuContent" class="doc-mc">
-			<h2 class="screen_out"> boat 메인메뉴 </h2>
-				<ul class="list_mc">
-					<li class>
-						" 회사 소개 "
-					<ul class="list_mc_sub">
-						<li>
-							<span class="txt_sub">오시는 길</span>
-						</li>
-					</ul>
-					</li>
+
+</script>
+	<header>
+	<!-- <div class="logo">
+            <span class="logo">컨텐츠 내용이 밀리는 풀 드롭다운 메뉴</span>
+        </div>  -->
+        <div class="logo">
+          		
+					<a href="https://localhost8088">
+						<img src="../image/logo.jpg" style="flaot:left; width: 100px; height: 100px;">
+					</a>
 					
-					<li class>
-						" 내 정보 "
-					<ul class="list_mc_sub">
-						<li>
-							<span class=:txt_sub">내정보 보기</span>
-						</li>
-						<li>
-							<span class=:txt_sub">내글 보기</span>
-						</li>
-						<li>
-							<span class=:txt_sub">내할일 보기</span>
-						</li>
-					</ul>
-					</li>
-					
-					<li class>
-						" 게시판 "
-					<ul class="list_mc_sub">
-						<li>
-							<span class=:txt_sub">업무 게시판</span>
-						</li>
-						<li>
-							<span class=:txt_sub">자료실 게시판</span>
-						</li>
-					</ul>
-					</li>
-					
-					<li class>
-						" 공유업무 "
-					<ul class="list_mc_sub">
-						<li>
-							<span class=:txt_sub">캘린더</span>
-						</li>
-						<li>
-							<span class=:txt_sub">주소록</span>
-						</li>
-					</ul>
-					</li>
-				</ul>
-				
-				<div>
-            <ul>
-                <li><a href="#">로그인</a></li>
-                <li><a href="#">회원가입</a></li>
-                
-                <li><select name="" id="">
-                    <option value="">사원모아보기</option>
-                    <option value="">업무게시판</option>
-                    <option value="">자료실게시판</option>
-                </select>
-                
-            </ul>
-            <ul>
-                <li><a href="#">로그아웃</a></li>
-               <ul>
-                   <li><button>출근</button></li>
-                   <li><button>퇴근</button></li>
-                   <li><button>외출</button></li>
-                </ul>
+		</div>
+        <div class="topMenu">
+            <ul class="menu01">
+                <li><span>회사소개</span>
+                    <ul class="dept01">
+                        <li id="nop">오시는길</li>
+                        <li id="nop">&nbsp;</li>
+                        <li id="nop">&nbsp;</li>
+                    </ul>
+                </li>
+                <li><span>내 정보</span>
+                    <ul class="dept01">
+                        <li id="nop">내 정보 보기</li>
+                        <li id="nop">내 &nbsp;글 &nbsp;보기</li>
+                        <li id="nop">내 할일 보기</li>
+                    </ul>
+                </li>
+                <li><span>게시판</span>
+                    <ul class="dept01">
+                        <li id="nop">업무 게시판</li>
+                        <li id="nop">자료 게시판</li>
+                        <li id="nop">&nbsp;</li>
+                    </ul>
+                </li>
+                <li><span>공유업무</span>
+                    <ul class="dept01">
+                        <li id="nop">캘린더</li>
+                        <li id="nop">주소록</li>
+                        <li id="nop">&nbsp;</li>
+                    </ul>
+                </li>
+
+
+
             </ul>
         </div>
-        
-		</nav>
+        </header>
 		
-		
-</div>          
+<main>
+		<div id="body-content">
+		<p>바디 부분 </p>
+		</div>
+</main>
 
 
+<div id="wrap">		
+		<footer>
+		    <nav>
+		        <a href='https://www.jhta.co.kr/about-the-academy/way-to-come' target='_blank'>중앙HTA</a> |
+		        <a href='https://github.com/gittrain129/Boat' target='_blank'>Github</a>
+		    </nav>
+		    <p>
+		        <span>프로젝트: BOAT</span><br/>
+		        <span>in HTA Academy</span><br/>
+		        <span>Copyright 2022. BOAT. All Rights Reserved.</span>
+		    </p>
+		</footer>
 
+</div>
 </body>
 </html>
