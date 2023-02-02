@@ -26,7 +26,7 @@ public class CowordFrontController extends javax.servlet.http.HttpServlet{
 		ActionForward forward = null;
 		Action action = null;
 		
-		//http://localhost:8088/Boat
+		//http://localhost:8089/Boat
 		switch(command) {
 			case "/email.net":
 				action = new EmailAction();
