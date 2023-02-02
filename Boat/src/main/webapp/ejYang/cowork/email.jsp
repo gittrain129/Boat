@@ -1,11 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
  <head>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	<style>
 		* { box-sizing: border-box;}
+		input[type=text], select, textarea {
+		  width: 100%;
+		  padding: 12px;
+		  border: 1px solid #ccc;
+		  border-radius: 4px;
+		  box-sizing: border-box;
+		  margin-top: 6px;
+		  margin-bottom: 16px;
+		  resize: vertical;
+		}
 		.container {width:70%}
 		label { font-weight:bold}
 		fieldset { padding:50px}
@@ -17,36 +26,36 @@
 		.form-textarea {width:88%; resize: none;}
 		.btn-primary {width:10%}
 	</style>
-	<title>¸ŞÀÏ º¸³»±â</title>
+	<title>ë©”ì¼ ë³´ë‚´ê¸°</title>
  </head>
  <body>
  	<div class="container mt-5">
- 		<h2>¸ŞÀÏº¸³»±â</h2>
+ 		<h2>ë©”ì¼ë³´ë‚´ê¸°</h2>
  		<form class="form-horizontal" method="post" action="mailSend.jsp">
  		  <fieldset>
  			<div class="form-group">
- 				<label class="control-label" for="sender">º¸³»´Â »ç¶÷</label>
+ 				<label class="control-label" for="sender">ë³´ë‚´ëŠ” ì‚¬ëŒ</label>
  					<input type="text" name="sender" id="sender" class="form-control"
- 						   placeholder="º¸³»´Â ºĞÀÇ ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¼¼¿ä."
+ 						   placeholder="ë³´ë‚´ëŠ” ë¶„ì˜ ì´ë©”ì¼ ì£¼ì†Œë¥¼ ì…ë ¥í•˜ì„¸ìš”."
  						   value="@naver.com" required>
  			</div>
  			
  			<div class="form-group">
- 				<label class="control-label" for="receiver">¹Ş´Â »ç¶÷</label>
+ 				<label class="control-label" for="receiver">ë°›ëŠ” ì‚¬ëŒ</label>
  					<input type="email" name="receiver" id="receiver" class="form-control"
- 						   placeholder="¹Ş´Â ºĞÀÇ ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¼¼¿ä." required>
+ 						   placeholder="ë°›ëŠ” ë¶„ì˜ ì´ë©”ì¼ ì£¼ì†Œë¥¼ ì…ë ¥í•˜ì„¸ìš”." required>
  			</div>
  			
  			<div class="form-group">
- 				<label class="control-label" for="reference">ÂüÁ¶</label>
+ 				<label class="control-label" for="reference">ì°¸ì¡°</label>
  					<input type="email" name="reference" id="reference" class="form-control"
- 						   placeholder="ÂüÁ¶¸¦ ÀÔ·ÂÇÏ¼¼¿ä." required>
+ 						   placeholder="ì°¸ì¡°ë¥¼ ì…ë ¥í•˜ì„¸ìš”." required>
  			</div>
  			
  			<div class="form-group">
- 				<label class="control-label" for="subject">Á¦¸ñ</label>
+ 				<label class="control-label" for="subject">ì œëª©</label>
  					<input type="email" name="subject" id="subject" class="form-control"
- 						   placeholder="ÀÌ¸ŞÀÏÀÇ Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä." required>
+ 						   placeholder="ì´ë©”ì¼ì˜ ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”." required>
  			</div>
  			
  			<div class="form-group">
@@ -54,9 +63,9 @@
  						   	  row="5" required></textarea>
  			</div>
  			
- 			<!-- ¹öÆ° ¿µ¿ª -->
+ 			<!-- ë²„íŠ¼ ì˜ì—­ -->
  			<div class="form-actions">
- 				<input type="submit" class="btn btn-primary" value="Àü¼Û">
+ 				<input type="submit" class="btn btn-primary" value="ì „ì†¡">
  			</div>
  		  </fieldset>
  		</form>

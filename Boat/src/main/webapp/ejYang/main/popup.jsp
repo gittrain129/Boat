@@ -16,7 +16,7 @@
   	.layerPopup div {display : inline;}
   	#btn-close a{text-decoration : none; color : black; width: 50px;height : 40px; cursor: pointer;}
   </style>
-  
+
  </head>
  <body>
  	<div class="layerPopup" id="layerPopup">
