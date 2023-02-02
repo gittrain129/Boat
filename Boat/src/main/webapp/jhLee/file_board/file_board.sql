@@ -15,11 +15,21 @@ create table file_board (
 	FILE_READCOUNT NUMBER(5),
 	FILE_DATE DATE );
 	
+	insert into file_board
+	values(1,1,1,1,1,1,1,0,0,0,0,sysdate);
+	
+	insert into file_board
+	values(2,1,1,1,1,1,1,0,0,1,0,sysdate);
+	
+	insert into file_board
+	values(3,1,1,1,1,1,1,0,0,2,0,sysdate);
+	
 	select * from file_board;
 	
 	
 	drop table FILE_COMMENT cascade constraints purge;
 
+	
 create table FILE_COMMENT (
 F_C_NUM number primary key,
 F_C_ID varchar2(30) references member(empno),

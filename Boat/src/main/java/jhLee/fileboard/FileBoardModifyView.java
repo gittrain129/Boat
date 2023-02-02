@@ -1,4 +1,4 @@
-package jhLee.board;
+package jhLee.fileboard;
 
 import java.io.IOException;
 
@@ -6,12 +6,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class FileBoardModifyAction implements Action {
+public class FileBoardModifyView implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//  File_bo_Update.jsp 의 내용 저장 (file저장도 필요함)
+		// File_bo_Update.jsp
 		return null;
 	}
 

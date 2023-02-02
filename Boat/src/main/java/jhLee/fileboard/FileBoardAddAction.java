@@ -1,4 +1,4 @@
-package jhLee.board;
+package jhLee.fileboard;
 
 import java.io.IOException;
 
@@ -6,12 +6,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class FileBoardDetailAction implements Action {
+public class FileBoardAddAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// File_bo_Read.jsp
+		// File_bo_Write.jsp
 		return null;
 	}
 
