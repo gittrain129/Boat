@@ -1,4 +1,4 @@
-package jhLee;
+package jhLee.board;
 
 public class ActionForward {
 	private boolean redirect = false; 

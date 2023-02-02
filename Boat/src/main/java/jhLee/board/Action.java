@@ -1,4 +1,4 @@
-package jhLee;
+package jhLee.board;
 
 import java.io.IOException;
 

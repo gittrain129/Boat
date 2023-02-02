@@ -1,4 +1,4 @@
-package jhLee;
+package jhLee.calendar;
 
 public class Calendarbean {
 
