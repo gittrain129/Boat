@@ -10,13 +10,6 @@
 <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <style>
-table{
-	width:100%;
-	height:100%
-	padding:0;
-	margin:0;
-	background-color: #A8C0D6;
-}
 * {
     padding: 0;
     margin: 0;
@@ -27,18 +20,18 @@ a {
     text-decoration: none;
 }
 
-.wrap {
-    padding: 10px 0;
+.message {
+    padding: 40px 0;
     background-color: #A8C0D6;
 }
 
-.wrap .chat {
+.message .chat {
     display: flex;
     align-items: flex-start;
     padding: 20px;
 }
 
-.wrap .chat .icon {
+.message .chat .icon {
     position: relative;
     overflow: hidden;
     width: 50px;
@@ -47,7 +40,7 @@ a {
     background-color: #eee;
 }
 
-.wrap .chat .icon i {
+.message .chat .icon i {
     position: absolute;
     top: 10px;
     left: 50%;
@@ -56,7 +49,7 @@ a {
     transform: translateX(-50%);
 }
 
-.wrap .chat .textbox {
+.message .chat .textbox {
     position: relative;
     display: inline-block;
     max-width: calc(100% - 70px);
@@ -66,34 +59,34 @@ a {
     border-radius: 10px;
 }
 
-.wrap .chat .textbox::before {
+.message .chat .textbox::before {
     position: absolute;
     display: block;
     top: 0;
     font-size: 1.5rem;
 }
 
-.wrap .ch1 .textbox {
+.message .ch1 .textbox {
     margin-left: 20px;
     background-color: #ddd;
 }
 
-.wrap .ch1 .textbox::before {
+.message .ch1 .textbox::before {
     left: -15px;
     content: "◀";
     color: #ddd;
 }
 
-.wrap .ch2 {
+.message .ch2 {
     flex-direction: row-reverse;
 }
 
-.wrap .ch2 .textbox {
+.message .ch2 .textbox {
     margin-right: 20px;
     background-color: #F9EB54;
 }
 
-.wrap .ch2 .textbox::before {
+.message .ch2 .textbox::before {
     right: -15px;
     content: "▶";
     color: #F9EB54;
@@ -105,11 +98,11 @@ a {
      <table class="display">
             <tr>
                 <td class="title">Status:</td>
-            </tr>
+                <td><div id="status" class="status"></div></td>
+           </tr>
            <tr>
            <td>
-		<div class="wrap">
-		<!-- c:if  -->
+		<div class="message" id="message">
         		<div class="chat ch1">
             		<div class="icon"><i class="fa-solid fa-user"></i></div>
             		<div class="textbox" id="your_box">안녕하세요.</div>
@@ -118,21 +111,10 @@ a {
             		<div class="icon"><i class="fa-solid fa-user"></i></div>
             		<div class="textbox" id="my_box">안녕하세요</div>
         		</div>
-        		<div class="chat ch1">
-            		<div class="icon"><i class="fa-solid fa-user"></i></div>
-            		<div class="textbox">반갑습니다1</div>
-        		</div>
-        		<div class="chat ch2">
-            		<div class="icon"><i class="fa-solid fa-user"></i></div>
-            		<div class="textbox">반갑습니다2</div>
-        		</div>
+        		
 		</div>
-		</td>
-				
-			<td><div class="message" id="message"></div>
-			</td>
+		</td>		
         </tr>
-        
          <tr>
                 <td>
                     <input type="text" id="sendMessageBox" placeholder="Enter a message..." autofocus="true" />
@@ -145,7 +127,6 @@ a {
                <div id="receiver-id" style="font-weight: bold;" title="Copy this ID to the input on send.html.">ID:</div>
          </td>
          </tr>
-         <tr> <td><div id="status" class="status"></div></td> </tr>
      </table>
      
      
@@ -158,8 +139,8 @@ a {
                 var conn = null;
                 var recvId = document.getElementById("receiver-id");
                 var status = document.getElementById("status");
-                //var message = document.getElementById("message");
-                var receiverMessage = document.getElementById("my_box"); //내 메세지
+                var message = document.getElementById("message");
+               // var receiverMessage = document.getElementById("my_box"); //내 메세지
                 //var senderMessage = document.getElementById("your_box"); //받은 메세지
                 var standbyBox = document.getElementById("standby");
                 var goBox = document.getElementById("go");
@@ -316,12 +297,16 @@ a {
                         return t;
                     };
 
-                    receiverMessage.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
+                    //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
+                    //message.innerHTML = ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" +msg + message.innerHTML +"</div>");
+                    message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
                     
+                   
+        		
                 }
 
                 function clearMessages() {
-                	receiverMessage.innerHTML = "";
+                	message.innerHTML = "";
                     addMessage("Msgs cleared");
                 }
 
