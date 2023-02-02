@@ -19,7 +19,11 @@
 a {
     text-decoration: none;
 }
+table{
+width:100%;
+background-color: #A8C0D6;
 
+}
 .message {
     padding: 40px 0;
     background-color: #A8C0D6;
@@ -98,8 +102,7 @@ a {
      <table class="display">
             <tr>
                 <td class="title">Status:</td>
-                <td><div id="status" class="status"></div></td>
-           </tr>
+            </tr>
            <tr>
            <td>
 		<div class="message" id="message">
@@ -118,7 +121,7 @@ a {
          <tr>
                 <td>
                     <input type="text" id="sendMessageBox" placeholder="Enter a message..." autofocus="true" />
-                    <button type="button" id="sendButton">Send</button>
+                    <button type="button" id="sendButton">전송</button>
                     <button type="button" id="clearMsgsButton">Clear Msgs (Local)</button>
                 </td>
          </tr>
@@ -126,6 +129,9 @@ a {
          <td>
                <div id="receiver-id" style="font-weight: bold;" title="Copy this ID to the input on send.html.">ID:</div>
          </td>
+         </tr>
+         <tr>
+         <td><div id="status" class="status"></div></td>
          </tr>
      </table>
      
