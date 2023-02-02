@@ -23,7 +23,7 @@
     margin-top: 50px  ;
     padding: 20px;
 }
-h1{font-size : 1.5rem; text-align: center; color : #1a92b9}
+h1{font-size : 1.5rem; text-align: center;  color:rgb(0,173,238)!important; ;}
 .container{width : 90%}
 label{font-weight : bold}
 #upfile,#upfile2{display : none}
@@ -38,8 +38,13 @@ img{width : 20px;}
     float: left;
 }
 .btn-group2{
-    margin-left: 160px;
+  text-align :center;
 }
+.btn-secondary {
+	background-color: rgb(0, 173, 238) !important;
+	border: rgb(0, 173, 238) !important;;
+}
+
 </style>
 
 </head>
@@ -88,8 +93,8 @@ img{width : 20px;}
  	</div>
  	
  	<div class="form-group">
- 		<label>파일첨부
- 		<img alt="파일첨부" src="image/file.png">
+ 		<label>파일첨부 &nbsp;
+ 		<img alt="파일첨부" src="../image/file.png">
  		<input name="board_file" id="upfile" type="file">
 		 </label>
 	 	
@@ -97,7 +102,7 @@ img{width : 20px;}
  	</div>
  	<div class="form-group">
  		<label>파일첨부2
- 		<img alt="파일첨부2" src="image/file.png">
+ 		<img alt="파일첨부2" src="../image/file.png">
  		<input name="board_file2" id="upfile2" type="file">
 		 </label>
 	 	
@@ -105,7 +110,7 @@ img{width : 20px;}
  	</div>
  	
  	<div class="form-group btn-group2">
- 		<button type="submit" class="btn btn-primary">등록</button>
+ 		<button type="submit" class="btn btn-primary" style="background-color :  rgb(0, 173, 238)!important;border-color:rgb(0, 173, 238)!important">등록</button>
  		<button type="reset" class="btn btn-danger">취소</button>
  	</div>
  </form>

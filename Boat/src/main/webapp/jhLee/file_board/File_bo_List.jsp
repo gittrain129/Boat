@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="boardlist.css">
+    <link rel="stylesheet" href="../css/filelist.css">
     <title>자료게시판 목록보기</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+    <div class="container">
     <div class = "File_board_list_wrap">
         <div class="File_board_Title">
             <Strong>자료실 게시판</Strong>
@@ -52,9 +53,12 @@
             <tbody>
                 <tr>
                     <td>5</td>
-                    <td><a href="#">자료입니다<span>new</span></a></td>
+                    <td><a href="#">자료입니다
+                    </a>
+                        <img src="../image/new.png" alt="" style ="width: 30px">
+                    </td>
                     
-                    <td>홍보부</td>
+                    <td>new이미지</td>
                     <td>홍길동</td>
                     <td>0</td>
                     <td>230131</td>
@@ -126,7 +130,7 @@
         <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
         </button>
         
-        
+   
         <div class="dropdown-menu">
             <a class="dropdown-item" href="#">홍보부</a>
             <a class="dropdown-item" href="#">기획부</a>
@@ -146,8 +150,24 @@
         </div>
    
     
-    <button type="button" class="btn btn-light">글쓰기</button>
+    <button type="button" class="btn ">글쓰기</button>
 </div>
-    </div>
+
+     
+
+
+   
+   <p class="paging">
+     <a href="#" class="btnPage"><img src="../image/pre.png" alt="이전10개" width="10px"></a>
+     <span class="num"><a href="#" class="firstItem">1</a>  
+        <a href="#">2</a> <a href="#">3</a>
+         <a href="#">4</a> <a href="#">5</a> 
+         <a href="#">6</a> <a href="#">7</a> 
+         <a href="#">8</a> <a href=  "#">9</a> 
+         <a href="#">10</a></span>
+     <a href="#" class="btnPage"><img src="../image/next.png" alt="다음10개" /></a>
+   </p>
+  
+</div>    </div>
 </body>
 </html>

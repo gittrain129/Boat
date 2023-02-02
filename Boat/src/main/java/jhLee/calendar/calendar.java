@@ -1,4 +1,4 @@
-package jhLee;
+package jhLee.calendar;
 
 import java.io.IOException;
 
