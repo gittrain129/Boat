@@ -1,7 +1,9 @@
-$(document).ready(function(){
-		
+$(function(){
+	//부서명 자동 선택
+	$()
+	
 	//submit 버튼 클릭할 때 이벤트 부분
-	$("form[name=boardform]").submit(function(){
+	$("form").submit(function(){
 		
 		if($.trim($("#board_subject").val()) == ""){
 			alert("제목을 입력하세요");
@@ -12,6 +14,12 @@ $(document).ready(function(){
 		if($.trim($("#board_name").val()) == ""){
 			alert("성함을 입력하세요");
 			$("#board_subject").focus();
+			return false;
+		}
+		
+		if($.trim($("#board_pass").val()) == ""){
+			alert("비밀번호를 입력하세요");
+			$("#board_pass").focus();
 			return false;
 		}
 		
