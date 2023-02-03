@@ -1,5 +1,5 @@
 //*** 데이터 빈(DataBean) 클래스 작성 ***
-package ejYang;
+package ejYang.board;
 
 public class BoardBean {
 	private int		board_num;		//글번호
@@ -81,7 +81,7 @@ public class BoardBean {
 		return board_date;
 	}
 	public void setBoard_date(String board_date) {
-		this.board_date = board_date;
+		this.board_date = board_date.substring(0,10);
 	}
 	public String getBoard_notice() {
 		return board_notice;

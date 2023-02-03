@@ -1,4 +1,4 @@
-package net.board.action;
+package ejYang.board;
 
 import java.io.IOException;
 

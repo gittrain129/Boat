@@ -1,4 +1,4 @@
-package ejYang;
+package ejYang.board;
 
 import java.io.IOException;
 
@@ -8,17 +8,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("*.ne")
-public class CowordFrontController extends javax.servlet.http.HttpServlet{
-	private static final long serialVersionUID=1L;
+@WebServlet("*.bo")
+public class BoardFrontController extends javax.servlet.http.HttpServlet{
+private static final long serialVersionUID=1L;
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
+		 * 요청된 전체 URL중에서 포트 번호 다음 부터 마지막 문자열까지 반환합니다.
+		 * 예) contextPath가 "/JspProJect"인 경우
+		 * 		http://localhost:8088/JspProJect/login.net로 요청하면
+		 * 		getRequestURI()는 "/JspProJect/BoardList.bo" 반환됩니다.
+		 */
 		String RequestURI = request.getRequestURI();
 		System.out.println("RequestURI= " + RequestURI);
 		
+		//getContextPath() : 컨텍스트 경로가 반환됩니다.
+		//contextPath는 "/JspProJect"가 반환됩니다.
 		String contextPath = request.getContextPath();
 		System.out.println("contextPath= " + contextPath);
 		
+		//RequestURI에서 컨텍스트 경로 길이 값의 인덱스 위치의 문자부터 마지막 위치 문자까지 추출합니다.
+		//command는 "/BoardList.bo" 반환됩니다.
 		String command = RequestURI.substring(contextPath.length());
 		System.out.println("command= " + command);
 		
@@ -26,10 +36,34 @@ public class CowordFrontController extends javax.servlet.http.HttpServlet{
 		ActionForward forward = null;
 		Action action = null;
 		
-		//http://localhost:8089/Boat
+		//http://localhost:8089/Boat/
 		switch(command) {
-			case "/email.ne":
-				action = new EmailAction();
+			case "/BoardList.bo":
+				action = new BoardListAction();//글 목록
+				break;
+			case "/BoardWrite.bo":
+				action = new BoardWriteAction();//글쓰기 페이지
+				break;
+			case "/BoardAddAction.bo":
+				action = new BoardAddAction();//글쓰기 처리
+				break;
+			case "/BoardDetailAction.bo":
+				action = new BoardDetailAction();//글 상세페이지
+				break;
+			case "/BoardModifyView.bo":
+				action = new BoardModifyView();
+				break;
+			case "/BoardModifyAction.bo":
+				action = new BoardModifyAction();
+				break;
+			case "/BoardReplyView.bo":
+				action = new BoardReplyView();
+				break;
+			case "/BoardReplyAction.bo":
+				action = new BoardReplyAction();
+				break;
+			case "/BoardDeleteAction.bo":
+				action = new BoardDeleteAction();
 				break;
 				
 		}//switch end
