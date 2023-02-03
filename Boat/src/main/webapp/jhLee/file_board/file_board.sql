@@ -46,3 +46,11 @@ insert into comm(num,id,comment_board_num) values(1,'admin',1);
 insert into comm(num,id,comment_board_num) values(2,'admin',1);
 insert into comm(num,id,comment_board_num) values(3,'admin',2);
 insert into comm(num,id,comment_board_num) values(4,'admin',2);
+
+
+
+
+--public class FileDAO {
+--	public int getListcount() {
+
+select count(*) from file_board;
