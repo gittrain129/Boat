@@ -29,18 +29,6 @@ create table file_board (
 	
 	drop table FILE_COMMENT cascade constraints purge;
 
-	
-create table FILE_COMMENT (
-F_C_NUM number primary key,
-F_C_ID varchar2(30) references member(empno),
-F_CONTENT varchar2(200),
-F_COMMENT_NUM NUMBER references file_board(FILE_NUM) on delete cascade,
-F_COMMENT_RE_LEV number check(f_comment_re_lev in(0,1,2)),
-F_COMMENT_RE_SEQ number(1) ,
-F_COMMENT_RE_REF number
-);
-
-
 --게시판 글이 삭제되면 참조하는 댓글도 삭제됩니다.
 insert into comm(num,id,comment_board_num) values(1,'admin',1);
 insert into comm(num,id,comment_board_num) values(2,'admin',1);
@@ -54,3 +42,27 @@ insert into comm(num,id,comment_board_num) values(4,'admin',2);
 --	public int getListcount() {
 
 select count(*) from file_board;
+
+--	public List<FileBean> getBoardList(int page, int limit) {
+
+SELECT * FROM (select rownum rnum, j.* from (
+							 select board.*, nvl(CNT ,0) CNT 
+							from board left outer join (select comment_board_num,count(*) CNT  
+														from comm 
+														group by comment_board_num) 
+												on board_num = comment_board_num 
+							order by board_re_ref desc, 
+							board_re_seq asc)j
+							 				where rownum<=? ) 
+							WHERE rnum>=? and rnum<=?
+
+SELECT * FROM (select rownum rnum, j.* from (
+							 select file_board.*, nvl(CNT ,0) CNT 
+							from file_board left outer join (select F_COMMENT_NUM,count(*) CNT  
+														from FILE_COMMENT 
+														group by F_COMMENT_NUM) 
+												on FILE_NUM = F_COMMENT_NUM 
+							order by FILE_RE_REF desc, 
+							FILE_RE_SEQ asc)j
+							 				where rownum<=? ) 
+							WHERE rnum>=? and rnum<=?;

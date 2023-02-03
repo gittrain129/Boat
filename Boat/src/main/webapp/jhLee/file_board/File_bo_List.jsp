@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/filelist.css">
+    <link rel="stylesheet" href="jhLee/css/filelist.css">
+    
     <title>자료게시판 목록보기</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,6 +25,8 @@
             <p>자료실 게시판 입니다.</p>
 
         </div>
+       
+        
         <input class ="search" type="text">
         <div class="btn-group search">
             <button type="button" class="btn btn-secondary">검색옵션</button>
@@ -39,18 +43,65 @@
         <table class="File_board_list">
             <caption>자료 게시판 목록</caption>
             <thead>
+	             <tr>
+				    <th colspan="4">File 게시판 - list</th>
+		    		<th colspan="3">
+		    			<span>글 개수 : ${listcount}</span>
+		    		</th>
+			  </tr> 
                 <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>부서</th>
-                    <th>작성자</th>
-                    <th>조회수</th>
-                    <th>작성일자</th>
-                    <th>자료</th>
-
+                    <th><div>번호</div></th>
+                    <th><div>제목</div></th>
+                    <th><div>부서</div></th>
+                    <th><div>작성자</div></th>
+                    <th><div>조회수</div></th>
+                    <th><div>작성일자</div></th>
+                    <th><div>자료</div></th>
                 </tr>
             </thead>
             <tbody>
+            	<c:set var = "num" value ="${listcount-(page-1)*limit }"/>
+				<c:forEach var="b" items="${boardlist}">
+				<tr>
+					<td><%--번호 --%>
+					<c:out value="${num}"/><%--num출력 --%>
+					<c:set var ="num" value="${num-1}"/><%--num =num-1의 의미 --%>
+					</td>
+					<td><%--제목 --%>
+					
+					<div>
+						<c:if test ="${b.FILE_RE_LEV !=0}"><%--답글인 경우 --%>
+			
+						<c:forEach var ="a" begin="0" end="${b.FILE_RE_LEV*2}" step="1">
+							&nbsp;
+						</c:forEach>
+						<img alt="들여쓰기" src="image/line.gif">
+					</c:if>
+			
+						<c:if test="${b.FILE_RE_LEV==0}"><%--원문인 경우 --%>
+							&nbsp;
+						</c:if>
+					
+						<a href ="FileBoadrdDetailAction.filebo?num=${b.FILE_NUM}">
+							<c:if test="${b.FILE_SUBJECT.length()>=20}">
+								<c:out value="${b.FILE_SUBJECT.substring(0,20)}..."/>
+							</c:if>
+						<c:if test="${b.FILE_SUBJECT.length()<20}">
+							<c:out value="${b.FILE_SUBJECT}"/>
+						</c:if>
+						</a>[${b.CNT}]
+					</div><%--제목 --%>
+				</td>
+			
+				<td><div>${b.FILE_NAME}</div></td>
+				<td><div>${b.BOARD_RE_READCOUNT}</div></td>
+				<td><div>${b.FILE_DATE}</div></td>
+				<td><div>${b.FILE_FILE}</div><div>${b.FILE_FILE2}</div></td>
+				
+				</tr>
+				
+				</c:forEach>
+            	
                 <tr>
                     <td>5</td>
                     <td><a href="#">자료입니다
