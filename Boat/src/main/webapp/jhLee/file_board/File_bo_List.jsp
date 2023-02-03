@@ -94,7 +94,7 @@
 				</td>
 			
 				<td><div>${b.FILE_NAME}</div></td>
-				<td><div>${b.BOARD_RE_READCOUNT}</div></td>
+				<td><div>${b.FILE_READCOUNT}</div></td>
 				<td><div>${b.FILE_DATE}</div></td>
 				<td><div>${b.FILE_FILE}</div><div>${b.FILE_FILE2}</div></td>
 				
