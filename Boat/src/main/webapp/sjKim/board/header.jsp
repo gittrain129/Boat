@@ -46,7 +46,7 @@ textarea {
 				<a class="nav-link" href="memberUpdate.net">정보수정</a></li>
 				
 			<c:if test="${id=='admin'}">
-				<!-- Dropdown -->
+				
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbardrop"
 						data-toggle="dropdown"> 관리자 </a>
