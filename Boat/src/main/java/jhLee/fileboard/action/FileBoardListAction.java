@@ -1,4 +1,5 @@
-package jhLee.fileboard;
+//http://localhost:8088/Boat/FileBoardList.filebo
+package jhLee.fileboard.action;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,8 +13,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import jhLee.fileboard.db.FileBean;
 import jhLee.fileboard.db.FileDAO;
+import jhLee.fileboard.db.FileboBean;
 
 public class FileBoardListAction implements Action {
 
@@ -21,7 +22,7 @@ public class FileBoardListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	FileDAO boarddao = new FileDAO();
-	List<FileBean> filebolist = new ArrayList<FileBean>();
+	List<FileboBean> filebolist = new ArrayList<FileboBean>();
 		
 	int page = 1;
 	int limit = 10;
@@ -32,7 +33,8 @@ public class FileBoardListAction implements Action {
 		limit = Integer.parseInt(request.getParameter("limit"));
 	}
 	int listcount = boarddao.getListcount();
-	filebolist = boarddao.getBoardList(page,limit);
+	System.out.println("글의 갯수는 = "+ listcount);
+	filebolist = boarddao.getfileBoardList(page,limit);
 	int maxpage = (listcount+limit -1)/limit;
 	System.out.println("총페이지수 = "+ maxpage);
 		
@@ -64,9 +66,10 @@ public class FileBoardListAction implements Action {
 		forward.setRedirect(false);
 		
 		//글 목록 페이지로 이동하기 위해 경로 를 설정합니다.
-		forward.setPath("jhLee/file_board/File_bo_List.jsp");
+		forward.setPath("/jhLee/file_board/File_bo_List.jsp");
 		System.out.println(filebolist);
 		return forward;//BoardFrontController.java 로 리턴됩니다.
+	//댓글 ajax
 	}else {
 		System.out.println("state = ajax");
 		

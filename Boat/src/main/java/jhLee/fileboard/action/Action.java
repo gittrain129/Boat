@@ -1,4 +1,4 @@
-package jhLee.fileboard;
+package jhLee.fileboard.action;
 
 import java.io.IOException;
 

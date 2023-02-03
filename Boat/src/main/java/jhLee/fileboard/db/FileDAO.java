@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -71,7 +72,7 @@ public class FileDAO {
 		return x;
 
 	}
-	public List<FileBean> getBoardList(int page, int limit) {
+	public List<FileboBean> getfileBoardList(int page, int limit) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -81,20 +82,20 @@ public class FileDAO {
 		 * page : 페이지 limit :페이지 당 목록의 수 board_re_ref desc ,board_re_seqasc에 의한 정렬한 것을
 		 * 조건절에 맞는 rnum의 범위만큼 가져오는 쿼리문입니다.
 		 */
-		String board_list_sql = " SELECT * FROM (select rownum rnum, j.* from ("
-							+ " select board.*, nvl(CNT ,0) CNT "
-							+ "from board left outer join (select comment_board_num,count(*) CNT  "
-							+ "							from comm " 
-							+ "							group by comment_board_num) "
-							+ "					on board_num = comment_board_num " 
-							+ "order by board_re_ref desc, " 
-							+ "board_re_seq asc)j"
-							+ " 				where rownum<=? ) "
-							+ "WHERE rnum>=? and rnum<=?";
+		String file_board_list_sql = "SELECT * FROM (select rownum rnum, j.* from ( "
+				+ "							 select file_board.*, nvl(CNT ,0) CNT "
+				+ "							from file_board left outer join (select F_COMMENT_NUM,count(*) CNT  "
+				+ "														from FILE_COMMENT "
+				+ "														group by F_COMMENT_NUM) "
+				+ "												on FILE_NUM = F_COMMENT_NUM "
+				+ "							order by FILE_RE_REF desc, "
+				+ "							FILE_RE_SEQ asc)j "
+				+ "							 				where rownum<=? ) "
+				+ "							WHERE rnum>=? and rnum<=? ";
 
-		System.out.println(board_list_sql);
+		System.out.println(file_board_list_sql);
 
-		List<BoardBean> list = new ArrayList<BoardBean>();
+		List<FileboBean> list = new ArrayList<FileboBean>();
 		
 		int startrow = (page - 1) * limit + 1;
 		int endrow = startrow + limit - 1;
@@ -102,7 +103,7 @@ public class FileDAO {
 		try {
 			con = ds.getConnection();
 
-			pstmt = con.prepareStatement(board_list_sql);
+			pstmt = con.prepareStatement(file_board_list_sql);
 
 			pstmt.setInt(1, endrow);
 			pstmt.setInt(2, startrow);
@@ -110,25 +111,26 @@ public class FileDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {// 더이상 읽을 데이터가 없을때까지 반복
-				FileBean filebo = new FileBean();// 각각의 컬럼 값을넣음
+				FileboBean filebo = new FileboBean();// 각각의 컬럼 값을넣음
 
-				filebo.setBOARD_NUM(rs.getInt("BOARD_NUM"));
-				filebo.setBOARD_NAME(rs.getString("BOARD_NAME"));// 이름
-				filebo.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT"));// 제목
-				filebo.setBOARD_CONTENT(rs.getString("BOARD_CONTENT"));// 내용
-				filebo.setBOARD_FILE(rs.getString("BOARD_FILE"));
-				filebo.setBOARD_RE_REF(rs.getInt("BOARD_RE_REF"));
-				filebo.setBOARD_RE_LEV(rs.getInt("BOARD_RE_LEV"));//
-				filebo.setBOARD_RE_SEQ(rs.getInt("BOARD_RE_SEQ"));// 답글번호 원글-1
-				filebo.setBOARD_RE_READCOUNT(rs.getInt("BOARD_READCOUNT"));
-				filebo.setBOARD_DATE(rs.getString("BOARD_DATE"));// 날짜
-				filebo.setCNT(rs.getInt("cnt"));
+				filebo.setFILE_NUM(rs.getInt("FILE_NUM"));
+				filebo.setFILE_NAME(rs.getString("FILE_NAME"));// 이름
+				filebo.setFILE_SUBJECT(rs.getString("FILE_SUBJECT"));// 제목
+				filebo.setFILE_CONTENT(rs.getString("FILE_CONTENT"));// 내용
+				filebo.setFILE_FILE(rs.getString("FILE_FILE"));
+				filebo.setFILE_FILE2(rs.getString("FILE_FILE2"));
+				filebo.setFILE_RE_REF(rs.getInt("FILE_RE_REF"));
+				filebo.setFILE_RE_LEV(rs.getInt("FILE_RE_LEV"));//
+				filebo.setFILE_RE_SEQ(rs.getInt("FILE_RE_SEQ"));// 답글번호 원글-1
+				filebo.setFILE_READCOUNT(rs.getInt("FILE_READCOUNT"));
+				filebo.setFILE_DATE(rs.getString("FILE_DATE"));// 날짜
+				filebo.setCNT(rs.getInt("CNT"));
 				list.add(filebo);// 각각의 로우를 넣음
 			}
 			return list;
 
 		} catch (Exception ex) {
-			System.out.println("getBoardList() 에러: " + ex);
+			System.out.println("getfileBoardList() 에러: " + ex);
 			
 			ex.printStackTrace();
 
