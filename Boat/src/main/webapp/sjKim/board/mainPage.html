@@ -141,6 +141,33 @@ footer p span {
   margin-left: 20px;
 }
 
+
+/* body */
+.background-wrap {
+  width: 272px;
+  height: 196px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.content span {
+  color: white;
+}
+
+.content span:nth-child(1) {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.content span:nth-child(2) {
+  font-size: 20px;
+}
 </style>
 </head>
 <body>
@@ -207,7 +234,26 @@ footer p span {
 		
 <main>
 		<div id="body-content">
-		<p>바디 부분 </p>
+		
+		<div class="text-on-img">
+		  <div class="background-wrap">
+		    <div class="content">
+		     <a href="https://google.com">
+		     <img class="img-concert" src="../image/strawberry.png" />
+		     </a>
+		      <span>회사소개</span>
+		    </div>
+		  </div>
+		</div>
+		<input type="button" value="회사소개" onclick="location.href='sample.html'">
+		<input type="button" value="오시는 길" onclick="location.href='sample.html'">
+		<input type="button" value="업무 게시판" onclick="location.href='sample.html'">
+		<input type="button" value="자료실" onclick="location.href='sample.html'">
+		
+		<input type="button" value="내 정보 보기" onclick="location.href='sample.html'">
+		<input type="button" value="내 글 보기" onclick="location.href='sample.html'">
+		<input type="button" value="내 할일 보기" onclick="location.href='sample.html'">
+		<input type="button" value="주소록" onclick="location.href='sample.html'">
 		</div>
 </main>
 
