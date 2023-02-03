@@ -96,76 +96,51 @@
 				<td><div>${b.FILE_NAME}</div></td>
 				<td><div>${b.FILE_READCOUNT}</div></td>
 				<td><div>${b.FILE_DATE}</div></td>
-				<td><div>${b.FILE_FILE}</div><div>${b.FILE_FILE2}</div></td>
-				
+				<td><div class = "file1">${b.FILE_FILE}</div><div class = "file1">${b.FILE_FILE2}</div></td>
 				</tr>
-				
 				</c:forEach>
             	
-                <tr>
-                    <td>5</td>
-                    <td><a href="#">자료입니다
-                    </a>
-                        <img src="../image/new.png" alt="" style ="width: 30px">
-                    </td>
-                    
-                    <td>new이미지</td>
-                    <td>홍길동</td>
-                    <td>0</td>
-                    <td>230131</td>
-                    <td><span>fileimage</span>&nbsp;&nbsp;<span>fileimage2</span></td>
-
-
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><a href="#">자료입니다<span>new</span></a></td>
-                    
-                    <td>홍보부</td>
-                    <td>홍길동</td>
-                    <td>0</td>
-                    <td>230131</td>
-                    <td><span>fileimage</span>&nbsp;&nbsp;<span>fileimage2</span></td>
-
-
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><a href="#">자료입니다<span>new</span></a></td>
-                    <td>홍보부</td>
-                    <td>홍길동</td>
-                    <td>0</td>
-                    <td>230131</td>
-                    <td><span>fileimage</span>&nbsp;&nbsp;<span>fileimage2</span></td>
-
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><a href="#">자료입니다<span>new</span></a></td>
-                    <td>홍보부</td>
-                    <td>홍길동</td>
-                    <td>0</td>
-                    <td>230131</td>
-                    <td><span>fileimage</span>&nbsp;&nbsp;<span>fileimage2</span></td>
-
-
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td><a href="#">자료입니다<span>new</span></a></td>
-                    <td>홍보부</td>
-                    <td>홍길동</td>
-                    <td>0</td>
-                    <td>230131</td>
-                    <td><span>fileimage</span>&nbsp;&nbsp;<span>fileimage2</span></td>
-                </tr>
             </tbody>
         </table>
-        <div class="File_board_page">
+        
+    
+     
+
+       <div class="File_board_page">
 
 
+   <p class="paging">
+   	<c:if test="${page<=1}">
+     <a href="#" class="btnPage gray"><img src="jhLee/image/pre.png" alt="이전10개" width="10px"></a>
+   	</c:if>
+   	<c:if test="${page>1}">
+     <a href="FileBoardList.filebo?page=${page-1}" class="btnPage"><img src="jhLee/image/pre.png" alt="이전10개" width="10px"></a>
+   	</c:if>
+   	
+ 
+   	<c:forEach var="a" begin="${startpage}" end="${endpage}">
+   		<c:if test="${a==page}">
+     		<span class="num"><a href="#" class="firstItem">${a}</a> </span> 
+   		</c:if>
+   		<c:if test="${a !=page}">
+     		<span class="num"><a href="BoardList.bo?page=${a}" class="">${a}</a> </span> 
+   		</c:if>
+   		</c:forEach>
+   	
+   	<c:if test="${page>=maxpage }">
+     <a href="#" class="btnPage gray"><img src="jhLee/image/next.png" alt="다음10개" /></a>
+   	</c:if>
+   	<c:if test="${page<maxpage}">
+	     <a href="FileBoardList.filebo?page=${page+1}" class="btnPage"><img src="jhLee/image/next.png" alt="다음10개" /></a>
+   	</c:if>
+   </p>
+   
         </div>
-        <!-- <div class="bt_wrap">
+   <%--게시글이 없는 경우 --%>
+	<c:if test="${listcount==0}">
+		<h3 style="text-align: center">등록된 글이 없습니다.</h3>
+	</c:if>
+		   <!-- <div class="bt_wrap">
             <div class="form-group">
                 <select class="form-control" id="sel1" name="sellist1">
                 <option value="">최신순 </option>
@@ -199,26 +174,23 @@
                 <a class="dropdown-item" href="#">댓글순</a>
             </div>
         </div>
-   
-    
-    <button type="button" class="btn ">글쓰기</button>
-</div>
+		<button type="button" class="btn btn-info float-right">글 쓰 기</button>
+		</div><%-- btntwoend --%>
 
-     
+		</div>   
+ </div>
+ <script>
+ 
+ $(function() {
+		const text = $("button:last-child").text()
+		console.log(text)
+		$("button:last-child").click(function() {
+
+			location.href = "FileBoardWrite.filebo";
+		})
 
 
-   
-   <p class="paging">
-     <a href="#" class="btnPage"><img src="../image/pre.png" alt="이전10개" width="10px"></a>
-     <span class="num"><a href="#" class="firstItem">1</a>  
-        <a href="#">2</a> <a href="#">3</a>
-         <a href="#">4</a> <a href="#">5</a> 
-         <a href="#">6</a> <a href="#">7</a> 
-         <a href="#">8</a> <a href=  "#">9</a> 
-         <a href="#">10</a></span>
-     <a href="#" class="btnPage"><img src="../image/next.png" alt="다음10개" /></a>
-   </p>
-  
-</div>    </div>
+	})
+ </script>
 </body>
 </html>

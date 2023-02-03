@@ -127,14 +127,19 @@ button:last-child {
 
 .paging .num a:hover, .paging .num a:focus {
 	color: rgb(0, 173, 238);
+	text-decoration: underline; 
 }
 
 .paging .num .firstItem {
 	font-weight: bold;
-	color: #ffffff;
-	text-decoration: underline;
+	/* color: #ffffff;
+	text-decoration: underline; */
 }
 
 img {
 	width: 10px
+}
+.gray{
+color : gray;
+opacity : 0.5;
 }

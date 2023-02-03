@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("*.filebo")
-public class BoardFrontController extends javax.servlet.http.HttpServlet {
+public class FileBoardFrontController extends javax.servlet.http.HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doProcess(HttpServletRequest request,HttpServletResponse response) 
@@ -61,12 +61,13 @@ public class BoardFrontController extends javax.servlet.http.HttpServlet {
 					break;
 				
 				}//switch end
-				
+				System.out.println("1");
 		forward = action.execute(request,response);
 		
 		if(forward != null) {
 			if(forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
+				System.out.println("1"+forward.getPath());
 			}else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request,response);
