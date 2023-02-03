@@ -7,13 +7,22 @@ public class BoardBean {
 	private String	board_pass;		//글 비밀번호
 	private String	board_subject;	//글 제목
 	private String	board_content;	//글 내용
-	private String	board_file;		//첨부될 파일의 이름
+	private String	board_dept;	//글 내용
 	private int		board_re_ref;	//답변 글 작성시 참조되는 글의 번호
 	private int		board_re_lev;	//답변 글의 깊이
 	private int		board_re_seq;	//답변 글의 순서
 	private int		board_readcount;//글의 조회수
 	private String	board_date;
+	private String	board_notice;	//공지사항
 	private int		cnt;
+	
+	
+	public String getBoard_dept() {
+		return board_dept;
+	}
+	public void setBoard_dept(String board_dept) {
+		this.board_dept = board_dept;
+	}
 	public int getBoard_num() {
 		return board_num;
 	}
@@ -44,12 +53,6 @@ public class BoardBean {
 	public void setBoard_content(String board_content) {
 		this.board_content = board_content;
 	}
-	public String getBoard_file() {
-		return board_file;
-	}
-	public void setBoard_file(String board_file) {
-		this.board_file = board_file;
-	}
 	public int getBoard_re_ref() {
 		return board_re_ref;
 	}
@@ -78,7 +81,13 @@ public class BoardBean {
 		return board_date;
 	}
 	public void setBoard_date(String board_date) {
-		this.board_date = board_date.substring(0,10);//년-월-일 시:분:초 => 년-월-일
+		this.board_date = board_date;
+	}
+	public String getBoard_notice() {
+		return board_notice;
+	}
+	public void setBoard_notice(String board_notice) {
+		this.board_notice = board_notice;
 	}
 	public int getCnt() {
 		return cnt;
@@ -86,5 +95,4 @@ public class BoardBean {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
-	
 }

@@ -35,7 +35,7 @@ public class BoardDAO {
 			//context.xml에서 설정한 리소스 jdbc/OracleDB 참조하여 Connection 객체를 얻어 옵니다.
 			conn = ds.getConnection();
 			
-			String sql = "select count(*) from board";
+			String sql = "select count(*) from BOARD";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -80,20 +80,27 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		//page : 페이지
-		//limit : 페이지 당 목록의 수
-		//board_re_ref DESC, board_re_seq ASC에 의해 정렬한 것을
-		//조건절에 맞는 rnum의 범위 만큼 가져오는 쿼리문입니다.
-		
-		String board_list_sql = "select*from(select rownum rnum, j.* "
-				+ "from (SELECT board.*, NVL(CNT, 0) CNT "
-				+ "		FROM BOARD LEFT OUTER JOIN (SELECT comment_board_num, COUNT(*) CNT FROM COMM "
-				+ "									GROUP BY comment_board_num) "
-				+ "		ON board_num = comment_board_num "
-				+ "		ORDER BY board_re_ref DESC, "
-				+ "		board_re_seq ASC) j "
-				+ "where rownum<= ?) "
-				+ "where rnum>=? and rnum<=?";
+		String board_list_sql = "select rownum rnum, j.* "
+				+ "			from (SELECT BOARD.*, NVL(CNT, 0) AS CNT "
+				+ "					FROM BOARD LEFT OUTER JOIN (SELECT B_COMMENT_NUM, COUNT(*) CNT FROM BOARD_COMMENT "
+				+ "												GROUP BY B_COMMENT_NUM)	"
+				+ "					ON BOARD_NUM = B_COMMENT_NUM "
+				+ "					WHERE BOARD_NOTICE = 'Y' "
+				+ "					ORDER BY BOARD_RE_REF DESC, "
+				+ "					BOARD_RE_SEQ ASC "
+				+ "					) j "
+				+ "			where rownum<= 3 "
+				+ "UNION ALL "
+				+ "select*from(select rownum rnum, j.*  "
+				+ "			from (SELECT BOARD.*, NVL(CNT, 0) AS CNT "
+				+ "					FROM BOARD LEFT OUTER JOIN (SELECT B_COMMENT_NUM, COUNT(*) CNT FROM BOARD_COMMENT "
+				+ "												GROUP BY B_COMMENT_NUM)	"
+				+ "					ON BOARD_NUM = B_COMMENT_NUM "
+				+ "					ORDER BY BOARD_RE_REF DESC, "
+				+ "					BOARD_RE_SEQ ASC "
+				+ "					) j "
+				+ "			where rownum<= ?) "
+				+ "where rnum >= ? and rnum <= ? ";
 		
 		List<BoardBean> list = new ArrayList<BoardBean>();
 		//한 페이지당 10개씩 목록인 경우 1페이지, 2페이지, 3페이지, 4페이지...
@@ -109,19 +116,19 @@ public class BoardDAO {
 			pstmt.setInt(3, endrow);
 			rs = pstmt.executeQuery();
 			
-			//DB에서 가져온 데이터를 VO객체에 담습니다.
 			while(rs.next()) {
 				BoardBean board = new BoardBean();
 				board.setBoard_num(rs.getInt("board_num"));
 				board.setBoard_name(rs.getString("board_name"));
 				board.setBoard_subject(rs.getString("board_subject"));
 				board.setBoard_content(rs.getString("board_content"));
-				board.setBoard_file(rs.getString("board_file"));
+				board.setBoard_dept(rs.getString("board_dept"));
 				board.setBoard_re_ref(rs.getInt("board_re_ref"));
 				board.setBoard_re_lev(rs.getInt("board_re_lev"));
 				board.setBoard_re_seq(rs.getInt("board_re_seq"));
 				board.setBoard_readcount(rs.getInt("board_readcount"));
 				board.setBoard_date(rs.getString("board_date"));
+				board.setBoard_notice(rs.getString("board_notice"));
 				board.setCnt(rs.getInt("cnt"));;
 				list.add(board);
 			}
@@ -158,6 +165,7 @@ public class BoardDAO {
 	}
 
 	
+	
 	//글 등록하기
 	public boolean boardInsert(BoardBean board) {
 		Connection conn = null;
@@ -167,17 +175,19 @@ public class BoardDAO {
 			//context.xml에서 설정한 리소스 jdbc/OracleDB 참조하여 Connection 객체를 얻어 옵니다.
 			conn = ds.getConnection();
 			
-			String max_sql = "(select nvl(max(board_num),0)+1 from board)";
+			String max_sql = "(select nvl(max(board_num),0)+1 from BOARD)";
 			
 			//원문글의 BOARD_RE_REF 필드는 자신의 글번호 입니다.
 			String sql = "insert into board "
-					+ "(board_num, board_name, board_pass, board_subject, "
-					+ "board_content, board_file, board_re_ref, "
-					+ "board_re_lev, board_re_seq, board_readcount) "
+					+ "(BOARD_NUM, BOARD_NAME, BOARD_PASS, "
+					+ "BOARD_SUBJECT, BOARD_CONTENT, BOARD_RE_REF, "
+					+ "BOARD_RE_LEV, BOARD_RE_SEQ, BOARD_READCOUNT, "
+					+ "BOARD_NOTICE) "
 					
-					+ "values(" + max_sql + ",?,?,?, "
+					+ "values(" + max_sql + ",?,?, "
 					+ "			?,?," + max_sql + ","
-					+ "			?,?,?)";
+					+ "			?,?,?,"
+					+ "			?)";
 			
 			//새로운 글을 등록하는 부분입니다.
 			pstmt = conn.prepareStatement(sql);
@@ -185,12 +195,10 @@ public class BoardDAO {
 			pstmt.setString(2, board.getBoard_pass());
 			pstmt.setString(3, board.getBoard_subject());
 			pstmt.setString(4, board.getBoard_content());
-			pstmt.setString(5, board.getBoard_file());
-			
-			//원문의 경우 board_re_lev, board_re_seq 필드 값은 0 입니다.
+			pstmt.setInt(5, 0);
 			pstmt.setInt(6, 0);
 			pstmt.setInt(7, 0);
-			pstmt.setInt(8, 0);
+			pstmt.setString(8, board.getBoard_notice());
 			
 			result = pstmt.executeUpdate();
 			if(result == 1) {

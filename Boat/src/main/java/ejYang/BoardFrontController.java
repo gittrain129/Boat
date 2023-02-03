@@ -39,13 +39,13 @@ private static final long serialVersionUID=1L;
 		//http://localhost:8089/Boat/
 		switch(command) {
 			case "/BoardList.bo":
-				action = new BoardListAction();
+				action = new BoardListAction();//글 목록
 				break;
 			case "/BoardWrite.bo":
-				action = new BoardWriteAction();
+				action = new BoardWriteAction();//글쓰기 페이지
 				break;
 			case "/BoardAddAction.bo":
-				action = new BoardAddAction();
+				action = new BoardAddAction();//글쓰기 처리
 				break;
 			case "/BoardDetailAction.bo":
 				action = new BoardDetailAction();
@@ -64,9 +64,6 @@ private static final long serialVersionUID=1L;
 				break;
 			case "/BoardDeleteAction.bo":
 				action = new BoardDeleteAction();
-				break;
-			case "/BoardFileDown.bo":
-				action = new BoardFileDownAction();
 				break;
 				
 		}//switch end
