@@ -1,4 +1,4 @@
-package ejYang;
+package ejYang.board;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -180,12 +180,12 @@ public class BoardDAO {
 			//원문글의 BOARD_RE_REF 필드는 자신의 글번호 입니다.
 			String sql = "insert into board "
 					+ "(BOARD_NUM, BOARD_NAME, BOARD_PASS, "
-					+ "BOARD_SUBJECT, BOARD_CONTENT, BOARD_RE_REF, "
+					+ "BOARD_SUBJECT, BOARD_CONTENT, BOARD_DEPT, BOARD_RE_REF, "
 					+ "BOARD_RE_LEV, BOARD_RE_SEQ, BOARD_READCOUNT, "
 					+ "BOARD_NOTICE) "
 					
 					+ "values(" + max_sql + ",?,?, "
-					+ "			?,?," + max_sql + ","
+					+ "			?,?,?," + max_sql + ","
 					+ "			?,?,?,"
 					+ "			?)";
 			
@@ -195,10 +195,11 @@ public class BoardDAO {
 			pstmt.setString(2, board.getBoard_pass());
 			pstmt.setString(3, board.getBoard_subject());
 			pstmt.setString(4, board.getBoard_content());
-			pstmt.setInt(5, 0);
+			pstmt.setString(5, board.getBoard_dept());
 			pstmt.setInt(6, 0);
 			pstmt.setInt(7, 0);
-			pstmt.setString(8, board.getBoard_notice());
+			pstmt.setInt(8, 0);
+			pstmt.setString(9, board.getBoard_notice());
 			
 			result = pstmt.executeUpdate();
 			if(result == 1) {
@@ -236,9 +237,9 @@ public class BoardDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "update board "
-				+ "set board_readcount = board_readcount + 1 "
-				+ "where board_num = ? ";
+		String sql = "update BOARD "
+				+ "set BOARD_READCOUNT = BOARD_READCOUNT + 1 "
+				+ "where BOARD_NUM = ? ";
 		
 		try {
 			//context.xml에서 설정한 리소스 jdbc/OracleDB 참조하여 Connection 객체를 얻어 옵니다.
@@ -267,7 +268,7 @@ public class BoardDAO {
 				}
 			}
 		}
-	}//end
+	}
 
 	
 	//글 내용 보기
@@ -293,7 +294,7 @@ public class BoardDAO {
 				board.setBoard_name(rs.getString("board_name"));
 				board.setBoard_subject(rs.getString("board_subject"));
 				board.setBoard_content(rs.getString("board_content"));
-				board.setBoard_file(rs.getString("board_file"));
+				board.setBoard_dept(rs.getString("board_dept"));
 				board.setBoard_re_ref(rs.getInt("board_re_ref"));
 				board.setBoard_re_lev(rs.getInt("board_re_lev"));
 				board.setBoard_re_seq(rs.getInt("board_re_seq"));

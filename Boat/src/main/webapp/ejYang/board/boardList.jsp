@@ -10,7 +10,6 @@
  <body>
 <section class="notice">
     <%-- 게시글이 있는 경우 --%>
- 	<c:if test="${listcount > 0 }">
     <div id="board-search">
         <div class="container">
             <div class="search-window">
@@ -59,10 +58,6 @@
                     
                     <td><%-- 제목 --%>
 	 		      	  <div>
-	 		      	  	<%-- 답변글 제목앞에 여백 처리 부분
-	 		      	  		board_re_lev, board_num,
-	 		      	  		board_subject, board_name, board_date,
-	 		      	  		board_readcount : property 이름 --%>
 	 		      	  	<c:if test="${b.board_re_lev != 0}">	<%-- 답글인 경우 --%>
 	 		      	  		<c:forEach var="a" begin="0" end="${b.board_re_lev*2}" step="1">
 	 		      	  		&nbsp;
@@ -135,7 +130,6 @@
 			</div>		
         </div>
     </div>
-    </c:if>
 </section>
  </body>
 </html>

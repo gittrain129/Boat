@@ -1,5 +1,5 @@
 //글 등록에 대한 Action 클래스
-package ejYang;
+package ejYang.board;
 
 import java.io.IOException;
 
@@ -25,6 +25,7 @@ public class BoardAddAction implements Action{
 		boarddata.setBoard_pass(request.getParameter("board_pass"));
 		boarddata.setBoard_subject(request.getParameter("board_subject"));
 		boarddata.setBoard_content(request.getParameter("editordata"));
+		boarddata.setBoard_dept(request.getParameter("department"));
 		if(id == "ADMIN") {
 			boarddata.setBoard_notice("Y");
 		}else{

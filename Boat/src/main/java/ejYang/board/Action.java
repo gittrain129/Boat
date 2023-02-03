@@ -1,4 +1,4 @@
-package ejYang;
+package ejYang.board;
 
 import java.io.IOException;
 

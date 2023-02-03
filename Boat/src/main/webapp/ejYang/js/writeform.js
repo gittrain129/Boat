@@ -1,7 +1,23 @@
 $(function(){
 	//부서명 자동 선택
-	$()
-	
+	let department = '${member.dept}'
+	let part = 1;
+	switch(department){
+		case '개발팀':
+			part=2;
+			break;
+		case '인사팀':
+			part=3;
+			break;
+		case '기획팀':
+			part=4;
+			break;
+		case '영업팀':
+			part=5;
+			break;
+	}
+	$('#select option:nth-child('+part+')').prop('selected',true)
+		
 	//submit 버튼 클릭할 때 이벤트 부분
 	$("form").submit(function(){
 		

@@ -32,7 +32,7 @@
 	}
 	
 	input[type=submit] {
-	  background-color: #04AA6D;
+	  background-color: #1e62ff;
 	  color: white;
 	  padding: 16px 20px;
 	  border: none;
@@ -97,10 +97,8 @@
 	    margin-top: 0;
 	  }
 	}
-	
-	#summernote{
-		margin:auto;
-		width:100%;
+	.note-editable p{
+		text-align: left;
 	}
   </style>
   
@@ -110,7 +108,7 @@
   <form action="BoardAddAction.bo">
     <div class="row">
       <div class="col-25">
-        <label for="fname">제목</label>
+        <label for="board_subject">제목</label>
       </div>
       <div class="col-75">
         <input type="text" id="board_subject" name="board_subject" placeholder="제목을 입력하세요.">
@@ -118,7 +116,7 @@
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="lname">작성자</label>
+        <label for="board_name">작성자</label>
       </div>
       <div class="col-75">
         <input type="text" id="board_name" name="board_name" placeholder="성함을 입력하세요.">
@@ -126,21 +124,21 @@
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="country">부서명</label>
+        <label for="select">부서명</label>
       </div>
       <div class="col-75">
-        <select id="select" name="select">
-          <option value="pr">홍보팀</option>
-          <option value="dt">개발팀</option>
-          <option value="hr">인사팀</option>
-          <option value="pt">기획팀</option>
-          <option value="st">영업팀</option>
+        <select id="select" name="department">
+          <option value="홍보팀">홍보팀</option>
+          <option value="개발팀">개발팀</option>
+          <option value="인사팀">인사팀</option>
+          <option value="기획팀">기획팀</option>
+          <option value="영업팀">영업팀</option>
         </select>
       </div>
     </div>
         <div class="row">
       <div class="col-25">
-        <label for="lname">비밀번호</label>
+        <label for="board_pass">비밀번호</label>
       </div>
       <div class="col-75">
         <input type="password" id="board_pass" name="board_pass" placeholder="비밀번호를 입력하세요.">
@@ -160,16 +158,13 @@
  		//여기 아래 부분
 		$('#summernote').summernote({
 			  height: 300,                 // 에디터 높이
-			  minHeight: null,             // 최소 높이
-			  maxHeight: null,             // 최대 높이
 			  lang: "ko-KR",				// 한글 설정
 			  placeholder: '내용을 입력하세요.',	//placeholder 설정
 				  toolbar: [
 			          ['style', ['style']],
 			          ['font', ['bold', 'underline', 'clear']],
 			          ['color', ['color']],
-			          ['para', ['ul', 'ol', 'paragraph']],
-			          ['table', ['table']],
+			          ['para', ['ul', 'ol', 'paragraph']]
 			        ]
 		});
  	})
