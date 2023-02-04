@@ -182,7 +182,7 @@ public class FileDAO {
 						+ "	FILE_FILE2 ,	"
 						+ "	FILE_RE_REF ,	"
 						+ "	FILE_RE_LEV ,	"
-						+ "	FILE_RE_SEQ , "
+			 			+ "	FILE_RE_SEQ , "
 						+ "	FILE_READCOUNT "
 						+ "	) "
 						+ "values ("+max_sql+",?,?,?,?,?,?,"+max_sql+",?,?,?)";

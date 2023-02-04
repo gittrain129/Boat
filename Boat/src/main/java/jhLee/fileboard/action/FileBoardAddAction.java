@@ -25,7 +25,7 @@ public class FileBoardAddAction implements Action {
 		
 		String realFolder="";
 		String saveFolder ="fileupload";
-		int fileSize = 5*1024*1024;
+		int fileSize = 5*1024*1024; 
 		
 		ServletContext sc = request.getServletContext();
 		realFolder = sc.getRealPath(saveFolder);

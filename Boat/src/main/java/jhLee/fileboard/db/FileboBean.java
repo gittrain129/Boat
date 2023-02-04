@@ -30,7 +30,7 @@ public class FileboBean {
 	}
 	public String getFILE_NAME() {
 		return FILE_NAME;
-	}
+	} 
 	public void setFILE_NAME(String fILE_NAME) {
 		FILE_NAME = fILE_NAME;
 	}
