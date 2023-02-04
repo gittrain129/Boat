@@ -2,34 +2,50 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="reset.css" />
 <title>Boat</title>
 <style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height:100%;
+}
+
 
 div.logo{
-	width: 10%;
-    float: left;
-    box-sizing: border-box;
-    position: left top;
+	position: absolute;
+    top: 26px;
+    left: 40px;
+    z-index: 100;
+    width: 116px;
+    height: 28px;
 }
 
 div.topmenu {
-	 width: 90%;
-     float: right;
-     box-sizing: border-box;
+	position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    min-width: 1280px;
+    border-bottom: 1px solid #e6e6e6;
+    text-align: center;
+    background: #fff;
+    border-color: transparent;
+    display: block;
+    box-sizing: border-box;
+}
+
+div.topmenu.li {
+	position: fixed;
+	left: 110px;
 }
 /* header */
 
 header {
-	width:100%;
 	height:100px;
 }
 
-/*
-* {
-	margin: 0; 
-	padding: 0; 
-}
-*/
 
 li {
 	list-style: none; 
@@ -54,6 +70,7 @@ position: relative;
 	margin-bottom: 20px; 
 	text-align: center; 
 	height: 40px; 
+	left:10%;
 	}
 	
 .topMenu:after {
@@ -64,6 +81,7 @@ position: relative;
 	}
 	
 .menu01>li {
+
 	float: left; 
 	width: 20%; 
 	line-height: 40px; 
@@ -73,6 +91,11 @@ position: relative;
 	font-size: 20px; 
 	font-weight: bold; 
 	}
+
+.point {
+	left:120px;
+	
+}
             
 .dept01 {	
 	position: absolute; 
@@ -96,28 +119,18 @@ position: relative;
 	
 	
 	/*footer*/
-html, body {
-  margin: 0;
-  padding: 0;
-}
+
 
 #wrap {
-  height:10%;
+  min-height: calc(30% - 120px);
   width: 100%; 
   background-color: #f2f2f2;
 }
 
-section {
-  padding-bottom: 105px;
-}
-
 footer {
   width: 100%;
-  height: 90px;
-  bottom: 0px;
-  position: absolute;
+  height: 60px;
   border-top: 1px solid #c4c4c4;
-  padding-top: 15px;
   color: #808080;
   font-size: 11px;
 }
@@ -143,31 +156,33 @@ footer p span {
 
 
 /* body */
-.background-wrap {
-  width: 272px;
-  height: 196px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+main{
+	width:100%;
+	margin-bottom: 10%;
+}
+.body_content {
+	width: 100%;
+	margin-top: 10%;
+	/*min-height:700px;*/
+	border: 1px solid #aaa; 
+	text-align: center; 
+	overflow: hidden;
+}
+.image-menu{
+	width: 30%;
+	text-align: center;
+	display: block;
+	color: #00adef;
+	text-decoration:none;
+	float: left;
+}
+.body_menu {
+	height: 40%; 
+	display: inline-block; 
+	vertical-align: middle;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-}
 
-.content span {
-  color: white;
-}
-
-.content span:nth-child(1) {
-  font-size: 25px;
-  font-weight: bold;
-}
-
-.content span:nth-child(2) {
-  font-size: 20px;
-}
 </style>
 </head>
 <body>
@@ -197,7 +212,7 @@ footer p span {
 		</div>
         <div class="topMenu">
             <ul class="menu01">
-                <li><span>회사소개</span>
+                <li class><span>회사소개</span>
                     <ul class="dept01">
                         <li id="nop">오시는길</li>
                         <li id="nop">&nbsp;</li>
@@ -233,27 +248,27 @@ footer p span {
         </header>
 		
 <main>
-		<div id="body-content">
+		<div class="body_content">
 		
-		<div class="text-on-img">
-		  <div class="background-wrap">
-		    <div class="content">
-		     <a href="https://google.com">
-		     <img class="img-concert" src="../image/strawberry.png" />
-		     </a>
-		      <span>회사소개</span>
-		    </div>
-		  </div>
-		</div>
-		<input type="button" value="회사소개" onclick="location.href='sample.html'">
-		<input type="button" value="오시는 길" onclick="location.href='sample.html'">
-		<input type="button" value="업무 게시판" onclick="location.href='sample.html'">
-		<input type="button" value="자료실" onclick="location.href='sample.html'">
-		
-		<input type="button" value="내 정보 보기" onclick="location.href='sample.html'">
-		<input type="button" value="내 글 보기" onclick="location.href='sample.html'">
-		<input type="button" value="내 할일 보기" onclick="location.href='sample.html'">
-		<input type="button" value="주소록" onclick="location.href='sample.html'">
+			<div class="body_menu">
+				<img src="../image/strawberry.png" width="255" border="0">
+			</div>
+			<div class="body_menu">
+				<img src="../image/strawberry.png" width="255" border="0">
+			</div>
+			<div class="body_menu">
+				<img src="../image/strawberry.png" width="255" border="0">
+			</div>
+			<div class="body_menu">
+				<img src="../image/strawberry.png" width="255" border="0">
+			</div>
+			<div class="body_menu">
+				<img src="../image/strawberry.png" width="255" border="0">
+			</div>
+			<div class="body_menu">
+				<img src="../image/strawberry.png" width="255" border="0">
+			</div>
+		  
 		</div> 
 </main>
 
@@ -270,6 +285,7 @@ footer p span {
 		        <span>Copyright 2022. BOAT. All Rights  Reserved.</span>
 		    </p>
 		</footer>
+
 
 </div>
 </body>
