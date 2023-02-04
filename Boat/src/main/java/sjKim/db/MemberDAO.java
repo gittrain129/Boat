@@ -1,4 +1,4 @@
-package net.member.db;
+package sjKim.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +23,7 @@ public class MemberDAO {
 			System.out.println("DB 연결 실패 : " + ex);
 		}
 	}
-	
+	 
 	public int isId(String id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
