@@ -24,9 +24,10 @@ a {
 	color: inherit;
 }
 
-.File_board_Title strong {
-	font-size: 3rem;
+tr th div,tr th span{
+	display : inline-block;
 }
+
 
 .File_board_Title {
 	margin-bottom: 30px;
@@ -34,7 +35,7 @@ a {
 
 .File_board_Title strong {
 	margin-top: 5px;
-	font-size: 1.4rem;
+	font-size: 2.4rem;
 }
 
 .File_board_list_wrap {
@@ -45,7 +46,9 @@ a {
 	width: 100%;
 	border-top: 2px solid navy;
 }
-
+.listcount {
+	text-align : right;
+}
 .File_board_list tr {
 	border-bottom: 1px solid #999;
 }

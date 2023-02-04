@@ -237,4 +237,105 @@ public class FileDAO {
 			return false;
 
 		}
+	public void setReadCountUpdate(int num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "update file_board set FILE_READCOUNT=FILE_READCOUNT+1 "
+				+ "where FILE_NUM =? ";
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, num);
+			
+			
+			 pstmt.executeUpdate();
+
+		} catch (Exception ex) {
+			System.out.println("getBoardCountUpdate() 에러: " + ex);
+			ex.printStackTrace();
+
+		} finally {
+			if (pstmt != null) {
+			try {
+					pstmt.close();// 꼭 닫아줘야함 ㅇㅇ
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			if (con != null)
+			try {
+					con.close();// 꼭 닫아줘야함 ㅇㅇ
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			}
+		}
+
+
+	}
+	public FileboBean getDetail(int num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		FileboBean board = null;
+		String sql ="select * from file_board where FILE_NUM =?";
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, num);
+			
+			
+			 rs =  pstmt.executeQuery();
+			 if(rs.next()) {
+				  board = new FileboBean();
+				  	board.setFILE_NUM(rs.getInt("FILE_NUM"));
+					board.setFILE_NAME(rs.getString("FILE_NAME"));// 이름
+					board.setFILE_PASS(rs.getInt("FILE_PASS"));// 비번
+					board.setFILE_SUBJECT(rs.getString("FILE_SUBJECT"));// 제목
+					board.setFILE_CONTENT(rs.getString("FILE_CONTENT"));// 내용
+					board.setFILE_FILE(rs.getString("FILE_FILE"));// 파일 굳이 필요없음 지금은 웹에서 필요
+					board.setFILE_FILE2(rs.getString("FILE_FILE2"));// 파일 굳이 필요없음 지금은 웹에서 필요
+
+					// 원문의 경우 BOARD_RE_LEV,BOARD_RE_SEQ 의 필드값음 0입니다.
+
+					board.setFILE_RE_REF(rs.getInt("FILE_RE_REF"));
+					board.setFILE_RE_LEV(rs.getInt("FILE_RE_LEV"));//
+					board.setFILE_RE_SEQ(rs.getInt("FILE_RE_SEQ"));// 답글번호 원글-1
+					board.setFILE_READCOUNT(rs.getInt("FILE_READCOUNT"));
+					board.setFILE_DATE(rs.getString("FILE_DATE"));// 날짜
+					board.setDEPT(rs.getString("DEPT"));
+					
+					System.out.println(sql);
+
+			 }
+			 
+
+		} catch (Exception ex) {
+			System.out.println("getBoardCountUpdate() 에러: " + ex);
+			ex.printStackTrace();
+
+		} finally {
+			if (pstmt != null) {
+			try {
+					pstmt.close();// 꼭 닫아줘야함 ㅇㅇ
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			if (con != null)
+			try {
+					con.close();// 꼭 닫아줘야함 ㅇㅇ
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			}
+		}
+		return board;
+
+
+	}
 }

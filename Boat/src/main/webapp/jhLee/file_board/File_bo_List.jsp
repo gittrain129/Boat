@@ -49,17 +49,17 @@ http://localhost:8088/Boat/FileBoardList.filebo
 	             <tr>
 				    <th colspan="4">File 게시판 - list</th>
 		    		<th colspan="3">
-		    			<span>글 개수 : ${listcount}</span>
+		    			<span class = "listcount">글 개수 : ${listcount}</span>
 		    		</th>
 			  </tr> 
                 <tr>
-                    <th><div>번호</div></th>
-                    <th><div>제목</div></th>
-                    <th><div>부서</div></th>
-                    <th><div>작성자</div></th>
-                    <th><div>조회수</div></th>
-                    <th><div>작성일자</div></th>
-                    <th><div>자료</div></th>
+                    <th><div class="num">번호</div></th>
+                    <th><div class="title">제목</div></th>
+                    <th><div class="dept">부서</div></th>
+                    <th><div class=writer>작성자</div></th>
+                    <th><div class="date">조회수</div></th>
+                    <th><div class="count">작성일자</div></th>
+                    <th><div class="file1">자료</div></th>
                 </tr>
             </thead>
             <tbody>
@@ -78,7 +78,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
 						<c:forEach var ="a" begin="0" end="${b.FILE_RE_LEV*2}" step="1">
 							&nbsp;
 						</c:forEach>
-						<img alt="들여쓰기" src="image/line.gif">
+						<img alt="들여쓰기" src="${pageContext.request.contextPath}/jhLee/image/file.png">
 					</c:if>
 			
 						<c:if test="${b.FILE_RE_LEV==0}"><%--원문인 경우 --%>
@@ -86,6 +86,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
 						</c:if>
 					
 						<a href ="FileBoadrdDetailAction.filebo?num=${b.FILE_NUM}">
+						<%-- FileBoardDetailAction22번줄 getParameter("num") --%>
 							<c:if test="${b.FILE_SUBJECT.length()>=20}">
 								<c:out value="${b.FILE_SUBJECT.substring(0,20)}..."/>
 							</c:if>
@@ -183,7 +184,17 @@ http://localhost:8088/Boat/FileBoardList.filebo
 		</div>   
  </div>
  <script>
- 
+	$(function() {
+		const text = $("button:last-child").text()
+		console.log(text)
+		$("button:last-child").click(function() {
+
+			location.href = "FileBoardWrite.filebo";
+		})
+
+
+	})
+	
  
  </script>
 </body>

@@ -47,8 +47,8 @@ public class FileBoardFrontController extends javax.servlet.http.HttpServlet {
 				case "/FileBoardModifyView.filebo":
 					action = new FileBoardModifyView();
 					break;
-				case "/FileBoardModifyAction.filebo":
-					action = new FileBoardModifyAction();
+				case "/FileBoardDownAction.filebo":
+					action = new FileBoardDownAction();
 					break;
 				case "/FileBoardReplyView.filebo":
 					action = new FileBoardReplyView();
