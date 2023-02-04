@@ -45,16 +45,7 @@ select count(*) from file_board;
 
 --	public List<FileBean> getBoardList(int page, int limit) {
 
-SELECT * FROM (select rownum rnum, j.* from (
-							 select board.*, nvl(CNT ,0) CNT 
-							from board left outer join (select comment_board_num,count(*) CNT  
-														from comm 
-														group by comment_board_num) 
-												on board_num = comment_board_num 
-							order by board_re_ref desc, 
-							board_re_seq asc)j
-							 				where rownum<=? ) 
-							WHERE rnum>=? and rnum<=?
+
 
 SELECT * FROM (select rownum rnum, j.* from (
 							 select file_board.*, nvl(CNT ,0) CNT 
@@ -66,3 +57,22 @@ SELECT * FROM (select rownum rnum, j.* from (
 							FILE_RE_SEQ asc)j
 							 				where rownum<=? ) 
 							WHERE rnum>=? and rnum<=?;
+						
+--		public boolean fileboardInsert(FileboBean filedata) {
+
+select nvl(max(FILE_NUM),0)+1 from file_board
+							
+							
+insert into board (FILE_NUM ,
+	FILE_NAME , 
+	FILE_PASS,
+	FILE_SUBJECT,	
+	FILE_CONTENT ,		
+	FILE_FILE ,
+	FILE_FILE2 ,		
+	FILE_RE_REF ,	
+	FILE_RE_LEV ,	
+	FILE_RE_SEQ ,
+	FILE_READCOUNT 
+	)
+ 	values ("+max_sql+",?,?,?,?,?,?,"+max_sql+",?,?,?);

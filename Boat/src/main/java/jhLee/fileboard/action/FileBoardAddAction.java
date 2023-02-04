@@ -40,14 +40,17 @@ public class FileBoardAddAction implements Action {
 					new DefaultFileRenamePolicy()
 					);
 //230204file 업로드진행필요
-			Filedata.setFILE_NAME(multi.getParameter(saveFolder));
-			Filedata.setFILE_PASS(multi.getParameter(""));
-			Filedata.setBOARD_SUBJECT(multi.getParameter("board_subject"));
-			Filedata.setFILE_CONTENT(multi.getParameter("board_content"));
+			//jsp name="" 맞춰야함
+			Filedata.setFILE_NAME(multi.getParameter(""));
+			Filedata.setFILE_PASS(Integer.parseInt(multi.getParameter("")));
+			Filedata.setFILE_SUBJECT(multi.getParameter(""));
+			Filedata.setFILE_CONTENT(multi.getParameter(""));
 			//시스템 상에 업로드된 실제 파일명
-			String filename = multi.getFilesystemName("board_file");
+			String filename = multi.getFilesystemName("");
 			Filedata.setFILE_FILE(filename);
-			Filedata.setFILE_FILE2(filename);
+			
+			String filename2 = multi.getFilesystemName("");
+			Filedata.setFILE_FILE2(filename2);
 			//두개 넣을 수 있나요?
 			
 			result = filedao.fileboardInsert(Filedata);
@@ -56,7 +59,7 @@ public class FileBoardAddAction implements Action {
 			
 			if(result ==false) {
 				System.out.println("게시판 등록 실패");
-				forward.setPath("error/error.jsp");
+				forward.setPath("jhLee/error/error.jsp");
 				request.setAttribute("message", "게시판 등록 실패입니다.");
 				forward.setRedirect(false);
 				return forward;
