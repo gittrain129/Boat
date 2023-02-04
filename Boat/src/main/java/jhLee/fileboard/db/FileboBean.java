@@ -14,8 +14,15 @@ public class FileboBean {
 	private int FILE_READCOUNT;
 	private String FILE_DATE;
 	private int CNT;
+	private String DEPT;
 
 	
+	public String getDEPT() {
+		return DEPT;
+	}
+	public void setDEPT(String string) {
+		DEPT = string;
+	}
 	public int getCNT() {
 		return CNT;
 	}
