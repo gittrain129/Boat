@@ -1,7 +1,7 @@
 /*
  *** 데이터 빈(DataBean) 클래스 작성 *** 
  */
-package net.member.db;
+package sjKim.db;
 
 public class Member {
 	private String id;
