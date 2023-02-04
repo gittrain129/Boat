@@ -161,5 +161,76 @@ public class FileDAO {
 		return list;
 
 	}
+	public boolean fileboardInsert(FileboBean filedata) {
 
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			int result = 0;
+
+			try {
+				con = ds.getConnection();
+
+				String max_sql = "(select nvl(max(FILE_NUM),0)+1 from file_board)";
+				
+				String sql = "insert into board "
+						+ "(FILE_NUM , "
+						+ "	FILE_NAME , "
+						+ "	FILE_PASS, "
+						+ "	FILE_SUBJECT,	"
+						+ "	FILE_CONTENT ,	"
+						+ "	FILE_FILE , "
+						+ "	FILE_FILE2 ,	"
+						+ "	FILE_RE_REF ,	"
+						+ "	FILE_RE_LEV ,	"
+			 			+ "	FILE_RE_SEQ , "
+						+ "	FILE_READCOUNT "
+						+ "	) "
+						+ "values ("+max_sql+",?,?,?,?,?,?,"+max_sql+",?,?,?)";
+				
+				pstmt = con.prepareStatement(sql);
+
+				pstmt.setString(1, filedata.getFILE_NAME());
+				pstmt.setString(2, filedata.getFILE_NAME());
+				pstmt.setInt(3, filedata.getFILE_PASS());
+				pstmt.setString(4, filedata.getFILE_SUBJECT());
+				pstmt.setString(5, filedata.getFILE_CONTENT());
+				pstmt.setString(6, filedata.getFILE_FILE());
+				pstmt.setString(7,filedata.getFILE_FILE2());
+				pstmt.setInt(8, 0);
+				pstmt.setInt(9, 0);
+				pstmt.setInt(10, 0);
+
+				result = pstmt.executeUpdate();
+
+
+				if(result ==1) {
+					System.out.println("데이터 삽입이 모두완료되었습니다.");
+					return true;
+				}
+			} catch (Exception ex) {
+				System.out.println("fileboardInsert() 에러: " + ex);
+				
+				ex.printStackTrace();
+
+			} finally {
+				if (pstmt != null) {
+				try {
+						pstmt.close();// 꼭 닫아줘야함 ㅇㅇ
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+				if (con != null)
+				try {
+						con.close();// 꼭 닫아줘야함 ㅇㅇ
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				}
+			}
+
+			return false;
+
+		}
 }

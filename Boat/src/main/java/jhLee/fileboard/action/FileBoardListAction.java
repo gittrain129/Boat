@@ -25,7 +25,7 @@ public class FileBoardListAction implements Action {
 	List<FileboBean> filebolist = new ArrayList<FileboBean>();
 		
 	int page = 1;
-	int limit = 10;
+	int limit = 10; 
 	if(request.getParameter("page")!=null){
 		page = Integer.parseInt(request.getParameter("page"));
 	}

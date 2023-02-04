@@ -56,7 +56,7 @@ public class FilecommBean {
 		return F_COMMENT_DATE;
 	}
 	public void setF_COMMENT_DATE(String f_COMMENT_DATE) {
-		F_COMMENT_DATE = f_COMMENT_DATE;
+		this.F_COMMENT_DATE = f_COMMENT_DATE.substring(0,10);
 	}
 
 

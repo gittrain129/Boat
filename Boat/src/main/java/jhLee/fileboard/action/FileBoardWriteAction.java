@@ -12,7 +12,10 @@ public class FileBoardWriteAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//File_bo_Write.jsp
-		return null;
+		ActionForward forward = new ActionForward();
+		forward.setRedirect(false);
+		forward.setPath("jhLee/file_board/File_bo_Write.jsp");
+		return forward;
 	}
 
 }

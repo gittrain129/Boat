@@ -30,7 +30,7 @@ public class FileboBean {
 	}
 	public String getFILE_NAME() {
 		return FILE_NAME;
-	}
+	} 
 	public void setFILE_NAME(String fILE_NAME) {
 		FILE_NAME = fILE_NAME;
 	}
@@ -92,7 +92,7 @@ public class FileboBean {
 		return FILE_DATE;
 	}
 	public void setFILE_DATE(String fILE_DATE) {
-		FILE_DATE = fILE_DATE;
+		this.FILE_DATE = fILE_DATE.substring(0,10);
 	}
 
 }
