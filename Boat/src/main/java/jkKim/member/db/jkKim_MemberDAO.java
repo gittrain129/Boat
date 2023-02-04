@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -24,6 +25,16 @@ public class jkKim_MemberDAO {
 	} //생성자end
 	
 	public int addressview() {
+		return 0;
+	}
+
+	public List<jkKim_Member> getMemberList(int page, int limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getListCount() {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 	

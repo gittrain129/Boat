@@ -20,13 +20,14 @@
   <!-- 부서선택 셀렉트 바-->
   <div class="rows" style="position:absolute; right:100px;">
   <span> 검색 </span>
-  <select class="form-select" aria-label="Default select example">
+  <select class="form-select" aria-label="Default select example" id="dept_value">
   <option selected>부서명</option>
-  <option value="1">홍보팀</option>
-  <option value="2">개발팀</option>
-  <option value="3">인사팀</option>
-  <option value="4">기획팀</option>
-  <option value="5">영업팀</option>
+  <option value="1">모두보기</option>
+  <option value="2">홍보팀</option>
+  <option value="3">개발팀</option>
+  <option value="4">인사팀</option>
+  <option value="5">기획팀</option>
+  <option value="6">영업팀</option>
 	</select>
 	</div>
 	<!-- 부서선택 셀렉트 바 끝 -->
