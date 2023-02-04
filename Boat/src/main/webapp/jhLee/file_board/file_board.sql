@@ -13,7 +13,9 @@ create table file_board (
 	FILE_RE_LEV NUMBER(5),	
 	FILE_RE_SEQ NUMBER(5),
 	FILE_READCOUNT NUMBER(5),
-	FILE_DATE DATE );
+	FILE_DATE DATE ,
+	DEPT VARCHAR2(30) check (dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀'))
+	);
 	
 	insert into file_board
 	values(1,1,1,1,1,1,1,0,0,0,0,sysdate);
@@ -76,3 +78,41 @@ insert into board (FILE_NUM ,
 	FILE_READCOUNT 
 	)
  	values ("+max_sql+",?,?,?,?,?,?,"+max_sql+",?,?,?);
+ 	
+ 				String max_sql = "(select nvl(max(FILE_NUM),0)+1 from file_board)";
+				
+				insert into file_board 
+						(FILE_NUM , 
+							FILE_NAME, 
+							FILE_PASS, 
+							FILE_SUBJECT,
+							FILE_CONTENT ,	
+							FILE_FILE , 
+							FILE_FILE2 ,	
+							FILE_RE_REF ,	
+							FILE_RE_LEV ,	
+			 				FILE_RE_SEQ , 
+							FILE_READCOUNT, 
+						 DEPT
+								) 
+						values (0,0,0,0,0,0,0,0,0,0,0,'개발팀');
+						
+							String max_sql = "(select nvl(max(FILE_NUM),0)+1 from file_board)";
+				
+				String sql = "insert into file_board "
+						+ "(FILE_NUM , "
+						+ "	FILE_NAME , "
+						+ "	FILE_PASS, "
+						+ "	FILE_SUBJECT,	"
+						+ "	FILE_CONTENT ,	"
+						+ "	FILE_FILE , "
+						+ "	FILE_FILE2 ,	"
+						+ "	FILE_RE_REF ,	"
+						+ "	FILE_RE_LEV ,	"
+			 			+ "	FILE_RE_SEQ , "
+						+ "	FILE_READCOUNT, "
+						+ " DEPT"
+						
+						+ "	) "
+						+ "values ("+max_sql+",?,?,?,?,?,?,"+max_sql+",?,?,?,"+"'"+filedata.getDEPT()+"'"+")";
+				

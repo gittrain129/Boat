@@ -172,7 +172,7 @@ public class FileDAO {
 
 				String max_sql = "(select nvl(max(FILE_NUM),0)+1 from file_board)";
 				
-				String sql = "insert into board "
+				String sql = "insert into file_board "
 						+ "(FILE_NUM , "
 						+ "	FILE_NAME , "
 						+ "	FILE_PASS, "
@@ -183,22 +183,26 @@ public class FileDAO {
 						+ "	FILE_RE_REF ,	"
 						+ "	FILE_RE_LEV ,	"
 			 			+ "	FILE_RE_SEQ , "
-						+ "	FILE_READCOUNT "
+						+ "	FILE_READCOUNT, "
+						+ " DEPT,"
+						+ "FILE_DATE"
+						
 						+ "	) "
-						+ "values ("+max_sql+",?,?,?,?,?,?,"+max_sql+",?,?,?)";
+						+ "values ("+max_sql+",?,?,?,?,?,?,"+max_sql+",?,?,?,"+"'"+filedata.getDEPT()+"'"+",sysdate)";
 				
 				pstmt = con.prepareStatement(sql);
-
+				System.out.println(sql);
+				System.out.println(filedata.getDEPT());
+				
 				pstmt.setString(1, filedata.getFILE_NAME());
-				pstmt.setString(2, filedata.getFILE_NAME());
-				pstmt.setInt(3, filedata.getFILE_PASS());
-				pstmt.setString(4, filedata.getFILE_SUBJECT());
-				pstmt.setString(5, filedata.getFILE_CONTENT());
-				pstmt.setString(6, filedata.getFILE_FILE());
-				pstmt.setString(7,filedata.getFILE_FILE2());
+				pstmt.setInt(2, filedata.getFILE_PASS());
+				pstmt.setString(3, filedata.getFILE_SUBJECT());
+				pstmt.setString(4, filedata.getFILE_CONTENT());
+				pstmt.setString(5, filedata.getFILE_FILE());
+				pstmt.setString(6,filedata.getFILE_FILE2());
+				pstmt.setInt(7, 0);
 				pstmt.setInt(8, 0);
 				pstmt.setInt(9, 0);
-				pstmt.setInt(10, 0);
 
 				result = pstmt.executeUpdate();
 

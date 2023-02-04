@@ -14,7 +14,8 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
 <script src="lang/summernote-ko-KR.js"></script>
 <script src="https://github.com/summernote/summernote/tree/master/lang/summernote-ko-KR.js"></script>
-  
+    <link href="${pageContext.request.contextPath}/jhLee/css/bootstrap-select.min.css" type="text/css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/jhLee/js/bootstrap-select.min.js"></script>
 <script src="js/writeform.js"></script>
 
 <style>
@@ -50,7 +51,7 @@ img{width : 20px;}
 </head>
 <body>
 <div class="container">
- <form action="BoardAddAction.bo" method="post" enctype = "multipart/form-data" name ="boardform">
+ <form action="FileBoardAddAction.filebo" method="post" enctype = "multipart/form-data" name ="boardform">
  	<h1>boat_  wirte 페이지</h1>
      
     <div class="form-group">
@@ -67,24 +68,27 @@ img{width : 20px;}
  		class="form-control" placeholder="Enter board_pass">
     </div>
 
-       
-
-    <div class="form-group ">
+ 
+         <div class="form-group ">
         <label for = "board_name">글쓴이</label><br>
         <div class="btn-group">
             <button type="button" class="btn btn-secondary">부서</button>
             <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
             </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">홍보부</a>
-                <a class="dropdown-item" href="#">기획부</a>
-                <a class="dropdown-item" href="#">마케팅부</a>
+                <a class="dropdown-item" href="#">홍보팀</a>
+                <a class="dropdown-item" href="#">개발팀</a>
+                <a class="dropdown-item" href="#">인사팀</a>
+                <a class="dropdown-item" href="#">기획팀</a>
+                <a class="dropdown-item" href="#">영업팀</a>
               </div>
             </div>
-       <input name="board_name" id="board_name" value="" 
-       type="text"  class="form-control writer"
-       placeholder="Enterboard_name">
-    </div>
+            <input type="hidden" name = "dept" id = "dept">
+       		<input name="board_name" id="board_name" value="" type="text"  class="form-control writer"
+       			placeholder="Enterboard_name">
+  	  </div>
+        
+    
 
  	
  	<div class="form-group">
@@ -93,16 +97,18 @@ img{width : 20px;}
  	</div>
  	
  	<div class="form-group">
- 		<label>파일첨부 &nbsp;
- 		<img alt="파일첨부" src="../image/file.png">
+ 		<label>
+ 		<img alt="파일첨부" src="${pageContext.request.contextPath}/jhLee/image/file.png"> 
+ 		&nbsp;파일첨부
  		<input name="board_file" id="upfile" type="file">
 		 </label>
 	 	
  		<span id ="filevalue"></span>
  	</div>
  	<div class="form-group">
- 		<label>파일첨부2
- 		<img alt="파일첨부2" src="../image/file.png">
+ 		<label>
+ 		<img alt="파일첨부2" src="${pageContext.request.contextPath}/jhLee/image/file.png">
+ 		 &nbsp;파일첨부2
  		<input name="board_file2" id="upfile2" type="file">
 		 </label>
 	 	
@@ -115,7 +121,22 @@ img{width : 20px;}
  	</div>
  </form>
 </div><!-- container끝 -->
+<script>
+$(function(){
 
+	$('.dropdown-menu .dropdown-item').click(function(){
+			const dept =$(this).text()
+			const sel =$('.btn-group button:first-child').text()
+			console.log(sel)
+			console.log(dept)
+	$('#dept').val(dept);
+			$('.btn-group button:first-child').text(dept)
+			const deptval=$('#dept').val()		
+			console.log('deptval ='+deptval)
+	
+	})//drop downclick 끝
+})//ready끝
+</script>
 <!-- <script>
    $('#summernote').summernote({
         placeholder: 'Hello Bootstrap 4',

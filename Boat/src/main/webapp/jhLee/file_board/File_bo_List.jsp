@@ -1,3 +1,6 @@
+<%--
+http://localhost:8088/Boat/FileBoardList.filebo
+ --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -16,7 +19,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<jsp:include page="herder.jsp"/>
 </head>
 <body>
     <div class="container">
@@ -182,16 +184,7 @@
  </div>
  <script>
  
- $(function() {
-		const text = $("button:last-child").text()
-		console.log(text)
-		$("button:last-child").click(function() {
-
-			location.href = "FileBoardWrite.filebo";
-		})
-
-
-	})
+ 
  </script>
 </body>
 </html>
