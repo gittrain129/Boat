@@ -33,6 +33,9 @@ public class jkKim_ActionFrontController extends javax.servlet.http.HttpServlet 
 			action = new AddressViewAction();
 			break;
 			
+		case "/adminView.jk":
+			action = new adminViewAction();
+			break;
 		}// switch end
 		
 		
