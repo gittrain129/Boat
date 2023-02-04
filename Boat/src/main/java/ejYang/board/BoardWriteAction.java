@@ -20,6 +20,10 @@ public class BoardWriteAction implements Action{
 //		MemberDAO mdao = new MemberDAO();
 //		Member m = new Member();
 //		m = mdao.member_info(empno);
+		String empno = "ADMIN";
+		MemberDAO mdao = new MemberDAO();
+		Member m = new Member();
+		m = mdao.member_info(empno);
 		
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);

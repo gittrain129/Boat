@@ -11,6 +11,7 @@
 <section class="notice">
     <%-- 게시글이 있는 경우 --%>
     <div id="board-search">
+        <h2>업무 게시판</h2>
         <div class="container">
             <div class="search-window">
                 <form action="" class="search-form">

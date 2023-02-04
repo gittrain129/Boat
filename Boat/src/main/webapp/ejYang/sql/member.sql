@@ -9,7 +9,7 @@ create table MEMBER(
  PASSWORD VARCHAR2(10),
  PWCHECK VARCHAR2(10),
  NAME VARCHAR2(15),
- JUMIN NUMBER(14),
+ JUMIN VARCHAR2(15),
  ADDRESS VARCHAR2(150),
  POST NUMBER(5),
  GENDER VARCHAR2(3),
@@ -23,6 +23,7 @@ create table MEMBER(
  INSERT INTO member 
  (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
  VALUES('ADMIN','','','123456','123456','홍길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', 
- '12345','남','admin@boat.com','01012345678','안녕하세요 반갑습니다','/uploadImage/adminImage');
+ '12345','남','admin@boat.com','01012345678','안녕하세
+요 반갑습니다','/uploadImage/adminImage');
  
  select * from member;

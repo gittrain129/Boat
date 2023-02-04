@@ -7,7 +7,7 @@ public class Member {
 	private String password;
 	private String pwcheck;
 	private String name;
-	private int jumin;
+	private String jumin;
 	private String address;
 	private int post;
 	private String gender;
@@ -53,11 +53,11 @@ public class Member {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getJumin() {
+	public String getJumin() {
 		return jumin;
 	}
-	public void setJumin(int jumin) {
-		this.jumin = jumin;
+	public void setJumin(String string) {
+		this.jumin = string;
 	}
 	public String getAddress() {
 		return address;
