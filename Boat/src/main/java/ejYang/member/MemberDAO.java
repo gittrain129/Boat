@@ -45,7 +45,7 @@ public class MemberDAO {
 				m.setPassword(rs.getString(4));
 				m.setPwcheck(rs.getString(5));
 				m.setName(rs.getString(6));
-				m.setJumin(rs.getInt(7));
+				m.setJumin(rs.getString(7));
 				m.setAddress(rs.getString(8));
 				m.setPost(rs.getInt(9));
 				m.setGender(rs.getString(10));

@@ -3,6 +3,7 @@
  <head>
   <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
   <link href="${pageContext.request.contextPath}/ejYang/css/view.css" type="text/css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
  </head>
  <body>
   <div class="container">
@@ -15,15 +16,25 @@
             <th scope="col" class="th-title">${boarddata.board_date}</th>
           </tr>
           <tr>
-            <td colspan="3" class="th-count">부서명&nbsp;작성자</td>
+            <td class="th-count"></td>
+            <td class="th-count"></td>
+            <td class="th-count">
+            	부서명&nbsp;:&nbsp;${boarddata.board_dept}&emsp;&emsp;&emsp;작성자&nbsp;:&nbsp;${boarddata.board_name}
+            </td>
           </tr>
           <tr>
-            <td colspan="3" class="th-count">댓글수&nbsp;조회수</td>
+            <td class="th-count"></td>
+            <td class="th-count"></td>
+            <td class="th-count">
+	            <img src="${pageContext.request.contextPath}/ejYang/image/reply.png">댓글&nbsp;${boarddata.cnt}
+	            &emsp;&emsp;&emsp;
+	            <img src="${pageContext.request.contextPath}/ejYang/image/eye.png">조회&nbsp;${boarddata.board_readcount}
+            </td>
           </tr>
         </thead>
         <tbody>
           <tr>
- 	  		<td style="padding-right: 0px">
+ 	  		<td colspan="3" style="padding-right: 0px">
  	  		<textarea class="form-control" 
  	  				  rows="5" readOnly>${boarddata.board_content}</textarea></td>
  	  	  </tr>
