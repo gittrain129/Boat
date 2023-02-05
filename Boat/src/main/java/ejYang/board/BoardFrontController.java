@@ -39,18 +39,18 @@ private static final long serialVersionUID=1L;
 			case "/BoardDetailAction.bo":
 				action = new BoardDetailAction();//글 상세페이지
 				break;
-//			case "/BoardModifyView.bo":
-//				action = new BoardModifyView();
-//				break;
-//			case "/BoardModifyAction.bo":
-//				action = new BoardModifyAction();
-//				break;
-//			case "/BoardReplyView.bo":
-//				action = new BoardReplyView();
-//				break;
-//			case "/BoardReplyAction.bo":
-//				action = new BoardReplyAction();
-//				break;
+			case "/BoardModifyView.bo":
+				action = new BoardModifyView();
+				break;
+			case "/BoardModifyAction.bo":
+				action = new BoardModifyAction();
+				break;
+			case "/BoardReplyView.bo":
+				action = new BoardReplyView();
+				break;
+			case "/BoardReplyAction.bo":
+				action = new BoardReplyAction();
+				break;
 //			case "/BoardDeleteAction.bo":
 //				action = new BoardDeleteAction();
 //				break;

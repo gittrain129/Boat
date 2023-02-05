@@ -16,7 +16,8 @@
 	  text-align: center;
 	}
 	.board-table th, .board-table td {
-	  padding: 14px 0;
+	  padding-top: 14px;
+	  padding-bottom: 14px;
 	}
 	.board-table tbody td {
 	  border-top: 1px solid #e7e7e7;
@@ -33,34 +34,6 @@
 	.board-table tbody th p{
 	  display: none;
 	}
-	.btn {
-	  display: inline-block;
-	  padding: 0 30px;
-	  font-size: 15px;
-	  font-weight: 400;
-	  background: transparent;
-	  text-align: center;
-	  white-space: nowrap;
-	  vertical-align: middle;
-	  -ms-touch-action: manipulation;
-	  touch-action: manipulation;
-	  cursor: pointer;
-	  -webkit-user-select: none;
-	  -moz-user-select: none;
-	  -ms-user-select: none;
-	  user-select: none;
-	  border: 1px solid transparent;
-	  text-transform: uppercase;
-	  -webkit-border-radius: 0;
-	  -moz-border-radius: 0;
-	  border-radius: 0;
-	  -webkit-transition: all 0.3s;
-	  -moz-transition: all 0.3s;
-	  -ms-transition: all 0.3s;
-	  -o-transition: all 0.3s;
-	  transition: all 0.3s;
-	}
-	/* reset */
 	
 	* {
 	  list-style: none;
@@ -69,22 +42,48 @@
 	  margin: 0;
 	  box-sizing: border-box;
 	}
-	.container {
-	  width: 1100px;
+	.containers {
+	  width: 60%;
 	  margin: 0 auto;
-	  display: flex;
 	}
 	
 	#board-list  table  thead  tr  th:nth-child(1){width:10%}
-   	#board-list  table  thead  tr  th:nth-child(2){width:75%}
-   	#board-list  table  thead  tr  th:nth-child(3){width:10%}
+   	#board-list  table  thead  tr  th:nth-child(2){width:70%}
+   	#board-list  table  thead  tr  th:nth-child(3){width:15%}
 
    	.board-table img{
    		width: 20px;
    		margin-right: 5px;
    	}
    	.th-count2 {text-align: right}
-   	.th-count3 {text-align: right}
-	body{
-		background:#F5F7FF
+   	.th-count3 {text-align: left; padding-left: 20px;}
+	.form-control{
+		width: 100%;
+		height:300px;
+		padding: 12px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		margin-top: 6px;
+		margin-bottom: 16px;
+		resize: none;
 	}
+	.center{
+		text-align: center;
+	}
+	.center2 a{
+		 text-decoration: none;
+		 color: black;
+		 font-weight: bold;
+		 font-size: medium;
+	}
+	.center3 a{
+		 text-decoration: none;
+		 color: black;
+		 font-weight: bold;
+		 font-size: medium;
+	}
+	.center3{
+		 text-align: right;
+	}
+	
