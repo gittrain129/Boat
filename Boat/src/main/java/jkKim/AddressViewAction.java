@@ -77,7 +77,7 @@ public class AddressViewAction implements jkKim_Action {
 			forward.setRedirect(false);
 			
 			//글 목록 페이지로 이동하기 위한 경로 설정
-			forward.setPath("board/boardList.jsp");
+			forward.setPath("/jkKim/addressView.jsp");
 			return forward; //BoardFrontController.java로 리턴
 			
 		}else {
@@ -96,25 +96,26 @@ public class AddressViewAction implements jkKim_Action {
 			
 			//List -> JsonElement
 			JsonElement je = new Gson().toJsonTree(memberlist);
-			System.out.println("boardlist= " + je.toString());
-			obj.add("boadrlist",je);
+			System.out.println("memberlist= " + je.toString());
+			obj.add("memberlist",je);
 			
 			response.setContentType("application/json;charset=utf-8");
 			response.getWriter().print(obj);
 			System.out.println(obj.toString());
 			return null;
 			}//else end
-	}//execute end
 		
 		
 		//페이징 처리 후 보여줄 기본화면 = 모든부서 보기
-		request.setAttribute("dept_select", "모두보기");
-		jkKim_ActionForward forward = new jkKim_ActionForward();
-		forward.setRedirect(false);
-		forward.setPath("/jkKim/addressView.jsp");
-		return forward;
+				
+				
+	}//execute end
 		
 		
-	}
+		
+		
+		
+	
 	
 }
+

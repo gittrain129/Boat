@@ -30,3 +30,9 @@ IMGSRC VARCHAR2(150)
  
  
  select * from member
+ 
+ select name, pwcheck from member;
+ 
+ update member set imgsrc = '/image/image_sample.png'
+ 
+ select imgsrc from member;
