@@ -20,14 +20,17 @@ public class BoardWriteAction implements Action{
 //		MemberDAO mdao = new MemberDAO();
 //		Member m = new Member();
 //		m = mdao.member_info(empno);
+		//로그인 세션 추가
+		
 		String empno = "ADMIN";
 		MemberDAO mdao = new MemberDAO();
 		Member m = new Member();
 		m = mdao.member_info(empno);
+		//세션 추가되면 삭제
 		
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);
-//		request.setAttribute("member", m);
+//		request.setAttribute("member", m);//로그인 세션 추가
 		forward.setPath("ejYang/board/boardWrite.jsp");
 		return forward;
 	}

@@ -21,17 +21,14 @@ public class BoardListAction implements Action{
 		BoardDAO boarddao = new BoardDAO();
 		List<BoardBean> boardlist = new ArrayList<BoardBean>();
 		
-		//로그인 성공시 파라미터 page가 없어요. 그래서 초기값이 필요합니다.
 		int page = 1;	//보여줄 page
 		int limit = 10;	//한 페이지에 보여줄 게시판 목록의 수
 		
-		//처음엔 null이나 페이지를 선택해서 페이지값이 지정되면 page값이 변경된다.
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		System.out.println("넘어온 페이지 =" + page);
 		
-		//추가
 		if(request.getParameter("limit") != null) {
 			limit = Integer.parseInt(request.getParameter("limit"));
 		}
