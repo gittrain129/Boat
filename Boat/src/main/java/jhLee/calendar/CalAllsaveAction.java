@@ -1,6 +1,9 @@
 package jhLee.calendar;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +16,8 @@ public class CalAllsaveAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",Locale.KOREA);
+		
 		Calendarbean cal = new Calendarbean();
 		CalendarDAO caldao = new CalendarDAO();
 		
@@ -20,8 +25,11 @@ public class CalAllsaveAction implements Action {
 		String allday = request.getParameter("allday");
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
-		//int empno = request.getParameter("empno");
 		
+		//int empno = request.getParameter("empno");
+		//LocalDateTime startDate = LocalDateTime.parse(start,dateTimeFormatter);
+	     //LocalDateTime endDate = LocalDateTime.parse(end, dateTimeFormatter);
+	            
 		System.out.println(title);
 		System.out.println(allday);
 		System.out.println(start);

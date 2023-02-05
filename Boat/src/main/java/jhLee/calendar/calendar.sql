@@ -8,6 +8,7 @@ start_date varchar2  (55),
 end_date varchar2	 (55),
 allday varchar2(10) check (allday  in('true','false'))
 );
+delete from boat_Calendar;
 
 select * from boat_Calendar;
 
