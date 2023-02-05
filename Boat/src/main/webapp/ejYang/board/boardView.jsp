@@ -16,18 +16,13 @@
             <th scope="col" class="th-title">${boarddata.board_date}</th>
           </tr>
           <tr>
-            <td class="th-count"></td>
-            <td class="th-count"></td>
-            <td class="th-count">
-            	부서명&nbsp;:&nbsp;${boarddata.board_dept}&emsp;&emsp;&emsp;작성자&nbsp;:&nbsp;${boarddata.board_name}
+            <td class="th-count1"></td>
+            <td class="th-count2">
+            	부서명&nbsp;:&nbsp;${boarddata.board_dept}&emsp;&emsp;작성자&nbsp;:&nbsp;${boarddata.board_name}
             </td>
-          </tr>
-          <tr>
-            <td class="th-count"></td>
-            <td class="th-count"></td>
-            <td class="th-count">
+            <td class="th-count3">
 	            <img src="${pageContext.request.contextPath}/ejYang/image/reply.png">댓글&nbsp;${boarddata.cnt}
-	            &emsp;&emsp;&emsp;
+	            &emsp;
 	            <img src="${pageContext.request.contextPath}/ejYang/image/eye.png">조회&nbsp;${boarddata.board_readcount}
             </td>
           </tr>

@@ -3,105 +3,10 @@
  <head>
   <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
   <script src="${pageContext.request.contextPath}/ejYang/js/writeform.js"></script>
+  <link href="${pageContext.request.contextPath}/ejYang/css/write.css" type="text/css" rel="stylesheet">
   <script src="${pageContext.request.contextPath}/ejYang/js/summernote/summernote-lite.js"></script>
   <script src="${pageContext.request.contextPath}/ejYang/js/summernote/lang/summernote-ko-KR.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-  <style>
-  	body{
-  		background:#bbb
-  	}
-  	* {
-	  box-sizing: border-box;
-	}
-	.container{
-		width:60%;
-		margin: auto;
-		margin-top: 100px;
-	}
-	input[type=text],input[type=password], select {
-	  width: 100%;
-	  padding: 12px;
-	  border: 1px solid #ccc;
-	  border-radius: 4px;
-	  resize: vertical;
-	}
-	
-	label {
-	  padding: 12px 12px 12px 0;
-	  display: inline-block;
-	}
-	
-	input[type=submit] {
-	  background-color: #1e62ff;
-	  color: white;
-	  padding: 16px 20px;
-	  border: none;
-	  cursor: pointer;
-	  width: 20%;
-	  margin-top:20px;
-	  margin-bottom:10px;
-	  opacity: 0.8;
-	  display: inline-block;
-	}
-	
-	input[type=reset] {
-	  background-color: red;
-	  color: white;
-	  padding: 16px 20px;
-	  border: none;
-	  cursor: pointer;
-	  width: 20%;
-	  margin-top:20px;
-	  margin-bottom:10px;
-	  opacity: 0.8;
-	  display: inline-block;
-	}
-	
-	input[type=submit]:hover, input[type=reset]:hover {
-	  opacity: 1;
-	}
-	
-	.row{
-		text-align: center;
-	}
-	
-	.container {
-	  border-radius: 5px;
-	  padding: 20px;
-	  background:white
-	}
-	
-	.col-25 {
-	  float: left;
-	  width: 10%;
-	  margin: 6px 0px 0px 20px;
-	}
-	
-	.col-75 {
-	  float: left;
-	  width: 85%;
-	  margin-top: 6px;
-	}
-	
-	/* Clear floats after the columns */
-	.row:after {
-	  content: "";
-	  display: table;
-	  clear: both;
-	}
-	
-	/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-	@media screen and (max-width: 600px) {
-	  .col-25, .col-75, input[type=submit] {
-	    width: 100%;
-	    margin-top: 0;
-	  }
-	}
-	.note-editable p{
-		text-align: left;
-	}
-  </style>
-  
  </head>
  <body>
 <div class="container">
@@ -145,9 +50,9 @@
       </div>
     </div>
     <div class="row">
-        <textarea id="summernote" name="editordata" class="board_content"></textarea>
+        <textarea id="summernote" name="editordata" class="board_content "></textarea>
     </div>
-    <div class="row">
+    <div class="row2">
       <input type="submit" value="등록">
       <input type="reset" value="취소">
     </div>

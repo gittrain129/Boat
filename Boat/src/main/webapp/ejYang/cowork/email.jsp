@@ -6,9 +6,20 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	<style>
 		* {box-sizing: border-box;}
+		body{
+			background: #F5F7FF;
+		}
 		.container {width:70%}
 		label { font-weight:bold}
-		fieldset {border:1px solid #9e9e9e; padding:50px}
+		fieldset {padding:50px;
+			position: relative;
+		    display: flex;
+		    flex-direction: column;
+		    word-wrap: break-word;
+		    background-color: #fff;
+		    background-clip: border-box;
+		    border-radius: 10px;
+		}
 		.container > h2 {text-align: center; width:auto; padding: 10px; font-weight:bold; margin-bottom:40px}
 		.form-control {
 			width: 88%;
