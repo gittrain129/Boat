@@ -14,32 +14,17 @@ html, body {
 
 div.logo{
 	position: absolute;
-    top: 26px;
+    top: 0;
     left: 40px;
     z-index: 100;
-    width: 116px;
+    width: 10%;
     height: 28px;
+    padding-top: 15px;
 }
 
-div.topmenu {
-	position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 1000;
-    min-width: 1280px;
-    border-bottom: 1px solid #e6e6e6;
-    text-align: center;
-    background: #fff;
-    border-color: transparent;
-    display: block;
-    box-sizing: border-box;
-}
 
-div.topmenu.li {
-	position: fixed;
-	left: 110px;
-}
+
+
 /* header */
 
 header {
@@ -56,16 +41,10 @@ body {
 	margin: 0 auto; 
 	}
             
-/* .logo {
-	margin: 50px 0; 
-	font-size: 30px; 
-	text-align: center; 
-	font-family: 'Nanum Brush Script', cursive; 
-	}  */
             
 .topMenu {
 position: relative;
-	width: 100%; 
+	width: 70%; 
 	margin-top: 50px;
 	margin-bottom: 20px; 
 	text-align: center; 
@@ -116,21 +95,32 @@ position: relative;
 	display: block; 
 	clear: both; 
 	}
+
+.menu01 img {
+ width:25px;
+ height:25px;
+}	
+
+login_header{
+	width:10%;
 	
+}
+
 	
 	/*footer*/
 
-
 #wrap {
-  min-height: calc(30% - 120px);
+  /*min-height: calc(30% - 120px);*/
+  height: 120px;
   width: 100%; 
   background-color: #f2f2f2;
+  
 }
 
 footer {
   width: 100%;
   height: 60px;
-  border-top: 1px solid #c4c4c4;
+  padding-top:10px;
   color: #808080;
   font-size: 11px;
 }
@@ -164,22 +154,44 @@ main{
 	width: 100%;
 	margin-top: 10%;
 	/*min-height:700px;*/
-	border: 1px solid #aaa; 
 	text-align: center; 
 	overflow: hidden;
+	display: flex;
+	justify-content: center;
 }
-.image-menu{
-	width: 30%;
-	text-align: center;
-	display: block;
-	color: #00adef;
-	text-decoration:none;
-	float: left;
-}
+
 .body_menu {
 	height: 40%; 
 	display: inline-block; 
 	vertical-align: middle;
+	position: relative;
+	margin:10px;
+	
+}
+
+.image_text {
+    position: absolute;
+    color: white;
+    z-index:1;
+    top:270px;
+    left:85px;
+    font-size: 18px;
+    width: 120px;
+    font-weight: bold;
+  }
+ 
+.body_menu img {
+	width: 235px;
+	border: 0;
+	padding: 30px;	
+	display:block;
+	margin:auto;
+}
+
+a {
+	width: 200px;
+	text-decoration: none;
+	color: black;
 }
 
 
@@ -200,74 +212,139 @@ main{
 
 </script>
 	<header>
-	<!-- <div class="logo">
-            <span class="logo">컨텐츠 내용이 밀리는 풀 드롭다운 메뉴</span>
-        </div>  -->
-        <div class="logo">
-          		
-					<a href="https://localhost8088">
-						<img src="../image/logo.jpg" style="flaot:left; width: 100px; height: 100px;">
-					</a>
-					
+
+        <div class="logo">       		
+			<a href="https://localhost8088">
+				<img src="../image/main_logo.jpg" style="float:left; width: 120px; height: 120px;">
+			</a>					
 		</div>
+		
         <div class="topMenu">
             <ul class="menu01">
-                <li class><span>회사소개</span>
+                <li><span>회사소개</span>
                     <ul class="dept01">
-                        <li id="nop">오시는길</li>
+                    	<a href="https://www.naver.com" target="_self">
+                        	<li id="nop">오시는길</li>
+                        </a>
                         <li id="nop">&nbsp;</li>
                         <li id="nop">&nbsp;</li>
                     </ul>
                 </li>
                 <li><span>내 정보</span>
                     <ul class="dept01">
-                        <li id="nop">내 정보 보기</li>
-                        <li id="nop">내 &nbsp;글 &nbsp;보기</li>
-                        <li id="nop">내 할일 보기</li>
+                    	<a href="https://www.naver.com" target="_self">
+                        	<li id="nop">내 정보 보기</li>
+                        </a>
+                        <a href="https://www.naver.com" target="_self">
+                        	<li id="nop">내 &nbsp;글 &nbsp;보기</li>
+                        </a>
+                        <a href="https://www.naver.com" target="_self">
+                        	<li id="nop">내 할일 보기</li>
+                        </a>
                     </ul>
                 </li>
                 <li><span>게시판</span>
                     <ul class="dept01">
-                        <li id="nop">업무 게시판</li>
-                        <li id="nop">자료 게시판</li>
+                    	<a href="https://www.naver.com" target="_self">
+                       		<li id="nop">업무 게시판</li>
+                       	</a>
+                       	<a href="https://www.naver.com" target="_self">
+                       		<li id="nop">자료 게시판</li>
+                        </a>
                         <li id="nop">&nbsp;</li>
+                        
                     </ul>
                 </li>
                 <li><span>공유업무</span>
                     <ul class="dept01">
-                        <li id="nop">캘린더</li>
-                        <li id="nop">주소록</li>
-                        <li id="nop">&nbsp;</li>
+                    	<a href="https://www.naver.com" target="_self">
+                        	<li id="nop">캘린더</li>
+                        </a>
+                        <a href="https://www.naver.com" target="_self">
+                        	<li id="nop">주소록</li>
+                        </a>
+                        <a href="https://www.naver.com" target="_self">
+                        <li id="nop">이메일</li>
+                        </a>
                     </ul>
                 </li>
-
-
-
+				<li>
+					<img src="../image/boat_icon.png" >
+					<span>대화하기</span>
+                    <ul class="dept01">
+                    	<li id="nop">&nbsp;</li>
+                    	<li id="nop">&nbsp;</li>
+                    	<li id="nop">&nbsp;</li>
+                    </ul>
+                </li>
             </ul>
         </div>
+        <div class="login_header" style="float:right;">				
+	                   <li><button>출근</button></li>
+	                   <li><button>퇴근</button></li>
+	                   <li><button>외출</button></li>
+		</div> 
+       
         </header>
 		
 <main>
 		<div class="body_content">
 		
 			<div class="body_menu">
-				<img src="../image/strawberry.png" width="255" border="0">
+				<a href="https://www.naver.com" target="_black">
+				<img src="../image/blue_button.png" >
+				</a>
+				<span class="image_text">오시는길</span>
 			</div>
 			<div class="body_menu">
-				<img src="../image/strawberry.png" width="255" border="0">
+				<a href="https://www.naver.com" target="_black">
+				<img src="../image/blue_button.png" >
+				</a>
+				<span class="image_text">내 정보 보기</span>
 			</div>
 			<div class="body_menu">
-				<img src="../image/strawberry.png" width="255" border="0">
+				<a href="https://www.naver.com" target="_black">
+				<img src="../image/blue_button.png" >
+				</a>
+				<span class="image_text">내 글 보기</span>		
+					
 			</div>
 			<div class="body_menu">
-				<img src="../image/strawberry.png" width="255" border="0">
+				<a href="https://www.naver.com" target="_black">
+				<img src="../image/blue_button.png" >
+				</a>
+				<span class="image_text">내 일정 보기</span>
+			</div>
+		</div> 
+		
+			
+		<div class="body_content">
+		
+			<div class="body_menu">
+				<a href="https://www.naver.com" target="_black">
+				<img src="../image/blue_button.png" >
+				</a>
+				<span class="image_text">업무 게시판</span>
 			</div>
 			<div class="body_menu">
-				<img src="../image/strawberry.png" width="255" border="0">
+				<a href="https://www.naver.com" target="_black">
+				<img src="../image/blue_button.png" >
+				</a>
+				<span class="image_text">자료실</span>
 			</div>
 			<div class="body_menu">
-				<img src="../image/strawberry.png" width="255" border="0">
+				<a href="https://www.naver.com" target="_black">
+				<img src="../image/blue_button.png" >
+				</a>
+				<span class="image_text">캘린더</span>
 			</div>
+		    <div class="body_menu">
+		    	<a href="https://www.naver.com" target="_black">
+				<img src="../image/blue_button.png" >
+				</a>
+				<span class="image_text">주소록</span>
+			</div>
+		  
 		  
 		</div> 
 </main>
