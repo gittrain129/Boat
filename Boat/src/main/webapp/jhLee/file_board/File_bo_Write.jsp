@@ -7,16 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- include summernote css/js -->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
-<script src="lang/summernote-ko-KR.js"></script>
-<script src="https://github.com/summernote/summernote/tree/master/lang/summernote-ko-KR.js"></script>
-    <link href="${pageContext.request.contextPath}/jhLee/css/bootstrap-select.min.css" type="text/css" rel="stylesheet">
-    <script src="${pageContext.request.contextPath}/jhLee/js/bootstrap-select.min.js"></script>
-<script src="js/writeform.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+
+
+    
+    
+<script src="${pageContext.request.contextPath}/jhLee/js/writeform.js"></script>
 
 <style>
     body{background-color: #bbb;}
@@ -72,8 +76,8 @@ img{width : 20px;}
          <div class="form-group ">
         <label for = "board_name">글쓴이</label><br>
         <div class="btn-group">
-            <button type="button" class="btn btn-secondary">부서</button>
-            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+            <button type="button" class="btn btn-secondary" id = "deptsel">부서</button>
+            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" id = "deptbutton">
             </button>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">홍보팀</a>
@@ -91,10 +95,8 @@ img{width : 20px;}
     
 
  	
- 	<div class="form-group">
  		<label for="board_content">내용</label>
  		<textarea name="board_content" id="summernote"  class="form-control"></textarea>
- 	</div>
  	
  	<div class="form-group">
  		<label>
@@ -124,29 +126,31 @@ img{width : 20px;}
 <script>
 $(function(){
 
-	$('.dropdown-menu .dropdown-item').click(function(){
-			const dept =$(this).text()
-			const sel =$('.btn-group button:first-child').text()
+	$('#deptbutton+div a').click(function(){
+			const dept =$(this).text();
+			const sel =$('#deptsel').text();
 			console.log(sel)
 			console.log(dept)
-	$('#dept').val(dept);
-			$('.btn-group button:first-child').text(dept)
+			
+			$('#dept').val(dept);
+			
+			$('#deptsel').text(dept)
+			
 			const deptval=$('#dept').val()		
 			console.log('deptval ='+deptval)
 	
 	})//drop downclick 끝
+	
+	  $('#summernote').summernote({
+	        placeholder: '자료를 입력하세요',
+	        tabsize: 2,
+	        lang : "ko-KR",
+	        height: 300
+	      });
+	
 })//ready끝
+
 </script>
-<!-- <script>
-   $('#summernote').summernote({
-        placeholder: 'Hello Bootstrap 4',
-        tabsize: 2,
-        height: 100,
-    
-  lang:'ko-KR',
-  height : 500
-});
-$('.dropdown-toggle').dropdown()
-</script> -->
+
 </body>
 </html>

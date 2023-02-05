@@ -23,6 +23,8 @@ public class FileDAO {
 			System.out.println("DB연결 실패 :" + ex);
 			return;
 		}
+		
+		//생성자 필드완
 	}
 	public int getListcount() {
 		Connection con = null;
@@ -338,4 +340,105 @@ public class FileDAO {
 
 
 	}
+	public boolean isBoardWriter(int num, String pass) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean result = false;
+		String board_sql = "select FILE_PASS from file_board where FILE_NUM = ? ";
+		
+
+		try {
+			con = ds.getConnection();
+			
+			pstmt = con.prepareStatement(board_sql);
+
+			
+			pstmt.setInt(1,num);
+			rs=pstmt.executeQuery();
+
+				if(rs.next()) {
+					if(pass.equals(rs.getString("BOARD_PASS"))) {
+						result = true;
+					}
+				}
+		} catch (Exception ex) {
+			System.out.println("isBoardWriter() 에러: " + ex);
+			
+			ex.printStackTrace();
+
+		} finally {
+			
+			if (rs != null) {
+				try {
+					rs.close();// 꼭 닫아줘야함 ㅇㅇ
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (pstmt != null) 
+			try {
+					pstmt.close();// 꼭 닫아줘야함 ㅇㅇ
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			if (con != null)
+			try {
+					con.close();// 꼭 닫아줘야함 ㅇㅇ
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			}
+			}
+		return result;
+	}
+	
+	public boolean boardModify(FileboBean modifyboard) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "update file_board set FILE_SUBJECT=?, FILE_CONTENT=?, FILE_FILE = ? ,FILE_FILE2 =? "
+				+ "where FILE_NUM =? ";
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, modifyboard.getFILE_SUBJECT());
+			pstmt.setString(2,modifyboard.getFILE_CONTENT());
+			pstmt.setString(3, modifyboard.getFILE_FILE());
+			pstmt.setString(4, modifyboard.getFILE_FILE2());
+			pstmt.setInt(5, modifyboard.getFILE_NUM());
+			int result = pstmt.executeUpdate();
+			
+			if(result ==1) {
+				System.out.println("성공업데이트");
+				return true;
+			}
+			
+
+		} catch (Exception ex) {
+			System.out.println("boardModify() 에러: " + ex);
+			ex.printStackTrace();
+
+		} finally {
+			if (pstmt != null) {
+			try {
+					pstmt.close();// 꼭 닫아줘야함 ㅇㅇ
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			if (con != null)
+			try {
+					con.close();// 꼭 닫아줘야함 ㅇㅇ
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			}
+		}
+		return false;
+
+
+	}
+
 }

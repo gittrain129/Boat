@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import ejYang.board.BoardBean;
-import ejYang.board.BoardDAO;
+import jhLee.fileboard.db.FileDAO;
+import jhLee.fileboard.db.FileboBean;
+
 
 public class FileBoardModifyAction implements Action {
 
@@ -20,12 +21,12 @@ public class FileBoardModifyAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//  File_bo_Update.jsp 의 내용 저장 (file저장도 필요함)
-		BoardDAO boarddao = new BoardDAO();
-		BoardBean boarddata = new BoardBean();
+		FileDAO boarddao = new FileDAO();
+		FileboBean boarddata = new FileboBean();
 		ActionForward forward = new ActionForward();
 		String realFolder ="";
 		
-		String saveFolde="boardupload";
+		String saveFolde="fileupload";
 		
 		int fileSize = 5 *1024 *1024;//업로드 할 파일의 최대 사이즈 입니다. 5MB
 		//실제 저장 경로
@@ -57,19 +58,23 @@ public class FileBoardModifyAction implements Action {
 			
 			//비밀전호가 일치하는 경우 수정 내용을 설정합니다.
 			//BOARDBEAN객체에 글 등록 폼에서 입력 받은 정보들을 저장합니다.
-			boarddata.setBOARD_NUM(num);
-			boarddata.setBOARD_SUBJECT(multi.getParameter("board_subject"));
-			boarddata.setBOARD_CONTENT(multi.getParameter("board_content"));
+			boarddata.setFILE_NUM(num);
+			boarddata.setFILE_SUBJECT(multi.getParameter("board_subject"));
+			boarddata.setFILE_CONTENT(multi.getParameter("board_content"));
 
 			
 			String check = multi.getParameter("check");
 			System.out.println("check="+check);
-			if(check !=null){
-				boarddata.setBOARD_FILE(check);
+			String check2 = multi.getParameter("check2");
+			if(check !=null || check2 !=null){
+				boarddata.setFILE_FILE(check);
+				boarddata.setFILE_FILE2(check2);
 				}else {
 					//업로드된 파일의 시스템상에 업로든된 실제 파일명을 얻어 옵니다.
 					String filename =multi.getFilesystemName("board_file");
-					boarddata.setBOARD_FILE(filename);
+					boarddata.setFILE_FILE(filename);
+					String filename2 =multi.getFilesystemName("board_file2");
+					boarddata.setFILE_FILE2(filename2);
 				}
 			
 			//DAO에서 수정 메서드 호출하여 수정합니다.
@@ -89,7 +94,7 @@ public class FileBoardModifyAction implements Action {
 			
 			forward.setRedirect(true);
 			//수정한 글 내용을 보여주기 위해 글 내용 보기 페이지로 이동하기 위해 경로를 설정합니다.
-			forward.setPath("BoadrdDetailAction.bo?num="+boarddata.getBOARD_NUM());
+			forward.setPath("BoadrdDetailAction.bo?num="+boarddata.getFILE_NUM());
 			return forward;
 			
 		}catch(IOException e) {
