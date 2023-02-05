@@ -22,13 +22,19 @@ public class jkKim_ActionFrontController extends javax.servlet.http.HttpServlet 
 		String contextPath = request.getContextPath(); // "/JspProject"
 		System.out.println("contextPath = " + contextPath);
 
-		String command = RequestURI.substring(contextPath.length()); // "/login.net"
+		
+		String command1 = RequestURI.substring(contextPath.length());
+		String command = RequestURI.substring(contextPath.length()).substring(6,command1.length()); // "/login.net"
 		System.out.println("command = " + command);
 		
 		jkKim_ActionForward forward = null;
 		jkKim_Action action = null;
 
 		switch (command) {
+		case "/home.jk":
+			action = new buttonViewAction();
+			break;
+		
 		case "/address.jk":
 			action = new AddressViewAction();
 			break;
