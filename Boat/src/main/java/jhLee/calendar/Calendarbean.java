@@ -7,6 +7,12 @@ public class Calendarbean {
 	String start_date;
 	String end_date;
 	String allday;
+	/*
+	 * 1 id 추가
+	 * 2 color 추가
+	 * 3 dept  추가
+	 * 4. 쉽게하려면 admin 추가
+	 */
 	
 	
 	public int getSchedule_code() {
