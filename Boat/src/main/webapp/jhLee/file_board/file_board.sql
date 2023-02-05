@@ -27,7 +27,7 @@ create table file_board (
 	values(3,1,1,1,1,1,1,0,0,2,0,sysdate);
 	
 	select * from file_board;
-	
+	delete from file_board where FILE_NUM =1;
 	
 	drop table FILE_COMMENT cascade constraints purge;
 
@@ -116,3 +116,7 @@ insert into board (FILE_NUM ,
 						+ "	) "
 						+ "values ("+max_sql+",?,?,?,?,?,?,"+max_sql+",?,?,?,"+"'"+filedata.getDEPT()+"'"+")";
 				
+						
+--		public FileboBean getDetail(int num) {
+
+select * from file_board where FILE_NUM =?

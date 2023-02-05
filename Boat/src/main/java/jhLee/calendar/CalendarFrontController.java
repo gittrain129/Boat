@@ -1,4 +1,4 @@
-package jhLee.fileboard.action;
+package jhLee.calendar;
 
 import java.io.IOException;
 
@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("*.filebo")
-public class FileBoardFrontController extends javax.servlet.http.HttpServlet {
+@WebServlet("*.cal")
+public class CalendarFrontController extends javax.servlet.http.HttpServlet {
+
+
 	private static final long serialVersionUID = 1L;
     
 	protected void doProcess(HttpServletRequest request,HttpServletResponse response) 
@@ -32,41 +34,18 @@ public class FileBoardFrontController extends javax.servlet.http.HttpServlet {
 		ActionForward forward = null;
 		Action action = null;
 				switch(command) {
-				case "/FileBoardList.filebo":
-					action = new FileBoardListAction();
-					break;
-				case "/FileBoardWrite.filebo":
-					action = new FileBoardWriteAction();
-					break;
-				case "/FileBoardAddAction.filebo":
-					action = new FileBoardAddAction();
-					break;
-				case "/FileBoadrdDetailAction.filebo":
-					action = new FileBoardDetailAction();
-					break;
-				case "/FileBoardModifyView.filebo":
-					action = new FileBoardModifyView();
-					break;
-				case "/FileBoardDownAction.filebo":
-					action = new FileBoardDownAction();
-					break;
-				case "/FileBoardReplyView.filebo":
-					action = new FileBoardReplyView();
-					break;
-				case "/FileBoardReplyAction.filebo":
-					action = new FileBoardReplyAction();
-					break;
-				case "/FileBoardDeleteAction.filebo":
-					action = new FileBoardDeleteAction();
+				case "/project_calendarallSave.cal":
+					action = new CalAllsaveAction();
 					break;
 				
 				}//switch end
-				System.out.println("1");
+				
 		forward = action.execute(request,response);
 		
 		if(forward != null) {
 			if(forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
+				
 				System.out.println("1"+forward.getPath());
 			}else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
@@ -86,5 +65,4 @@ public class FileBoardFrontController extends javax.servlet.http.HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			doProcess(request,response);
 	}
-
 }

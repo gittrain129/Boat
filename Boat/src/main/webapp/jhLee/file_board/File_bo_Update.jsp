@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+         <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,11 +52,12 @@ img{width : 20px;}
 <div class="container">
  <form action="BoardAddAction.bo" method="post" enctype = "multipart/form-data" name ="boardform">
  	<h1>boat_  글 수정페이지</h1>
+ 	<input type="hidden" name="board_num" value="${boarddata.FILE_NUM}">
      
     <div class="form-group">
         <label for="board_subject">제목</label>
         <input name="board_subject" id="board_subject" type="text" maxlength="100"
-        class="form-control" placeholder="Enter board_subject">
+        class="form-control" placeholder="Enter board_subject" value="${boarddata.FILE_SUBJECT }">
     </div>
  	
 
@@ -63,41 +65,44 @@ img{width : 20px;}
  	<div class="form-group">
          <label for="board_pass">비밀번호</label>
  		<input name="board_pass" id="board_pass" type="password" maxlength="30"
- 		class="form-control" placeholder="Enter board_pass">
+ 		class="form-control" placeholder="Enter board_pass"  value="${boarddata.FILE_PASS }">
     </div>
 
        
 
     <div class="form-group ">
         <label for = "board_name">글쓴이</label><br>
-        <div class="btn-group">
+          <div class="btn-group">
             <button type="button" class="btn btn-secondary">부서</button>
             <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
             </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">홍보부</a>
-                <a class="dropdown-item" href="#">기획부</a>
-                <a class="dropdown-item" href="#">마케팅부</a>
+                <a class="dropdown-item" href="#">홍보팀</a>
+                <a class="dropdown-item" href="#">개발팀</a>
+                <a class="dropdown-item" href="#">인사팀</a>
+                <a class="dropdown-item" href="#">기획팀</a>
+                <a class="dropdown-item" href="#">영업팀</a>
               </div>
             </div>
-       <input name="board_name" id="board_name" value="" 
-       type="text"  class="form-control writer"
-       placeholder="Enterboard_name">
-    </div>
+            <input type="hidden" name = "dept" id = "dept">
+       		<input name="board_name" id="board_name" value="" type="text"  class="form-control writer"
+       			placeholder="Enterboard_name">
+  	  </div>
 
  	
  	<div class="form-group">
  		<label for="board_content">내용</label>
- 		<textarea name="board_content" id="summernote"  class="form-control"></textarea>
+ 		<textarea name="board_content" id="summernote"  class="form-control">${boarddata.FILE_CONTENT}</textarea>
  	</div>
  	
+ 	<c:if test="${boarddata.FILE_RE_LEV==0}"></c:if>
  	<div class="form-group">
  		<label>파일첨부 &nbsp;
  		<img alt="파일첨부" src="../image/file.png">
  		<input name="board_file" id="upfile" type="file">
 		 </label>
 	 	
- 		<span id ="filevalue"></span>
+ 		<span id ="filevalue">${boarddata.FILE_FILE }</span>
  	</div>
  	<div class="form-group">
  		<label>파일첨부2
@@ -105,7 +110,7 @@ img{width : 20px;}
  		<input name="board_file2" id="upfile2" type="file">
 		 </label>
 	 	
- 		<span id ="filevalue2"></span>
+ 		<span id ="filevalue2">${boarddata.FILE_FILE2 }</span>
  	</div>
  	
  	<div class="form-group btn-group2">
@@ -114,7 +119,18 @@ img{width : 20px;}
  	</div>
  </form>
 </div><!-- container끝 -->
+<script>
+$(function(){
+//db의 값을 select 의 값으로 찾아서 넣어줍시다.
 
+console.log(${boarddata.DEPT })
+	
+			$('.btn-group button:first-child').text(${boarddata.DEPT })
+			
+	
+	})//drop downclick 끝
+})//ready끝
+</script>
 <!-- <script>
    $('#summernote').summernote({
         placeholder: 'Hello Bootstrap 4',
