@@ -3,6 +3,7 @@ package jkKim;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import com.google.gson.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -54,8 +55,56 @@ public class AddressViewAction implements jkKim_Action {
 		
 		String state = request.getParameter("state");
 		
-		//state 상태에 따른if구문 들어갈자리
 		
+		
+		//state 상태에 따른if구문 들어갈자리
+		if(state == null) {
+			System.out.println("state == null");
+			request.setAttribute("page", page);
+			request.setAttribute("maxpage", maxpage);
+			
+			request.setAttribute("startpage", startpage);
+			
+			request.setAttribute("endpage", endpage);
+			
+			request.setAttribute("listcount", listcount);
+			
+			request.setAttribute("memberlist", memberlist);
+			
+			request.setAttribute("limit", limit);
+			
+			jkKim_ActionForward forward = new jkKim_ActionForward();
+			forward.setRedirect(false);
+			
+			//글 목록 페이지로 이동하기 위한 경로 설정
+			forward.setPath("board/boardList.jsp");
+			return forward; //BoardFrontController.java로 리턴
+			
+		}else {
+			//위에서 request로 담았던것을 jsonobject에 담습니다
+			JsonObject obj = new JsonObject();
+			obj.addProperty("page", page); //{"page":변수 page의 값
+			obj.addProperty("maxpage", maxpage);
+			obj.addProperty("startpage", startpage);
+			obj.addProperty("endpage", endpage);
+			obj.addProperty("listcount", listcount);
+			obj.addProperty("limit", limit);
+			
+			//JsonObject에는 list형식을 담을수없는 addproperty()가 존재하지않습니다
+			//void com.google.gson.JsonObject.add(String property,JsonElement value) 메서드를 통해서 저장
+			//List 형식을 JsonElement로 바꾸어주어야 object에 저장할수있습니다
+			
+			//List -> JsonElement
+			JsonElement je = new Gson().toJsonTree(memberlist);
+			System.out.println("boardlist= " + je.toString());
+			obj.add("boadrlist",je);
+			
+			response.setContentType("application/json;charset=utf-8");
+			response.getWriter().print(obj);
+			System.out.println(obj.toString());
+			return null;
+			}//else end
+	}//execute end
 		
 		
 		//페이징 처리 후 보여줄 기본화면 = 모든부서 보기
