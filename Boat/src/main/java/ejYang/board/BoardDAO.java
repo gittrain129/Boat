@@ -281,8 +281,8 @@ public class BoardDAO {
 			//context.xml에서 설정한 리소스 jdbc/OracleDB 참조하여 Connection 객체를 얻어 옵니다.
 			conn = ds.getConnection();
 			
-			String sql = "select*from board "
-					+ "where board_num = ? ";
+			String sql = "select*from BOARD "
+					+ "where BOARD_NUM = ? ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -331,7 +331,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean result = false;
-		String board_sql = "select board_pass from board where board_num = ? ";
+		String board_sql = "select BOARD_PASS from BOARD where BOARD_NUM = ? ";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(board_sql);
@@ -370,18 +370,18 @@ public class BoardDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "update board "
-				+ "set board_subject=?, board_content=?, board_file=? "
-				+ "where board_num = ? ";
+		String sql = "update BOARD "
+				+ "set BOARD_NAME=?, BOARD_SUBJECT=?, BOARD_CONTENT=?, BOARD_DEPT=? "
+				+ "where BOARD_NUM = ? ";
 		
 		try {
-			//context.xml에서 설정한 리소스 jdbc/OracleDB 참조하여 Connection 객체를 얻어 옵니다.
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, modifyboard.getBoard_subject());
-			pstmt.setString(2, modifyboard.getBoard_content());
-			pstmt.setString(3, modifyboard.getBoard_file());
-			pstmt.setInt(4, modifyboard.getBoard_num());
+			pstmt.setString(1, modifyboard.getBoard_name());
+			pstmt.setString(2, modifyboard.getBoard_subject());
+			pstmt.setString(3, modifyboard.getBoard_content());
+			pstmt.setString(4, modifyboard.getBoard_dept());
+			pstmt.setInt(5, modifyboard.getBoard_num());
 			int result = pstmt.executeUpdate();
 			if(result == 1) {
 				System.out.println("성공 업데이트");

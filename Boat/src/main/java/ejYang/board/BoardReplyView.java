@@ -6,9 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.board.db.BoardBean;
-import net.board.db.BoardDAO;
-
 public class BoardReplyView implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request,
@@ -38,7 +35,7 @@ public class BoardReplyView implements Action{
 		
 		forward.setRedirect(false);
 		//글 답변 페이지 경로 지정합니다.
-		forward.setPath("board/boardReply.jsp");
+		forward.setPath("ejYang/board/boardReply.jsp");
 		return forward;
 	}
 }

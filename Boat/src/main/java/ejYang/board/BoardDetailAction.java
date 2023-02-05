@@ -12,10 +12,15 @@ public class BoardDetailAction implements Action{
 			  HttpServletResponse response) throws ServletException, IOException{
 		BoardDAO boarddao = new BoardDAO();
 		BoardBean boarddata = new BoardBean();
+		BoardBean prevdata = new BoardBean();
+		BoardBean nextdata = new BoardBean();
 		
 		int num=Integer.parseInt(request.getParameter("num"));
 		boarddao.setReadCountUpdate(num);//조회수
 		boarddata=boarddao.getDetail(num);//상세내용
+		
+		prevdata=boarddao.getDetail(num-1);//이전글
+		nextdata=boarddao.getDetail(num+1);//다음글
 		
 		if(boarddata==null) {
 			System.out.println("상세보기 실패");
@@ -30,6 +35,8 @@ public class BoardDetailAction implements Action{
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);
 		request.setAttribute("boarddata", boarddata);
+		request.setAttribute("prevdata", prevdata);
+		request.setAttribute("nextdata", nextdata);
 		forward.setPath("ejYang/board/boardView.jsp");//글 내용 보기 페이지로 이동하기 위해 경로를 설정합니다.
 		return forward;
 	}
