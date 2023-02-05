@@ -15,12 +15,12 @@ public class CalAllsaveAction implements Action {
 		
 		Calendarbean cal = new Calendarbean();
 		CalendarDAO caldao = new CalendarDAO();
-		ActionForward forward = new ActionForward();
 		
 		String title = request.getParameter("title");
 		String allday = request.getParameter("allday");
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
+		//int empno = request.getParameter("empno");
 		
 		System.out.println(title);
 		System.out.println(allday);
@@ -32,8 +32,12 @@ public class CalAllsaveAction implements Action {
 		cal.setEvent_name(title);
 		cal.setStart_date(start);
 		cal.setEnd_date(end);
+		//cal.setEmpno(empno);
 		
 		int saveall = caldao.saveall(cal);
+		if(saveall ==1) {
+			System.out.println("캘린더데이터 삽입 성공");
+		}
 		
 		//월간달력 전체 이벤트 추가합니다.
 		

@@ -15,7 +15,8 @@
 <script src="lang/summernote-ko-KR.js"></script>
 <script src="https://github.com/summernote/summernote/tree/master/lang/summernote-ko-KR.js"></script>
   
-<script src="js/writeform.js"></script>
+<script src="${pageContext.request.contextPath}/jhLee/js/fileupdate.js"></script>
+
 
 <style>
     body{background-color: #bbb;}

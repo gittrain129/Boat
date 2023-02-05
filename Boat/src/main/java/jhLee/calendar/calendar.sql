@@ -1,11 +1,11 @@
 drop table boat_Calendar cascade constraints purge;
 
-
+--dept empno추가 필요
 create table boat_Calendar (
 schedule_code number (2) primary key,
-event_name varchar2 (50),
-start_date date ,
-end_date date	,
+event_name varchar2 (55),
+start_date varchar2  (55),
+end_date varchar2	 (55),
 allday varchar2(10) check (allday  in('true','false'))
 );
 
