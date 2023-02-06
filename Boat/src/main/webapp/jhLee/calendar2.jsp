@@ -18,9 +18,13 @@ http://localhost:8089/Boat/project_calendarallSave.cal
  
   <meta charset='utf-8' />
   <!-- 화면 해상도에 따라 글자 크기 대응(모바일 대응) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
   <!-- jquery CDN -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+  
+<!--   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.0/index.global.min.js'></script> -->
+  
 
   <!-- fullcalendar CDN -->
   
@@ -32,11 +36,10 @@ http://localhost:8089/Boat/project_calendarallSave.cal
   
   <!-- bootstrap -->
   <link href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.css' rel='stylesheet'>
-	<link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
+<link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
 
  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 <!-- the moment-to-fullcalendar connector. must go AFTER the moment lib -->
 
 <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@6.1.1/index.global.min.js'></script>
@@ -44,10 +47,9 @@ http://localhost:8089/Boat/project_calendarallSave.cal
  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
  
  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
  
- <link href ="${pageContext.request.contextPath}/jhLee/css/calendar.css"  rel ="stylesheet">
- 
+ <link rel ="${pageContext.request.contextPath}/jhLee/css/calendar.css">
  <script>
  var calendar =null;
  // calendar element 취득
@@ -60,9 +62,10 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	      var containerEl = document.getElementById('external-events');
 	      var calendarEl = document.getElementById('calendar');
 	      var checkbox = document.getElementById('drop-remove');
-	      var allEvent =null;
 	      //db모든 데이터 가져옴
 	    
+	      console.log(all_events)
+	      
 	      //드래그앤 드롭가능  -> 추후 삭제 예정
 	      
 	      new Draggable(containerEl, {
@@ -76,8 +79,8 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	      //드래그앤 드롭가능  -> 추후 삭제 예정
 	      
 	      
-	      var all_events = loadingEvents();
-	     console.log(all_events);
+	        var all_events = loadingEvents();
+	     
 	      
 	      // full-calendar 생성하기
 	      calendar = new FullCalendar.Calendar(calendarEl, {
@@ -89,7 +92,7 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	       		 headerToolbar: {
 	          		  left: 'prev,next today',
 	          		  center: 'title',
- 						right : '',
+	          		 right: '',
 	        			  },
 	          
 	       		   editable: true, //재수정여부 가능
@@ -97,28 +100,24 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	        	 /*  droppable: true,
 	       	   
 	          		drop: function(info) {
+	            // is the "remove after drop" checkbox checked?
+	            if (checkbox.checked) {
+	              // if so, remove the element from the "Draggable Events" list
+	              info.draggedEl.parentNode.removeChild(info.draggedEl);
 	            } 
 	          },*/
 	          //월간 달력으로 시작합니다.
 	          initialView: 'dayGridMonth',
+	          
 	          editable: true, // 수정 가능?
 	          selectable: true, // 달력 일자 드래그 설정가능
 	          nowIndicator: true, // 현재 시간 마크
 	          dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
 	          locale: 'ko', // 한국어 설정
-	          
-	          eventAdd: function(arg) { // 이벤트가 추가되면 발생하는 이벤트
-	              console.log(arg);
-	          	console.log('이벤트 변경 및 추가');
-/* 
-                calendar.addEvent({
-                  title: title,
-                  start: arg.start,
-                  end: arg.end,
-                  allDay: arg.allDay,
-                  Boolean//?
-                		  }) 
-              }*/
+	          eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
+	              console.log(obj);
+	          	console.log('이벤트 추가함');
+	          	
 	          	
 	            },
 	            eventChange: function(obj) { // 이벤트가 수정되면 발생하는 이벤트
@@ -131,11 +130,8 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	          	console.log('이벤트 삭제함');
 	            
 	            },
-	            //ok
 	            select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
 	              var title = prompt('일정추가:');
-	           		 console.log(arg.start);
-	            
 	             
 	              if (title) {
 	                calendar.addEvent({
@@ -144,18 +140,16 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	                  end: arg.end,
 	                  allDay: arg.allDay,
 	                  Boolean//?
-	                		  })
-	              savedata(cal_data(calendar.getEvents()));
-	                
-	                //ok
+	                		  }  )
+	                		  
 	              }
-	              calendar.unselect();//titlt입력중에는 선택되지말아여
+	              calendar.unselect();//뭔지모르겠다
 	              
 	            },   eventClick: function (arg) {
 
 	            	            if (confirm("삭제하시겠습니까?")) {
 	            		 arg.event.remove();
-	            	     $.ajax({
+	            	      /*         $.ajax({
 	            	                type: "POST",
 	            	                url: "${pageContext.request.contextPath}/project_calendardelete.cal",
 	            	                contentType: "application/json; charset=utf-8",
@@ -165,7 +159,7 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	            	                  console.log("삭제완료");
 	            	                 // arg.event.remove();
 	            	                }
-	            	})//ajax 끝 
+	            	})//ajax 끝 */
 	            	}else{
 	            		console.log('삭제 실패');
 	            	}
@@ -180,47 +174,38 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	    
 	    //전체 이벤트 뽑아냄(그달의 전체 이벤트)
 	    //뽑을때 각각 데이터로 뽑아냄 json값
+	     
 	    function cal_data(allEvent){
 	     		 var events = new Array();
 	     		 for(var i=0; i<allEvent.length;i++){
 	     		 
-		   		 var obj = new Object();
- 		   		var startevent = moment(allEvent[i]._instance.range.start).format("YYYY-MMMM-DD HH:mm:ss");
-	//	   		var startevent = moment(allEvent[i]._instance.range.start).format("YYYY-M-D ");
-	//	   		var endevent = moment(allEvent[i]._instance.range.end).format("YYYY-M-D");
-	   			var endevent = moment(allEvent[i]._instance.range.end).format("YYYY-MMMM-DD HH:mm:ss");
+		   		var obj = new Object();
+		   		var startevent = moment(allEvent[i]._instance.range.start).format("YYYY-MM-DD H:m:s");
+		   		var endevent = moment(allEvent[i]._instance.range.end).format("YYYY-MM-DD H:m:s");
+		   		
+		   		 console.log(allEvent[i]._instance.range.start);
+		   		 console.log(startevent);
 		   		 
 		   		 obj.title = allEvent[i]._def.title; //이벤트 명칭
 		   		 obj.allday =allEvent[i]._def.allDay; //하루종일 이벤트인지 알려주는boolean값
 		   		 obj.start = startevent//시작날짜 및 시간
-		   		 obj.end   = endevent //마침 날짜 및 시간
+		   		 obj.end =endevent //마침 날짜 및 시간
 	    		}
+	     	 
 	     	 
 	     	return obj
 	      }
-   
-   
-	    //selectable 저장
-	    function save(){
-	    allEvent = calendar.getEvents();
-	    console.log(allEvent);
-	    console.log("현재 이벤트 저장합니다.");
-	    let obj = cal_data(allEvent);
-	   	 savedata(obj);
-	   	 
-	    }
 	    
 	    //전체 버튼 누르면 저장됨
 	    function allSave(){
-	    allEvent =	 calendar.getEvents();
+	   	 var allEvent =	 calendar.getEvents();
 	   	 console.log(allEvent);
 	   	 alert("전체 이벤트 저장합니다.");
-	 	console.log('1111'+moment.locale());
 	   	 console.log("전체 이벤트 저장합니다.");
 	   	 
 	    let obj = cal_data(allEvent);
 	   	 savedata(obj);
-	   	 }
+	   	}
 	    
 
 	    //이벤트 db저장 ajax
@@ -233,21 +218,20 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	   			async:true,
 	   			success:function(rdata){
 	   				console.log('모든 데이터 저장하였습니다.');
-	   			
 	   			},
 	   			error:function(request,status,error){},
 	   			complete:function(){}
 	   		}) 
 	    }//save data끝
 
-		 	function loadingEvents(){
+	    function loadingEvents(){
 			 	   
 			 	   var return_value = null;
 			    		$.ajax({
 			    			type:'POST',
 			    			url:'${pageContext.request.contextPath}/project_calendarshow.cal',
 			    			dataType:"json",
-			    			async:true,
+			    			async:false,
 			    			success:function(result){
 			    				return_value = result;
 			    				console.log('이벤트 가져왔습니다.');
@@ -259,7 +243,7 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 			    			complete:function(){}
 			    		}) 
 			 	return return_value;   
-			    }
+			 }
 			    
 			    
  </script>
