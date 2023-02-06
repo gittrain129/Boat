@@ -14,10 +14,29 @@ create table BOARD (
 	BOARD_DATE DATE DEFAULT SYSDATE,
 	BOARD_NOTICE VARCHAR2(2) 
 	CONSTRAINT BOARD_NO_CK check(BOARD_NOTICE in ('Y','N'))
+	
 );
+insert into BOARD
+(BOARD_NUM,BOARD_NAME,BOARD_PASS,BOARD_SUBJECT,BOARD_CONTENT,BOARD_DEPT,BOARD_RE_REF,BOARD_RE_LEV,
+BOARD_RE_SEQ,BOARD_READCOUNT,BOARD_NOTICE)
+values(21,'어드민', 1234, '공지', '공지', '인사팀', 21,0,0,0,'Y');
+
+delete BOARD
+where BOARD_NOTICE = 'Y'
+
+select count(*) from BOARD 
+					where BOARD_NOTICE = 'Y';
+				
+select * from BOARD
+where BOARD_RE_REF >= 13
+and BOARD_RE_SEQ = (select max(BOARD_RE_SEQ) from BOARD
+					where BOARD_RE_REF >= 13)	
+
+--게시판 조회 쿼리
+select * from BOARD
+ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC					
 	
-select * from BOARD;
-	
+
 insert into BOARD (BOARD_NUM, BOARD_SUBJECT, BOARD_NAME, BOARD_RE_REF, BOARD_NOTICE) values(1, '처음', 'admin', 1, 'N');
 insert into BOARD (BOARD_NUM, BOARD_SUBJECT, BOARD_NAME, BOARD_RE_REF, BOARD_NOTICE) values(2, '처음', 'admin', 2, 'N');
 insert into BOARD (BOARD_NUM, BOARD_SUBJECT, BOARD_NAME, BOARD_RE_REF, BOARD_NOTICE) values(3, '처음', 'admin', 3, 'N');
@@ -62,5 +81,8 @@ select*from(select rownum rnum, j.*
 					ORDER BY BOARD_RE_REF DESC,
 					BOARD_RE_SEQ ASC
 					) j
-			where rownum<= 13)
+			where rownum<= 10)
 where rnum>=1 and rnum<=13;
+
+
+

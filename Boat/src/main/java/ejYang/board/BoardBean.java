@@ -15,8 +15,15 @@ public class BoardBean {
 	private String	board_date;
 	private String	board_notice;	//공지사항
 	private int		cnt;
+	private int		rnum;
 	
 	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	public String getBoard_dept() {
 		return board_dept;
 	}
