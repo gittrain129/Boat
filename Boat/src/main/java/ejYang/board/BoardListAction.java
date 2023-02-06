@@ -1,7 +1,9 @@
 package ejYang.board;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -21,8 +23,20 @@ public class BoardListAction implements Action{
 		BoardDAO boarddao = new BoardDAO();
 		List<BoardBean> boardlist = new ArrayList<BoardBean>();
 		
+//		//공지글 총 리스트 수를 받아옵니다.
+//		int ycount = boarddao.getYListCount();
+//		System.out.println("ycount"+ycount);
 		int page = 1;	//보여줄 page
 		int limit = 10;	//한 페이지에 보여줄 게시판 목록의 수
+		
+//		int limit = 13;	//한 페이지에 보여줄 게시판 목록의 수
+//		if(ycount == 0) {//공지 0개
+//			limit = 10;	//한 페이지에 보여줄 게시판 목록의 수
+//		}else if(ycount == 1) {//공지 1개
+//			limit = 11;	//한 페이지에 보여줄 게시판 목록의 수
+//		}else if(ycount == 2) {//공지 2개
+//			limit = 12;	//한 페이지에 보여줄 게시판 목록의 수
+//		}
 		
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
@@ -70,6 +84,17 @@ public class BoardListAction implements Action{
 			request.setAttribute("boardlist", boardlist);
 			
 			request.setAttribute("limit", limit);
+			
+			
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	        Calendar cal = Calendar.getInstance();
+	        cal.add(Calendar.DAY_OF_MONTH, -3); //1일간 보이도록 하기위해서.
+	        String nowday = format.format(cal.getTime());
+	           
+	        System.out.println("nowday=" + nowday);
+	        request.setAttribute("nowday",nowday);
+	        
+	           
 			ActionForward forward = new ActionForward();
 			forward.setRedirect(false);
 			

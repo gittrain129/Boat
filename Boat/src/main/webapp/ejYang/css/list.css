@@ -273,3 +273,10 @@
 		text-align: center;
 		margin-bottom: 30px;
 	}
+	.title-td div:nth-child(1){
+		text-align: left;
+		padding-left: 15px;
+	}
+	#new{
+		width: 25px;
+	}

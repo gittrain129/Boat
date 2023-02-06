@@ -57,7 +57,7 @@
                     	</c:if>
                     </td>
                     
-                    <td><%-- 제목 --%>
+                    <td class="title-td"><%-- 제목 --%>
 	 		      	  <div>
 	 		      	  	<c:if test="${b.board_re_lev != 0}">	<%-- 답글인 경우 --%>
 	 		      	  		<c:forEach var="a" begin="0" end="${b.board_re_lev*2}" step="1">
@@ -77,8 +77,12 @@
 	 		      	  		</c:if>
 	 		      	  		<c:if test="${b.board_subject.length()<20}">
 	 		      	  		  <c:out value="${b.board_subject}"/>
+	 		      	  		  
 	 		      	  		</c:if>
 	 		      	  	</a>&nbsp;[${b.cnt}]
+	 		      	  	<c:if test="${b.board_date > nowday}">
+	 		      	  		<img src="${pageContext.request.contextPath}/ejYang/image/new.jpg" id="new">
+	 		      	  	</c:if>
 	 		      	  </div>
 	 		      	</td>
                     <td><div>${b.board_dept}</div></td>

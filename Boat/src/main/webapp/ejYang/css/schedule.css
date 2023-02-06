@@ -80,7 +80,7 @@ header{
 }
 .form-check-label{
 	display: inline-block;
-	background: #e5e5e5;
+	background: lightgray;
     color: black;
     padding-left: 15px;
     width: 97%;
@@ -92,17 +92,3 @@ header{
     margin-top: 20px;
     padding-top: 14px;
 }
-input[type="checkbox"] {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 50%;
-    border: 1px solid #999;
-    appearance: none;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  input[type="checkbox"]:checked {
-    background: blue;
-    border: none;
-  }

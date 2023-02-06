@@ -25,6 +25,58 @@ public class BoardDAO {
 		}
 	}
 
+	//공지글의 갯수 구하기
+	public int getYListCount() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int x = 0;
+		try {
+			//context.xml에서 설정한 리소스 jdbc/OracleDB 참조하여 Connection 객체를 얻어 옵니다.
+			conn = ds.getConnection();
+			
+			String sql = "select count(*) from BOARD "
+					+ "where BOARD_NOTICE = 'Y' ";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				x = rs.getInt(1);
+			}
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println("getYListCount() 에러: " + ex);
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close(); 
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if(pstmt != null) {
+				try {
+					pstmt.close(); 
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if(conn != null) {
+				try {
+					conn.close(); 	
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		return x;
+	}
+	
+	
+	
 	//글의 갯수 구하기
 	public int getListCount() {
 		Connection conn = null;
