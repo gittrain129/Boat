@@ -25,8 +25,7 @@
 	
 	  <!-- 부서선택 셀렉트 바-->
   <div class="rows" style="position:absolute; right:100px;">
-  <span> 검색 </span>
-  <select class="form-control" id="dept" >
+   <select class="form-control" id="dept" >
   <option value="1">모든부서</option>
   <option value="2">홍보팀</option>
   <option value="3">개발팀</option>
@@ -39,8 +38,8 @@
 	
 	
 	
-  
-      <div class="row"> <!--  카드 포함한 div -->
+  		<div id="whole-body">
+      <div class="row" id="cardbody"> <!--  카드 포함한 div -->
       
       <c:forEach var="m" items="${memberlist }">
       <!-- 1인 카드 시작 -->
@@ -65,7 +64,8 @@
     
         </c:forEach>
       </div>
-      
+      </div>
+     
       <br>
       
       
@@ -115,5 +115,16 @@
 		<h3 style="text-align:center">등록된 유저가 없습니다</h3>
 	</c:if>
 	
+	<div class="container">
+      
+      <form class="mb-3">
+         <div class="row">
+            <input type='search' name='search' id='search' class="form-control col-8 ml-3">
+            <button class="btn btn-info" name='search-btn' id='search-btn'>검색</button>
+         </div>
+      </form>
+   </div>
+   
+   
   </body>
 </html>
