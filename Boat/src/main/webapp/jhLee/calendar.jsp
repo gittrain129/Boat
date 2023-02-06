@@ -185,10 +185,10 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	     		 for(var i=0; i<allEvent.length;i++){
 	     		 
 		   		 var obj = new Object();
- 		   		var startevent = moment(allEvent[i]._instance.range.start).format("YYYY-MMMM-DD HH:mm:ss");
+ 		   		var startevent = moment(allEvent[i]._instance.range.start).format("YYYY-MM-DD HH:mm:ss");
 	//	   		var startevent = moment(allEvent[i]._instance.range.start).format("YYYY-M-D ");
 	//	   		var endevent = moment(allEvent[i]._instance.range.end).format("YYYY-M-D");
-	   			var endevent = moment(allEvent[i]._instance.range.end).format("YYYY-MMMM-DD HH:mm:ss");
+	   			var endevent = moment(allEvent[i]._instance.range.end).format("YYYY-MM-DD HH:mm:ss");
 		   		 
 		   		 obj.title = allEvent[i]._def.title; //이벤트 명칭
 		   		 obj.allday =allEvent[i]._def.allDay; //하루종일 이벤트인지 알려주는boolean값
@@ -247,7 +247,7 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 			    			type:'POST',
 			    			url:'${pageContext.request.contextPath}/project_calendarshow.cal',
 			    			dataType:"json",
-			    			async:true,
+			    			async:false,//  동기화
 			    			success:function(result){
 			    				return_value = result;
 			    				console.log('이벤트 가져왔습니다.');

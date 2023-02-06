@@ -1,8 +1,11 @@
 package jhLee.calendar;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.ServletException;
@@ -35,6 +38,18 @@ public class CalAllsaveAction implements Action {
 		System.out.println(start);
 		System.out.println(end);
 		System.out.println("확인");
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
+		Date date;
+		try {
+			date = sdf.parse(start);
+			System.out.println(date.getTime());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.MILLISECOND, 1);
+	
 		
 		cal.setAllday(allday);
 		cal.setEvent_name(title);
