@@ -4,7 +4,7 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -16,13 +16,18 @@
     <style>
       p { margin:20px 0px; }
     </style>
+    <script src=${pageContext.request.contextPath}/jkKim/js/addView.js></script>
   </head>
   <body>
-  <!-- 부서선택 셀렉트 바-->
+    <div class="container"> <!-- 카드+ 페이지 전체포함한 div -->
+    
+	<c:if test="${listcount > 0 }">
+	
+	  <!-- 부서선택 셀렉트 바-->
   <div class="rows" style="position:absolute; right:100px;">
   <span> 검색 </span>
-  <select class="form-select" aria-label="Default select example" id="dept_value">
-  <option selected value="1">모든부서</option>
+  <select class="form-control" id="dept" >
+  <option value="1">모든부서</option>
   <option value="2">홍보팀</option>
   <option value="3">개발팀</option>
   <option value="4">인사팀</option>
@@ -32,12 +37,14 @@
 	</div>
 	<!-- 부서선택 셀렉트 바 끝 -->
 	
-	<c:if test="${listcount > 0 }">
-    <div class="container"> <!-- 카드+ 페이지 전체포함한 div -->
+	
+	
+  
       <div class="row"> <!--  카드 포함한 div -->
       
       <c:forEach var="m" items="${memberlist }">
       <!-- 1인 카드 시작 -->
+      
         <div class="col-3">
           <p>${m.dept }</p>
           <div class="card">
@@ -59,7 +66,7 @@
         </c:forEach>
       </div>
       
-      
+      <br>
       
       
       <div class="center-block">
@@ -100,9 +107,9 @@
 		</ul>
 	</div>
 	  
-    </div>
-    </c:if> <%-- <c:if test="${listcount >0 }">   end --%>
     
+    </c:if> <%-- <c:if test="${listcount >0 }">   end --%>
+    </div>
     <%-- 회원이 없는 경우 --%>
 	<c:if test="${listcount ==0 }">
 		<h3 style="text-align:center">등록된 유저가 없습니다</h3>

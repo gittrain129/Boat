@@ -29,7 +29,7 @@ public class jkKim_MemberDAO {
 		return 0;
 	}
 
-	public List<jkKim_Member> getMemberList(int page, int limit) {
+	public List<jkKim_Member> getMemberList(int page, int limit, String dept_sql) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -42,13 +42,24 @@ public class jkKim_MemberDAO {
 			
 		try {	
 			conn = ds.getConnection();
+			//empno는 orderby용으로 불러만옴
 			
-			String sql = "select name, dept, email, imgsrc from member";
-			
+			System.out.println("1");
+			String sql = "select j.* "
+					+ " from (select rownum rnum, "
+					+ "		k.* "
+					+ "	from (select empno, name, dept, email, imgsrc from member where ? order by deptno asc) k "
+					+ " ) j "
+					+ " where rnum >=? and rnum <=? ";
+			System.out.println("2");
 			
 			pstmt = conn.prepareStatement(sql); //sql.toString()
+			pstmt.setString(1, dept_sql);
+			pstmt.setInt(2, startrow);
+			pstmt.setInt(3, endrow);
 			rs=pstmt.executeQuery();
 			
+			System.out.println("3");
 			// DB에서 가져온 데이터를 VO객체에 담습니다.
 			while (rs.next()) {
 				jkKim_Member b = new jkKim_Member();
