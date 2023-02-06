@@ -15,6 +15,7 @@ public class jkKim_MemberDAO {
 	
 	private DataSource ds;
 
+	
 	// 생ㅅ어자에서 JNDI리소스를 참조하여 Connection객체를 얻어옵니다
 	public jkKim_MemberDAO() {
 		try {
@@ -44,22 +45,21 @@ public class jkKim_MemberDAO {
 			conn = ds.getConnection();
 			//empno는 orderby용으로 불러만옴
 			
-			System.out.println("1");
+			
 			String sql = "select j.* "
 					+ " from (select rownum rnum, "
 					+ "		k.* "
-					+ "	from (select empno, name, dept, email, imgsrc from member where ? order by deptno asc) k "
+					+ "	from (select empno, name, dept, email, imgsrc from member " + dept_sql + " order by deptno asc) k "
 					+ " ) j "
 					+ " where rnum >=? and rnum <=? ";
-			System.out.println("2");
+			
 			
 			pstmt = conn.prepareStatement(sql); //sql.toString()
-			pstmt.setString(1, dept_sql);
-			pstmt.setInt(2, startrow);
-			pstmt.setInt(3, endrow);
+			pstmt.setInt(1, startrow);
+			pstmt.setInt(2, endrow);
 			rs=pstmt.executeQuery();
 			
-			System.out.println("3");
+		
 			// DB에서 가져온 데이터를 VO객체에 담습니다.
 			while (rs.next()) {
 				jkKim_Member b = new jkKim_Member();
@@ -99,7 +99,7 @@ public class jkKim_MemberDAO {
 		return list;
 	}
 
-	public int getListCount() {
+	public int getListCount(String dept_sql) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -108,7 +108,7 @@ public class jkKim_MemberDAO {
 		try {
 			conn = ds.getConnection();
 			
-			String sql = "select count(*) from member";
+			String sql = "select count(*) from member" + dept_sql;
 			
 			pstmt = conn.prepareStatement(sql); //sql.toString()
 			rs=pstmt.executeQuery();
