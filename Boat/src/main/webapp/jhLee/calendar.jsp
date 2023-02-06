@@ -44,14 +44,14 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 
 <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@6.1.1/index.global.min.js'></script>
  
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.40/moment-timezone.min.js" integrity="sha512-NJfMpP34NDFAS8lJqH4FzsaD1fqoIJATgBpPjNUck9hC8kGvFhrcR8KIPnTtSinNyx8b1QPBE6NM4iux/0dHXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  <link rel ="${pageContext.request.contextPath}/jhLee/css/calendar.css">
  <script>
  var calendar =null;
- //import { Calendar } from '@fullcalendar/core';
+ // calendar element 취득
 
-	    $(document).ready(function(){
-	      // calendar element 취득
-	      var calendarEl = $('#calendar')[0];
+ $(document).ready(function(){
 	      
 	      //드래그앤 드롭가능  -> 추후 삭제 예정
 	      var Draggable = FullCalendar.Draggable;
@@ -60,8 +60,9 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	      var calendarEl = document.getElementById('calendar');
 	      var checkbox = document.getElementById('drop-remove');
 	      //db모든 데이터 가져옴
-	      val all_events = null;
-	      all_events = loadingEvents();
+	      var all_events = loadingEvents();
+	     
+	      console.log(all_events)
 	      
 	      //드래그앤 드롭가능  -> 추후 삭제 예정
 	      
@@ -80,32 +81,18 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	      
 	      // full-calendar 생성하기
 	      calendar = new FullCalendar.Calendar(calendarEl, {
-	    	  titleFormat: { // will produce something like "Tuesday, September 18, 2018"
+	    	/*   titleFormat: { // will produce something like "Tuesday, September 18, 2018"
 	    		    month: 'long',
 	    		    year: 'numeric',
-	    		  },
-	    		  views: {
-	    			   /* dayGrid: {
-	    			    	 month: 'long',
-	    		    		    year: 'numeric',
-	    		    		    day: '2-digit',
-	    		    		    weekday: 'long'
-	    			    }*/
-  			    }
-	    			    ,
-	    	  //themeSystem: 'bootstrap',
-	    	
+	    		  }, */
+	    		events :all_events,
 	    	  
 	        height: '600px', // calendar 높이 설정
 	        expandRows: true, // 화면에 맞게 높이 재설정
-//당장 필요 없음 (final)	     
-	        //slotMinTime: '08:00', // Day 캘린더에서 시작 시간
-	        //slotMaxTime: '20:00', // Day 캘린더에서 종료 시간
 	        
 	        headerToolbar: {
 	            left: 'prev,next today',
 	            center: 'title',
- //(final)     right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
  				right : '',
 	          },
 	          
@@ -126,7 +113,7 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	          selectable: true, // 달력 일자 드래그 설정가능
 	          nowIndicator: true, // 현재 시간 마크
 	          dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
-	          locale: 'ko', // 한국어 설정
+	          //locale: 'ko', // 한국어 설정
 	          eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
 	              console.log(obj);
 	          	console.log('이벤트 추가함');
@@ -145,8 +132,11 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	            },
 	            select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
 	              var title = prompt('일정추가:');
-	             var start =  moment(start).format('YYYY/MM/DD');
-	              var end = moment(end).format('YYYY/MM/DD');
+	            console.log(arg.start);
+	             var startmo =  moment(arg.start,"Asia/Seoul");
+	             console.log("1111"+startmo);
+	               //var start1 = startmo.tz('Asia/Seoul').format('YYYY-MM-DD HH:mm:ss');
+	              var end = moment(arg.end).format('YYYY-MM-DD HH:mm:ss');
 	              if (title) {
 	                calendar.addEvent({
 	                  title: title,
@@ -155,7 +145,7 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	                  allDay: arg.allDay,
 	                  Boolean//?
 	                		  }  )
-	              
+	              savedata(cal_data(calendar.getEvents()));
 	              }
 	              calendar.unselect();//뭔지모르겠다
 	            },   eventClick: function (arg) {
@@ -177,38 +167,31 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	            		console.log('삭제 실패');
 	            	}
 	            }
+	          
      });
      calendar.render();
    });//캘린더 객체 선언 끝
 	    
-   	function loadingEvents(){
-   		$.ajax({
-   			type:'POST',
-   			url:'${pageContext.request.contextPath}/project_calendarshow.cal',
-   			dataType:"json",
-   			async:true,
-   			success:function(rdata){
-   				console.log('이벤트디비저장완료.');
-   			},
-   			error:function(request,status,error){},
-   			complete:function(){}
-   		}) 
-	   
-   }
-   
+  
 	    
 	    //전체 이벤트 뽑아냄(그달의 전체 이벤트)
-	    //뽑을때 각각 데이터로 뽑아냄
+	    //뽑을때 각각 데이터로 뽑아냄 json값
+	    	 var allEvent =	 calendar.getEvents();
 	    function cal_data(allEvent){
+	     		 var events = new Array();
 	     	 for(var i=0; i<allEvent.length;i++){
+	     		 
 		   		 var obj = new Object();
+		   		var startevent = moment(allEvent[i]._instance.range.start).format("YYYY-MM-DD HH:mm:ss");
+		   		var endevent = moment(allEvent[i]._instance.range.end).format("YYYY-MM-DD HH:mm:ss");
 		   		 
 		   		 obj.title = allEvent[i]._def.title; //이벤트 명칭
 		   		 obj.allday =allEvent[i]._def.allDay; //하루종일 이벤트인지 알려주는boolean값
-		   		 obj.start = allEvent[i]._instance.range.start//시작날짜 및 시간
-		   		 obj.end = allEvent[i]._instance.range.end//마침 날짜 및 시간
-		   		 
+		   		 obj.start = startevent//시작날짜 및 시간
+		   		 obj.end =endevent //마침 날짜 및 시간
 	    		}
+	     	 
+	     	 
 	     	return obj
 	      }
 	    
@@ -222,8 +205,8 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	    let obj = cal_data(allEvent);
 	   	 savedata(obj);
 	   	 }
-	   	 
 	    
+
 	    //이벤트 db저장 ajax
 	    function savedata(jsondata){
 	   		$.ajax({
@@ -239,7 +222,29 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	   			complete:function(){}
 	   		}) 
 	    }//save data끝
-	    
+
+		 	function loadingEvents(){
+			 	   
+			 	   var return_value = null;
+			    		$.ajax({
+			    			type:'POST',
+			    			url:'${pageContext.request.contextPath}/project_calendarshow.cal',
+			    			dataType:"json",
+			    			async:false,
+			    			success:function(result){
+			    				return_value = result;
+			    				console.log('이벤트 가져왔습니다.');
+			    				console.log(result);
+			    				console.log('다음');
+			    				console.log(return_value);
+			    			},
+			    			error:function(request,status,error){},
+			    			complete:function(){}
+			    		}) 
+			 	return return_value;   
+			    }
+			    
+			    
  </script>
 </head>
 

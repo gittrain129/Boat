@@ -4,12 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 public class CalendarDAO {
 	
@@ -123,7 +124,7 @@ public class CalendarDAO {
 			}
 		return result_check;
 	}
-	public List<Calendarbean> getCalList() {
+	public JsonArray getCalList() {
 		//		public List<Calendarbean> getCalList(empno) {
 
 
@@ -133,8 +134,7 @@ public class CalendarDAO {
 		String sql = "select * from  boat_Calendar ";
 		//String sql = "select * from  boat_Calendar where empno = ? ";
 		
-		List<Calendarbean> list = new ArrayList<Calendarbean>();
-		
+		JsonArray list = new JsonArray();
 		try {
 			con = ds.getConnection();
 
@@ -144,14 +144,15 @@ public class CalendarDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {// 더이상 읽을 데이터가 없을때까지 반복
-				Calendarbean cal = new Calendarbean();// 각각의 컬럼 값을넣음
-
-				cal.setAllday(rs.getString("event_name"));
-				cal.setAllday(rs.getString("start_date"));
-				cal.setAllday(rs.getString("end_date"));
-				cal.setAllday(rs.getString("allday"));
+				JsonObject json = new JsonObject();
+				json.addProperty("id", rs.getInt("schedule_code"));
+				json.addProperty("title", rs.getString("event_name"));
+				json.addProperty("start", rs.getString("start_date"));
+				json.addProperty("end", rs.getString("end_date"));
+				json.addProperty("allDay", rs.getString("allday"));
 				
-				list.add(cal);
+				
+				list.add(json);
 			}
 			return list;
 
