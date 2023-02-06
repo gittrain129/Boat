@@ -16,7 +16,7 @@
     <style>
       p { margin:20px 0px; }
     </style>
-    <script src=${pageContext.request.contextPath}/jkKim/js/addView.js></script>
+    <script src=${pageContext.request.contextPath}/jkKim/js/addressView2.js></script>
   </head>
   <body>
     <div class="container"> <!-- 카드+ 페이지 전체포함한 div -->
@@ -26,7 +26,7 @@
 	  <!-- 부서선택 셀렉트 바-->
   <div class="rows" style="position:absolute; right:100px;">
    <select class="form-control" id="dept" >
-  <option value="1">모든부서</option>
+  <option selected value="1">모든부서</option>
   <option value="2">홍보팀</option>
   <option value="3">개발팀</option>
   <option value="4">인사팀</option>
@@ -116,13 +116,11 @@
 	</c:if>
 	
 	<div class="container">
-      
-      <form class="mb-3">
-         <div class="row">
-            <input type='search' name='search' id='search' class="form-control col-8 ml-3">
+            <div class="row">
+            <input type='text' name='search' id='search' class=" col-8 ml-3">
             <button class="btn btn-info" name='search-btn' id='search-btn'>검색</button>
          </div>
-      </form>
+      
    </div>
    
    

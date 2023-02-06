@@ -5,11 +5,11 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
         <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
         <title>Peer-to-Peer Cue System --- Sender</title>
         <link rel="stylesheet" href="style.css">
         <style>
@@ -127,7 +127,7 @@ background-color: #A8C0D6;
             
         </table>
 
-        <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+
         <script type="text/javascript">
             (function () {
 
@@ -137,10 +137,7 @@ background-color: #A8C0D6;
                 var recvIdInput = document.getElementById("receiver-id");
                 var status = document.getElementById("status");
                 var message = document.getElementById("message");
-                var goButton = document.getElementById("goButton");
-                var resetButton = document.getElementById("resetButton");
-                var fadeButton = document.getElementById("fadeButton");
-                var offButton = document.getElementById("offButton");
+                
                 var sendMessageBox = document.getElementById("sendMessageBox");
                 var sendButton = document.getElementById("sendButton");
                 var clearMsgsButton = document.getElementById("clearMsgsButton");
@@ -263,18 +260,7 @@ background-color: #A8C0D6;
                     }
                 }
 
-                goButton.addEventListener('click', function () {
-                    signal("Go");
-                });
-                resetButton.addEventListener('click', function () {
-                    signal("Reset");
-                });
-                fadeButton.addEventListener('click', function () {
-                    signal("Fade");
-                });
-                offButton.addEventListener('click', function () {
-                    signal("Off");
-                });
+                
 
                 function addMessage(msg) {
                     var now = new Date();

@@ -4,11 +4,12 @@
 <html>
 <head>
 <title>BoaTalk</title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+
 <style>
 * {
     padding: 0;
@@ -98,7 +99,13 @@ background-color: #A8C0D6;
 </style>
 </head>
 <body>
-      
+      <!--  1. 각각 송수신페이지에서 내 메세지는 노란색박스에 다른사람 메세지는 흰색박스에 담기
+      		2. peer객체 id부여를 member테이블에서 사번이나 이름을 받아와서 peer객체 생성하기
+      		3. frontcontroller를 거쳐서 제어하기?
+      		4.
+      		
+      		
+      		 -->
      <table class="display">
             <tr>
                 <td class="title">Status:</td>
@@ -120,7 +127,7 @@ background-color: #A8C0D6;
         </tr>
          <tr>
                 <td>
-                    <input type="text" id="sendMessageBox" placeholder="Enter a message..." autofocus="true" />
+                    <input type="text" id="sendMessageBox" placeholder="Enter a message..."  />
                     <button type="button" id="sendButton">전송</button>
                     <button type="button" id="clearMsgsButton">Clear Msgs (Local)</button>
                 </td>
@@ -148,30 +155,23 @@ background-color: #A8C0D6;
                 var message = document.getElementById("message");
                // var receiverMessage = document.getElementById("my_box"); //내 메세지
                 //var senderMessage = document.getElementById("your_box"); //받은 메세지
-                var standbyBox = document.getElementById("standby");
-                var goBox = document.getElementById("go");
-                var fadeBox = document.getElementById("fade");
-                var offBox = document.getElementById("off");
+              
+               
                 var sendMessageBox = document.getElementById("sendMessageBox");
                 var sendButton = document.getElementById("sendButton");
                 var clearMsgsButton = document.getElementById("clearMsgsButton");
 
-                /**
-                 * Create the Peer object for our end of the connection.
-                 *
-                 * Sets up callbacks that handle any events related to our
-                 * peer object.
-                 */
+                
                  function initialize() {
-                    // Create own peer object with connection to shared PeerJS server
-                    peer = new Peer(null, {
+                    
+                    peer = new Peer('jkKim', {
                         debug: 2
                     });
                     
 					
 					
                     peer.on('open', function (id) {
-                        // Workaround for peer.reconnect deleting previous id
+                       
                         if (peer.id === null) {
                             console.log('Received null id from peer open');
                             peer.id = lastPeerId;
@@ -184,7 +184,7 @@ background-color: #A8C0D6;
                         status.innerHTML = "Awaiting connection...";
                     });
                     peer.on('connection', function (c) {
-                        // Allow only a single connection
+                        // 한번에 한명만 연결되게함
                         if (conn && conn.open) {
                             c.on('open', function() {
                                 c.send("Already connected to another client");
@@ -202,7 +202,7 @@ background-color: #A8C0D6;
                         status.innerHTML = "Connection lost. Please reconnect";
                         console.log('Connection lost. Please reconnect');
 
-                        // Workaround for peer.reconnect deleting previous id
+                       
                         peer.id = lastPeerId;
                         peer._lastServerId = lastPeerId;
                         peer.reconnect();
@@ -218,35 +218,10 @@ background-color: #A8C0D6;
                     });
                 };
 
-                /**
-                 * Triggered once a connection has been achieved.
-                 * Defines callbacks to handle incoming data and connection events.
-                 */
+               
                 function ready() {
                     conn.on('data', function (data) {
-                        console.log("Data recieved");
-                        var cueString = "<span class=\"cueMsg\">Cue: </span>";
-                        switch (data) {
-                            case 'Go':
-                                go();
-                                addMessage(cueString + data);
-                                break;
-                            case 'Fade':
-                                fade();
-                                addMessage(cueString + data);
-                                break;
-                            case 'Off':
-                                off();
-                                addMessage(cueString + data);
-                                break;
-                            case 'Reset':
-                                reset();
-                                addMessage(cueString + data);
-                                break;
-                            default:
-                                addMessage("<span class=\"peerMsg\">Peer: </span>" + data);
-                                break;
-                        };
+                        addyourMessage("<span class=\"peerMsg\">Peer:</span> " + data);
                     });
                     conn.on('close', function () {
                         status.innerHTML = "Connection reset<br>Awaiting connection...";
@@ -254,37 +229,7 @@ background-color: #A8C0D6;
                     });
                 }
 
-                function go() {
-                    standbyBox.className = "display-box hidden";
-                    goBox.className = "display-box go";
-                    fadeBox.className = "display-box hidden";
-                    offBox.className = "display-box hidden";
-                    return;
-                };
-
-                function fade() {
-                    standbyBox.className = "display-box hidden";
-                    goBox.className = "display-box hidden";
-                    fadeBox.className = "display-box fade";
-                    offBox.className = "display-box hidden";
-                    return;
-                };
-
-                function off() {
-                    standbyBox.className = "display-box hidden";
-                    goBox.className = "display-box hidden";
-                    fadeBox.className = "display-box hidden";
-                    offBox.className = "display-box off";
-                    return;
-                }
-
-                function reset() {
-                    standbyBox.className = "display-box standby";
-                    goBox.className = "display-box hidden";
-                    fadeBox.className = "display-box hidden";
-                    offBox.className = "display-box hidden";
-                    return;
-                };
+                
 
                 function addMessage(msg) {
                     var now = new Date();
@@ -302,15 +247,35 @@ background-color: #A8C0D6;
                             t = "0" + t;
                         return t;
                     };
-
                     //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
                     //message.innerHTML = ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" +msg + message.innerHTML +"</div>");
                     message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
-                    
-                   
-        		
                 }
 
+                
+                //다른사람 채팅창용 펑션
+                function addyourMessage(msg) {
+                    var now = new Date();
+                    var h = now.getHours();
+                    var m = addZero(now.getMinutes());
+                    var s = addZero(now.getSeconds());
+
+                    if (h > 12)
+                        h -= 12;
+                    else if (h === 0)
+                        h = 12;
+
+                    function addZero(t) {
+                        if (t < 10)
+                            t = "0" + t;
+                        return t;
+                    };
+                    //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
+                    //message.innerHTML = ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" +msg + message.innerHTML +"</div>");
+                    message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
+                }
+                
+                
                 function clearMessages() {
                 	message.innerHTML = "";
                     addMessage("Msgs cleared");

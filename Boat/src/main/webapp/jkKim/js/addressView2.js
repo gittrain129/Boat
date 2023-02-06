@@ -5,6 +5,8 @@ function go(page) {
 }
 
 function search(page){
+	let igo = "여기까지왔습니다";
+	console.log(igo)
 	const name2 = $("#search").val();
 	const data2 = `name2=${name2}&state=search&page=${page}`;
 	ajax(data2);
@@ -105,6 +107,12 @@ function ajax(sdata){
                console.log(output)
                $('.pagination').append(output);
             }//if(data.listcount>0)
+            else{
+			$("#cardbody").remove();
+			$(".pagination").empty();
+			let output = "<h3> 결과값이 없습니다</h3>";
+			$("#whole-body").append(output)
+		}
                 
             
          }, //success end
@@ -118,7 +126,9 @@ function ajax(sdata){
 
 
 $(function(){
- $("form").submit(function(){
+ $("#search-btn").click(function(){
+	let wego= "form submit펑션까지 왔습니다";
+	console.log(wego)
       search(1); //보여줄 페이지를 1페이지로 설정
    });
 
