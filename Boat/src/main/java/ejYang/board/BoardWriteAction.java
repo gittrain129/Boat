@@ -30,7 +30,7 @@ public class BoardWriteAction implements Action{
 		
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);
-//		request.setAttribute("member", m);//로그인 세션 추가
+		request.setAttribute("member", m);
 		forward.setPath("ejYang/board/boardWrite.jsp");
 		return forward;
 	}

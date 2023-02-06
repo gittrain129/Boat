@@ -11,7 +11,7 @@
  <body>
   <h1>게시글 수정</h1>
 <div class="container">
-  <form action="BoardModifyAction.bo">
+  <form action="BoardModifyAction.bo" method="post" name="">
   <input type="hidden" name="board_num" value="${boarddata.board_num}">
     <div class="row">
       <div class="col-25">

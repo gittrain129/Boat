@@ -1,4 +1,4 @@
-package ejYang.board;
+package ejYang.myinfo;
 
 import java.io.IOException;
 
@@ -8,8 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("*.bo")
-public class BoardFrontController extends javax.servlet.http.HttpServlet{
+import ejYang.board.Action;
+import ejYang.board.ActionForward;
+
+@WebServlet("*.my")
+public class MyinfoFrontController extends javax.servlet.http.HttpServlet{
 private static final long serialVersionUID=1L;
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,32 +30,8 @@ private static final long serialVersionUID=1L;
 		
 		//http://localhost:8089/Boat/
 		switch(command) {
-			case "/BoardList.bo":
-				action = new BoardListAction();//글 목록
-				break;
-			case "/BoardWrite.bo":
-				action = new BoardWriteAction();//글쓰기 페이지
-				break;
-			case "/BoardAddAction.bo":
-				action = new BoardAddAction();//글쓰기 처리
-				break;
-			case "/BoardDetailAction.bo":
-				action = new BoardDetailAction();//글 상세페이지
-				break;
-			case "/BoardModifyView.bo":
-				action = new BoardModifyView();//글 수정 페이지
-				break;
-			case "/BoardModifyAction.bo":
-				action = new BoardModifyAction();//글 수정 처리
-				break;
-			case "/BoardReplyView.bo":
-				action = new BoardReplyView();//답글 페이지
-				break;
-			case "/BoardReplyAction.bo":
-				action = new BoardReplyAction();//답글 처리
-				break;
-			case "/BoardDeleteAction.bo":
-				action = new BoardDeleteAction();//글 삭제
+			case "/MySchedule.my":
+				action = new MyScheduleAction();//글 목록
 				break;
 				
 		}//switch end

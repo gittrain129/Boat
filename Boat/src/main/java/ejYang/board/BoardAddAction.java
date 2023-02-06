@@ -19,14 +19,14 @@ public class BoardAddAction implements Action{
 		boolean result=false;
 		
 		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("id");
+		String empno = (String) session.getAttribute("empno");
 		
 		boarddata.setBoard_name(request.getParameter("board_name"));
 		boarddata.setBoard_pass(request.getParameter("board_pass"));
 		boarddata.setBoard_subject(request.getParameter("board_subject"));
 		boarddata.setBoard_content(request.getParameter("editordata"));
 		boarddata.setBoard_dept(request.getParameter("department"));
-		if(id == "ADMIN") {
+		if(empno == "ADMIN") {
 			boarddata.setBoard_notice("Y");
 		}else{
 			boarddata.setBoard_notice("N");
