@@ -11,7 +11,7 @@
  <body>
  <h1>게시글 쓰기</h1>
 <div class="container">
-  <form action="BoardAddAction.bo">
+  <form action="BoardAddAction.bo" method="post" name="boardform">
     <div class="row">
       <div class="col-25">
         <label for="board_subject">제목</label>
@@ -25,7 +25,7 @@
         <label for="board_name">작성자</label>
       </div>
       <div class="col-75">
-        <input type="text" id="board_name" name="board_name" placeholder="성함을 입력하세요.">
+        <input type="text" id="board_name" name="board_name" placeholder="성함을 입력하세요." value="${member.name}">
       </div>
     </div>
     <div class="row">

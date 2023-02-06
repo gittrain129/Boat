@@ -5,9 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.board.db.BoardBean;
-import net.board.db.BoardDAO;
+import javax.servlet.http.HttpSession;
 
 public class BoardReplyAction implements Action{
 	@Override
@@ -18,11 +16,11 @@ public class BoardReplyAction implements Action{
 		BoardBean boarddata = new BoardBean();
 		int result=0;
 		
-		//파라미터로 넘어온 값들을 boarddata 객체에 저장합니다.
 		boarddata.setBoard_name(request.getParameter("board_name"));
 		boarddata.setBoard_pass(request.getParameter("board_pass"));
 		boarddata.setBoard_subject(request.getParameter("board_subject"));
-		boarddata.setBoard_content(request.getParameter("board_content"));
+		boarddata.setBoard_content(request.getParameter("editordata"));
+		boarddata.setBoard_dept(request.getParameter("department"));
 		boarddata.setBoard_re_ref(Integer.parseInt(request.getParameter("board_re_ref")));
 		boarddata.setBoard_re_lev(Integer.parseInt(request.getParameter("board_re_lev")));
 		boarddata.setBoard_re_seq(Integer.parseInt(request.getParameter("board_re_seq")));

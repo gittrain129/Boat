@@ -451,7 +451,7 @@ public class BoardDAO {
 			//BOARD_RE_REF, BOARD_RE_SEQ 값을 확인하여 원문 글에 답글이 달려있다면
 			//달린 답글들의 BOARD_RE_SEQ값을 1씩 증가시킵니다.
 			//현재 글을 이미 달린 답글보다 앞에 출려되게 하기 위해서 입니다.
-			String sql = "update board "
+			String sql = "update BOARD "
 					+ "set BOARD_RE_SEQ=BOARD_RE_SEQ + 1 "
 					+ "where BOARD_RE_REF = ? "
 					+ "and BOARD_RE_SEQ > ? ";
@@ -465,14 +465,14 @@ public class BoardDAO {
 			re_seq = re_seq + 1;
 			re_lev = re_lev + 1;
 			
-			sql = "		insert into board "
-					+ "(board_num, board_name, board_pass, board_subject, "
-					+ "board_content, board_file, board_re_ref, "
-					+ "board_re_lev, board_re_seq, board_readcount) "
+			sql = "		insert into BOARD "
+					+ "(BOARD_NUM, BOARD_NAME, BOARD_PASS, BOARD_SUBJECT, "
+					+ "BOARD_CONTENT, BOARD_DEPT, BOARD_RE_REF, "
+					+ "BOARD_RE_LEV, BOARD_RE_SEQ, BOARD_READCOUNT, BOARD_NOTICE) "
 					+ "values(" + num + ","
 					+ "		?,?,?,"
 					+ "		?,?,?,"
-					+ "		?,?,?)";
+					+ "		?,?,?,?)";
 			
 			//새로운 글을 등록하는 부분입니다.
 			pstmt = conn.prepareStatement(sql);
@@ -480,11 +480,12 @@ public class BoardDAO {
 			pstmt.setString(2, board.getBoard_pass());
 			pstmt.setString(3, board.getBoard_subject());
 			pstmt.setString(4, board.getBoard_content());
-			pstmt.setString(5, "");	//답변에는 파일을 업로드하지 않습니다.
+			pstmt.setString(5, board.getBoard_dept());	
 			pstmt.setInt(6, re_ref);//원문의 글번호
 			pstmt.setInt(7, re_lev);
 			pstmt.setInt(8, re_seq);
 			pstmt.setInt(9, 0);//board_readcount(조회수)는 0
+			pstmt.setString(10, "N");//답글은 일반글
 			if(pstmt.executeUpdate() == 1) {
 				conn.commit();//commit합니다.
 			}else {
@@ -536,20 +537,20 @@ public class BoardDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null, pstmt2 = null;
 		ResultSet rs = null;
-		String select_sql = "select board_re_ref, board_re_lev, board_re_seq from board "
-				+ "where board_num = ?";
+		String select_sql = "select BOARD_RE_REF, BOARD_RE_LEV, BOARD_RE_SEQ from BOARD "
+				+ "where BOARD_NUM = ?";
 		
-		String board_delete_sql = "delete board "
-						+ "where board_re_ref = ? "
-						+ "and 	 board_re_lev >=? "
-						+ "and 	 board_re_seq >=? "
-						+ "and 	 board_re_seq <=( "
-						+ "						nvl((select min(board_re_seq)-1 from board "
-						+ "							where board_re_ref = ? "
-						+ "							and   board_re_lev = ? "
-						+ "							and   board_re_seq > ?), "
-						+ "							(select max(board_re_seq) from board "
-						+ "								where board_re_ref=? ))"
+		String board_delete_sql = "delete BOARD "
+						+ "where BOARD_RE_REF = ? "
+						+ "and 	 BOARD_RE_LEV >=? "
+						+ "and 	 BOARD_RE_SEQ >=? "
+						+ "and 	 BOARD_RE_SEQ <=( "
+						+ "						nvl((select min(BOARD_RE_SEQ)-1 from BOARD "
+						+ "							where BOARD_RE_REF = ? "
+						+ "							and   BOARD_RE_LEV = ? "
+						+ "							and   BOARD_RE_SEQ > ?), "
+						+ "							(select max(board_re_seq) from BOARD "
+						+ "								where BOARD_RE_REF=? ))"
 						+ "						)";
 		boolean result_check = false;
 		try {

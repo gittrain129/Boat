@@ -63,7 +63,7 @@
 	 		      	  		<c:forEach var="a" begin="0" end="${b.board_re_lev*2}" step="1">
 	 		      	  		&nbsp;
 	 		      	  		</c:forEach>
-	 		      	  		<img src="image/line.gif">
+	 		      	  		<img src="${pageContext.request.contextPath}/ejYang/image/line.png">
 	 		      	  	</c:if>
 	 		      	  	
 	 		      	  	<c:if test="${b.board_re_lev == 0}">	<%-- 원문인 경우 --%>

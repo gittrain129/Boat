@@ -7,8 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.board.db.BoardDAO;
-
 public class BoardDeleteAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request,

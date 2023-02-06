@@ -2,9 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
  <head>
-  <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <link href="${pageContext.request.contextPath}/ejYang/css/view.css" type="text/css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
   	$(function(){
 	  	$('.gray1').click(function(){
@@ -88,10 +89,30 @@
  	  	  </tr>
         </tbody>
       </table>
-      
-      
     </div>
+    
+    <%-- modal 시작 --%>
+ 	  <div class="modal" id="myModal">
+ 	  	<div class="modal-dialog">
+      	  <div class="modal-content">
+        	<!-- Modal body -->
+        	<div class="modal-body">
+        	  <form name="deleteForm" action="BoardDeleteAction.bo" method="post">
+        	  	<input type="hidden" name="num" value="${boarddata.board_num}" id="comment_board_num">
+        	  	<div class="form-group">
+        	  		<label for="pwd">비밀번호</label>
+        	  		<input type="password"
+        	  			   class="form-control" placeholder="Enter password"
+        	  			   name="board_pass" id="board_pass">
+        	  	</div>
+        	  	<button type="submit" class="btn btn-primary">전송</button>
+ 	  	  		<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+        	  </form>
+        	</div>
+          </div>
+      	</div>
+      </div>
+    <%-- id="myModal" end --%>
   </div>
-  
  </body>
 </html>
