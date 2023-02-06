@@ -14,6 +14,8 @@
     <title>자료실 게시판</title>
 
   <link rel="stylesheet" href="jhLee/css/fileview.css">
+  
+  
 </head>
 <body>
 <input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
@@ -30,11 +32,7 @@
           <c:out value ="${boarddata.FILE_SUBJECT}"/><%--제목 --%>
            </div>
            <div class="info">
-            <dl>
-                <dt>글번호</dt>
-                <dt>${boarddata.FILE_NUM}</dt>
-                
-            </dl>
+            
             <dl>
                 <dt>부서명</dt>
                 <dt>${boarddata.DEPT}</dt>
@@ -58,7 +56,7 @@
            </div>
       
            <div class="content">
-           <c:out value =" ${boarddata.FILE_CONTENT}"/>
+           <c:out value =" ${boarddata.FILE_CONTENT}" escapeXml="false" />
            </div>
          
         </div>
@@ -68,20 +66,28 @@
 		  <%-- 원문글인 경우에만 첨부파일을 추가 할 수 있습니다. --%>
 		   <div class="filedown">
 		   첨부파일
+		   <br>
+		   <br>
 
          
 		  
 		  <%--파일을 첨부한 경우 --%>
 		 
-		  <c:if test="${!empty boarddata.FILE_FILE || boarddata.FILE_FILE2}">
+		  <c:if test="${!empty boarddata.FILE_FILE}" >
 		    <dl>
-		  <dt>  <img alt="파일다운" src="${pageContext.request.contextPath}/jhLee/image/down.png" width="10px">
-		  <a href = "BoardFileDown.bo?filename=${boarddata.FILE_FILE}">${boarddata.FILE_FILE}</a></dt>
-		  <dt>  <img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/image/down.png" width="10px">
-		  <a href = "BoardFileDown.bo?filename2=${boarddata.FILE_FILE2}">${boarddata.FILE_FILE2}</a></dt>
+		 		 <dt>  <img alt="파일다운" src="${pageContext.request.contextPath}/jhLee/image/down.png" width="10px">
+		 		 &nbsp;&nbsp;
+		  		<a href = "FileBoardDownAction.filebo?filename=${boarddata.FILE_FILE}">${boarddata.FILE_FILE}</a>
+		 		 </dt></dl>
+		   </c:if>
+		   <c:if test="${!empty boarddata.FILE_FILE2}">
+		   		<dl>
+		  		<dt>  <img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/image/down.png" width="10px">
+		  		&nbsp;&nbsp;
+		 		 <a href = "FileBoardDownAction.filebo?filename2=${boarddata.FILE_FILE2}">${boarddata.FILE_FILE2}</a></dt>
+		 		  </dl>
+		</c:if>
 
-		   </dl>
-		  </c:if>
 		  <%--파일을 첨부한 경우 --%>
 		  
 		  <c:if test ="${empty boarddata.FILE_FILE && boarddata.FILE_FILE2}">
@@ -107,13 +113,14 @@
 			  
 			  <%--href의 주소를 #으로 설정합니다. --%>
 			  
-		  <a href="#">
-			  <button class="btn btn-danger" data-toggle ="modal"
+            <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">답변</a>
+
+		  <a href="#" id ='delete'>
+			  <button id = 'deletebtn' class="btn btn-danger" data-toggle ="modal"
 			  data-target="#myModal">삭제</button>
 			</a>
 			  
 
-            <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">답변</a>
 
         </div><%--"bt_wrap끝 --%>
 <%-- modal 시작 --%>

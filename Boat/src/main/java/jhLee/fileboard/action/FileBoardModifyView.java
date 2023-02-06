@@ -36,11 +36,12 @@ public class FileBoardModifyView implements Action {
 			return forward;
 		}
 		System.out.println("상세보기 성공");
+		System.out.println((boarddata.getFILE_CONTENT()));
 		
 		request.setAttribute("boarddata",boarddata);
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("jhLee/file_board/File_bo_Update.jsp");
+		forward.setPath("jhLee/file_board/File_bo_update2.jsp");
 		return forward;
 	
 	}

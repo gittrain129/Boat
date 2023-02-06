@@ -30,12 +30,13 @@
 <body>
 <div class="container">
  <form action="FileBoardAddAction.filebo" method="post" enctype = "multipart/form-data" name ="fileboardform">
- 	<h1>boat_ 자료실 글쓰기</h1>
+ 	<h1>boat_  글 수정페이지2</h1>
+     <input type="hidden" name="board_num" value="${boarddata.FILE_NUM}">
      
     <div class="form-group">
         <label for="board_subject">제목</label>
         <input name="board_subject" id="board_subject" type="text" maxlength="100"
-        class="form-control" placeholder="제목을 입력하세요">
+        class="form-control" placeholder="제목을 입력하세요" value="${boarddata.FILE_SUBJECT }">
     </div>
  	
 
@@ -43,7 +44,7 @@
  	<div class="form-group">
          <label for="board_pass">비밀번호</label>
  		<input name="board_pass" id="fileboard_pass" type="password" maxlength="30"
- 		class="form-control" placeholder="비밀번호를 입력하세요">
+ 		class="form-control" placeholder="비밀번호를 입력하세요" value="${boarddata.FILE_PASS }">
     </div>
 
  
@@ -62,10 +63,9 @@
               </div>
             </div>
             <input type="hidden" name = "dept" id = "dept">
-       		<input name="board_name" id="board_name" value="" type="text"  class="form-control writer"
-       			placeholder="이름을 입력하세요">
+       		<input name="board_name" id="board_name" type="text"  class="form-control writer"
+       			placeholder="이름을 입력하세요" value="${boarddata.FILE_NAME }">
   	  </div>
-        
     
 
  	
@@ -100,7 +100,21 @@
 <script>
 $(function(){
 
-
+	$('#summernote').val(" ${boarddata.FILE_CONTENT}");
+	 $('#summernote').summernote({
+		 	placeholder: '내용을 입력하세요.',
+	       tabsize: 2,
+	        lang : "ko-KR",
+	        height: 300,
+	        callbacks: {
+	        	onImageUpload: function(files, editor, welEditable) {
+	        		for(var i = files.length -1; i>=0; i--) {
+	        			sendFile(files[i], this);
+	        		}
+	        	}
+	        }
+	 });
+	
 	
 })//ready끝
 

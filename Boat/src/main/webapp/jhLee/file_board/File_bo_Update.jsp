@@ -93,7 +93,7 @@ img{width : 20px;}
  	
  	<div class="form-group">
  		<label for="board_content">내용</label>
- 		<textarea name="board_content" id="summernote"  class="form-control">${boarddata.FILE_CONTENT}</textarea>
+ 		<textarea name="board_content" id="summernote"  class="form-control" ></textarea>
  	</div>
  	
  	<c:if test="${boarddata.FILE_RE_LEV==0}"></c:if>
@@ -120,28 +120,5 @@ img{width : 20px;}
  	</div>
  </form>
 </div><!-- container끝 -->
-<script>
-$(function(){
-//db의 값을 select 의 값으로 찾아서 넣어줍시다.
-
-console.log(${boarddata.DEPT })
-	
-			$('.btn-group button:first-child').text(${boarddata.DEPT })
-			
-	
-	})//drop downclick 끝
-})//ready끝
-</script>
-<!-- <script>
-   $('#summernote').summernote({
-        placeholder: 'Hello Bootstrap 4',
-        tabsize: 2,
-        height: 100,
-    
-  lang:'ko-KR',
-  height : 500
-});
-$('.dropdown-toggle').dropdown()
-</script> -->
 </body>
 </html>

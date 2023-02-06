@@ -127,6 +127,7 @@ public class FileDAO {
 				filebo.setFILE_READCOUNT(rs.getInt("FILE_READCOUNT"));
 				filebo.setFILE_DATE(rs.getString("FILE_DATE"));// 날짜
 				filebo.setCNT(rs.getInt("CNT"));
+				filebo.setDEPT(rs.getString("DEPT"));
 				list.add(filebo);// 각각의 로우를 넣음
 			}
 			return list;
