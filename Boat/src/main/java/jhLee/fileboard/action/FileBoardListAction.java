@@ -26,6 +26,18 @@ public class FileBoardListAction implements Action {
 	FileDAO boarddao = new FileDAO();
 	List<FileboBean> filebolist = new ArrayList<FileboBean>();
 		
+	
+	
+	  String dept =  request.getParameter("dept");
+      String order =   request.getParameter("order");
+      String search =  request.getParameter("search");
+      
+//      switch() {
+//      case dept : filebolist = boarddao.getboardlist()
+//      }
+//	
+	
+	
 	int page = 1;
 	int limit = 10; 
 	if(request.getParameter("page")!=null){
@@ -72,6 +84,14 @@ public class FileBoardListAction implements Action {
         cal.add(Calendar.DAY_OF_MONTH, -3); //1일간 보이도록 하기위해서.
         String nowday = format.format(cal.getTime());
            
+        
+     
+        
+        
+        
+        
+        
+        
         System.out.println("nowday=" + nowday);
         request.setAttribute("nowday",nowday);
         

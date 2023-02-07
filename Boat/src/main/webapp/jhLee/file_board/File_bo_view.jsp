@@ -84,7 +84,7 @@
 		   		<dl>
 		  		<dt>  <img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/image/down.png" width="10px">
 		  		&nbsp;&nbsp;
-		 		 <a href = "FileBoardDownAction.filebo?filename2=${boarddata.FILE_FILE2}">${boarddata.FILE_FILE2}</a></dt>
+		 		 <a href = "FileBoardDownAction.filebo?filename=${boarddata.FILE_FILE2}">${boarddata.FILE_FILE2}</a></dt>
 		 		  </dl>
 		</c:if>
 

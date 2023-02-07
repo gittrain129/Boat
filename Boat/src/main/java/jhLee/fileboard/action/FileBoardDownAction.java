@@ -17,9 +17,8 @@ public class FileBoardDownAction implements Action {
 			throws ServletException, IOException {
 		String fileName = request.getParameter("filename");
 		System.out.println("fileName=" +fileName);
-		String fileName2 = request.getParameter("filename2");
 		
-		String savePath = "boardupload";
+		String savePath = "fileupload";
 		
 		//서블릿의 실행 환경 정보를 담고 있는 객체를 리턴합니다.
 		ServletContext context = request.getSession().getServletContext();
@@ -56,7 +55,7 @@ public class FileBoardDownAction implements Action {
 		response.setHeader("Content-Disposition","attachment; filename ="+ sEncoding);
 //		response.setHeader("Content-Disposition","inline; filename ="+ sEncoding);
 		//브라우저에 바로 뜸
-	
+	//=====================================================//
 				
 		try(
 				//웹 브라우저로의 출력 스트림 생성합니다.
