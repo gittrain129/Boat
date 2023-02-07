@@ -38,7 +38,10 @@ public class MemberFrontController extends javax.servlet.http.HttpServlet {
 		Action action = null;
 		
 		switch(command) {
-			case "/login.net":
+			case "/mainPage.net":
+				action = new MemberMainAction();
+				break;
+		/*	case "/login.net":
 				action = new MemberLoginAction();
 				break;
 			case "/join.net":
@@ -71,7 +74,7 @@ public class MemberFrontController extends javax.servlet.http.HttpServlet {
 			case "/memberDelete.net":
 				action = new MemberDeleteAction();
 				break;
-				
+		*/		
 		} // switch end
 		forward = action.execute(request, response);
 		
