@@ -13,12 +13,12 @@
 div.logo{
 	position: absolute;
     top: 0;
-    margin-top:15px;
+    margin-top:10px;
     left: 40px;
     z-index: 100;
     width: 10%;
     height: 28px;
-    padding-top: 15px;
+    padding-top: 10px;
 }
 
 
@@ -97,7 +97,9 @@ li {
 }
 
 .login_header > div {
-padding:7px;
+	padding:7px;
+	font-size: 16px;
+	font-weight: bold
 }
 
 .menu01 a {
@@ -117,7 +119,7 @@ padding:7px;
 .logo{z-index: 1}
 
 
-.login_header .dropdown_inout inout:nth-chile(1) {background-color: green;}
+
 
 </style>
 
