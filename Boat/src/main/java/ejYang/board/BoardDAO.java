@@ -98,6 +98,7 @@ public class BoardDAO {
 				+ "					FROM BOARD LEFT OUTER JOIN (SELECT B_COMMENT_NUM, COUNT(*) CNT FROM BOARD_COMMENT "
 				+ "												GROUP BY B_COMMENT_NUM)	"
 				+ "					ON BOARD_NUM = B_COMMENT_NUM "
+				+ "					WHERE BOARD_NOTICE = 'N' "
 				+ "					ORDER BY BOARD_RE_REF DESC, "
 				+ "					BOARD_RE_SEQ ASC "
 				+ "					) j "
@@ -736,7 +737,7 @@ public class BoardDAO {
 	}
 
 
-
+	//다음글
 	public BoardBean getNextDetail(int num) {
 		BoardBean board=null;
 		Connection conn = null;
@@ -764,6 +765,78 @@ public class BoardDAO {
 					+ "								(select * from BOARD "
 					+ "								ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J) "
 					+ "								WHERE BOARD_NUM = ?))) ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				board = new BoardBean();
+				board.setBoard_num(rs.getInt("board_num"));
+				board.setBoard_name(rs.getString("board_name"));
+				board.setBoard_subject(rs.getString("board_subject"));
+				board.setBoard_content(rs.getString("board_content"));
+				board.setBoard_dept(rs.getString("board_dept"));
+				board.setBoard_re_ref(rs.getInt("board_re_ref"));
+				board.setBoard_re_lev(rs.getInt("board_re_lev"));
+				board.setBoard_re_seq(rs.getInt("board_re_seq"));
+				board.setBoard_readcount(rs.getInt("board_readcount"));
+				board.setBoard_date(rs.getString("board_date"));
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println("getNextDetail() 에러: " + ex);
+		}finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close(); 
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if(conn != null) {
+				try {
+					conn.close(); 	
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		return board;
+	}
+
+
+	//이전글
+	public BoardBean getPrevDetail(int num) {
+		BoardBean board=null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//context.xml에서 설정한 리소스 jdbc/OracleDB 참조하여 Connection 객체를 얻어 옵니다.
+			conn = ds.getConnection();
+			
+			String sql = "SELECT * FROM "
+					+ "(SELECT * FROM( "
+					+ "	select ROWNUM RNUM, J.* from "
+					+ "			(select * from BOARD "
+					+ "			ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J "
+					+ ") WHERE RNUM > (select RNUM from "
+					+ "								(select ROWNUM RNUM, J.* from "
+					+ "									(select * from BOARD "
+					+ "									ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J) "
+					+ "						WHERE BOARD_NUM = ?) "
+					+ ") WHERE RNUM = (SELECT MIN(RNUM) FROM( "
+					+ "					select ROWNUM RNUM, J.* from "
+					+ "							(select * from BOARD "
+					+ "							ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J "
+					+ "				) WHERE RNUM > (select RNUM from "
+					+ "												(select ROWNUM RNUM, J.* from "
+					+ "													(select * from BOARD "
+					+ "													ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J) "
+					+ "										WHERE BOARD_NUM = ?)) ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);

@@ -65,7 +65,7 @@
  	  	  </tr>
  	  	    <td colspan="2" class="center2">
  	  	      <c:if test="${prevdata.board_subject != null}">
- 	  	  	  <a href="BoardDetailAction.bo?num=${boarddata.board_num-1}">
+ 	  	  	  <a href="BoardDetailAction.bo?num=${prevdata.board_num}">
  	  	  	  	<button class="btn">이전글</button>
  	  	  	  	${prevdata.board_subject}
  	  	  	  </a>
