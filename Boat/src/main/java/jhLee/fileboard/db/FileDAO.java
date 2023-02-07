@@ -441,5 +441,20 @@ public class FileDAO {
 
 
 	}
+	public List<FileboBean> getList(String dept, String search, String searchinput, String order, int page, int limit) {
+String sql ="\r\n"
+		+ " select FILE_NUM, FILE_NAME, FILE_SUBJECT, FILE_FILE, FILE_FILE2, FILE_RE_REF , FILE_RE_LEV , FILE_RE_SEQ , FILE_READCOUNT , FILE_DATE  , nvl(CNT ,0)\r\n"
+		+ "from file_board left outer join \r\n"
+		+ "  				(select F_COMMENT_NUM ,count(*) \"CNT\" from FILE_COMMENT group by F_COMMENT_NUM\r\n"
+		+ "					order by  CNT desc)\r\n"
+		+ " 					--댓글 숫자 가져옴(댓글순)\r\n"
+		+ "on FILE_NUM = F_COMMENT_NUM\r\n"
+		+ "where dept = '개발팀'    --()\r\n"
+		+ "and FILE_NAME = '이지현'      \r\n"
+		+ "order by FILE_RE_REF desc\r\n"
+		+ ", FILE_READCOUNT desc;  \r\n"
+		+ ""
+		return null;
+	}
 
 }

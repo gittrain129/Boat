@@ -15,7 +15,10 @@ table {
 caption {
 	display: none;
 }
-
+.searchbutton{
+	border : none;
+	background-color : white;
+}
 a {
 	text-decoration: none;
 }
@@ -114,10 +117,6 @@ tr:nth-child(n+3) {
 	width: 30%
 }
 
-.search {
-	float: right;
-	margin-bottom: 10px;
-}
 
 input {
 	height: 31.5px;
@@ -130,7 +129,7 @@ input {
 	border: rgb(0, 173, 238) !important;;
 }
 
-button:last-child {
+#write {
 	color: white;
 	background-color: rgb(0, 173, 238);
 }
@@ -155,6 +154,32 @@ button:last-child {
 
 .paging .num .firstItem ,a:focus  {
 	font-weight: bold;
+}
+div[class ='search']{
+	  width:400px;
+  height: 27px;
+  border-radius: 5px;
+  float:right;
+   display: flex; 
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  opacity: 1;
+/* width : 165px; */
+  margin-bottom : 10px;
+
+}
+
+
+input[class='sharch']:focus{
+ outline: none;
+  width: 300px;
+  text-align: left;
+  border : none!important;}
+  
+  
+.searchimg {
+	width : 20px;
 }
 
 

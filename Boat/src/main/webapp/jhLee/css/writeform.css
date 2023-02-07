@@ -1,19 +1,22 @@
 @charset "utf-8";
 
-body{
-background-color: #bbb;
-	}
     
 .container{
-	
-		 margin-top: 20%;
-	background-color: white;
-    padding: 20px;
+		 margin-top: 200px;
+	max-width :900px;
 }
+form{
+	padding : 20px;
+	background-color: white;
+	border : 1px solid gray;
+	margin-bottom: 50px;
+}
+.form-control{width : 95%;
+justify-content : center;
+height : 36px!important;}
 
 h1{font-size : 1.5rem; text-align: center;  color:rgb(0,173,238)!important; ;}
 
-.container{width : 90%}
 
 label{font-weight : bold}
 
@@ -21,9 +24,12 @@ label{font-weight : bold}
 
 img{width : 20px;}
 
+input{width : 80%;
+		height : 36px!important;}
+		
 .writer{
     margin-left: 20px;
-    width: 76%;
+    width: 66%;
 }
 .file1 {
 	margin-top: 10px;

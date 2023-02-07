@@ -25,19 +25,9 @@ public class FileBoardListAction implements Action {
 			throws ServletException, IOException {
 	FileDAO boarddao = new FileDAO();
 	List<FileboBean> filebolist = new ArrayList<FileboBean>();
-		
+		int filelicount = 0;
 	
-	
-	  String dept =  request.getParameter("dept");
-      String order =   request.getParameter("order");
-      String search =  request.getParameter("search");
-      
-//      switch() {
-//      case dept : filebolist = boarddao.getboardlist()
-//      }
-//	
-	
-	
+
 	int page = 1;
 	int limit = 10; 
 	if(request.getParameter("page")!=null){
@@ -59,6 +49,43 @@ public class FileBoardListAction implements Action {
 	if(endpage>maxpage)
 		endpage = maxpage;
 	String state = request.getParameter("state");
+	//==========================================================
+	//검색 및 페이징
+	
+	int depthidden =  Integer.parseInt(request.getParameter("dept"));
+	String dept = "";
+    String order =   request.getParameter("order");//최신순조회순댓글순 asc desc 쿼리
+    String search =  request.getParameter("searchsel");
+    //작성자나 제목
+    String searchinput =  request.getParameter("searchinput");
+    //검색결과
+    
+    
+    System.out.println("dept "+dept);
+    switch(depthidden) {
+    case 10:dept = "홍보팀";
+  	  break;
+    case 20:dept = "개발팀";
+  	  break;
+    case 30:dept = "인사팀";
+  	  break;
+    case 40:dept = "기획팀";
+  	  break;
+    case 50:dept = "영업팀";
+  	  break;
+  	  
+    }
+    
+    filelicount =boarddao.getListcount();
+   filebolist = boarddao.getList(dept,search,searchinput,order,page,limit); 
+    
+    System.out.println("order "+order);
+    System.out.println("search "+search);
+
+	
+	
+	
+	
 	
 	if(state ==null) {
 		System.out.println("state ==null");
