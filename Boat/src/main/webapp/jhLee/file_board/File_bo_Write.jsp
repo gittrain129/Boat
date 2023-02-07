@@ -81,6 +81,7 @@
 	 	
  		<span id ="filevalue"></span>
  	</div>
+ 	
  	<div class="form-group file2">
  		<label>
  		<img alt="파일첨부2" src="${pageContext.request.contextPath}/jhLee/image/file.png">

@@ -54,11 +54,20 @@ $("#upfile2").change(function(){
 			return false;	
 			}
 			
+			
+			const name=$.trim($("#board_name").val());
+			
 		if($.trim($("#board_name").val())==""){
 			alert("이름를 입력하세요");
 			$("board_name").focus();
 			return false;	
 			}
+			
+		if(name.length >10){
+			alert("이름의 최대 길이는 10글자입니다");
+			$("board_name").focus();
+			return false;
+		}
 		
 		if($('#deptsel').text()== "부서"){
 			alert("부서를 선택하세요")

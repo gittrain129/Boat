@@ -42,11 +42,14 @@ http://localhost:8088/Boat/FileBoardList.filebo
             <button type="button" class="btn btn-secondary" id = 'search'>검색옵션</button>
             <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" id = "searchbtn">
             </button>
-            
+              <input type="hidden" name = "search" id = "search">
             
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#" >작성자</a>
-                <a class="dropdown-item" href="#" >제목</a>
+                <a class="dropdown-item" href="#"  >작성자
+                </a>
+                
+                <a class="dropdown-item" href="#" >제목
+                </a>
             </div>
         </div>
 
@@ -209,7 +212,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
         <button id = "dept" type="button" class="btn btn-secondary">부서별</button>
         <button id = "deptbtn" type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
         </button>
-        
+        <input name = "dept" type ="hidden" id = "deptval">
    
         <div class="dropdown-menu">
             <a class="dropdown-item" href="#">홍보부</a>
@@ -221,6 +224,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
             <button id = "order" type="button" class="btn btn-secondary">정렬</button>
             <button id = "orderbtn" type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
             </button>
+            <input name = "order" type ="hidden" id = "orderval">
             
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">최신순</a>
