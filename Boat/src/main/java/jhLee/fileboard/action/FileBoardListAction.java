@@ -2,7 +2,9 @@
 package jhLee.fileboard.action;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -64,6 +66,15 @@ public class FileBoardListAction implements Action {
 		request.setAttribute("limit", limit);
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_MONTH, -3); //1일간 보이도록 하기위해서.
+        String nowday = format.format(cal.getTime());
+           
+        System.out.println("nowday=" + nowday);
+        request.setAttribute("nowday",nowday);
+        
 		
 		//글 목록 페이지로 이동하기 위해 경로 를 설정합니다.
 		forward.setPath("/jhLee/file_board/File_bo_List.jsp");

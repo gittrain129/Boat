@@ -32,13 +32,20 @@ a{
     margin-top: 5px;
     font-size: 1.4rem;
 }
+.filedown{
+	border-bottom: 2px solid black;
+	background-color :rgb(238,247,250) ;
+	min-height : 50px;
+	font-size : 1.4rem;
+	padding : 20px;
+}
 
 .bt_wrap{
     margin-top: 30px;
     text-align: center;
     font-size: 0;
 }
-.bt_wrap a {
+.bt_wrap a,#deletebtn {
     display: inline-block;
     min-width: 80px;
     margin-left: 10px;
@@ -52,74 +59,30 @@ a{
     margin-left : 0;
 }
 .bt_wrap a.on{
-    background-color: black;
+    background-color: rgb(0, 173, 238);
+    border-color: rgb(0, 173, 238);
     color : white;
 }
-
-.board_list{
-    width: 100%;
-    border-top:2px solid black;
+#delete{
+	border : none;
+	display : inline;
+	margin : 0;
+	float: right;
+	padding : 0;
 }
-
-.board_list > div{
-border-bottom: 1px solid #ddd;
+#deletebtn{
+	border : red;
+	
 }
-.board_list>div.top{
-border-bottom: 1px solid #999;
+a:hover{
+	font-weight : 600;
+	background-color : light-gray
+	
 }
-.board_list>div:last-child{
-    border-bottom: 1px solid black;
-}
-.board_list>div>div{
-    display: inline-block;
-    padding: 15px 0;
-    text-align: center;
-    font-size: 1.4rem;
-}
-.board_list>div .top >div{
-    font-weight: 600;
-}
-.board_list .num {
-    width: 7%;
-
-}
-.board_list .top .title {
-    text-align: center;
-}
-.board_list .title {
-    width: 48%;
-    text-align: left;
-
-}
-.board_list .dept {
-    width: 7%;
-
-}
-.board_list .writer {
-    width: 7%;
-
-}
-.board_list .date {
-    width: 7%;
-
-}
-.board_list .count {
-    width: 7%;
-
-}
-.board_list .file1 {
-    width: 7%;
-
-}
-.board_list .file2 {
-    width: 7%;
-
-}
-
 /* 글보기 */
 .board_view{
     width: 100%;
-    border-top: 2px solid #000;
+    border-top: 2px solid navy;
 }
 
 .board_view .title{
@@ -165,6 +128,11 @@ font-size: 1.4rem;
     color : #777
 }
 .board_view .content{
+	font-size:1.4rem;
     padding: 15px;
     border-bottom: 1px solid black;
+    	min-height:454px;
+}
+.board_view .info dl:first-child{
+	margin-left: 400px
 }

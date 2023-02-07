@@ -6,13 +6,37 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jhLee.fileboard.db.FileDAO;
+import jhLee.fileboard.db.FileboBean;
+
 public class FileBoardReplyView implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// File_bo_reply.jsp
-		return null;
+		
+		ActionForward forward = new ActionForward();
+		FileboBean filebo = new FileboBean();
+		FileDAO filedao = new FileDAO();
+		
+		int num = Integer.parseInt(request.getParameter("num"));  
+		
+		filebo=filedao.getDetail(num);
+		
+		if(filebo==null) {
+			System.out.println("글이 존재하지 않습니다.");
+			forward.setRedirect(false);
+			request.setAttribute("message", "글이 존재하지 않습니다.");
+			forward.setPath("jhLee/error/error.jsp");
+			return forward;
+		}
+		System.out.println("답변 페이지 이동 완료");
+		
+		request.setAttribute("boarddata", filebo);
+		forward.setRedirect(false);
+		forward.setPath("jhLee/file_board/File_bo_reply.jsp");
+		return forward;
 	}
 
 }

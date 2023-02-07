@@ -4,7 +4,7 @@
 }
 
 .container {
-	width: 70%
+	width: 80%
 }
 
 html {
@@ -21,13 +21,45 @@ caption {
 
 a {
 	text-decoration: none;
-	color: inherit;
+}
+a:hover{
+	font-weight : 600;
 }
 
 tr th div,tr th span{
 	display : inline-block;
 }
-
+tr:nth-child(n+3) {
+           padding : 5px 0;
+        }
+.head{
+/*  	background-color : rgb(227,238,241);*/
+	background-color :rgb(238,247,250) ;
+}
+.head th:nth-child(1){
+	width : 5%;
+}
+.head th:nth-child(2){
+	width : 40%;
+}
+.head th:nth-child(3){
+	width : 8%;
+}
+.head th:nth-child(4){
+	width : 8%;
+}
+.head th:nth-child(5){
+		width : 8%;
+}
+.head th:nth-child(6){
+		width : 10%;
+}
+.head th:nth-child(7){
+		width : 6%;
+}
+.head th:nth-child(8){
+		width : 6%;
+}
 
 .File_board_Title {
 	margin-bottom: 30px;
@@ -39,12 +71,12 @@ tr th div,tr th span{
 }
 
 .File_board_list_wrap {
-	padding: 50px;
+	padding: 20px;
 }
 
 .File_board_list {
 	width: 100%;
-	border-top: 2px solid navy;
+	border-top: 3px solid navy;
 }
 .listcount {
 	text-align : right;
@@ -58,7 +90,7 @@ tr th div,tr th span{
 	font-size: 15px;
 }
 
-.File_board_list td {
+.File_board_list th,td {
 	text-align: center;
 }
 
@@ -72,22 +104,14 @@ tr th div,tr th span{
 
 .btntwo { 
 	margin-top: 30px;
-	width: 40%;
+	width: 100%;
 }
 
 .bt_wrap {
 	margin-top: 30px;
 	text-align: center;
 	font-size: 0;
-} /*
-    .bt_wrap a {
-        display: inline-block ;
-        min-width: 80px;
-        padding: 10px;
-        border: 1px solid #000;
-        border-radius: 2px;
-        font-size: 1rem;;
-    }*/
+    }
 #sel1 {
 	width: 30%
 }
@@ -109,8 +133,6 @@ input {
 }
 
 button:last-child {
-	position: fixed;
-	right: 300px;
 	color: white;
 	background-color: rgb(0, 173, 238);
 }
@@ -128,16 +150,15 @@ button:last-child {
 	line-height: 1.2em;
 }
 
-.paging .num a:hover, .paging .num a:focus {
+.paging .num a:hover, .paging .num {
 	color: rgb(0, 173, 238);
-	text-decoration: underline; 
 }
 
-.paging .num .firstItem {
+
+.paging .num .firstItem ,a:focus  {
 	font-weight: bold;
-	/* color: #ffffff;
-	text-decoration: underline; */
 }
+
 
 img {
 	width: 10px
@@ -146,3 +167,11 @@ img {
 color : gray;
 opacity : 0.5;
 }
+
+.underline:hover{
+	border-bottom : 1px solid  rgb(0, 173, 238);
+}
+#new,.file{
+	width : 20px;}
+
+

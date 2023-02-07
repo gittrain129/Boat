@@ -1,4 +1,21 @@
 $(document).ready(function(){
+	
+	$('#summernote').val(" ${boarddata.FILE_CONTENT}");
+	 $('#summernote').summernote({
+		 	placeholder: '내용을 입력하세요.',
+	       tabsize: 2,
+	        lang : "ko-KR",
+	        height: 300,
+	        callbacks: {
+	        	onImageUpload: function(files, editor, welEditable) {
+	        		for(var i = files.length -1; i>=0; i--) {
+	        			sendFile(files[i], this);
+	        		}
+	        	}
+	        }
+	 });
+	
+	
 	let check = 0;
 	let check2 = 0;
 	

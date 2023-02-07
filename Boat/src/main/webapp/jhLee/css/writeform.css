@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+body{background-color: #bbb;}
+    
+.container{background-color: white;
+    margin-top: 50px  ;
+    padding: 20px;
+}
+
+h1{font-size : 1.5rem; text-align: center;  color:rgb(0,173,238)!important; ;}
+
+.container{width : 90%}
+
+label{font-weight : bold}
+
+#upfile,#upfile2{display : none}
+
+img{width : 20px;}
+
+.writer{
+    margin-left: 20px;
+    width: 76%;
+}
+.file1 {
+	margin-top: 10px;
+}
+.btn-group{
+    margin-right: 20px;
+    width : 20%;
+    float: left;
+}
+.btn-group2{
+  text-align :center;
+}
+.btn-secondary {
+	background-color: rgb(0, 173, 238) !important;
+	border: rgb(0, 173, 238) !important;;
+}
+.file2{
+	display : none;
+}
