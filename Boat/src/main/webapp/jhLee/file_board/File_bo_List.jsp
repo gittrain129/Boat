@@ -5,6 +5,8 @@ http://localhost:8088/Boat/FileBoardList.filebo
     pageEncoding="utf-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+  
+    <!--/Boat/src/main/webapp/sjKim/boat/header.jsp  -->
 <!DOCTYPE html>
 <html lang="en">
 <head> 
@@ -26,6 +28,9 @@ http://localhost:8088/Boat/FileBoardList.filebo
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	
 	<script src="${pageContext.request.contextPath}/jhLee/js/filelist.js"></script>
+	
+	
+	  <jsp:include page="/sjKim/boat/header.jsp" />
 </head>
 <body>
     <div class="container">
@@ -242,5 +247,6 @@ http://localhost:8088/Boat/FileBoardList.filebo
 	
  
  </script>
+  <jsp:include page="/sjKim/boat/footer.jsp" />
 </body>
 </html>
