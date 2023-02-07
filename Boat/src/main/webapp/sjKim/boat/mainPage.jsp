@@ -8,6 +8,7 @@
 <html>
 <head>
 <jsp:include page="header.jsp" />
+
 <style>
 body{
 	margin-top: 20%;
@@ -64,26 +65,26 @@ a {
 		
 			<div class="body_menu">
 				<a href="https://www.naver.com" target="_black">
-				<img src="../image/blue_button.png" >
+				<img src="sjKim/image/blue_button.png" >
 				</a>
 				<span class="image_text">오시는길</span>
 			</div>
 			<div class="body_menu">
 				<a href="https://www.naver.com" target="_black">
-				<img src="../image/blue_button.png" >
+				<img src="sjKim/image/blue_button.png" >
 				</a>
 				<span class="image_text">내 정보 보기</span>
 			</div>
 			<div class="body_menu">
 				<a href="https://www.naver.com" target="_black">
-				<img src="../image/blue_button.png" >
+				<img src="sjKim/image/blue_button.png" >
 				</a>
 				<span class="image_text">내 글 보기</span>		
 					
 			</div>
 			<div class="body_menu">
 				<a href="https://www.naver.com" target="_black">
-				<img src="../image/blue_button.png" >
+				<img src="sjKim/image/blue_button.png" >
 				</a>
 				<span class="image_text">내 일정 보기</span>
 			</div>
@@ -94,25 +95,25 @@ a {
 		
 			<div class="body_menu">
 				<a href="https://www.naver.com" target="_black">
-				<img src="../image/blue_button.png" >
+				<img src="sjKim/image/blue_button.png" >
 				</a>
 				<span class="image_text">업무 게시판</span>
 			</div>
 			<div class="body_menu">
 				<a href="https://www.naver.com" target="_black">
-				<img src="../image/blue_button.png" >
+				<img src="sjKim/image/blue_button.png" >
 				</a>
 				<span class="image_text">자료실</span>
 			</div>
 			<div class="body_menu">
 				<a href="https://www.naver.com" target="_black">
-				<img src="../image/blue_button.png" >
+				<img src="sjKim/image/blue_button.png" >
 				</a>
 				<span class="image_text">캘린더</span>
 			</div>
 		    <div class="body_menu">
 		    	<a href="https://www.naver.com" target="_black">
-				<img src="../image/blue_button.png" >
+				<img src="sjKim/image/blue_button.png" >
 				</a>
 				<span class="image_text">주소록</span>
 			</div>

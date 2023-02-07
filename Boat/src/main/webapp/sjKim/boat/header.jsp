@@ -89,11 +89,10 @@ li {
 .login_header{
 	position: absolute;
 	top:0;
-	width:10%;
 	right: 20px;
 	margin-top: 62px;
 	display:flex;
-	width:250px;	
+	width:270px;	
 }
 
 .login_header > div {
@@ -106,13 +105,15 @@ a {
 	color: black;
 }
 
+
+
 </style>
 
-<script src="../js/header.js"></script>
+<script src="sjKim/js/header.js"></script>
 
  		<div class="logo">       		
-			<a href="https://localhost8088">
-				<img src="../image/main_logo.jpg" style="float:left; width: 120px; height: 120px;">
+			<a href="">
+				<img src="sjKim/image/main_logo.jpg" style="float:left; width: 120px; height: 120px;">
 			</a>					
 		</div>
 		
@@ -137,17 +138,17 @@ a {
                         <a href="https://www.naver.com" target="_self">
                         	<li id="nop">내 &nbsp;글 &nbsp;보기</li>
                         </a>
-                        <a href="https://www.naver.com" target="_self">
+                        <a href="${pageContext.request.contextPath}/MySchedule.my" target="_self">
                         	<li id="nop">내 할일 보기</li>
                         </a>
                     </ul>
                 </li>
                 <li><span>게시판</span>
                     <ul class="dept01">
-                    	<a href="https://www.naver.com" target="_self">
+                    	<a href="${pageContext.request.contextPath}/BoardList.bo" target="_self">
                        		<li id="nop">업무 게시판</li>
                        	</a>
-                       	<a href="https://www.naver.com" target="_self">
+                       	<a href="${pageContext.request.contextPath}/FileBoardList.filebo" target="_self">
                        		<li id="nop">자료 게시판</li>
                         </a>
                         <li id="nop">&nbsp;</li>
@@ -156,18 +157,18 @@ a {
                 </li>
                 <li><span>공유업무</span>
                     <ul class="dept01">
-                    	<a href="https://www.naver.com" target="_self">
+                    	<a href="${pageContext.request.contextPath}/project_calendarshow.cal" target="_self">
                         	<li id="nop">캘린더</li>
                         </a>
-                        <a href="https://www.naver.com" target="_self">
+                        <a href="${pageContext.request.contextPath}/jkKim/address.jk" target="_self">
                         	<li id="nop">주소록</li>
                         </a>
                          <li id="nop">&nbsp;</li>
                     </ul>
                 </li>
 				<li>
-					<img src="../image/boat_icon.png" >
-					<a href="https://www.naver.com" target="_self">
+					<img src="sjKim/image/boat_icon.png" >
+					<a href="${pageContext.request.contextPath}/chat.jk" target="_self">
 					<span>대화하기</span>
 					</a>
                     <ul class="dept01">
@@ -192,8 +193,10 @@ a {
 			</a>
 			</div>
 			<div class="status_button">						
-                <li><button>출근</button></li>
-                <li><button>퇴근</button></li>
-                <li><button>외출</button></li>
+                <select id="browsers" name="browsers" multiple size="3" required autofocus>
+				    <option value="출근" selected>출근</option>
+				    <option value="외출">외출</option>
+				    <option value="퇴근">퇴근</option>
+				</select>
 	        </div>
 		</div> 
