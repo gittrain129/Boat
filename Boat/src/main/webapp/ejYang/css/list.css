@@ -166,12 +166,8 @@
 	
 	/* reset */
 	
-	body {
-	  list-style: none;
+	* {
 	  text-decoration: none;
-	  padding: 0;
-	  margin: 0;
-	  box-sizing: border-box;
 	}
 	.clearfix:after {
 	  content: '';
@@ -273,6 +269,7 @@
 	}
 	#board-search h2{
 		font-size: 2.4rem;
+		margin-bottom: 0px;
 	}
 	.title-td div:nth-child(1){
 		text-align: left;
