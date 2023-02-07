@@ -31,13 +31,6 @@ where BOARD_NOTICE = 'Y';
 select * from BOARD
 ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC		
 
-
-(select * from
-(select ROWNUM, J.* from
-(select * from BOARD
-ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J)
-WHERE BOARD_NUM = 16)
-
 --다음글 쿼리
 SELECT * FROM(
 select ROWNUM RNUM, J.* from
@@ -57,6 +50,27 @@ WHERE ROWNUM <	(select RNUM from
 								(select * from BOARD
 								ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J)
 								WHERE BOARD_NUM = 16)))
+
+--이전글 쿼리
+SELECT * FROM
+(SELECT * FROM(
+	select ROWNUM RNUM, J.* from
+			(select * from BOARD
+			ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J
+) WHERE RNUM > (select RNUM from
+								(select ROWNUM RNUM, J.* from
+									(select * from BOARD
+									ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J)
+						WHERE BOARD_NUM = 16)		
+) WHERE RNUM = (SELECT MIN(RNUM) FROM(
+					select ROWNUM RNUM, J.* from
+							(select * from BOARD
+							ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J
+				) WHERE RNUM > (select RNUM from
+												(select ROWNUM RNUM, J.* from
+													(select * from BOARD
+													ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J)
+										WHERE BOARD_NUM = 16))
 
 
 

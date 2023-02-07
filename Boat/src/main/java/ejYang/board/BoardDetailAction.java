@@ -19,7 +19,7 @@ public class BoardDetailAction implements Action{
 		boarddao.setReadCountUpdate(num);//조회수
 		boarddata=boarddao.getDetail(num);//상세내용
 		
-		prevdata=boarddao.getDetail(num-1);//이전글
+		prevdata=boarddao.getPrevDetail(num);//이전글 getPrevDetail
 		nextdata=boarddao.getNextDetail(num);//다음글 getNextDetail
 		
 		if(boarddata==null) {

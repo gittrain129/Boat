@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <html>
  <head>
-  <script src="../js/jquery-3.6.3.js"></script> 
+  <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
   <style>
   	.pop-cont img {margin-bottom: 10px;  width: 300px; height: 400px;}
   	.layerPopup::before {display: block; content: ""; position: fixed; left: 0; top: 0; 
@@ -23,7 +23,7 @@
       <div class="pop-box">
         <h4 class="title">BOAT 공지사항</h4>
         <div class="pop-cont">
-			<img src="../image/popup.jpg" alt="event page">
+			<img src="${pageContext.request.contextPath}/ejYang/image/popup.jpg" alt="event page">
         </div>
         
         <form name="pop_form">
