@@ -27,17 +27,19 @@ public class AddressViewAction implements jkKim_Action {
 		int limit = 8; //한화면에 주소록 사진 4개씩 2줄만 노출 
 		if(request.getParameter("page") != null) {
 			page= Integer.parseInt(request.getParameter("page"));
+			System.out.println("넘어온 페이지 = " + page);
 		}
-		System.out.println("넘어온 페이지 = " + page);
+		
 		
 		//추가
 		if(request.getParameter("limit") != null) {
 			limit = Integer.parseInt(request.getParameter("limit"));
+			System.out.println("넘어온 limit = " + limit);
 		}
-		System.out.println("넘어온 limit = " + limit);
 		
 		
-		System.out.println("dept= " + request.getParameter("dept"));
+		
+	
 		//추가된부분********************
 		if(request.getParameter("dept") != null) {
 			int num = Integer.parseInt(request.getParameter("dept")); 
@@ -45,11 +47,11 @@ public class AddressViewAction implements jkKim_Action {
 		}
 		
 		if(request.getParameter("name2") != null) {
-			dept_sql = " where name = " + request.getParameter("name2");
+			dept_sql = " where name like '%" + request.getParameter("name2")+"%'";
 		}
 		System.out.println("MemberDAO로 넘어가는 string = " + dept_sql);
 		
-		System.out.println("넘어온 limit = " + limit);
+		
 		
 		//총 리스트를 수 받아옵니다
 		int listcount =mdao.getListCount(dept_sql);
@@ -97,7 +99,7 @@ public class AddressViewAction implements jkKim_Action {
 			forward.setPath("/jkKim/addressView.jsp");
 			return forward; //BoardFrontController.java로 리턴
 			
-		}else if (state == "ajax"){
+		}else {
 					
 			JsonObject obj = new JsonObject();
 			obj.addProperty("page", page); //{"page":변수 page의 값
@@ -121,31 +123,7 @@ public class AddressViewAction implements jkKim_Action {
 			System.out.println(obj.toString());
 			return null;
 			
-			} else {//else if end
-				
-				JsonObject obj = new JsonObject();
-				obj.addProperty("page", page); //{"page":변수 page의 값
-				obj.addProperty("maxpage", maxpage);
-				obj.addProperty("startpage", startpage);
-				obj.addProperty("endpage", endpage);
-				obj.addProperty("listcount", listcount);
-				 obj.addProperty("limit", limit);
-				
-				//JsonObject에는 list형식을 담을수없는 addproperty()가 존재하지않습니다
-				//void com.google.gson.JsonObject.add(String property,JsonElement value) 메서드를 통해서 저장
-				//List 형식을 JsonElement로 바꾸어주어야 object에 저장할수있습니다
-				
-				//List -> JsonElement
-				JsonElement je = new Gson().toJsonTree(memberlist);
-				System.out.println("memberlist= 검색바의 " + je.toString());
-				obj.add("memberlist",je);
-				
-				response.setContentType("application/json;charset=utf-8");
-				response.getWriter().print(obj);
-				System.out.println(obj.toString());
-				return null;
-				
-			}
+			} 
 		
 		
 		//페이징 처리 후 보여줄 기본화면 = 모든부서 보기
