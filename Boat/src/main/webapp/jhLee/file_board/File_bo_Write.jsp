@@ -25,7 +25,7 @@
 <style>
 
 </style>
-
+ <jsp:include page="/sjKim/boat/header.jsp" />
 </head>
 <body>
 <div class="container">
@@ -106,6 +106,6 @@ $(function(){
 })//ready끝
 
 </script>
-
+ <jsp:include page="/sjKim/boat/footer.jsp" />
 </body>
 </html>

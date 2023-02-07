@@ -15,7 +15,7 @@
 
   <link rel="stylesheet" href="jhLee/css/fileview.css">
   
-  
+   <jsp:include page="/sjKim/boat/header.jsp" />
 </head>
 <body>
 <input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
@@ -150,5 +150,6 @@
 		</div>
 <%--id="myModal"end --%>
         </div>
+         <jsp:include page="/sjKim/boat/footer.jsp" />
 </body>
 </html>

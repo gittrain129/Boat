@@ -12,8 +12,10 @@ http://localhost:8089/Boat/project_calendarallSave.cal
  
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+     <jsp:include page="/sjKim/boat/header.jsp" />
 <!DOCTYPE html>
 <html>
+
 <head>
  
   <meta charset='utf-8' />
@@ -268,6 +270,7 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 <body>
 
 <%-- 추후 삭제 예정 --%>
+ <div id = cal_wrap>
  <div id = drag_wrap>
 	 <div id='external-events'>
 	    <p>
@@ -305,11 +308,11 @@ http://localhost:8089/Boat/project_calendarallSave.cal
  <button id ="cal_save" onclick="allSave();">전체 저장</button>
  </div>
  
- <div id = cal_wrap>
  	<div id='calendar'></div>
  </div>
  <script>
 
  </script>
+  <jsp:include page="/sjKim/boat/footer.jsp" />
 </body>
 </html>
