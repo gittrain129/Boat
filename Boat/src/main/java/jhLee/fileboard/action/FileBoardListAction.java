@@ -52,7 +52,7 @@ public class FileBoardListAction implements Action {
 	//==========================================================
 	//검색 및 페이징
 	
-	int depthidden =  Integer.parseInt(request.getParameter("dept"));
+	//int depthidden =  Integer.parseInt(request.getParameter("dept"));
 	String dept = "";
     String order =   request.getParameter("order");//최신순조회순댓글순 asc desc 쿼리
     String search =  request.getParameter("searchsel");
@@ -62,19 +62,13 @@ public class FileBoardListAction implements Action {
     
     
     System.out.println("dept "+dept);
-    switch(depthidden) {
-    case 10:dept = "홍보팀";
-  	  break;
-    case 20:dept = "개발팀";
-  	  break;
-    case 30:dept = "인사팀";
-  	  break;
-    case 40:dept = "기획팀";
-  	  break;
-    case 50:dept = "영업팀";
-  	  break;
-  	  
-    }
+	/*
+	 * switch(depthidden) { case 10:dept = "홍보팀"; break; case 20:dept = "개발팀";
+	 * break; case 30:dept = "인사팀"; break; case 40:dept = "기획팀"; break; case 50:dept
+	 * = "영업팀"; break;
+	 * 
+	 * }
+	 */
     
     filelicount =boarddao.getListcount();
    filebolist = boarddao.getList(dept,search,searchinput,order,page,limit); 

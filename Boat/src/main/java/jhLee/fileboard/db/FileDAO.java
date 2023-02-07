@@ -442,19 +442,96 @@ public class FileDAO {
 
 	}
 	public List<FileboBean> getList(String dept, String search, String searchinput, String order, int page, int limit) {
-String sql ="\r\n"
-		+ " select FILE_NUM, FILE_NAME, FILE_SUBJECT, FILE_FILE, FILE_FILE2, FILE_RE_REF , FILE_RE_LEV , FILE_RE_SEQ , FILE_READCOUNT , FILE_DATE  , nvl(CNT ,0)\r\n"
-		+ "from file_board left outer join \r\n"
-		+ "  				(select F_COMMENT_NUM ,count(*) \"CNT\" from FILE_COMMENT group by F_COMMENT_NUM\r\n"
-		+ "					order by  CNT desc)\r\n"
-		+ " 					--댓글 숫자 가져옴(댓글순)\r\n"
-		+ "on FILE_NUM = F_COMMENT_NUM\r\n"
-		+ "where dept = '개발팀'    --()\r\n"
-		+ "and FILE_NAME = '이지현'      \r\n"
-		+ "order by FILE_RE_REF desc\r\n"
-		+ ", FILE_READCOUNT desc;  \r\n"
-		+ ""
-		return null;
+
+		List<FileboBean>list = new ArrayList<FileboBean>();
+		Connection con = null;
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		
+		try {
+			con  = ds.getConnection();
+			
+			
+		String sql =
+		"  select * from "
+		+ "				(select b.*, rownum rnum from "
+		+ "					(select file_board.* , nvl(CNT ,0) "
+		+ "					from file_board left outer join  "
+		+ "					 				(select F_COMMENT_NUM ,count(*) as CNT from FILE_COMMENT group by F_COMMENT_NUM "
+		+ "									order by  CNT desc) "
+		+ "					on FILE_NUM = F_COMMENT_NUM "
+		+ "					where dept = '개발팀' "
+		+ "					and FILE_NAME = '이지현' "
+		+ "				order by FILE_RE_REF desc "
+		+ "				, FILE_READCOUNT desc )b "
+		+ "				where rownum<=10 ) "
+		+ "				where rnum>=1 and rnum<=10 ";
+		
+		
+		System.out.println(sql);
+
+		pstmt = con.prepareStatement(sql);
+		//pstmt.setString(1,"%"+search_word+"%");
+		
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit - 1;
+
+		//pstmt.setInt(2, endrow);
+		//pstmt.setInt(3, startrow);
+		//pstmt.setInt(4, endrow);
+		
+		rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			FileboBean m = new FileboBean();
+			
+			m.setDEPT(rs.getString("DEPT"));
+			m.setCNT(rs.getInt("CNT"));
+			m.setFILE_NUM(rs.getInt("FILE_NUM"));
+			m.setFILE_NAME(rs.getString("FILE_NAME"));
+			m.setFILE_SUBJECT(rs.getString("FILE_SUBJECT"));
+			m.setFILE_CONTENT(rs.getString("FILE_CONTENT"));
+			m.setFILE_FILE(rs.getString("FILE_FILE"));
+			m.setFILE_FILE2(rs.getString("FILE_FILE2"));
+			m.setFILE_RE_REF(rs.getInt("FILE_RE_REF"));
+			m.setFILE_RE_LEV(rs.getInt("FILE_RE_LEV"));
+			m.setFILE_RE_SEQ(rs.getInt("FILE_RE_SEQ"));
+			m.setFILE_READCOUNT(rs.getInt("FILE_READCOUNT"));
+			m.setFILE_DATE(rs.getString("FILE_DATE"));
+			list.add(m);
+		}
+		System.out.println(list.size());
+		
+	} catch (Exception se) {
+		se.printStackTrace();
+		System.out.println("getList(4)에러 "+se);
+	} finally {
+		try {
+			if (rs != null)
+				rs.close();
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+		}
+		try {
+			if (pstmt != null)
+				pstmt.close();
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+		}
+		try {
+			if (con != null)
+				con.close();
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+		}
+
 	}
+
+	return list;
+	}
+
 
 }

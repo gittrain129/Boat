@@ -120,3 +120,24 @@ insert into board (FILE_NUM ,
 --		public FileboBean getDetail(int num) {
 
 select * from file_board where FILE_NUM =?
+
+
+
+
+
+
+
+
+ select * from 
+				(select b.*, rownum rnum from 
+					(select file_board.* , nvl(CNT ,0) 
+					from file_board left outer join  
+					 				(select F_COMMENT_NUM ,count(*) CNT from FILE_COMMENT group by F_COMMENT_NUM 
+									order by  CNT desc) 
+					on FILE_NUM = F_COMMENT_NUM 
+					where dept = '개발팀'
+					and FILE_NAME = '이지현' 
+				order by FILE_RE_REF desc 
+				, FILE_READCOUNT desc )b 
+				where rownum<=10 )
+				where rnum>=1 and rnum<=10;
