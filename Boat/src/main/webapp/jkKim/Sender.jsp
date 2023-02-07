@@ -1,18 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
-        <title>Peer-to-Peer Cue System --- Sender</title>
-        <link rel="stylesheet" href="style.css">
-        <style>
+<head>
+<title>BoaTalk -- Sender</title>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+     
+<style>
         * {
     padding: 0;
     margin: 0;
@@ -106,23 +104,39 @@ background-color: #A8C0D6;
         <table class="control">
             <tr>
                 <td class="title">Status:</td>
-                <td class="title">Messages:</td>
             </tr>
             <tr>
                 <td>
-                    <span style="font-weight: bold">ID: </span>
-                    <input type="text" id="receiver-id" title="Input the ID from receive.html">
+                    <span style="font-weight: bold">연결할ID: </span>
+                    <input type="text" id="receiver-id" title="Input the ID">
                     <button id="connect-button">Connect</button>
                 </td>
-                <td>
-                    <input type="text" id="sendMessageBox" placeholder="Enter a message..." autofocus="true" />
+            </tr>
+            <tr>
+           <td>
+			<div class="message" id="message">
+            <div class="chat ch1">
+            		<div class="icon"><i class="fa-solid fa-user"></i></div>
+            		<div class="textbox" id="your_box">안녕하세요.</div>
+        			</div>
+        		<div class="chat ch2">
+            		<div class="icon"><i class="fa-solid fa-user"></i></div>
+            		<div class="textbox" id="my_box">안녕하세요</div>
+        		</div>
+        		</div>
+        		</td>
+        		</tr>
+            
+            
+            <tr>
+             <td>
+                    <input type="text" id="sendMessageBox" placeholder="Enter a message..."  />
                     <button type="button" id="sendButton">Send</button>
                     <button type="button" id="clearMsgsButton">Clear Msgs (Local)</button>
                 </td>
             </tr>
             <tr>
                 <td><div id="status" class="status"></div></td>
-                <td><div class="message" id="message"></div></td>
             </tr>
             
         </table>
@@ -222,7 +236,7 @@ background-color: #A8C0D6;
                     });
                     // Handle incoming data (messages only since this is the signal sender)
                     conn.on('data', function (data) {
-                        addMessage("<span class=\"peerMsg\">Peer:</span> " + data);
+                        addyourMessage2("<span class=\"peerMsg\">Peer:</span> " + data);
                     });
                     conn.on('close', function () {
                         status.innerHTML = "Connection closed";
@@ -278,9 +292,30 @@ background-color: #A8C0D6;
                             t = "0" + t;
                         return t;
                     };
-                    message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
+                    message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
                     //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
                 };
+                
+                function addyourMessage2(msg) {
+                    var now = new Date();
+                    var h = now.getHours();
+                    var m = addZero(now.getMinutes());
+                    var s = addZero(now.getSeconds());
+
+                    if (h > 12)
+                        h -= 12;
+                    else if (h === 0)
+                        h = 12;
+
+                    function addZero(t) {
+                        if (t < 10)
+                            t = "0" + t;
+                        return t;
+                    };
+                    //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
+                    //message.innerHTML = ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" +msg + message.innerHTML +"</div>");
+                    message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
+                }
 
                 function clearMessages() {
                     message.innerHTML = "";

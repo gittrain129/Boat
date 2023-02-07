@@ -64,7 +64,7 @@ function ajax(sdata){
             output += "<h5 class='card-title'>조장</h5>"
             let email = item.email;
             output += "<p class='card-text'>이메일: " + email + "</p>"
-            output += " <a href='#' class='btn btn-primary'>More</a>"
+            output += " <a href='#' class='btn btn-primary'>임시메일버튼</a>"
             output += "</div>"
             output += "</div>"
             output += "</div>"
@@ -76,7 +76,7 @@ function ajax(sdata){
           $("#whole-body").append(output)
           
           
-           $(".pagination").empty(); //페이징 처리 영역 내용 제거
+           $(".pagination").empty(); 
                output = "";
                
                let digit = '이전&nbsp;'
@@ -119,7 +119,7 @@ function ajax(sdata){
 
 $(function(){
  $("form").submit(function(){
-      search(1); //보여줄 페이지를 1페이지로 설정
+      search(1); 
    });
 
 });
@@ -129,7 +129,7 @@ $(function(){
 $(function(){
     
    $('#dept').change(function(){
-      go(1); //보여줄 페이지를 1페이지로 설정
+      go(1); 
    });
    
   
