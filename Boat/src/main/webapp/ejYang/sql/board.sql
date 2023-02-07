@@ -25,17 +25,41 @@ delete BOARD
 where BOARD_NOTICE = 'Y'
 
 select count(*) from BOARD 
-					where BOARD_NOTICE = 'Y';
-				
-select * from BOARD
-where BOARD_RE_REF >= 13
-and BOARD_RE_SEQ = (select max(BOARD_RE_SEQ) from BOARD
-					where BOARD_RE_REF >= 13)	
+where BOARD_NOTICE = 'Y';
 
 --게시판 조회 쿼리
 select * from BOARD
-ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC					
-	
+ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC		
+
+
+(select * from
+(select ROWNUM, J.* from
+(select * from BOARD
+ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J)
+WHERE BOARD_NUM = 16)
+
+--다음글 쿼리
+SELECT * FROM(
+select ROWNUM RNUM, J.* from
+(select * from BOARD
+ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J
+WHERE ROWNUM <	(select RNUM from
+				(select ROWNUM RNUM, J.* from
+				(select * from BOARD
+				ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J)
+				WHERE BOARD_NUM = 16)
+) WHERE RNUM = (SELECT MAX(RNUM) from
+				(select ROWNUM RNUM, J.* from
+				(select * from BOARD
+				ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J
+				WHERE ROWNUM <	(select RNUM from
+								(select ROWNUM RNUM, J.* from
+								(select * from BOARD
+								ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J)
+								WHERE BOARD_NUM = 16)))
+
+
+
 
 insert into BOARD (BOARD_NUM, BOARD_SUBJECT, BOARD_NAME, BOARD_RE_REF, BOARD_NOTICE) values(1, '처음', 'admin', 1, 'N');
 insert into BOARD (BOARD_NUM, BOARD_SUBJECT, BOARD_NAME, BOARD_RE_REF, BOARD_NOTICE) values(2, '처음', 'admin', 2, 'N');

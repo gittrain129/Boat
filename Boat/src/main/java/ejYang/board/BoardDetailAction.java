@@ -20,7 +20,7 @@ public class BoardDetailAction implements Action{
 		boarddata=boarddao.getDetail(num);//상세내용
 		
 		prevdata=boarddao.getDetail(num-1);//이전글
-		nextdata=boarddao.getDetail(num+1);//다음글
+		nextdata=boarddao.getNextDetail(num);//다음글 getNextDetail
 		
 		if(boarddata==null) {
 			System.out.println("상세보기 실패");

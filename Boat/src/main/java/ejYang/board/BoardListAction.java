@@ -14,6 +14,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import ejYang.member.Member;
+
 
 public class BoardListAction implements Action{
 	@Override
@@ -23,20 +25,8 @@ public class BoardListAction implements Action{
 		BoardDAO boarddao = new BoardDAO();
 		List<BoardBean> boardlist = new ArrayList<BoardBean>();
 		
-//		//공지글 총 리스트 수를 받아옵니다.
-//		int ycount = boarddao.getYListCount();
-//		System.out.println("ycount"+ycount);
 		int page = 1;	//보여줄 page
 		int limit = 10;	//한 페이지에 보여줄 게시판 목록의 수
-		
-//		int limit = 13;	//한 페이지에 보여줄 게시판 목록의 수
-//		if(ycount == 0) {//공지 0개
-//			limit = 10;	//한 페이지에 보여줄 게시판 목록의 수
-//		}else if(ycount == 1) {//공지 1개
-//			limit = 11;	//한 페이지에 보여줄 게시판 목록의 수
-//		}else if(ycount == 2) {//공지 2개
-//			limit = 12;	//한 페이지에 보여줄 게시판 목록의 수
-//		}
 		
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
@@ -48,11 +38,34 @@ public class BoardListAction implements Action{
 		}
 		System.out.println("넘어온 limit =" + limit);
 		
-		//총 리스트 수를 받아옵니다.
-		int listcount = boarddao.getListCount();//글의 갯수 구하기
 		
-		//리스트를 받아옵니다.
-		boardlist = boarddao.getBoardList(page, limit);
+		//검색 기능
+		int listcount = 0;
+		int index=-1;//search_field에 존재하지 않는 값으로 초기화
+		
+		String search_word="";
+		//(BoardList.bo?page=2$search_field=-1&search_word=)
+		if(request.getParameter("search_word") == null
+				|| request.getParameter("search_word").equals("")) {
+			//총 리스트 수를 받아옵니다.
+			listcount = boarddao.getListCount();
+			//리스트를 받아옵니다.
+			boardlist = boarddao.getBoardList(page, limit);
+		}else {//검색을 클릭한 경우
+			index= Integer.parseInt(request.getParameter("search_field"));
+			String[] search_field = new String[] {"BOARD_NAME","BOARD_SUBJECT"};//"board_name","board_subject"
+			search_word = request.getParameter("search_word");
+			listcount = boarddao.getListCount(search_field[index], search_word);
+			boardlist = boarddao.getBoardList(search_field[index], search_word, page, limit);
+		}
+		//검색 기능 끝
+		
+		
+//		//총 리스트 수를 받아옵니다.
+//		int listcount = boarddao.getListCount();//글의 갯수 구하기
+		
+//		//리스트를 받아옵니다.
+//		boardlist = boarddao.getBoardList(page, limit);
 		
 		int maxpage = (listcount + limit -1)/limit;
 		System.out.println("총 페이지수 = " +maxpage);
@@ -84,11 +97,13 @@ public class BoardListAction implements Action{
 			request.setAttribute("boardlist", boardlist);
 			
 			request.setAttribute("limit", limit);
-			
+			//검색에 필요
+			request.setAttribute("search_field", index);
+			request.setAttribute("search_word", search_word);
 			
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	        Calendar cal = Calendar.getInstance();
-	        cal.add(Calendar.DAY_OF_MONTH, -3); //1일간 보이도록 하기위해서.
+	        cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
 	        String nowday = format.format(cal.getTime());
 	           
 	        System.out.println("nowday=" + nowday);
@@ -112,6 +127,9 @@ public class BoardListAction implements Action{
 			object.addProperty("endpage", endpage);
 			object.addProperty("listcount", listcount);
 			object.addProperty("limit", limit);
+			//검색에 필요
+			request.setAttribute("search_field", index);
+			request.setAttribute("search_word", search_word);
 			
 			JsonElement je = new Gson().toJsonTree(boardlist);
 			System.out.println("boardlist = " + je.toString());

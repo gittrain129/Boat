@@ -25,56 +25,6 @@ public class BoardDAO {
 		}
 	}
 
-	//공지글의 갯수 구하기
-	public int getYListCount() {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int x = 0;
-		try {
-			//context.xml에서 설정한 리소스 jdbc/OracleDB 참조하여 Connection 객체를 얻어 옵니다.
-			conn = ds.getConnection();
-			
-			String sql = "select count(*) from BOARD "
-					+ "where BOARD_NOTICE = 'Y' ";
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				x = rs.getInt(1);
-			}
-			
-		}catch(Exception ex) {
-			ex.printStackTrace();
-			System.out.println("getYListCount() 에러: " + ex);
-		}finally {
-			if(rs != null) {
-				try {
-					rs.close(); 
-				}catch(Exception e) {
-					System.out.println(e.getMessage());
-				}
-			}
-			
-			if(pstmt != null) {
-				try {
-					pstmt.close(); 
-				}catch(Exception e) {
-					System.out.println(e.getMessage());
-				}
-			}
-			
-			if(conn != null) {
-				try {
-					conn.close(); 	
-				}catch(Exception e) {
-					System.out.println(e.getMessage());
-				}
-			}
-		}
-		return x;
-	}
-	
 	
 	
 	//글의 갯수 구하기
@@ -652,6 +602,208 @@ public class BoardDAO {
 		}
 		
 		return result_check;
+	}
+
+
+	//검색시 글 개수
+	public int getListCount(String field, String value) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int x = 0;
+		try {
+			conn = ds.getConnection();
+			
+			String select_sql = "select count(*) from BOARD "
+					+ "where "+ field + " like ? ";
+			pstmt = conn.prepareStatement(select_sql.toString());
+			pstmt.setString(1, "%"+value+"%");
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				x = rs.getInt(1);
+			}
+			
+		}catch(Exception se) {
+			se.printStackTrace();
+			System.out.println("getListCount()2 에러:" + se);
+		}finally {
+			
+			try {
+				if(rs != null)
+					rs.close(); 
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+			try {
+				if(pstmt != null)
+					pstmt.close(); 
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+			try {
+				if(conn != null)
+					conn.close(); 	
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return x;
+	}
+
+
+	//검색시 
+	public List<BoardBean> getBoardList(String field, String value, int page, int limit) {
+		List<BoardBean> list = new ArrayList<BoardBean>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "select*from(select rownum rnum, j.* "
+					+ "				from (SELECT BOARD.*, NVL(CNT, 0) AS CNT "
+					+ "					FROM BOARD LEFT OUTER JOIN (SELECT B_COMMENT_NUM, COUNT(*) CNT FROM BOARD_COMMENT "
+					+ "													GROUP BY B_COMMENT_NUM)	"
+					+ "					ON BOARD_NUM = B_COMMENT_NUM  "
+					+ "					where "+ field + " like ? "
+					+ "					ORDER BY BOARD_RE_REF DESC, "
+					+ "					BOARD_RE_SEQ ASC) j "
+					+ "				where rownum<= ?) "
+					+ "	where rnum >= ? and rnum <= ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+value+"%");
+			
+			//한 페이지당 10개씩 목록인 경우 1페이지, 2페이지, 3페이지, 4페이지 ...
+			int startrow = (page - 1) * limit + 1;//읽기 시작할 row 번호(1  11 21 31 ...
+			int endrow = startrow + limit -1;		//읽을 마지막 row 번호(10 20 30 40 ...
+			
+			pstmt.setInt(2, endrow);
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, endrow);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardBean board = new BoardBean();
+				board.setBoard_num(rs.getInt("board_num"));
+				board.setBoard_name(rs.getString("board_name"));
+				board.setBoard_subject(rs.getString("board_subject"));
+				board.setBoard_content(rs.getString("board_content"));
+				board.setBoard_dept(rs.getString("board_dept"));
+				board.setBoard_re_ref(rs.getInt("board_re_ref"));
+				board.setBoard_re_lev(rs.getInt("board_re_lev"));
+				board.setBoard_re_seq(rs.getInt("board_re_seq"));
+				board.setBoard_readcount(rs.getInt("board_readcount"));
+				board.setBoard_date(rs.getString("board_date"));
+				board.setBoard_notice(rs.getString("board_notice"));
+				board.setCnt(rs.getInt("cnt"));;
+				list.add(board);
+			}
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println("getList()2 에러: " + ex);
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close(); 
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if(pstmt != null) {
+				try {
+					pstmt.close(); 
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if(conn != null) {
+				try {
+					conn.close(); 	
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		return list;
+	}
+
+
+
+	public BoardBean getNextDetail(int num) {
+		BoardBean board=null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//context.xml에서 설정한 리소스 jdbc/OracleDB 참조하여 Connection 객체를 얻어 옵니다.
+			conn = ds.getConnection();
+			
+			String sql = "SELECT * FROM( "
+					+ "select ROWNUM RNUM, J.* from "
+					+ "(select * from BOARD "
+					+ "ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J "
+					+ "WHERE ROWNUM <	(select RNUM from "
+					+ "				(select ROWNUM RNUM, J.* from "
+					+ "				(select * from BOARD "
+					+ "				ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J) "
+					+ "				WHERE BOARD_NUM = ?) "
+					+ ") WHERE RNUM = (SELECT MAX(RNUM) from "
+					+ "				(select ROWNUM RNUM, J.* from "
+					+ "				(select * from BOARD "
+					+ "				ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J "
+					+ "				WHERE ROWNUM <	(select RNUM from "
+					+ "								(select ROWNUM RNUM, J.* from "
+					+ "								(select * from BOARD "
+					+ "								ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J) "
+					+ "								WHERE BOARD_NUM = ?))) ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				board = new BoardBean();
+				board.setBoard_num(rs.getInt("board_num"));
+				board.setBoard_name(rs.getString("board_name"));
+				board.setBoard_subject(rs.getString("board_subject"));
+				board.setBoard_content(rs.getString("board_content"));
+				board.setBoard_dept(rs.getString("board_dept"));
+				board.setBoard_re_ref(rs.getInt("board_re_ref"));
+				board.setBoard_re_lev(rs.getInt("board_re_lev"));
+				board.setBoard_re_seq(rs.getInt("board_re_seq"));
+				board.setBoard_readcount(rs.getInt("board_readcount"));
+				board.setBoard_date(rs.getString("board_date"));
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println("getNextDetail() 에러: " + ex);
+		}finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close(); 
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if(conn != null) {
+				try {
+					conn.close(); 	
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		return board;
 	}
 
 	

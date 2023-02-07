@@ -76,7 +76,7 @@
  	  	    </td>
  	  	    <td class="center3">
  	  	      <c:if test="${nextdata.board_subject != null}">
- 	  	  	  <a href="BoardDetailAction.bo?num=${boarddata.board_num+1}">
+ 	  	  	  <a href="BoardDetailAction.bo?num=${nextdata.board_num}">
  	  	  	  	${nextdata.board_subject}
  	  	  	  	<button class="btn">다음글</button>
  	  	  	  </a>
