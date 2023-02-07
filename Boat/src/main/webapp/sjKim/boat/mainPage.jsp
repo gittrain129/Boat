@@ -8,6 +8,7 @@
 <html>
 <head>
 <jsp:include page="header.jsp" />
+<jsp:include page="popup.jsp" />
 
 <style>
 body{
