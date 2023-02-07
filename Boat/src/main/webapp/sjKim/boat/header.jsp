@@ -100,7 +100,7 @@ li {
 padding:7px;
 }
 
-.dept01 a {
+.menu01 a {
 	width: 200px;
 	text-decoration: none;
 	color: black;
@@ -118,7 +118,6 @@ padding:7px;
 
 
 .login_header .dropdown_inout inout:nth-chile(1) {background-color: green;}
-
 
 </style>
 
@@ -170,7 +169,7 @@ padding:7px;
                 </li>
                 <li><a href="${pageContext.request.contextPath}/project_calendarshow.cal" target="_self"><span>공유업무</span></a>
                     <ul class="dept01">
-                    	<a href="${pageContext.request.contextPath}/project_calendarshow.cal" target="_self">
+                    	<a href="${pageContext.request.contextPath}/jhLee/calendar.jsp" target="_self">
                         	<li id="nop">캘린더</li>
                         </a>
                         <a href="${pageContext.request.contextPath}/jkKim/address.jk" target="_self">
