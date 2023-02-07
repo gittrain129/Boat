@@ -47,7 +47,7 @@
 		display: inline;
 		float: left;
 	}
-	#search{
+	#search_word{
 		right: 10px;	
 	}
 	#board-search .search-window .search-wrap input:focus {
@@ -279,4 +279,6 @@
 	}
 	#new{
 		width: 25px;
+		position: relative;
+        top: 6px;
 	}

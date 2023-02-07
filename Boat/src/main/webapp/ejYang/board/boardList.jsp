@@ -6,6 +6,38 @@
   <link href="${pageContext.request.contextPath}/ejYang/css/list.css" type="text/css" rel="stylesheet">
   <script src="${pageContext.request.contextPath}/ejYang/js/list.js"></script>
   <title>게시판 목록</title>
+  <script>
+	$(function(){
+		//검색 클릭 후 응답화면에는 검색시 선택한 필드가 선택되도록 합니다.
+		let selectedValue = '${search_field}'
+		if(selectedValue != '-1')
+			$('#country').val(selectedValue);
+		else
+			selectedValue=0;	//선택된 필드가 없는 경우 기본적으로 작성자를 선택하도록 합니다.
+			
+		//검색 후 selectedValue값에 따라 placeholder가 나타나도록 합니다.
+		const message = ["작성자를","제목을"];
+		$('input').attr("placeholder", message[selectedValue] + " 입력하세요.");
+		
+		//검색 버튼 클릭한 경우
+		$(".btn-dark").click(function(){
+			//검색어 공백 유효성 검사합니다.
+			if($("input").val() == ''){
+				alert("검색어를 입력하세요.");
+				$("input").focus();
+				return false;
+			}
+		});//button click end
+		
+		//검색어 입력창에 placeholder가 나타나도록 합니다.
+		$('#country').change(function(){
+			selectedValue = $(this).val();
+			$("input").val('');
+			$("input").attr("placeholder",message[selectedValue] + " 입력하세요.");
+		})//$('#country').change end
+		
+	})
+ </script>
  </head>
  <body>
 <section class="notice">
@@ -14,14 +46,14 @@
         <h2>업무 게시판</h2>
         <div class="container">
             <div class="search-window">
-                <form action="" class="search-form">
+                <form action="BoardList.bo" class="search-form" method="post">
                     <div class="search-wrap">
-                    	<select id="country" name="country">
-				          <option value="forname">작성자</option>
-				          <option value="forcontent">제목</option>
+                    	<select id="country" name="search_field">
+				          <option value="0">작성자</option>
+				          <option value="1">제목</option>
 				        </select>
-                        <label for="search" class="blind">공지사항 내용 검색</label>
-                        <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
+                        <input id="search_word" type="search" name="search_word" 
+                        		placeholder="검색어를 입력해주세요." value="${search_word}">
                     <button type="submit" class="btn btn-dark">검색</button>
                     </div>
                 </form>
