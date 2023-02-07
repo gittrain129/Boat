@@ -17,7 +17,7 @@ public class MemberMainAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);  //주소 변경없이 jsp페이지의 내용을 보여줍니다.
-		forward.setPath("../boat/mainPage.jsp");
+		forward.setPath("sjKim/boat/mainPage.jsp");
 		return forward;
 		
 	}
