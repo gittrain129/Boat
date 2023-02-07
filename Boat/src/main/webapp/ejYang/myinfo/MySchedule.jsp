@@ -4,6 +4,7 @@
   <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
   <script src="${pageContext.request.contextPath}/ejYang/js/schedule.js"></script>
   <link href="${pageContext.request.contextPath}/ejYang/css/schedule.css" type="text/css" rel="stylesheet">
+  <jsp:include page="/sjKim/boat/header.jsp" />
   <title>내 일정</title>
  </head>
  <body>
@@ -34,5 +35,6 @@
         </div>
    </div>
    <script src="${pageContext.request.contextPath}/ejYang/js/list.js"></script>
+   <jsp:include page="/sjKim/boat/footer.jsp" />
  </body>
 </html>

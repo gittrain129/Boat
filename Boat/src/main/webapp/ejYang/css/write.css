@@ -1,14 +1,21 @@
 	label { font-weight:bold}
-  	body{
-  		background:#F5F7FF
+  	.containers{
+  		margin-top:200px;
+  		margin-bottom: 150px;
   	}
   	* {
 	  box-sizing: border-box;
 	}
+	body{
+	    margin: 0;
+	}
 	.container{
 		width:60%;
 		margin: auto;
-		margin-top: 100px;
+		margin-top: 50px;
+  		background:#F5F7FF;
+  		border-radius: 10px;
+	 	padding: 50px;
 	}
 	input[type=text],input[type=password], select {
 	  width: 100%;
@@ -53,13 +60,6 @@
 	input[type=submit]:hover, input[type=reset]:hover {
 	  opacity: 1;
 	}
-	
-	.container {
-	  border-radius: 10px;
-	  padding: 50px;
-	  background:white
-	}
-	
 	.col-25 {
 	  float: left;
 	  width: 10%;
@@ -80,7 +80,7 @@
 	}
 	
 	/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-	@media screen and (max-width: 600px) {
+	@media screen and (max-width: 1000px) {
 	  .col-25, .col-75, input[type=submit] {
 	    width: 100%;
 	    margin-top: 0;

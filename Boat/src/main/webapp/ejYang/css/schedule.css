@@ -1,6 +1,9 @@
 * {
     box-sizing: border-box;
 }
+body {
+    margin: 0;
+}
 .Todolist li{
     list-style: none;
     line-height: 50px; 
@@ -31,12 +34,13 @@
 	background: #f5f7ff;
 	padding: 50px;
 	border-radius: 10px;
+    margin-bottom: 150px;
 }
 header{
 	text-align: center;
 	font-weight:bold;
 	font-size: 2rem;
-	margin-top: 70px;
+	margin-top: 230px;
     margin-bottom: 70px;
 }
 .wrapper p{

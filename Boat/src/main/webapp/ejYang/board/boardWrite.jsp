@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <html>
  <head>
+  <jsp:include page="/sjKim/boat/header.jsp" />
   <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
   <script src="${pageContext.request.contextPath}/ejYang/js/writeform.js"></script>
   <link href="${pageContext.request.contextPath}/ejYang/css/write.css" type="text/css" rel="stylesheet">
@@ -9,6 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
  </head>
  <body>
+<div class="containers">
  <h1>게시글 쓰기</h1>
 <div class="container">
   <form action="BoardAddAction.bo" method="post" name="boardform">
@@ -59,6 +61,7 @@
     </div>
   </form>
 </div>
+</div>
  <script>
  	$(function(){
  		$('#board_content').val("${board_data.BOARD_CONTENT}");
@@ -76,5 +79,6 @@
 		});
  	})
  </script>
+ <jsp:include page="/sjKim/boat/footer.jsp" />
  </body>
 </html>

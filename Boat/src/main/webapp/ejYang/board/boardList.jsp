@@ -5,7 +5,8 @@
   <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
   <link href="${pageContext.request.contextPath}/ejYang/css/list.css" type="text/css" rel="stylesheet">
   <script src="${pageContext.request.contextPath}/ejYang/js/list.js"></script>
-  <title>게시판 목록</title>
+  <jsp:include page="/sjKim/boat/header.jsp" />
+  <title>업무 게시판</title>
   <script>
 	$(function(){
 		//검색 클릭 후 응답화면에는 검색시 선택한 필드가 선택되도록 합니다.
@@ -43,8 +44,9 @@
 <section class="notice">
     <%-- 게시글이 있는 경우 --%>
     <div id="board-search">
-        <h2>업무 게시판</h2>
         <div class="container">
+        <h2>업무 게시판</h2>
+        <p>업무 게시판 입니다.</p>
             <div class="search-window">
                 <form action="BoardList.bo" class="search-form" method="post">
                     <div class="search-wrap">
@@ -168,5 +170,6 @@
         </div>
     </div>
 </section>
+<jsp:include page="/sjKim/boat/footer.jsp" />
  </body>
 </html>

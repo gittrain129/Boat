@@ -20,6 +20,7 @@
 	#board-search .search-window {
 	  padding: 15px 0;
 	  background-color: #f9f7f9;
+	  border-top: 3px solid navy;
 	}
 	.search-form{
 		width: 100%;
@@ -62,12 +63,12 @@
 	  width: 15%;
 	  float: left;
 	  height: 40px;
+	  background: rgb(0, 173, 238);
 	}
 	
 	.board-table {
-	  font-size: 13px;
+	  font-size: 14px;
 	  width: 100%;
-	  border-top: 1px solid #ccc;
 	  border-bottom: 1px solid #ccc;
 	}
 	
@@ -270,15 +271,25 @@
 		float: left;	
 	}
 	#board-search h2{
-		text-align: center;
-		margin-bottom: 30px;
+		font-size: 2.4rem;
 	}
 	.title-td div:nth-child(1){
 		text-align: left;
 		padding-left: 15px;
+		font-weight: bold;
 	}
 	#new{
 		width: 25px;
 		position: relative;
         top: 6px;
+	}
+	body{
+		margin-top:100px;
+	}
+	.container p{
+		margin-bottom: 30px;
+	}
+	.board-table thead tr{
+		background-color: rgb(238,247,250);
+		font-size: 15px;
 	}
