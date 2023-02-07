@@ -3,7 +3,7 @@
 }
 
 .container {
-	 margin-top: 20%;
+	 margin-top: 10%;
 	width: 80%
 }
 
@@ -72,6 +72,7 @@ tr:nth-child(n+3) {
 
 .File_board_list_wrap {
 	padding: 20px;
+	margin-bottom : 30px;
 }
 
 .File_board_list {
