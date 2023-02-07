@@ -70,6 +70,7 @@
 	  font-size: 14px;
 	  width: 100%;
 	  border-bottom: 1px solid #ccc;
+	  text-decoration: none;
 	}
 	
 	.board-table a {
@@ -165,7 +166,7 @@
 	
 	/* reset */
 	
-	* {
+	body {
 	  list-style: none;
 	  text-decoration: none;
 	  padding: 0;
@@ -277,6 +278,7 @@
 		text-align: left;
 		padding-left: 15px;
 		font-weight: bold;
+		text-decoration: none;
 	}
 	#new{
 		width: 25px;
