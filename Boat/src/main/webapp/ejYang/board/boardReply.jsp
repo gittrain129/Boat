@@ -2,6 +2,7 @@
 <html>
  <head>
   <title>게시글 답글 쓰기</title>
+  <jsp:include page="/sjKim/boat/header.jsp" />
   <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
   <script src="${pageContext.request.contextPath}/ejYang/js/reply.js"></script>
   <link href="${pageContext.request.contextPath}/ejYang/css/write.css" type="text/css" rel="stylesheet">
@@ -32,7 +33,8 @@
   </script>
  </head>
  <body>
- 	<h1>게시글 답글 쓰기</h1>
+<div class="containers">
+<h1>게시글 답글 쓰기</h1>
 <div class="container">
   <form action="BoardReplyAction.bo" method="post" name="replyform">
     <input type="hidden" name="board_re_ref" value="${boarddata.board_re_ref}">
@@ -86,7 +88,8 @@
       <input type="reset" onclick="history.back()" value="취소">
     </div>
   </form>
-  
+ </div>
+</div>
   <script>
  	$(function(){
  		$('#board_content').val("${board_data.BOARD_CONTENT}");
@@ -104,5 +107,6 @@
 		});
  	})
   </script>
+  <jsp:include page="/sjKim/boat/footer.jsp" />
  </body>
 </html>

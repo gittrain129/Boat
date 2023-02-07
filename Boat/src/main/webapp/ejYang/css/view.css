@@ -8,9 +8,9 @@
 	.board-table {
 	  font-size: 13px;
 	  width: 100%;
-	  border-top: 1px solid #ccc;
+	  border-top: 3px solid navy;
 	  border-bottom: 1px solid #ccc;
-	  margin-top: 100px;
+	  margin-top: 50px;
 	}
 	.board-table th {
 	  text-align: center;
@@ -19,22 +19,12 @@
 	  padding-top: 14px;
 	  padding-bottom: 14px;
 	}
-	.board-table tbody td {
+	.board-table tbody tr:nth-child(1) {
 	  border-top: 1px solid #e7e7e7;
-	}
-	.board-table thead tr:nth-child(2){
-	  border-top: 1px solid #e7e7e7;
-	}
-	.board-table tbody th {
-	  padding-left: 28px;
-	  padding-right: 14px;
-	  border-top: 1px solid #e7e7e7;
-	  text-align: left;
 	}
 	.board-table tbody th p{
 	  display: none;
 	}
-	
 	* {
 	  list-style: none;
 	  text-decoration: none;
@@ -45,6 +35,8 @@
 	.containers {
 	  width: 60%;
 	  margin: 0 auto;
+	  margin-top: 250px;
+	  margin-bottom: 150px;
 	}
 	
 	#board-list  table  thead  tr  th:nth-child(1){width:10%}
@@ -86,4 +78,16 @@
 	.center3{
 		 text-align: right;
 	}
-	
+	.containers p{
+		margin-bottom: 30px;
+	}
+	.containers h2{
+		font-size: 2.4rem;
+		font-weight: bold;
+	}
+	.board-table thead tr:nth-child(1){
+		background-color: rgb(238,247,250);
+	}
+	.th-num2{
+		font-size: 15px;
+	}

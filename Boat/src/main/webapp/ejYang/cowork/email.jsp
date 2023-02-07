@@ -3,15 +3,13 @@
 <html>
  <head>
 	<script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ 	<jsp:include page="/sjKim/boat/header.jsp" />
 	<style>
 		* {box-sizing: border-box;}
-		body{
-			background: #F5F7FF;
-		}
-		.container {width:70%}
+		.container {width:70%; margin-top: 200px;}
 		label { font-weight:bold}
-		fieldset {padding:50px;
+		.container fieldset {padding:50px;
 			position: relative;
 		    display: flex;
 		    flex-direction: column;
@@ -19,6 +17,8 @@
 		    background-color: #fff;
 		    background-clip: border-box;
 		    border-radius: 10px;
+		    background: #F5F7FF;
+		    margin-bottom: 150px;
 		}
 		.container > h2 {text-align: center; width:auto; padding: 10px; font-weight:bold; margin-bottom:40px}
 		.form-control {
@@ -84,7 +84,7 @@
 	</script>
  </head>
  <body>
- 	<div class="container mt-5">
+ 	<div class="container">
  		<h2>메일보내기</h2>
  		<form class="form-horizontal" method="post" action="emailsend.ne">
  		  <fieldset>
@@ -117,5 +117,6 @@
  		  </fieldset>
  		</form>
  	</div>
+ 	<jsp:include page="/sjKim/boat/footer.jsp" />
  </body>
 </html>

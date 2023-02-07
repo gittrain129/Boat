@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <html>
  <head>
+  <jsp:include page="/sjKim/boat/header.jsp" />
   <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
   <script src="${pageContext.request.contextPath}/ejYang/js/modifyform.js"></script>
   <link href="${pageContext.request.contextPath}/ejYang/css/write.css" type="text/css" rel="stylesheet">
   <script src="${pageContext.request.contextPath}/ejYang/js/summernote/summernote-lite.js"></script>
   <script src="${pageContext.request.contextPath}/ejYang/js/summernote/lang/summernote-ko-KR.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+  <title>게시글 수정</title>
  </head>
  <body>
+<div class="containers">
   <h1>게시글 수정</h1>
 <div class="container">
   <form action="BoardModifyAction.bo" method="post" name="">
@@ -62,6 +65,7 @@
     </div>
   </form>
 </div>
+</div>
  <script>
  	$(function(){
  		//부서명 자동 선택
@@ -98,5 +102,6 @@
 		});
  	})
  </script>
+ <jsp:include page="/sjKim/boat/footer.jsp" />
  </body>
 </html>

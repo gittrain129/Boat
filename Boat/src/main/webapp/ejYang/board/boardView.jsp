@@ -6,6 +6,8 @@
   <link href="${pageContext.request.contextPath}/ejYang/css/view.css" type="text/css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <jsp:include page="/sjKim/boat/header.jsp" />
+  <title>게시글 보기</title>
   <script>
   	$(function(){
 	  	$('.gray1').click(function(){
@@ -19,12 +21,14 @@
  </head>
  <body>
   <div class="containers">
+  <h2>업무 게시판</h2>
+  <p>업무 게시판 입니다.</p>
     <div id="board-list">
       <table class="board-table">
       	<thead>
           <tr>
           	<th scope="col" class="th-num">제목</th>
-          	<th><div id="bname">${boarddata.board_subject}</div></th>
+          	<th scope="col" class="th-num2"><div id="bname">${boarddata.board_subject}</div></th>
             <th scope="col" class="th-title">${boarddata.board_date}</th>
           </tr>
           <tr>
@@ -114,5 +118,6 @@
       </div>
     <%-- id="myModal" end --%>
   </div>
+  <jsp:include page="/sjKim/boat/footer.jsp" />
  </body>
 </html>
