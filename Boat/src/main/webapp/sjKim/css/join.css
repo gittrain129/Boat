@@ -1,110 +1,128 @@
+
 body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
 * {
-	box-sizing: border-box
+	box-sizing: border-box;
 }
 
-input {
-	border-radius: 3px;
-	border: 1px solid lightgray
-}
-
-input[type=text], input[type=password] {
+select, input[type=text], input[type=password], input[type="button"] {
 	width: 100%;
-	padding: 10px;
+	padding: 15px;
 	margin: 5px 0 22px 0;
 	display: inline-block;
+	border: none;
+	background: #f1f1f1;
+	outline: none;
+	height: 40px;
 }
 
-input[type=radio] {
-	width: 5%;
-	display: inline-block;
-	border: none;
+select {
+	padding: 10px 15px 10px 15px;
+	vertical-align: bottom;
+}
+
+legend {
+	text-align: center;
+	font-size: 40px;
+	font-weight: bold
+}
+
+#id, #post1 {
+	width: 70%
+}
+
+#jumin1, #jumin2 {
+	width: 48%
+}
+
+#id+input, #post1+input {
+	width: 29%;
+	background:#18a8f1;
+	line-height: 10px;
+	vertical-align: bottom;
+}
+
+textarea {
+	width: 100%;
+	resize: none;
+	outline: none;
+	margin-top: 5px;
+	border : 2px solid #18a8f1;
+}
+
+#email, #domain {
+	width: 32%;
+}
+
+#sel {
+	width: 30%;
+	background: lightgray
+}
+
+.container2 {
+	border: 1px solid lightgray;
+	padding: 1.5% 1%;
+	word-spacing: 10px;
+	margin-bottom: 20px;
 }
 
 input[type=text]:focus, input[type=password]:focus {
-	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+	background-color: #ddd;
 	outline: none;
 }
 
+input[type=button]:hover {
+	opacity: 0.8;
+	cursor: pointer
+}
+
 button {
-	background-color: #4CAF50;
+	background-color: #18a8f1;
 	color: white;
 	padding: 14px 20px;
 	margin: 8px 0;
 	border: none;
-	width: 100%;
-	opacity: 0.8;
+	cursor: pointer;
+	width: 20%;
+	opacity: 0.9;
 }
 
 button:hover {
 	opacity: 1;
-	cursor: pointer; /* 손가락 커서 모양 */
 }
 
-button:focus {
-	outline: none;
-}
-
-/* 취소 버튼*/
 .cancelbtn {
 	padding: 14px 20px;
 	background-color: #f44336;
 }
 
-.cancelbtn, .submitbtn {
-	float: left;
-	width: 50%;
+.clearfix{
+	text-align: center;
 }
 
-form {
+
+body {
+	background-color: white;
+}
+
+#myform {
 	background-color: #fefefe;
 	margin: 5% auto 15% auto;
-	/* 5% from the top, 15% from the bottom and centered */
-	border: 1px solid lightgray;
-	width: 600px; /* Could be more or less, depending on screen size */
+	width: 850px;
 	padding: 16px;
 }
 
-hr {
-	border: 1px solid #f1f1f1;
-	margin-bottom: 25px;
+label {
+	display: block;
+	font-weight: bold;
 }
 
-b+div {
-	width: 100%;
-	padding: 10px;
-	margin: 5px 0 22px 0;
-	display: inline-block;
-	border: none;
-	background: #f1f1f1;
+.logo {
+	text-align: center;	
 }
 
-/* Clear floats */
-.clearfix::after {
-	content: "";
-	clear: both;
-	display: table;
+fieldset{
+	border-color: #18a8f1;
 }
-
-h1 {
-	text-align: center
-}
-
-b {
-	width: 100%;
-	display: block
-}
-
-span {
-	display: inline-block;
-	font-size: 10px
-}
-
-input[name=id]+span, input[name=email]+span {
-	position: relative;
-	top: -20px
-}
-

@@ -1,79 +1,90 @@
-
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box}
-
-input{border-radius:3px;border:1px solid lightgray}
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
+.login {
+  width: 410px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.login h2 {
+  padding: 0 0 20px;
+  border-bottom: 2px solid #111;
+  text-align: center;
+  line-height: 1;
+}
+.login > ul {
+  padding: 40px 0 33px;
+}
+.login > ul li {
+  padding: 0 0 12px;
+  text-align: left;
+}
+.login > ul li input {
+  width: 100%;
+  height: 46px;
+  box-sizing: border-box;
+  text-indent: 16px;
+}
+.login > ul li input::-webkit-input-placeholder {
+  font-size: 16px;
+  color: #9fa19f;
+}
+.login > ul li input[type="checkbox"] {
+  position: absolute;
+  left: -3000%;
+}
+.login > ul li input[type="checkbox"] + label {
+  height: 36px;
+  line-height: 36px;
+}
+.login > ul li input[type="checkbox"] + label:before {
+  content: "";
+  display: inline-block;
+  margin: 0 10px 0 0;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #666;
+  background: #fff;
+  vertical-align: -5px;
+}
+.login > ul li input[type="checkbox"]:checked + label:before {
+  background: url(../images/ico_check_on.png) no-repeat center #18a8f1;
+  border-color: #333;
 }
 
-
-input[type=text]:focus, input[type=password]:focus {
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-    outline: none;
+.login div {
+  padding: 0 0 45px;
+}
+.login div ul {
+  display: flex;
+  justify-content: center;
+  
+}
+.login div ul li {
+  position: relative;
+  padding: 0 18px;
+}
+.login div ul li ~ li:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  height: 14px;
+  width: 1px;
+  background: #111;
+ /* transform: rotate(25deg); */
+}
+.login div ul li a {
+  font-size: 14px;
+  color: #111;
+}
+.login > a {
+  font-size: 14px;
+  color: #666;
+  border-bottom: 1px solid #666;
+}
+ul {
+  list-style: none;
+  padding-left: 0px;
 }
 
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer; /* 손가락 커서 모양 */
-    width: 100%;
-    opacity: 0.9;
-}
-button:nth-child(1){border-radius:3px 0 0 3px}
-button:nth-child(2){border-radius:0 3px 3px 0px}
-button:hover {
-    opacity:1;
-    
-}
-button:focus{
-   outline:none;
-}
-
-/* 취소 버튼*/
-.join{
-    padding: 14px 20px;
-    background-color: #f44336;
-}
-
-.join, .submitbtn {
-  height:45px;
-  float: left;
-  width: 50%;
-}
-a{color:white;text-decoration:none;}
-
-form {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid lightgray;
-    width: 500px; /* Could be more or less, depending on screen size */
-    padding: 16px;
-}
-
-hr {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
-}
- 
- h1{text-align:center}
-
-/* Clear floats */
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table; 
-}
-span{vertical-align: top}
-
-@media screen and (max-width: 300px) {
-    .join, .signupbtn {
-       width: 100%;
-    }
-}

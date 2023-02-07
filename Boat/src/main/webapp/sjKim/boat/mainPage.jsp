@@ -13,7 +13,18 @@
 <style>
 body{
 	margin-top: 20%;
+	margin-right:0;
+	margin-left:0;
+	margin-bottom:0;
 }
+
+h2{
+	text-align: center;
+}
+h2 > span{
+	color:#18a8f1;
+}
+
 
 .body_content {
 	width: 100%;
@@ -61,7 +72,7 @@ a {
 <title>BOAT 메인페이지</title>
 </head>
 <body>
-<h1> 메인 페이지 </h1>
+<h2> 안녕하세요 <span>BOAT</span>에 오신걸 환영합니다 </h2>
 	<div class="body_content">
 		
 			<div class="body_menu">

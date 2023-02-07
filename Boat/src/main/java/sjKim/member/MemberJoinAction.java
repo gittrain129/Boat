@@ -1,4 +1,4 @@
-package net.member.action;
+package sjKim.member;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ public class MemberJoinAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);  //주소 변경없이 jsp페이지의 내용을 보여줍니다.
-		forward.setPath("member/joinForm.jsp");
+		forward.setPath("sjKim/boat/joinForm.jsp");
 		return forward;
 	}
 }

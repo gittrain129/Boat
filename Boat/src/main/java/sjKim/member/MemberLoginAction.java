@@ -1,4 +1,4 @@
-package net.member.action;
+package sjKim.member;
 
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ public class MemberLoginAction implements Action {
 		request.setAttribute("id", id);
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);  //주소 변경없이 jsp페이지의 내용을 보여줍니다.
-		forward.setPath("member/loginForm.jsp");
+		forward.setPath("sjKim/boat/loginForm.jsp");
 		return forward;
 	}
 }

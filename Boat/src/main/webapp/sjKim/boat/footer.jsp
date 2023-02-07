@@ -52,7 +52,7 @@ footer p span {
 		    <p>
 		        <span>프로젝트: ⓒ BOAT</span><br/>
 		        <span>in HTA Academy</span><br/>
-		        <span>Copyright 2022. BOAT. All Rights  Reserved.</span>
+		        <span>Copyright 2023. BOAT. All Rights  Reserved.</span>
 		    </p>
 		</footer>
 
