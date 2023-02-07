@@ -100,7 +100,7 @@ li {
 padding:7px;
 }
 
-a {
+.dept01 a {
 	width: 200px;
 	text-decoration: none;
 	color: black;
@@ -110,11 +110,15 @@ a {
 .dept01 a:nth-child(2) {font-weight: bold}
 .dept01 a:nth-child(3) {font-weight: bold}
 
-.dept01 a:nth-child(1):hover {color: #4c91cd}
-.dept01 a:nth-child(2):hover {color: #4c91cd}
-.dept01 a:nth-child(3):hover {color: #4c91cd}
+.dept01 a:nth-child(1):hover {color:#18a8f1}
+.dept01 a:nth-child(2):hover {color: #18a8f1}
+.dept01 a:nth-child(3):hover {color: #18a8f1}
 
 .logo{z-index: 1}
+
+
+.login_header .dropdown_inout inout:nth-chile(1) {background-color: green;}
+
 
 </style>
 
@@ -201,11 +205,16 @@ a {
 				<span>회원가입</span>	
 			</a>
 			</div>
-			<div class="status_button">						
-                <select id="browsers" name="browsers" multiple size="3" required autofocus>
-				    <option value="출근" selected>출근</option>
-				    <option value="외출">외출</option>
-				    <option value="퇴근">퇴근</option>
+			
+		<script src="${pageContext.request.contextPath}/sjKim/js/inout.js"></script>			
+			<div class="dropdown_inout">						
+               <select id="inout" name="inout" onchange="select_inout()" required autofocus>
+               		<option value="" selected disabled hidden>출근현황</option>
+				    <option style= "background-color: #18a8f1" value="출근">출근</option>
+				    <option style= "background-color: #f5de16" value="외출">외출</option>
+				    <option style= "background-color: #ff5858" value="퇴근">퇴근</option>
 				</select>
 	        </div>
+		     
+	       
 		</div> 
