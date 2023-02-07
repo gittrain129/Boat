@@ -4,6 +4,7 @@
    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+   
   
 <style>
 
@@ -105,15 +106,23 @@ a {
 	color: black;
 }
 
+.dept01 a:nth-child(1) {font-weight: bold}
+.dept01 a:nth-child(2) {font-weight: bold}
+.dept01 a:nth-child(3) {font-weight: bold}
 
+.dept01 a:nth-child(1):hover {color: #4c91cd}
+.dept01 a:nth-child(2):hover {color: #4c91cd}
+.dept01 a:nth-child(3):hover {color: #4c91cd}
+
+.logo{z-index: 1}
 
 </style>
 
-<script src="sjKim/js/header.js"></script>
+<script src="${pageContext.request.contextPath}/sjKim/js/header.js"></script>
 
  		<div class="logo">       		
 			<a href="">
-				<img src="sjKim/image/main_logo.jpg" style="float:left; width: 120px; height: 120px;">
+				<img src="${pageContext.request.contextPath}/sjKim/image/main_logo.jpg" style="float:left; width: 120px; height: 120px;">
 			</a>					
 		</div>
 		
@@ -121,7 +130,7 @@ a {
         
             <ul class="menu01">
             
-                <li><span>회사소개</span>
+                <li><a href="https://www.naver.com" target="_self"><span>회사소개</span></a>
                     <ul class="dept01">
                     	<a href="https://www.naver.com" target="_self">
                         	<li id="nop">오시는길</li>
@@ -130,7 +139,7 @@ a {
                         <li id="nop">&nbsp;</li>
                     </ul>
                 </li>
-                <li><span>내 정보</span>
+                <li><a href="https://www.naver.com" target="_self"><span>내 정보</span></a>
                     <ul class="dept01">
                     	<a href="https://www.naver.com" target="_self">
                         	<li id="nop">내 정보 보기</li>
@@ -143,7 +152,7 @@ a {
                         </a>
                     </ul>
                 </li>
-                <li><span>게시판</span>
+                <li><a href="${pageContext.request.contextPath}/BoardList.bo" target="_self"><span>게시판</span></a>
                     <ul class="dept01">
                     	<a href="${pageContext.request.contextPath}/BoardList.bo" target="_self">
                        		<li id="nop">업무 게시판</li>
@@ -155,7 +164,7 @@ a {
                         
                     </ul>
                 </li>
-                <li><span>공유업무</span>
+                <li><a href="${pageContext.request.contextPath}/project_calendarshow.cal" target="_self"><span>공유업무</span></a>
                     <ul class="dept01">
                     	<a href="${pageContext.request.contextPath}/project_calendarshow.cal" target="_self">
                         	<li id="nop">캘린더</li>
@@ -167,7 +176,7 @@ a {
                     </ul>
                 </li>
 				<li>
-					<img src="sjKim/image/boat_icon.png" >
+					<img src="${pageContext.request.contextPath}/sjKim/image/boat_icon.png" >
 					<a href="${pageContext.request.contextPath}/chat.jk" target="_self">
 					<span>대화하기</span>
 					</a>
