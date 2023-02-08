@@ -143,7 +143,54 @@ public class jkKim_MemberDAO {
 	}
 		return result;
 	}
+
+	public jkKim_Member chatIdFind(String id) {
+		Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      jkKim_Member jk = null;
+	      try {
+	         conn = ds.getConnection();
+	         StringBuilder sql = new StringBuilder();
+	         sql.append("select empno,imgsrc from member ");
+	         sql.append("where name = ?");
+	         pstmt = conn.prepareStatement(sql.toString());
+	         pstmt.setString(1, id);
+	         rs = pstmt.executeQuery();
+	         if(rs.next()) {
+	            jk = new jkKim_Member();
+	            jk.setEmpno(rs.getString("empno"));
+	            jk.setImgsrc(rs.getString("imgsrc"));
+	         }
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	         System.out.println("chatIdFind에러");
+	      }finally {
+	         try {
+	            if(rs!=null)
+	               rs.close();
+	         }catch(SQLException se) {
+	            se.printStackTrace();
+	         }try {
+	            if(pstmt!=null)
+	               pstmt.close();
+	         }catch(SQLException se) {
+	            se.printStackTrace();
+	         }try {
+	            if(conn!=null)
+	               conn.close();
+	         }catch(Exception e) {
+	            e.printStackTrace();
+	         }
+	      }
+	      return jk;
+	   }
+
 	
 	
 	
-}
+	}
+	
+
+	
+
