@@ -29,9 +29,6 @@ legend {
 	font-weight: bold
 }
 
-#id{
-	width:30%;	
-} 
 
 #post1 {
 	width: 70%;
@@ -42,16 +39,18 @@ legend {
 }
 
 #id+input{
-	width: 15%;
+	width: 30%;
 	background:#18a8f1;
 	line-height: 10px;
 	vertical-align: bottom;
+	color:white;
 } 
 #post1+input {
 	width: 29%;
 	background:#18a8f1;
 	line-height: 10px;
 	vertical-align: bottom;
+	color:white;
 }
 
 textarea {
@@ -88,7 +87,7 @@ input[type=button]:hover {
 	cursor: pointer
 }
 
-button {
+button, input[id=f_upload] {
 	background-color: #18a8f1;
 	color: white;
 	padding: 14px 20px;
@@ -119,7 +118,7 @@ body {
 
 #myform {
 	background-color: #fefefe;
-	margin: 5% auto 15% auto;
+	margin: 3% auto 5% auto;
 	width: 850px;
 	padding: 16px;
 }
@@ -137,11 +136,32 @@ fieldset{
 	border-color: #18a8f1;
 }
 
-.first_area {
-	display: flex !important;
-	float:left;
+
+.showImage {
+	width:100px;
 }
 
-input[name="memberfile2"]{
-	display: none;
+.top_block1, .top_block2{
+	display:inline-block;	
 }
+
+.top_block1{
+	width: 40%;
+}
+
+.top_block2{
+	float:right;
+	text-align: center;
+	width: 200px;
+}
+
+button[id=f_upload] {
+	width:130px; 
+	background:#18a8f1; 
+	line-height: 10px; 
+	vertical-align: bottom;
+	
+}
+
+
+

@@ -262,13 +262,17 @@ $(document).ready(function() {
     
     
     //프로필사진 업로드
+    
+    
+        
+        
     $('input[type=file]').change(function(event){
 			const inputfile = $(this).val().split('\\');
-			const filename = inputfile[inputfile.length - 1]; //inputfile.length -1 = 2
+			const f_upload = inputfile[inputfile.length - 1]; //inputfile.length -1 = 2
 			
 			const pattern = /(gif|jpg|jpeg|png)$/i; //i(ignore case)는 대소문자 무시를 의미
-			if (pattern.test(filename)){
-				$('#filename').text(filename);
+			if (pattern.test(f_upload)){
+				$('#f_upload').text(f_upload);
 				
 				const reader = new FileReader(); //파일을 읽기 위한 객체 생성
 			
@@ -283,11 +287,16 @@ $(document).ready(function() {
 				};
 			}else{
 				alert('이미지 파일(gif,jpg,jpeg,png)이 아닌 경우는 무시됩니다.');
-				$('#filename').text('');
+				$('#f_upload').text('');
 				$('#showImage > img').attr('src', 'image/profile.png');
 				$(this).val('')
 				$('input[name=check]').val('');
 			}
+			
+			 function onClickUpload() {
+            let myInput = document.getElementById("memberfile");
+            myInput.click();
+        	}
 		})//chage()
 		
 		

@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sjKim.db.MemberDAO;
 
 public class MemberMainAction implements Action {
 	
