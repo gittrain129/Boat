@@ -64,8 +64,8 @@
         </div>
         
         <!-- css필요 -->
-         <c:if test="${boarddata.FILE_RE_LEV==0}">
-		  <%-- 원문글인 경우에만 첨부파일을 추가 할 수 있습니다. --%>
+       <%--  <c:if test="${boarddata.FILE_RE_LEV==0}">
+		   원문글인 경우에만 첨부파일을 추가 할 수 있습니다. --%>
 		   <div class="filedown">
 		   첨부파일
 		   <br>
@@ -100,7 +100,7 @@
 			</dl>
 		  </c:if>
 		 </div><%--div class filedown끝 --%>
-		  </c:if>
+		 <%-- </c:if>--%>
      
         </div>
         <div class="bt_wrap">
@@ -132,7 +132,7 @@
 	      
 	        <!-- Modal body -->
 	        <div class="modal-body">
-			  <form name="deleteForm" action="BoardDeleteAction.bo" method="post">
+			  <form name="deleteForm" action="FileBoardDeleteAction.filebo" method="post">
 			  <%-- http://localhost:8088/Board/boardDetailACtion.bo?num=22
 			  	주소를 보면 num 을 파라미터로 너미고 있습니다.
 			  	이 값을 가져와서 ${param.num}를 사용 또는 ${boarddata.board_num} --%>
@@ -152,7 +152,7 @@
 		</div>
 <%--id="myModal"end --%>
 
-
+<div class="comment">
  <section class="mb-5">
                         <div class="card bg-light">
                             <div class="card-body">
@@ -195,7 +195,9 @@
                         </div>
                     </section>
 <%-- class="card bg-light">end --%>
+</div><%-- class="comment end --%>
         </div>
+        
          <jsp:include page="/sjKim/boat/footer.jsp" />
 </body>
 </html>

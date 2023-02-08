@@ -7,7 +7,7 @@
 <head>
  	<jsp:include page="/sjKim/boat/header.jsp" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  	<%--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> --%>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="jhLee/css/writeform.css">
 
@@ -36,19 +36,9 @@
  		class="form-control" placeholder="비밀번호를 입력하세요">
     </div>
 
-  <div class="dropdown">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-      Dropdown button
-    </button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Link 1</a>
-      <a class="dropdown-item" href="#">Link 2</a>
-      <a class="dropdown-item" href="#">Link 3</a>
-    </div>
-  </div>
     <div class="form-group">
         <label>글쓴이</label><br>
-        <div class="btn-group" id = "deptsel">
+        <div class="btn-group" id = "">
             <button type="button" class="btn btn-secondary" id ="deptsel" >부서</button>
             <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" id = "deptbutton">
             </button>
