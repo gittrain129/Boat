@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
  <head>
+  <script src="${pageContext.request.contextPath}/ejYang/js/view.js"></script><%-- 댓글 --%>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <link href="${pageContext.request.contextPath}/ejYang/css/view.css" type="text/css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
@@ -50,6 +51,41 @@
  	  		<div class="form-control"><c:out value="${boarddata.board_content}" escapeXml="false" /></div>
  	  		</td>
  	  	  </tr>
+        </tbody>
+      </table>
+      
+      
+      <%-- 댓글 시작 --%>
+      <div class="comment-area">
+      	<div class="comment-head">
+      	  <h3 class="comment-count">
+      	  	댓글 <sup id="count"></sup><%-- superscript(윗첨자) --%>
+      	  </h3>
+      	  <h3 class="comment-order">
+      	  	<ul class="comment-order-list">
+      	  	</ul>
+      	  </h3>
+      	</div><%-- comment-head end --%>
+      	<ul class="comment-list">
+      	</ul>
+      	<div class="comment-write">
+      	  <div class="comment-write-area">
+      	  	<b class="comment-write-area-name">${id}</b>
+      	  	<span class="comment-write-area-count">0/200</span>
+      	  	<textarea placeholder="댓글을 남겨보세요" rows="1" 
+      	  			  class="comment-write-area-text" maxLength="200"></textarea>
+      	  </div>
+      	  <div class="register-box">
+      	  	<div class="button btn-cancle">취소</div><%-- 댓글의 취소는 display:none, 등록만 보이도록 합니다. --%>
+      	  	<div class="button btn-register">등록</div>
+      	  </div>
+      	</div>
+      </div>
+      <%-- 댓글 끝 --%>
+      
+      
+      <table class="table">
+      	<thead>
           <tr>
  	  		<td colspan="4" class="center">
  	  		  <a href="BoardList.bo">
@@ -118,6 +154,9 @@
       	</div>
       </div>
     <%-- id="myModal" end --%>
+    
+    
+    
   </div>
   <jsp:include page="/sjKim/boat/footer.jsp" />
  </body>
