@@ -122,6 +122,8 @@ function ajax(sdata){
    })//ajax end
 }//function ajax end
 
+//켜질때 데이터 받아오는 쿼리로
+
 
 
 
@@ -142,6 +144,7 @@ $(function(){
       go(1); //보여줄 페이지를 1페이지로 설정
    });
    
+
   
 });
 

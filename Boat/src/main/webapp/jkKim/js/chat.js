@@ -1,168 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>BoaTalk</title>
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+function getId(signal){
+	const data = `state=ajax`;
 	
-
-<style>
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
 }
 
-#whole-chat-box{
-width:100%;
-background-color: #A8C0D6;
+$(function(){
+	   $(window).on("load",function(){
+		alert('ㅎㅇ');
+		
+		 		
+                initialize();
+		
+		
+})
+});
 
-
- display:flex;
-
-    flex-direction: column-reverse;
-
-    overflow-y:auto;
-
-    height:500px;
-    
-    
-
-}
-
-
-sage {
-    padding: 40px 0;
-    
-    background-color: #A8C0D6;
-}
-#message{
-	width:460px;
-}
-.message .chat {
-    display: flex;
-    align-items: flex-start;
-    padding: 20px;
-}
-
-.message .chat .icon {
-    position: relative;
-    overflow: hidden;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #eee;
-}
-
-.message .chat .icon i {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    font-size: 2.5rem;
-    color: #aaa;
-    transform: translateX(-50%);
-}
-
-.message .chat .textbox {
-    position: relative;
-    display: inline-block;
-    max-width: calc(100% - 70px);
-    padding: 10px;
-    margin-top: 7px;
-    font-size: 13px;
-    border-radius: 10px;
-}
-
-.message .chat .textbox::before {
-    position: absolute;
-    display: block;
-    top: 0;
-    font-size: 1.5rem;
-}
-
-.message .ch1 .textbox {
-    margin-left: 20px;
-    background-color: #ddd;
-}
-
-.message .ch1 .textbox::before {
-    left: -15px;
-    content: "◀";
-    color: #ddd;
-}
-
-.message .ch2 {
-    flex-direction: row-reverse;
-}
-
-.message .ch2 .textbox {
-    margin-right: 20px;
-    background-color: #F9EB54;
-}
-
-.message .ch2 .textbox::before {
-    right: -15px;
-    content: "▶";
-    color: #F9EB54;
-}
-</style>
-
-</head>
-<body>
-     
-     <table class="display" id="whole-chat-box">
-           <tr>
-           <td>
-		<div class="message" id="message">
-        		<div class="chat ch1">
-            		<div class="icon"><i class="fa-solid fa-user"></i></div>
-            		<div class="textbox" id="your_box">안녕하세요.</div>
-        			</div>
-        		<div class="chat ch2">
-            		<div class="icon"><i class="fa-solid fa-user"></i></div>
-            		<div class="textbox" id="my_box">안녕하세요</div>
-        		</div>
-        		
-		</div>
-		</td>		
-        </tr>
-         <tr>
-                <td>
-                    <input type="text" id="sendMessageBox" placeholder="Enter a message..."  />
-                    <button type="button" id="sendButton">전송</button>
-                    <button type="button" id="clearMsgsButton">리셋</button>
-                  
-                    
-                </td>
-         </tr>
-         <tr>
-         <td>
-               <div id="receiver-id" style="font-weight: bold;" title="Copy this ID to the input on send.html.">ID:</div>
-         </td>
-           
-         </tr>
-         <tr>
-         <td><div id="status" class="status"></div></td>
-         </tr>
-         
-     </table>
-      
-  <jsp:include page="/jkKim/chat_footer.jsp" /> 
-   
- 
-     
- 
-     <script type="text/javascript">
-     
-     
-            (function () {
-
-                var lastPeerId = null;
+var lastPeerId = null;
                 var peer = null; // Own peer object
                 var peerId = null;
                 var conn = null;
@@ -176,18 +28,14 @@ sage {
                 var sendMessageBox = document.getElementById("sendMessageBox");
                 var sendButton = document.getElementById("sendButton");
                 var clearMsgsButton = document.getElementById("clearMsgsButton");
-                
-                 var idid = "${idid.empno}";     
-                 
-                
-               
-                
-                 function initialize(id) {
+
+
+
+function initialize() {
                     
-                    peer = new Peer(id, {
+                    peer = new Peer('jkKim', {
                         debug: 2
                     });
-                    
                     
 					
 					
@@ -237,10 +85,11 @@ sage {
                         console.log(err);
                         alert('' + err);
                     });
-                };
+                }; //initialize end
+
 
                
-                function ready() {
+function ready() {
                     conn.on('data', function (data) {
                         addyourMessage("<span class=\"peerMsg\">Peer:</span> " + data);
                     });
@@ -248,11 +97,11 @@ sage {
                         status.innerHTML = "Connection reset<br>Awaiting connection...";
                         conn = null;
                     });
-                }
+                } //reday() end
 
                 
 
-                function addMessage(msg) {
+function addMessage(msg) {
                     var now = new Date();
                     var h = now.getHours();
                     var m = addZero(now.getMinutes());
@@ -272,11 +121,13 @@ sage {
                     //message.innerHTML = ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" +msg + message.innerHTML +"</div>");
                     message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
                    
-                }
+                } //addmessage() end
 
                 
+                
+                
                 //다른사람 채팅창용 펑션
-                function addyourMessage(msg) {
+function addyourMessage(msg) {
                     var now = new Date();
                     var h = now.getHours();
                     var m = addZero(now.getMinutes());
@@ -296,28 +147,15 @@ sage {
                     //message.innerHTML = ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" +msg + message.innerHTML +"</div>");
                     message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
                     
-                }
+                } //addyourmessage(end)
                 
-                /* 추가할지말지
+                 
                 
-                function autoScroll(){
-                						
-                	var offset = $('#message > div:nth-child(2n) > div.textbox').last().find('span').offset();
-                	$('#message').animate({
-                		scrollTop : offset.top
-                	}, 400);
-                }
-                */
-                
-                
-                
-                
-                
-                function clearMessages() {
+function clearMessages() {
                 	message.innerHTML = "";
                     history.go(0);
                     
-                }
+                } //clear messages end
                 
             
                 
@@ -347,15 +185,5 @@ sage {
 				
               
                 	
-                initialize(idid);
-            })();
-        </script>
 
-     
-     
-     
-     
-     
-     
-</body>
-</html>
+
