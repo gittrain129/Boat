@@ -11,6 +11,8 @@ F_COMMENT_RE_SEQ number(1),
 F_COMMENT_RE_REF number(1) 
 );
 
+create sequence filecom nocache;
+
 create table file_board (
 	FILE_NUM NUMBER(5) primary key,
 	FILE_NAME VARCHAR2(30), 

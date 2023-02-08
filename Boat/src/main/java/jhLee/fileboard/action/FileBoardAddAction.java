@@ -39,8 +39,7 @@ public class FileBoardAddAction implements Action {
 					"utf-8",
 					new DefaultFileRenamePolicy()
 					);
-//230204file 업로드진행필요
-			//jsp name="" 맞춰야함
+			
 			Filedata.setFILE_NAME(multi.getParameter("board_name"));
 			Filedata.setFILE_PASS(Integer.parseInt(multi.getParameter("board_pass")));
 			Filedata.setFILE_SUBJECT(multi.getParameter("board_subject"));

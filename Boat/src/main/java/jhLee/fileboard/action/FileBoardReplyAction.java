@@ -42,11 +42,11 @@ public class FileBoardReplyAction implements Action {
 					);
 			
 		int result = 0;
-		System.out.println(request.getParameter("board_pass"));
-		filebo.setFILE_NAME(request.getParameter("board_name"));
-		filebo.setFILE_PASS(Integer.parseInt(request.getParameter("board_pass").trim()));
-		filebo.setFILE_SUBJECT(request.getParameter("board_subject"));
-		filebo.setFILE_CONTENT(request.getParameter("board_content"));
+		System.out.println(multi.getParameter("board_pass"));
+		filebo.setFILE_NAME(multi.getParameter("board_name"));
+		filebo.setFILE_PASS(Integer.parseInt(multi.getParameter("board_pass").trim()));
+		filebo.setFILE_SUBJECT(multi.getParameter("board_subject"));
+		filebo.setFILE_CONTENT(multi.getParameter("board_content"));
 		
 		String filename = multi.getFilesystemName("board_file");
 		filebo.setFILE_FILE(filename);
@@ -54,10 +54,10 @@ public class FileBoardReplyAction implements Action {
 		String filename2 = multi.getFilesystemName("board_file2");
 		filebo.setFILE_FILE2(filename2);
 		
-		filebo.setFILE_RE_REF(Integer.parseInt(request.getParameter("board_re_ref")));
-		filebo.setFILE_RE_LEV(Integer.parseInt(request.getParameter("board_re_lev")));
-		filebo.setFILE_RE_SEQ(Integer.parseInt(request.getParameter("board_re_seq")));
-		filebo.setDEPT(request.getParameter("dept"));
+		filebo.setFILE_RE_REF(Integer.parseInt(multi.getParameter("board_re_ref")));
+		filebo.setFILE_RE_LEV(Integer.parseInt(multi.getParameter("board_re_lev")));
+		filebo.setFILE_RE_SEQ(Integer.parseInt(multi.getParameter("board_re_seq")));
+		filebo.setDEPT(multi.getParameter("dept"));
 		
 		result = filedao.fileboReply(filebo);
 		

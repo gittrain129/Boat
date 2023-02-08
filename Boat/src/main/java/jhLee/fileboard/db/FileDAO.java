@@ -359,7 +359,7 @@ public class FileDAO {
 			rs=pstmt.executeQuery();
 
 				if(rs.next()) {
-					if(pass.equals(rs.getString("BOARD_PASS"))) {
+					if(pass.equals(rs.getString("FILE_PASS"))) {
 						result = true;
 					}
 				}
@@ -644,8 +644,8 @@ public class FileDAO {
 			sql = "insert into file_board"
 					+ "(FILE_NUM,FILE_NAME,FILE_PASS,FILE_SUBJECT,"
 					+ "FILE_CONTENT, FILE_FILE,FILE_FILE2, FILE_RE_REF,"
-					+ "FILE_RE_LEV, FILE_RE_SEQ, FILE_READCOUNT,DEPT) "
-					+ "values( "+num+",?,?,?,?,?,?,?,?,?,?,?)";
+					+ "FILE_RE_LEV, FILE_RE_SEQ, FILE_READCOUNT,DEPT,FILE_DATE) "
+					+ "values( "+num+",?,?,?,?,?,?,?,?,?,?,?,sysdate)";
 					
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, filebo.getFILE_NAME());// 이름
@@ -694,6 +694,83 @@ public class FileDAO {
 				}
 			}
 		return num;
+	}
+	public boolean fileboardDelete(int num) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null,pstmt2 = null;
+		ResultSet rs = null;
+		String select_sql ="select FILE_RE_REF,FILE_RE_LEV,FILE_RE_SEQ "
+						+ "from file_board "
+						+ "where FILE_NUM = ? ";
+				
+		String board_delete_sql = "delete from file_board "
+							+ "where FILE_RE_REF = ? "
+							+ "and FILE_RE_LEV >=? "
+							+ "and FILE_RE_SEQ>=? "
+							+ "and FILE_RE_SEQ <=(  "
+							+ " 					nvl((select min(FILE_RE_SEQ) -1 "
+							+ "					  from file_board "
+							+ "					  where FILE_RE_REF = ? "
+							+ "					  and FILE_RE_LEV = ? "
+							+ "					  and FILE_RE_SEQ >?),"
+							+ "					(select max(FILE_RE_SEQ)"
+							+ "			  		from file_board"
+							+ "			 		 where FILE_RE_REF = ?)))";
+		
+		boolean result_check = false;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(select_sql);
+			pstmt.setInt(1, num);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				pstmt2=con.prepareStatement(board_delete_sql);
+				pstmt2.setInt(1, rs.getInt("FILE_RE_REF"));
+				pstmt2.setInt(2, rs.getInt("FILE_RE_LEV"));
+				pstmt2.setInt(3, rs.getInt("FILE_RE_SEQ"));
+				pstmt2.setInt(4, rs.getInt("FILE_RE_REF"));
+				pstmt2.setInt(5, rs.getInt("FILE_RE_LEV"));
+				pstmt2.setInt(6, rs.getInt("FILE_RE_SEQ"));
+				pstmt2.setInt(7, rs.getInt("FILE_RE_REF"));
+			
+				int count=pstmt2.executeUpdate();
+				if(count>=1)
+					result_check=true;//삭제가 안된 경우에는false반환
+			}
+			
+			
+		}catch(Exception ex) {
+			System.out.println("fileboardDelete()에러:"+ex);
+			
+		}finally {
+			if(rs!=null)
+				try {rs.close();
+				}catch(SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (pstmt!= null)
+				try {
+					pstmt.close();
+					pstmt2.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			if(pstmt2!= null)
+				try {
+				pstmt2.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		return result_check;
 	}
 
 
