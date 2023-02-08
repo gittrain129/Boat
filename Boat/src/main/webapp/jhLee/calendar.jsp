@@ -1,14 +1,3 @@
-
-<%--
-http://localhost:8089/Boat/jhLee/calendar.jsp
-
-http://localhost:8089/Boat/project_calendarallSave.cal
-
-http://localhost:8089/Boat/project_calendarallSave.cal
-http://localhost:8089/Boat/project_calendarallSave.cal
-
-
- --%>
  
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -20,10 +9,6 @@ http://localhost:8089/Boat/project_calendarallSave.cal
  
   <meta charset='utf-8' />
   <!-- 화면 해상도에 따라 글자 크기 대응(모바일 대응) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <!-- jquery CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-
   <!-- fullcalendar CDN -->
   
   <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />

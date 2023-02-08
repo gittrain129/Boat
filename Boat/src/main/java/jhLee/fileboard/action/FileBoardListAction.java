@@ -25,31 +25,38 @@ public class FileBoardListAction implements Action {
 			throws ServletException, IOException {
 	FileDAO boarddao = new FileDAO();
 	List<FileboBean> filebolist = new ArrayList<FileboBean>();
-	int filelicount = boarddao.getListcount();
-	
+	int listcount = boarddao.getListcount();
 
 	int page = 1;
 	int limit = 10; 
 	
 	
-	
 	String state = request.getParameter("state");
-	state ="ajax";
+	//state ="ajax";
 	System.out.println("state="+state);
 	
-	int listcount = boarddao.getListcount();
+	
 	System.out.println("글의 갯수는 = "+ listcount);
+
 	filebolist = boarddao.getfileBoardList(page,limit);
+	
 	int maxpage = (listcount+limit -1)/limit;
 	System.out.println("총페이지수 = "+ maxpage);
 		
 	int startpage = ((page-1)/10)*10+1;
 	
 	int endpage = startpage+10-1;
+	System.out.println("endpage= "+maxpage);
 	
 	if(endpage>maxpage)
 		endpage = maxpage;
 	
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar cal = Calendar.getInstance();
+    cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
+    String nowday = format.format(cal.getTime());
+       
+    
 	
 	
 	if(state ==null) {
@@ -75,7 +82,34 @@ public class FileBoardListAction implements Action {
 					//int depthidden =  Integer.parseInt(request.getParameter("dept"));
 						//널이면 위에서 했는디... 널이아니면 ajax를 사용해서 값을 변경해서 filelist에 담기
 					    
-
+		System.out.println("state ==null");
+		request.setAttribute("page", page);//현재 페이지 수 
+		request.setAttribute("maxpage", maxpage);
+		
+		//현재 페이지에 표시할 첫 페이지 수 
+		request.setAttribute("startpage", startpage);
+		request.setAttribute("endpage", endpage);
+		
+		//현제 페이지에 표시할 끝 페이지 수 
+		request.setAttribute("listcount", listcount);
+		
+		//해당 페이지의 글 목록을 갖고 있는 리스트
+		request.setAttribute("boardlist", filebolist);
+		
+		request.setAttribute("limit", limit);
+		ActionForward forward = new ActionForward();
+		forward.setRedirect(false);
+		
+	
+     
+        System.out.println("nowday=" + nowday);
+        request.setAttribute("nowday",nowday);
+        
+		
+		//글 목록 페이지로 이동하기 위해 경로 를 설정합니다.
+		forward.setPath("/jhLee/file_board/File_bo_List.jsp");
+		System.out.println(filebolist);
+		return forward;//BoardFrontController.java 로 리턴됩니다.
 	
 	
 	}else {
@@ -98,10 +132,23 @@ public class FileBoardListAction implements Action {
 	    System.out.println("searchsel "+searchsel);
 	    System.out.println("searchinput "+searchinput);
 
-		
-		filelicount = boarddao.getListcount(dept,searchsel,searchinput,order);
-		 filebolist = boarddao.getList(dept,searchsel,searchinput,order,page,limit); 
+	    listcount = boarddao.getListcount();
+	    filebolist = boarddao.getfileBoardList(page,limit);
+	    //listcount = boarddao.getListcount(dept,searchsel,searchinput,order);
+		// filebolist = boarddao.getList(dept,searchsel,searchinput,order,page,limit); 
 		 
+		 
+		 maxpage = (listcount+limit -1)/limit;
+			System.out.println("총페이지수 = "+ maxpage);
+				
+			 startpage = ((page-1)/10)*10+1;
+			
+			 endpage = startpage+10-1;
+			System.out.println("endpage= "+maxpage);
+			
+			if(endpage>maxpage)
+				endpage = maxpage;
+			
 		//위에서 request로 담았던 것을 JsogObject에 담습니다.
 		JsonObject object = new JsonObject();
 		
@@ -117,7 +164,8 @@ public class FileBoardListAction implements Action {
 		object.addProperty("endpage", endpage);
 		object.addProperty("listcount",listcount);
 		object.addProperty("limit", limit);
-		
+	System.out.println("11111111"+nowday);
+		object.addProperty("nowday",nowday);
 		
 		//ㅣList => JsonElement
 		JsonElement je = new Gson().toJsonTree(filebolist);
@@ -131,40 +179,7 @@ public class FileBoardListAction implements Action {
 		return null;
 	}//else end
 		
-		System.out.println("state ==null");
-		request.setAttribute("page", page);//현재 페이지 수 
-		request.setAttribute("maxpage", maxpage);
 		
-		//현재 페이지에 표시할 첫 페이지 수 
-		request.setAttribute("startpage", startpage);
-		request.setAttribute("endpage", endpage);
-		
-		//현제 페이지에 표시할 끝 페이지 수 
-		request.setAttribute("listcount", listcount);
-		
-		//해당 페이지의 글 목록을 갖고 있는 리스트
-		request.setAttribute("boardlist", filebolist);
-		
-		request.setAttribute("limit", limit);
-		ActionForward forward = new ActionForward();
-		forward.setRedirect(false);
-		
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
-        String nowday = format.format(cal.getTime());
-           
-        
-     
-        System.out.println("nowday=" + nowday);
-        request.setAttribute("nowday",nowday);
-        
-		
-		//글 목록 페이지로 이동하기 위해 경로 를 설정합니다.
-		forward.setPath("/jhLee/file_board/File_bo_List.jsp");
-		System.out.println(filebolist);
-		return forward;//BoardFrontController.java 로 리턴됩니다.
-	//댓글 ajax
 	
 }//execute end
 

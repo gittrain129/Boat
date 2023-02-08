@@ -9,6 +9,9 @@ http://localhost:8088/Boat/FileBoardList.filebo
 <!DOCTYPE html>
 <html lang="en">
 <head> 
+	  <jsp:include page="/sjKim/boat/header.jsp" />
+	  
+	  
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,21 +20,16 @@ http://localhost:8088/Boat/FileBoardList.filebo
     <title>자료게시판 목록보기</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
- 
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<%--moment lib --%>
+ 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script> 
 	
 	<script src="${pageContext.request.contextPath}/jhLee/js/filelist.js"></script>
 	
 	
-	  <jsp:include page="/sjKim/boat/header.jsp" />
+
 	  <head>
 
 
@@ -54,6 +52,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
 							</c:url>
        <div>
    <div>
+     <label>
    <div class = 'search'>
       
         
@@ -73,10 +72,12 @@ http://localhost:8088/Boat/FileBoardList.filebo
                 
             </div>
         </div>     
+      
           <input class ="search" type="text" name="searchinput" id = "searchinput" >
           <button type="button" class = "searchbutton search" id="searhcbtn2" onclick="submit();">
         	<img src="${pageContext.request.contextPath}/jhLee/image/2.png"  class ="searchimg">
         </button>
+        </label>
         </div>
 
         <table class="File_board_list">
@@ -111,7 +112,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
 					
 					<td><%--제목 --%>
 					
-					<div class="num">
+					<div class="title">
 						<c:if test ="${b.FILE_RE_LEV !=0}"><%--답글인 경우 --%>
 			
 							<c:forEach var ="a" begin="0" end="${b.FILE_RE_LEV*2}" step="1">
@@ -233,11 +234,11 @@ http://localhost:8088/Boat/FileBoardList.filebo
         </button>
    
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="FileBoardList.filebo&dept=10">홍보팀</a>
-            <a class="dropdown-item" href="FileBoardList.filebo&dept=20">개발팀</a>
-            <a class="dropdown-item" href="FileBoardList.filebo&dept=30">인사팀</a>
-            <a class="dropdown-item" href="FileBoardList.filebo&dept=40">기획팀</a>
-            <a class="dropdown-item" href="FileBoardList.filebo&dept=50">영업팀</a>
+            <a class="dropdown-item" href="FileBoardList.filebo">홍보팀</a>
+            <a class="dropdown-item" href="FileBoardList.filebo">개발팀</a>
+            <a class="dropdown-item" href="FileBoardList.filebo">인사팀</a>
+            <a class="dropdown-item" href="FileBoardList.filebo">기획팀</a>
+            <a class="dropdown-item" href="FileBoardList.filebo">영업팀</a>
         </div>
     </div>
             <input name = "order" type ="hidden" id = "orderval">
@@ -247,9 +248,9 @@ http://localhost:8088/Boat/FileBoardList.filebo
             </button>
             
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="FileBoardList.filebo&order=desc">최신순</a>
-                <a class="dropdown-item" href="FileBoardList.filebo&order=desc">조회순</a>
-                <a class="dropdown-item" href="FileBoardList.filebo&order=desc">댓글순</a>
+                <a class="dropdown-item" href="FileBoardList.filebo">최신순</a>
+                <a class="dropdown-item" href="FileBoardList.filebo">조회순</a>
+                <a class="dropdown-item" href="FileBoardList.filebo">댓글순</a>
             </div>
         </div>
 		<button type="button" class="btn btn-info float-right" id = "write">글 쓰 기</button>
