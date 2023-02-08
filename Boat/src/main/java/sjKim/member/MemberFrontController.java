@@ -41,13 +41,13 @@ public class MemberFrontController extends javax.servlet.http.HttpServlet {
 			case "/mainPage.net":
 				action = new MemberMainAction();
 				break;
-		/*	case "/login.net":
+			case "/login.net":
 				action = new MemberLoginAction();
 				break;
 			case "/join.net":
 				action = new MemberJoinAction();
 				break;
-			case "/idcheck.net":
+	/*		case "/idcheck.net":
 				action = new MemberIdCheckAction();
 				break;
 			case "/joinProcess.net":

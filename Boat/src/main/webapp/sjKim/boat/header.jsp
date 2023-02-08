@@ -94,12 +94,14 @@ li {
 	margin-top: 62px;
 	display:flex;
 	width:270px;	
+	text-decoration: none;
+	color: black;
 }
 
 .login_header > div {
 	padding:7px;
 	font-size: 16px;
-	font-weight: bold
+	font-weight: bold;
 }
 
 .menu01 a {
@@ -118,15 +120,27 @@ li {
 
 .logo{z-index: 1}
 
+.login_header > .dropdown_inout {
+			display: inline-block;
+            background: none;
+            border-radius: 10px;
+            border: black;
+}
 
-
+.login_header > .dropdown_inout select{				
+				border-radius: 10px;
+				background-color: #f5de16;
+                color:black;
+                font-weight: 500;
+                text-align-last: center;             
+}
 
 </style>
 
 <script src="${pageContext.request.contextPath}/sjKim/js/header.js"></script>
 
  		<div class="logo">       		
-			<a href="">
+			<a href="http://localhost:8088/Boat/index.jsp">
 				<img src="${pageContext.request.contextPath}/sjKim/image/main_logo.jpg" style="float:left; width: 120px; height: 120px;">
 			</a>					
 		</div>
@@ -197,12 +211,12 @@ li {
         
         <div class="login_header">	
         	<div class="login_button">
-        	<a href="https://www.naver.com" target="_black">
+        	<a href="${pageContext.request.contextPath}/login.net" target="_self">
 				<span>로그인</span>	
 			</a>
 			</div>
 			<div class="join_button">
-        	<a href="https://www.naver.com" target="_black">
+        	<a href="${pageContext.request.contextPath}/join.net" target="_self">
 				<span>회원가입</span>	
 			</a>
 			</div>
