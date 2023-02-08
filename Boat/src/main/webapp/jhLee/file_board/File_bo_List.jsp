@@ -6,7 +6,6 @@ http://localhost:8088/Boat/FileBoardList.filebo
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   
-    <!--/Boat/src/main/webapp/sjKim/boat/header.jsp  -->
 <!DOCTYPE html>
 <html lang="en">
 <head> 
@@ -18,12 +17,14 @@ http://localhost:8088/Boat/FileBoardList.filebo
     <title>자료게시판 목록보기</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+ 
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	
@@ -31,6 +32,10 @@ http://localhost:8088/Boat/FileBoardList.filebo
 	
 	
 	  <jsp:include page="/sjKim/boat/header.jsp" />
+	  <head>
+
+
+</head>
 </head>
 <body>
     <div class="container">
@@ -40,11 +45,14 @@ http://localhost:8088/Boat/FileBoardList.filebo
             <p>자료실 게시판 입니다.</p>
 
         </div>
-       
+       <div>
+   <div>
+   <div class = 'search'>
+      
         
-        <input class ="search" type="text">
+
         <div class="btn-group search">
-              <input type="hidden" name = "search" id = "searchval">
+              <input type="hidden" name = "searchsel" id = "searcselhval">
             <button type="button" class="btn btn-secondary" id = 'search'>검색옵션</button>
             <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" id = "searchbtn">
             </button>
@@ -55,7 +63,13 @@ http://localhost:8088/Boat/FileBoardList.filebo
                 
                 <a class="dropdown-item" href="#" >제목
                 </a>
+                
             </div>
+        </div>     
+          <input class ="search" type="text" name="searchinput" id = "searchinput" >
+          <button type="button" class = "searchbutton search" id="searhcbtn2" onclick="submit();">
+        	<img src="${pageContext.request.contextPath}/jhLee/image/2.png"  class ="searchimg">
+        </button>
         </div>
 
         <table class="File_board_list">
@@ -202,15 +216,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
 	<c:if test="${listcount==0}">
 		<h3 style="text-align: center">등록된 글이 없습니다.</h3>
 	</c:if>
-		   <!-- <div class="bt_wrap">
-            <div class="form-group">
-                <select class="form-control" id="sel1" name="sellist1">
-                <option value="">최신순 </option>
-                <option value="">조회순 </option>
-                <option value="">댓글순 </option>
-            </select>
-        </div>
-    </div> -->
+		
     <div class="btntwo">
  
         <input name = "dept" type ="hidden" id = "deptval">
@@ -220,11 +226,11 @@ http://localhost:8088/Boat/FileBoardList.filebo
         </button>
    
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">홍보팀</a>
-            <a class="dropdown-item" href="#">개발팀</a>
-            <a class="dropdown-item" href="#">인사팀</a>
-            <a class="dropdown-item" href="#">기획팀</a>
-            <a class="dropdown-item" href="#">영업팀</a>
+            <a class="dropdown-item" href="FileBoardList.filebo&dept=10">홍보팀</a>
+            <a class="dropdown-item" href="FileBoardList.filebo&dept=20">개발팀</a>
+            <a class="dropdown-item" href="FileBoardList.filebo&dept=30">인사팀</a>
+            <a class="dropdown-item" href="FileBoardList.filebo&dept=40">기획팀</a>
+            <a class="dropdown-item" href="FileBoardList.filebo&dept=50">영업팀</a>
         </div>
     </div>
             <input name = "order" type ="hidden" id = "orderval">
@@ -234,15 +240,17 @@ http://localhost:8088/Boat/FileBoardList.filebo
             </button>
             
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">최신순</a>
-                <a class="dropdown-item" href="#">조회순</a>
-                <a class="dropdown-item" href="#">댓글순</a>
+                <a class="dropdown-item" href="FileBoardList.filebo&order=desc">최신순</a>
+                <a class="dropdown-item" href="FileBoardList.filebo&order=desc">조회순</a>
+                <a class="dropdown-item" href="FileBoardList.filebo&order=desc">댓글순</a>
             </div>
         </div>
-		<button type="button" class="btn btn-info float-right">글 쓰 기</button>
+		<button type="button" class="btn btn-info float-right" id = "write">글 쓰 기</button>
 		</div><%-- btntwoend --%>
 
 		</div>   
+ </div>
+ </div>
  </div>
  <script>
 	

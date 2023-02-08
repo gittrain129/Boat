@@ -47,9 +47,10 @@
 
 /* 달력 감싸기 (드래그이벤트 포함)  */
   #cal_wrap {
-  margin-top: 20%;
+  margin-top: 10%;
     margin-left: 200px;
-       max-width: 600px; 
+    margin-bottom : 100px;
+       max-width: 1100px; 
   }
  
   #calendar {

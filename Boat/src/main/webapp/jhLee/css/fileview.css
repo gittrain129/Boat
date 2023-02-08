@@ -1,11 +1,7 @@
-@charset "utf-8";*{
-     margin-top: 20%;
-    padding: 0;
-}
+@charset "utf-8";
 
-html{
-    font-size: 10px;
-}
+
+
 
 ul,li{
     list-style: none;
@@ -18,25 +14,27 @@ a{
 
 .board_wrap{
     width : 1000px;
-    margin:100px auto;
+    margin:200px auto;
+    padding : 50px;
+	 
 }
 
 .board_title{
     margin-bottom: 30px;
 }
 .board_title strong{
-    font-size: 3rem;
+    font-size: 33.6px
 }
 
 .board_title p{
     margin-top: 5px;
-    font-size: 1.4rem;
+    font-size: 14px;
 }
 .filedown{
 	border-bottom: 2px solid black;
 	background-color :rgb(238,247,250) ;
 	min-height : 50px;
-	font-size : 1.4rem;
+	font-size :14px;
 	padding : 20px;
 }
 
@@ -52,7 +50,7 @@ a{
     padding: 10px;
     border: 1px solid black;
     border-radius: 2px;
-    font-size: 1.4rem;
+    font-size: 14px;
     
 }
 .bt_wrap a:first-child {
@@ -88,7 +86,7 @@ a:hover{
 .board_view .title{
     padding: 20px 15px;
     border-bottom : 1px dashed #ddd;
-    font-size : 2rem;
+    font-size : 20px;
 }
 .board_view .info{
     padding : 15px; 
@@ -120,7 +118,7 @@ padding-left: 0;
 .board_view .info dl, dt,
 .board_view .info dl, dd{
 display : inline-block;
-font-size: 1.4rem;
+font-size: 14px;
 }
 .board_view .info dl, dd{
 
@@ -128,10 +126,10 @@ font-size: 1.4rem;
     color : #777
 }
 .board_view .content{
-	font-size:1.4rem;
+	font-size:14px;
     padding: 15px;
     border-bottom: 1px solid black;
-    	min-height:454px;
+    	min-height:354px;
 }
 .board_view .info dl:first-child{
 	margin-left: 400px
