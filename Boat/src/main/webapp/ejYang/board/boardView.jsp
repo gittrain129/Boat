@@ -28,10 +28,11 @@
       	<thead>
           <tr>
           	<th scope="col" class="th-num">제목</th>
-          	<th scope="col" class="th-num2"><div id="bname">${boarddata.board_subject}</div></th>
+          	<th scope="col" class="th-num2" colspan="2"><div id="bname">${boarddata.board_subject}</div></th>
             <th scope="col" class="th-title">${boarddata.board_date}</th>
           </tr>
           <tr>
+            <td class="th-count1"></td>
             <td class="th-count1"></td>
             <td class="th-count2">
             	부서명&nbsp;:&nbsp;${boarddata.board_dept}&emsp;&emsp;작성자&nbsp;:&nbsp;${boarddata.board_name}
@@ -45,12 +46,12 @@
         </thead>
         <tbody>
           <tr>
- 	  		<td colspan="3" style="padding-right: 0px">
+ 	  		<td colspan="4" style="padding-right: 0px">
  	  		<div class="form-control"><c:out value="${boarddata.board_content}" escapeXml="false" /></div>
  	  		</td>
  	  	  </tr>
           <tr>
- 	  		<td colspan="3" class="center">
+ 	  		<td colspan="4" class="center">
  	  		  <a href="BoardList.bo">
  	  	  	  	<button class="btn btn-warning">목록</button>
  	  	  	  </a>
@@ -65,7 +66,7 @@
  	  	  	  	<button class="btn btn-danger" data-toggle="modal"
  	  	  	  			data-target="#myModal">삭제</button>
  	  	  	  </a>
- 	  	  </td>
+ 	  	    </td>
  	  	  </tr>
  	  	    <td colspan="2" class="center2">
  	  	      <c:if test="${prevdata.board_subject != null}">
@@ -78,7 +79,7 @@
  	  	  	  <button class="btn gray1">이전글</button>
  	  	  	  </c:if>
  	  	    </td>
- 	  	    <td class="center3">
+ 	  	    <td colspan="2" class="center3">
  	  	      <c:if test="${nextdata.board_subject != null}">
  	  	  	  <a href="BoardDetailAction.bo?num=${nextdata.board_num}">
  	  	  	  	${nextdata.board_subject}

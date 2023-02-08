@@ -1,0 +1,19 @@
+drop table MYINFO cascade constraints purge;
+
+create table MYINFO (
+	T_CONTENT VARCHAR2(1000),
+	T_DATE DATE DEFAULT SYSDATE, 
+	T_GRAPH VARCHAR2(2),
+	CONSTRAINT MYINFO_GP_CK check(T_GRAPH in ('Y','N'))
+);
+
+--글내용, 완료(Y,N), 날짜(SYSDATE)
+
+SELECT*FROM MYINFO
+ORDER BY T_DATE;
+
+INSERT INTO MYINFO
+(T_CONTENT, T_GRAPH)
+VALUES('할 일2','N')
+
+delete MYINFO where T_CONTENT is null

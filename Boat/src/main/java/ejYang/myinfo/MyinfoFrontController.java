@@ -33,6 +33,9 @@ private static final long serialVersionUID=1L;
 			case "/MySchedule.my":
 				action = new MyScheduleAction();//글 목록
 				break;
+//			case "/MyScheduleInsert.my":
+//				action = new MyScheduleInsertAction();//글 목록
+//				break;
 				
 		}//switch end
 		forward = action.execute(request, response);
