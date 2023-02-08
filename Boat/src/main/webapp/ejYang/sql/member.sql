@@ -24,6 +24,15 @@ create table MEMBER(
  (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
  VALUES('ADMIN','인사팀','','123456','123456','홍길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', 
  '12345','남','admin@boat.com','01012345678','안녕하세
-요 반갑습니다','/uploadImage/adminImage');
+요 반갑습니다','adminImage.png');
+
+--추가 계정
+ INSERT INTO member 
+ (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
+ VALUES('HONG','인사팀','','123456','123456','홍길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', 
+ '12345','남','admin@boat.com','01012345678','안녕하세요 반갑습니다','adminImage.png');
  
  select * from member;
+ 
+ delete MEMBER
+ where EMPNO='ADMIN'

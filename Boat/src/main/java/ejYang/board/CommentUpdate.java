@@ -12,10 +12,10 @@ public class CommentUpdate implements Action{
 			  HttpServletResponse response) throws ServletException, IOException{
 		CommentDAO dao = new CommentDAO();
 		Comment co = new Comment();
-		co.setContent(request.getParameter("content"));
-		System.out.println("content=" + co.getContent());
+		co.setB_content(request.getParameter("b_content"));
+		System.out.println("content=" + co.getB_content());
 		
-		co.setNum(Integer.parseInt(request.getParameter("num")));
+		co.setB_c_num(Integer.parseInt(request.getParameter("b_c_num")));
 		
 		int ok = dao.commentUpdate(co);
 		response.getWriter().print(ok);

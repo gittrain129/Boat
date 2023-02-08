@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 public class CommentAdd implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request,
@@ -14,13 +13,13 @@ public class CommentAdd implements Action{
 		CommentDAO dao = new CommentDAO();
 		
 		Comment co = new Comment();
-		co.setId(request.getParameter("id"));
-		co.setContent(request.getParameter("content"));
-		System.out.println("content=" + co.getContent());
+		co.setB_c_id(request.getParameter("b_c_id"));
+		co.setB_content(request.getParameter("b_content"));
+		System.out.println("content=" + co.getB_content());
 		
-		co.setComment_re_lev(Integer.parseInt(request.getParameter("comment_re_lev")));
-		co.setComment_board_num(Integer.parseInt(request.getParameter("comment_board_num")));
-		co.setComment_re_seq(Integer.parseInt(request.getParameter("comment_re_seq")));
+		co.setB_comment_num(Integer.parseInt(request.getParameter("b_comment_num")));
+		co.setB_comment_re_lev(Integer.parseInt(request.getParameter("b_comment_re_lev")));
+		co.setB_comment_re_seq(Integer.parseInt(request.getParameter("b_comment_re_seq")));
 		
 		int ok = dao.commentsInsert(co);
 		response.getWriter().print(ok);
