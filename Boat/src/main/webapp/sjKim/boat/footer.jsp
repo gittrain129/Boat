@@ -6,12 +6,11 @@
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>   -->
   
 <style>
-	#wrap {
+#footer_wrap {
   /*min-height: calc(30% - 120px);*/
   height: 120px;
   width: 100%; 
-  background-color: #f2f2f2;
-  
+  background-color: #f2f2f2; 
 }
 
 footer {
@@ -43,7 +42,7 @@ footer p span {
 
 </style>
 
-<div id="wrap">		
+<div id="footer_wrap">		
 		<footer>
 		    <nav>
 		        <a href='https://www.jhta.co.kr/about-the-academy/way-to-come' target='_blank'>중앙HTA</a> |

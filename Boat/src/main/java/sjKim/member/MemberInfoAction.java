@@ -1,4 +1,4 @@
-package net.member.action;
+package sjKim.member;
 
 import java.io.IOException;
 
@@ -6,8 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.member.db.Member;
-import net.member.db.MemberDAO;
+import sjKim.db.Member;
+import sjKim.db.MemberDAO;
 
 public class MemberInfoAction implements Action {
 	public ActionForward execute (HttpServletRequest request, HttpServletResponse response)
@@ -25,7 +25,7 @@ public class MemberInfoAction implements Action {
 			return forward;
 		}
 		
-		forward.setPath("member/memberInfo.jsp");
+		forward.setPath("sjKim/boat/memberInfo.jsp");
 		forward.setRedirect(false);
 		request.setAttribute("memberinfo", m);
 		return forward;

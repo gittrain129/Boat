@@ -29,15 +29,25 @@ legend {
 	font-weight: bold
 }
 
-#id, #post1 {
-	width: 70%
+#id{
+	width:30%;	
+} 
+
+#post1 {
+	width: 70%;
 }
 
 #jumin1, #jumin2 {
 	width: 48%
 }
 
-#id+input, #post1+input {
+#id+input{
+	width: 15%;
+	background:#18a8f1;
+	line-height: 10px;
+	vertical-align: bottom;
+} 
+#post1+input {
 	width: 29%;
 	background:#18a8f1;
 	line-height: 10px;
@@ -125,4 +135,13 @@ label {
 
 fieldset{
 	border-color: #18a8f1;
+}
+
+.first_area {
+	display: flex !important;
+	float:left;
+}
+
+input[name="memberfile2"]{
+	display: none;
 }
