@@ -1,4 +1,4 @@
-package net.member.action;
+package sjKim.member;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.member.db.MemberDAO;
+import sjKim.db.MemberDAO;
 
 public class MemberIdCheckAction implements Action {
 	@Override

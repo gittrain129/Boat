@@ -28,43 +28,37 @@
 	 	
 		<fieldset>
 			<legend>회원가입</legend>
-			
-			  <div id="first_area">
-				<label for="id">ID</label>
-				<div>
-					<input type='text' placeholder='Enter id' name='id' id='id' >
-					<input type='button' value="ID중복검사" id="idcheck"><input type="hidden" id="result">
-					<div id="opener_message"></div>
+				<div class="top_block1">
+			 		&nbsp;양식을 모두 작성해주세요
+					<label for="id" style="padding-top: 45px;">사원번호</label>
+					<div style="width:600px">
+						<input type='text' placeholder='Enter id' name='id' id='id' style="width:60%">
+						<input type='button' value="ID중복검사" id="idcheck" ><input type="hidden" id="result">
+						<div id="opener_message"></div>
+					</div>
+				</div>
+				
+				<div class="top_block2">
+					<label style="text-align: center;">
+						
+						<span id="showImage">
+							<c:if test='${empty memberinfo.memberfile}'>
+								<c:set var='src' value='sjKim/image/profile.png'/>
+							</c:if>
+							<c:if test='${!empty memberinfo.memberfile}'>
+								<c:set var='src' value='${"memberupload/"}${memberinfo.memberfile}'/>
+								<input type="hidden" name="check" value="${memberinfo.memberfile}"> <%-- 파일이 있는데 변경하지 않은 경우 --%>
+							</c:if>
+							<img src="${src}" width="130px" alt="profile">	
+						</span>
+	
+							<input type="file" name="memberfile" accept="image/*" style="visibility: hidden;">
+							<button onclick="onClickUpload();" id="f_upload">업로드</button>
+					</label>				
 				</div>
 				
 				
-				<label>
-					<img src="sjKim/image/attach.png" width="10px">
-					<span id="filename">${memberinfo.memberfile}</span>
-					<span id="showImage">
-						<c:if test='${empty memberinfo.memberfile}'>
-							<c:set var='src' value='sjKim/image/profile.png'/>
-						</c:if>
-						<c:if test='${!empty memberinfo.memberfile}'>
-							<c:set var='src' value='${"upload/"}${memberinfo.memberfile}'/>
-							<input type="hidden" name="check" value="${memberinfo.memberfile}"> <%-- 파일이 있는데 변경하지 않은 경우 --%>
-						</c:if>
-						<img src="${src}" width="30px" alt="profile">	
-					</span>
-						<%-- accept: 업로드할 파일 타입을 설정합니다.
-							 <input type="file" accept="파일 확장자|audio/*|video/*|image/*">
-							 	(1) 파일 확장자는 .png .jpg .pdf .hwp 처럼 (.)으로 시작되는 파일 확장자를 의미합니다.
-							 				예)accept = " .png, .jpg, .pdf, .hwp"
-							 	(2) audio/* : 모든 타입의 오디오 파일
-							 	(3) image/* : 모든 타입의 이미지 파일
-						 --%>
-						 <input type="file" name="memberfile2" accept="image/*">
-						 <input type="button" name="memberfile" accept="image/*">업로드</button>	
-				</label>
-			  </div>
-				
-				
-				<label for="pass">Password</label>
+				<label for="pass" style="padding-top: 10px;">비밀번호</label>
 					<input type='password' placeholder='Enter Password' name='pass' id='pass' >
 				
 					
@@ -76,7 +70,7 @@
 							name='jumin2' id='jumin2'  >
 							
 							
-				<label for="email">E-Mail</label>
+				<label for="email">이메일</label>
 					<input type='text' name='email' id='email'> @
 					<input type='text' name='domain' id='domain'>
 						<select name='sel' id='sel' >

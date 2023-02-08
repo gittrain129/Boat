@@ -1,4 +1,4 @@
-package net.member.action;
+package sjKim.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,8 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.member.db.Member;
-import net.member.db.MemberDAO;
+import sjKim.db.Member;
+import sjKim.db.MemberDAO;
 
 public class MemberJoinProcessAction implements Action {
 	public ActionForward execute (HttpServletRequest request, HttpServletResponse response)
