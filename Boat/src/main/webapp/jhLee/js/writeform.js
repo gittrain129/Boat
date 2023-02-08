@@ -9,6 +9,8 @@ $(document).ready(function(){
 	      
 	      
 	      
+
+
 	$('#deptbutton+div a').click(function(){
 			const dept =$(this).text();
 			
@@ -16,12 +18,12 @@ $(document).ready(function(){
 			console.log(sel)
 			console.log(dept)
 			
-			$('#dept').val(dept);
+		//	$('#dept').val(dept);
 			
-			$('#deptsel').text(dept)
+			//$('#deptsel').text(dept)
 			
-			const deptval=$('#dept').val()		
-			console.log('deptval ='+deptval)
+		//	const deptval=$('#dept').val()		
+		//	console.log('deptval ='+deptval)
 	
 	})//drop downclick 끝
 	

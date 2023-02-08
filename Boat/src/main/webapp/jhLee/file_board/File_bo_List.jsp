@@ -45,6 +45,13 @@ http://localhost:8088/Boat/FileBoardList.filebo
             <p>자료실 게시판 입니다.</p>
 
         </div>
+        <c:url var="go" value="FileBoardList.filebo">
+								<c:param name="searchsel" value="${search_field}" />
+								<c:param name="searchinput" value="${search_word}" />
+								<c:param name="searchinput" value="${search_word}" />
+								<c:param name="searchinput" value="${search_word}" />
+								<c:param name="page" value="${a}" />
+							</c:url>
        <div>
    <div>
    <div class = 'search'>

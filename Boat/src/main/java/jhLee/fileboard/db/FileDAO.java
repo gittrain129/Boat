@@ -455,9 +455,10 @@ public class FileDAO {
 		String sql =
 		"  select * from "
 		+ "				(select b.*, rownum rnum from "
-		+ "					(select file_board.* , nvl(CNT ,0) "
+		+ "					(select file_board.* , nvl(CNT ,0) CNT "
 		+ "					from file_board left outer join  "
-		+ "					 				(select F_COMMENT_NUM ,count(*) as CNT from FILE_COMMENT group by F_COMMENT_NUM "
+		+ "					 				(select F_COMMENT_NUM ,count(*) as CNT "
+		+ "									from FILE_COMMENT group by F_COMMENT_NUM "
 		+ "									order by  CNT desc) "
 		+ "					on FILE_NUM = F_COMMENT_NUM "
 		+ "					where dept = '개발팀' "
@@ -531,6 +532,60 @@ public class FileDAO {
 	}
 
 	return list;
+	}
+	public int getListcount(String dept, String searchsel, String searchinput, String order) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int x = 0;
+
+		try {
+			con = ds.getConnection();
+			String sql = "select count(*) "
+					+ "					from file_board "
+					+ "					where dept = '개발팀' "
+					+ "					and FILE_NAME = '이지현' "
+					+ "				order by FILE_RE_REF desc "
+					+ "				, FILE_READCOUNT desc "
+					+ "";
+			pstmt = con.prepareStatement(sql);
+			System.out.println(sql);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				x = rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			System.out.println("getListCount()에러: " + e);
+			System.out.println(e.getMessage());
+			e.getStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+
+					System.out.println(e.getMessage());
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+
+					System.out.println(e.getMessage());
+				}
+
+		}
+
+		return x;
+
 	}
 
 

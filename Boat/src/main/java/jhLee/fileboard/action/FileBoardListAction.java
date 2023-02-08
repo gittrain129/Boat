@@ -25,17 +25,18 @@ public class FileBoardListAction implements Action {
 			throws ServletException, IOException {
 	FileDAO boarddao = new FileDAO();
 	List<FileboBean> filebolist = new ArrayList<FileboBean>();
-		int filelicount = 0;
+	int filelicount = boarddao.getListcount();
 	
 
 	int page = 1;
 	int limit = 10; 
-	if(request.getParameter("page")!=null){
-		page = Integer.parseInt(request.getParameter("page"));
-	}
-	if(request.getParameter("limit")!=null) {
-		limit = Integer.parseInt(request.getParameter("limit"));
-	}
+	
+	
+	
+	String state = request.getParameter("state");
+	state ="ajax";
+	System.out.println("state="+state);
+	
 	int listcount = boarddao.getListcount();
 	System.out.println("글의 갯수는 = "+ listcount);
 	filebolist = boarddao.getfileBoardList(page,limit);
@@ -48,40 +49,88 @@ public class FileBoardListAction implements Action {
 	
 	if(endpage>maxpage)
 		endpage = maxpage;
-	String state = request.getParameter("state");
-	//==========================================================
-	//검색 및 페이징
-	
-	//int depthidden =  Integer.parseInt(request.getParameter("dept"));
-	String dept = "";
-    String order =   request.getParameter("order");//최신순조회순댓글순 asc desc 쿼리
-    String search =  request.getParameter("searchsel");
-    //작성자나 제목
-    String searchinput =  request.getParameter("searchinput");
-    //검색결과
-    
-    
-    System.out.println("dept "+dept);
-	/*
-	 * switch(depthidden) { case 10:dept = "홍보팀"; break; case 20:dept = "개발팀";
-	 * break; case 30:dept = "인사팀"; break; case 40:dept = "기획팀"; break; case 50:dept
-	 * = "영업팀"; break;
-	 * 
-	 * }
-	 */
-    
-    filelicount =boarddao.getListcount();
-   filebolist = boarddao.getList(dept,search,searchinput,order,page,limit); 
-    
-    System.out.println("order "+order);
-    System.out.println("search "+search);
-
-	
-	
 	
 	
 	
 	if(state ==null) {
+	
+		if(request.getParameter("page")!=null){
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		if(request.getParameter("limit")!=null) {
+			limit = Integer.parseInt(request.getParameter("limit"));
+		}
+		
+		
+		/*
+		 * switch(depthidden) { case 10:dept = "홍보팀"; break; case 20:dept = "개발팀";
+		 * break; case 30:dept = "인사팀"; break; case 40:dept = "기획팀"; break; case 50:dept
+		 * = "영업팀"; break;
+		 * 
+		 * }
+		 */
+					//==========================================================
+					//검색 및 페이징
+					
+					//int depthidden =  Integer.parseInt(request.getParameter("dept"));
+						//널이면 위에서 했는디... 널이아니면 ajax를 사용해서 값을 변경해서 filelist에 담기
+					    
+
+	
+	
+	}else {
+		
+		System.out.println("state = ajax");
+		
+		String dept = "";
+		String deptsel = request.getParameter("deptsel");
+		String deptval = request.getParameter("deptval");
+		String searchsel = request.getParameter("searchsel");
+		  //작성자나 제목
+		String searchinput = request.getParameter("searchinput");
+	    	//검색결과
+		
+	    String order =   request.getParameter("order");//최신순조회순댓글순 asc desc 쿼리
+	    
+	    System.out.println("dept "+dept);
+	    System.out.println("deptsel "+deptsel);
+	    System.out.println("deptval "+deptval);
+	    System.out.println("searchsel "+searchsel);
+	    System.out.println("searchinput "+searchinput);
+
+		
+		filelicount = boarddao.getListcount(dept,searchsel,searchinput,order);
+		 filebolist = boarddao.getList(dept,searchsel,searchinput,order,page,limit); 
+		 
+		//위에서 request로 담았던 것을 JsogObject에 담습니다.
+		JsonObject object = new JsonObject();
+		
+		object.addProperty("searchsel", searchsel);
+		object.addProperty("searchinput", searchinput);
+		object.addProperty("dept", dept);
+		object.addProperty("order", order);
+		
+		
+		object.addProperty("page", page);//{"page":변수page의 값}형식으로 저장
+		object.addProperty("maxpage",maxpage);
+		object.addProperty("startpage",startpage);
+		object.addProperty("endpage", endpage);
+		object.addProperty("listcount",listcount);
+		object.addProperty("limit", limit);
+		
+		
+		//ㅣList => JsonElement
+		JsonElement je = new Gson().toJsonTree(filebolist);
+		System.out.println("boardlist = "+je.toString());
+		object.add("boardlist", je);
+		
+		response.setContentType("application/json;charset=utf-8");
+		response.getWriter().print(object);
+		System.out.println(object.toString());
+	
+		return null;
+	}//else end
+		
 		System.out.println("state ==null");
 		request.setAttribute("page", page);//현재 페이지 수 
 		request.setAttribute("maxpage", maxpage);
@@ -102,17 +151,11 @@ public class FileBoardListAction implements Action {
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DAY_OF_MONTH, -3); //1일간 보이도록 하기위해서.
+        cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
         String nowday = format.format(cal.getTime());
            
         
      
-        
-        
-        
-        
-        
-        
         System.out.println("nowday=" + nowday);
         request.setAttribute("nowday",nowday);
         
@@ -122,30 +165,7 @@ public class FileBoardListAction implements Action {
 		System.out.println(filebolist);
 		return forward;//BoardFrontController.java 로 리턴됩니다.
 	//댓글 ajax
-	}else {
-		System.out.println("state = ajax");
-		
-		//위에서 request로 담았던 것을 JsogObject에 담습니다.
-		JsonObject object = new JsonObject();
-		object.addProperty("page", page);//{"page":변수page의 값}형식으로 저장
-		object.addProperty("maxpage",maxpage);
-		object.addProperty("startpage",startpage);
-		object.addProperty("endpage", endpage);
-		object.addProperty("listcount",listcount);
-		object.addProperty("limit", limit);
-		
-		
-		//ㅣList => JsonElement
-		JsonElement je = new Gson().toJsonTree(filebolist);
-		System.out.println("boardlist = "+je.toString());
-		object.add("boardlist", je);
-		
-		response.setContentType("application/json;charset=utf-8");
-		response.getWriter().print(object);
-		System.out.println(object.toString());
 	
-		return null;
-	}//else end
 }//execute end
 
 }//class end
