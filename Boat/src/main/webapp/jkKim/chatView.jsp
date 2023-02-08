@@ -24,12 +24,28 @@ table{
 width:100%;
 background-color: #A8C0D6;
 
+
+}
+#whole-chat-box{
+ display:flex;
+
+    flex-direction: column-reverse;
+
+    overflow-y:auto;
+
+    height:450px;
+    
+    
+
 }
 .message {
     padding: 40px 0;
+    
     background-color: #A8C0D6;
 }
-
+#message{
+	width:460px;
+}
 .message .chat {
     display: flex;
     align-items: flex-start;
@@ -107,10 +123,7 @@ background-color: #A8C0D6;
       		
       		
       		 -->
-     <table class="display">
-            <tr>
-                <td class="title">Status:</td>
-            </tr>
+     <table class="display" id="whole-chat-box">
            <tr>
            <td>
 		<div class="message" id="message">
@@ -130,7 +143,9 @@ background-color: #A8C0D6;
                 <td>
                     <input type="text" id="sendMessageBox" placeholder="Enter a message..."  />
                     <button type="button" id="sendButton">전송</button>
-                    <button type="button" id="clearMsgsButton">Clear Msgs (Local)</button>
+                    <button type="button" id="clearMsgsButton">리셋</button>
+                  
+                    
                 </td>
          </tr>
          <tr>
@@ -141,6 +156,7 @@ background-color: #A8C0D6;
          <tr>
          <td><div id="status" class="status"></div></td>
          </tr>
+         
      </table>
      
      
@@ -161,6 +177,7 @@ background-color: #A8C0D6;
                 var sendMessageBox = document.getElementById("sendMessageBox");
                 var sendButton = document.getElementById("sendButton");
                 var clearMsgsButton = document.getElementById("clearMsgsButton");
+               
 
                 
                  function initialize() {
@@ -251,6 +268,7 @@ background-color: #A8C0D6;
                     //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
                     //message.innerHTML = ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" +msg + message.innerHTML +"</div>");
                     message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
+                   
                 }
 
                 
@@ -274,13 +292,32 @@ background-color: #A8C0D6;
                     //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
                     //message.innerHTML = ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" +msg + message.innerHTML +"</div>");
                     message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
+                    
                 }
+                
+                /* 추가할지말지
+                
+                function autoScroll(){
+                						
+                	var offset = $('#message > div:nth-child(2n) > div.textbox').last().find('span').offset();
+                	$('#message').animate({
+                		scrollTop : offset.top
+                	}, 400);
+                }
+                */
+                
+                
+                
                 
                 
                 function clearMessages() {
                 	message.innerHTML = "";
-                    addMessage("Msgs cleared");
+                    history.go(0);
+                    
                 }
+                
+            
+                
 
                 // Listen for enter in message box
                 sendMessageBox.addEventListener('keypress', function (e) {
@@ -304,7 +341,9 @@ background-color: #A8C0D6;
 
                 // Clear messages box
                 clearMsgsButton.addEventListener('click', clearMessages);
-
+				
+              
+                	
                 initialize();
             })();
         </script>
