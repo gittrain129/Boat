@@ -200,14 +200,14 @@ public class CommentDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result=0;
-		String sql = "update comm set content=? "
-				+ "where num = ? ";
+		String sql = "update BOARD_COMMENT set B_CONTENT=? "
+				+ "where B_C_NUM = ? ";
 		try {
 			conn = ds.getConnection();
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, co.getContent());
-			pstmt.setInt(2, co.getNum());
+			pstmt.setString(1, co.getB_content());
+			pstmt.setInt(2, co.getB_c_num());
 			
 			result=pstmt.executeUpdate();
 			if(result == 1) {
@@ -241,17 +241,17 @@ public class CommentDAO {
 	
 	
 	
-	public int commentsDelete(int num) {
+	public int commentsDelete(int b_c_num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
 			conn = ds.getConnection();
 			
-			String sql = "delete comm "
-					+ "where num = ? ";
+			String sql = "delete BOARD_COMMENT "
+					+ "where B_C_NUM = ? ";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, num);
+			pstmt.setInt(1, b_c_num);
 			result = pstmt.executeUpdate();
 			if(result == 1) {
 				System.out.println("데이터 삭제 되었습니다.");
@@ -291,26 +291,26 @@ public class CommentDAO {
 			conn = ds.getConnection();
 			conn.setAutoCommit(false);
 			StringBuilder update_sql=new StringBuilder();
-			update_sql.append("update comm ");
-			update_sql.append("set   comment_re_seq=comment_re_seq +1 ");
-			update_sql.append("where comment_re_ref=? ");
-			update_sql.append("and   comment_re_seq>? ");
+			update_sql.append("update BOARD_COMMENT ");
+			update_sql.append("set   B_COMMENT_RE_SEQ = B_COMMENT_RE_SEQ +1 ");
+			update_sql.append("where B_COMMENT_RE_REF = ? ");
+			update_sql.append("and   B_COMMENT_RE_SEQ > ? ");
 			pstmt = conn.prepareStatement(update_sql.toString());
-			pstmt.setInt(1, c.getComment_re_ref());
-			pstmt.setInt(2, c.getComment_re_seq());
+			pstmt.setInt(1, c.getB_comment_re_ref());
+			pstmt.setInt(2, c.getB_comment_re_seq());
 			pstmt.executeUpdate();
 			pstmt.close();
 			
-			String sql = "insert into comm "
-					+ "values(com_seq.nextval, ?, ?, sysdate, ?,?,?,?)";
+			String sql = "insert into BOARD_COMMENT "
+					+ "values(BOARD_COM_SEQ.nextval, ?, ?, sysdate, ?,?,?,?)";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, c.getId());
-			pstmt.setString(2, c.getContent());
-			pstmt.setInt(3, c.getComment_board_num());
-			pstmt.setInt(4, c.getComment_re_lev()+1);
-			pstmt.setInt(5, c.getComment_re_seq()+1);
-			pstmt.setInt(6, c.getComment_re_ref());
+			pstmt.setString(1, c.getB_c_id());
+			pstmt.setString(2, c.getB_content());
+			pstmt.setInt(3, c.getB_comment_num());
+			pstmt.setInt(4, c.getB_comment_re_lev()+1);
+			pstmt.setInt(5, c.getB_comment_re_seq()+1);
+			pstmt.setInt(6, c.getB_comment_re_ref());
 			result = pstmt.executeUpdate();
 			if(result == 1) {
 				System.out.println("reply 삽입 완료되었습니다.");

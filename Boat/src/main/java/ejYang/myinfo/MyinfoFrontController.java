@@ -31,11 +31,17 @@ private static final long serialVersionUID=1L;
 		//http://localhost:8089/Boat/
 		switch(command) {
 			case "/MySchedule.my":
-				action = new MyScheduleAction();//글 목록
+				action = new TodoAction();//페이지 이동
 				break;
-//			case "/MyScheduleInsert.my":
-//				action = new MyScheduleInsertAction();//글 목록
-//				break;
+			case "/Todolist.my":
+				action = new Todolist();//글 목록
+				break;
+			case "/TodoAdd.my":
+				action = new TodoAdd();//투두 추가
+				break;
+			case "/TodoCheck.my":
+				action = new TodoCheck();//글 목록
+				break;
 				
 		}//switch end
 		forward = action.execute(request, response);

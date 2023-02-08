@@ -13,12 +13,12 @@ public class CommentReply implements Action{
 		CommentDAO dao = new CommentDAO();
 		Comment co = new Comment();
 		
-		co.setId(request.getParameter("id"));
-		co.setContent(request.getParameter("content"));
-		co.setComment_re_lev(Integer.parseInt(request.getParameter("comment_re_lev")));
-		co.setComment_board_num(Integer.parseInt(request.getParameter("comment_board_num")));
-		co.setComment_re_seq(Integer.parseInt(request.getParameter("comment_re_seq")));
-		co.setComment_re_ref(Integer.parseInt(request.getParameter("comment_re_ref")));
+		co.setB_c_id(request.getParameter("b_c_id"));
+		co.setB_content(request.getParameter("b_content"));
+		co.setB_comment_num(Integer.parseInt(request.getParameter("b_comment_num")));
+		co.setB_comment_re_lev(Integer.parseInt(request.getParameter("b_comment_re_lev")));
+		co.setB_comment_re_ref(Integer.parseInt(request.getParameter("b_comment_re_ref")));
+		co.setB_comment_re_seq(Integer.parseInt(request.getParameter("b_comment_re_seq")));
 		int ok = dao.commentsReply(co);
 		response.getWriter().print(ok);
 		return null;

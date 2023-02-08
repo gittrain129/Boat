@@ -1,10 +1,17 @@
 package ejYang.myinfo;
 
 public class TodoBean {
+	private String t_empno;
 	private String t_content;
 	private String t_date;
 	private String t_graph;
 	
+	public String getT_empno() {
+		return t_empno;
+	}
+	public void setT_empno(String t_empno) {
+		this.t_empno = t_empno;
+	}
 	
 	public String getT_content() {
 		return t_content;
