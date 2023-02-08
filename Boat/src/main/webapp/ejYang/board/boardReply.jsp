@@ -2,7 +2,7 @@
 <html>
  <head>
   <title>게시글 답글 쓰기</title>
-  <jsp:include page="/sjKim/boat/header2.jsp" />
+  <jsp:include page="/sjKim/boat/header.jsp" />
   <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
   <script src="${pageContext.request.contextPath}/ejYang/js/reply.js"></script>
   <link href="${pageContext.request.contextPath}/ejYang/css/write.css" type="text/css" rel="stylesheet">
@@ -107,6 +107,6 @@
 		});
  	})
   </script>
-  <jsp:include page="/sjKim/boat/footer2.jsp" />
+  <jsp:include page="/sjKim/boat/footer.jsp" />
  </body>
 </html>

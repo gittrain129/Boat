@@ -54,6 +54,21 @@ private static final long serialVersionUID=1L;
 			case "/BoardDeleteAction.bo":
 				action = new BoardDeleteAction();//글 삭제
 				break;
+			case "/CommentList.bo":
+				action = new CommentList();
+				break;
+//			case "/CommentAdd.bo":
+//				action = new CommentAdd();
+//				break;
+//			case "/CommentDelete.bo":
+//				action = new CommentDelete();
+//				break;
+//			case "/CommentUpdate.bo":
+//				action = new CommentUpdate();
+//				break;
+//			case "/CommentReply.bo":
+//				action = new CommentReply();
+//				break;
 				
 		}//switch end
 		forward = action.execute(request, response);

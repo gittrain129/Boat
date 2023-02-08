@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <html>
  <head>
-  <jsp:include page="/sjKim/boat/header2.jsp" />
+  <jsp:include page="/sjKim/boat/header.jsp" />
   <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
   <script src="${pageContext.request.contextPath}/ejYang/js/writeform.js"></script>
   <link href="${pageContext.request.contextPath}/ejYang/css/write.css" type="text/css" rel="stylesheet">
@@ -79,6 +79,6 @@
 		});
  	})
  </script>
- <jsp:include page="/sjKim/boat/footer2.jsp" />
+ <jsp:include page="/sjKim/boat/footer.jsp" />
  </body>
 </html>

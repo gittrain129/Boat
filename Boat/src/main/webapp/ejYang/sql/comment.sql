@@ -4,7 +4,7 @@ create table BOARD_COMMENT(
 	B_C_NUM					number 			PRIMARY KEY,--글번호
 	B_C_ID 					varchar2(30)	references MEMBER(EMPNO),
 	B_CONTENT				varchar2(200),
-	reg_date				date,
+	REG_DATE				date,
 	B_COMMENT_NUM			number	--원문글번호
 	references BOARD(BOARD_NUM) on delete cascade,--comm 테이블이 참조하는 보드 글 번호
 	B_COMMENT_RE_LEV		number(1)	check(B_COMMENT_RE_LEV in (0,1,2)),--원문이면0 답글이면1
@@ -20,3 +20,12 @@ create sequence BOARD_COM_SEQ;
 delete comm;
 
 select*from BOARD_COMMENT;
+
+
+select B_C_NUM, B_C_ID, B_CONTENT, REG_DATE, B_COMMENT_RE_LEV, 
+B_COMMENT_RE_SEQ, B_COMMENT_RE_REF, MEMBER.MEMBERFILE 
+from BOARD_COMMENT join MEMBER 
+on	 	BOARD_COMMENT.B_C_ID = MEMBER.EMPNO 
+where 	B_COMMENT_NUM = 1 
+order by B_COMMENT_RE_REF asc, 
+B_COMMENT_RE_SEQ asc

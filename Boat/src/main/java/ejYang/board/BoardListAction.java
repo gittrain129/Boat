@@ -131,6 +131,16 @@ public class BoardListAction implements Action{
 			request.setAttribute("search_field", index);
 			request.setAttribute("search_word", search_word);
 			
+
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	        Calendar cal = Calendar.getInstance();
+	        cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
+	        String nowday = format.format(cal.getTime());
+	           
+	        System.out.println("nowday=" + nowday);
+	        request.setAttribute("nowday",nowday);
+	        
+			
 			JsonElement je = new Gson().toJsonTree(boardlist);
 			System.out.println("boardlist = " + je.toString());
 			object.add("boardlist", je);
