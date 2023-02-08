@@ -13,10 +13,12 @@ $(document).ready(function(){
 
 	$('#deptbutton+div a').click(function(){
 			const dept =$(this).text();
-			
+				console.log(dept)
 			const sel =$('#deptsel').text();
+			
+		$('#deptsel').text(dept);
 			console.log(sel)
-			console.log(dept)
+		
 			
 		//	$('#dept').val(dept);
 			
