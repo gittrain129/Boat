@@ -10,7 +10,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import ejYang.board.BoardBean;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 public class TodoDAO {
 	private DataSource ds;
@@ -27,27 +28,30 @@ public class TodoDAO {
 	}
 
 	//투두리스트 글 목록
-	public List<TodoBean> getTodoList() {
+	public JsonArray getTodoList(String t_empno) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		JsonArray array = new JsonArray();
 		
 		String sql = "SELECT*FROM MYINFO "
+				+ "WHERE T_EMPNO = ? "
+				+ "AND T_GRAPH = 'N'"
 				+ "ORDER BY T_DATE ";
-		
-		List<TodoBean> list = new ArrayList<TodoBean>();
 		try {
 			conn = ds.getConnection();
 			
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, t_empno);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				TodoBean todo = new TodoBean();
-				todo.setT_content(rs.getString("t_content"));
-				todo.setT_date(rs.getString("t_date"));
-				todo.setT_graph(rs.getString("t_graph"));
-				list.add(todo);
+				JsonObject object = new JsonObject();
+				object.addProperty("t_empno", rs.getString(1));
+				object.addProperty("t_content", rs.getString(2));
+				object.addProperty("t_date", rs.getString(3));
+				object.addProperty("t_graph", rs.getString(4));
+				array.add(object);
 			}
 			
 		}catch(Exception ex) {
@@ -78,62 +82,120 @@ public class TodoDAO {
 				}
 			}
 		}
-		return list;
+		return array;
 	}
-
 	
-	//투두리스트 갯수
-	public int getTodoListCount() {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int x = 0;
-		try {
-			//context.xml에서 설정한 리소스 jdbc/OracleDB 참조하여 Connection 객체를 얻어 옵니다.
-			conn = ds.getConnection();
-			
-			String sql = "select count(*) from MYINFO";
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				x = rs.getInt(1);
-			}
-			
-		}catch(Exception ex) {
-			ex.printStackTrace();
-			System.out.println("getTodoListCount() 에러: " + ex);
-		}finally {
-			if(rs != null) {
-				try {
-					rs.close(); 
-				}catch(Exception e) {
-					System.out.println(e.getMessage());
-				}
-			}
-			
-			if(pstmt != null) {
-				try {
-					pstmt.close(); 
-				}catch(Exception e) {
-					System.out.println(e.getMessage());
-				}
-			}
-			
-			if(conn != null) {
-				try {
-					conn.close(); 	
-				}catch(Exception e) {
-					System.out.println(e.getMessage());
-				}
-			}
-		}
-		return x;
-	}
+	
+	
+	
+//	//투두리스트 글 목록
+//	public List<TodoBean> getTodoList() {
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		String sql = "SELECT*FROM MYINFO "
+//				+ "ORDER BY T_DATE ";
+//		
+//		List<TodoBean> list = new ArrayList<TodoBean>();
+//		try {
+//			conn = ds.getConnection();
+//			
+//			pstmt = conn.prepareStatement(sql);
+//			rs = pstmt.executeQuery();
+//			
+//			while(rs.next()) {
+//				TodoBean todo = new TodoBean();
+//				todo.setT_content(rs.getString("t_content"));
+//				todo.setT_date(rs.getString("t_date"));
+//				todo.setT_graph(rs.getString("t_graph"));
+//				list.add(todo);
+//			}
+//			
+//		}catch(Exception ex) {
+//			ex.printStackTrace();
+//			System.out.println("getTodoList() 에러: " + ex);
+//		}finally {
+//			if(rs != null) {
+//				try {
+//					rs.close(); 
+//				}catch(Exception e) {
+//					System.out.println(e.getMessage());
+//				}
+//			}
+//			
+//			if(pstmt != null) {
+//				try {
+//					pstmt.close(); 
+//				}catch(Exception e) {
+//					System.out.println(e.getMessage());
+//				}
+//			}
+//			
+//			if(conn != null) {
+//				try {
+//					conn.close(); 	
+//				}catch(Exception e) {
+//					System.out.println(e.getMessage());
+//				}
+//			}
+//		}
+//		return list;
+//	}
+//
+//	
+//	//투두리스트 갯수
+//	public int getTodoListCount() {
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		int x = 0;
+//		try {
+//			//context.xml에서 설정한 리소스 jdbc/OracleDB 참조하여 Connection 객체를 얻어 옵니다.
+//			conn = ds.getConnection();
+//			
+//			String sql = "select count(*) from MYINFO";
+//			pstmt = conn.prepareStatement(sql);
+//			rs = pstmt.executeQuery();
+//			
+//			if(rs.next()) {
+//				x = rs.getInt(1);
+//			}
+//			
+//		}catch(Exception ex) {
+//			ex.printStackTrace();
+//			System.out.println("getTodoListCount() 에러: " + ex);
+//		}finally {
+//			if(rs != null) {
+//				try {
+//					rs.close(); 
+//				}catch(Exception e) {
+//					System.out.println(e.getMessage());
+//				}
+//			}
+//			
+//			if(pstmt != null) {
+//				try {
+//					pstmt.close(); 
+//				}catch(Exception e) {
+//					System.out.println(e.getMessage());
+//				}
+//			}
+//			
+//			if(conn != null) {
+//				try {
+//					conn.close(); 	
+//				}catch(Exception e) {
+//					System.out.println(e.getMessage());
+//				}
+//			}
+//		}
+//		return x;
+//	}
 
 	
 	//투두리스트 등록하기
-		public boolean todoInsert(String addValue) {
+		public int todoInsert(TodoBean todo) {
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			int result = 0;
@@ -141,17 +203,16 @@ public class TodoDAO {
 				conn = ds.getConnection();
 				
 				String sql = "insert into MYINFO "
-						+ "(T_CONTENT, T_GRAPH) "
-						+ "values(?, 'N') ";
+						+ "values(?, ?, sysdate, 'N') ";
 				//등록은 무조건 N
 				
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, addValue);
+				pstmt.setString(1, todo.getT_empno());
+				pstmt.setString(2, todo.getT_content());
 				result = pstmt.executeUpdate();
-				System.out.println("jdbc"+addValue);
+				
 				if(result == 1) {
 					System.out.println("투두리스트 삽입이 모두 완료되었습니다.");
-					return true;
 				}
 				
 			}catch(Exception ex) {
@@ -174,6 +235,53 @@ public class TodoDAO {
 					}
 				}
 			}
-			return false;
+			return result;
+		}
+
+		
+		//완료 'N' -> 'Y'
+		public int todocheck(TodoBean todo) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			int result = 0;
+			try {
+				conn = ds.getConnection();
+				
+				String sql = "UPDATE MYINFO "
+						+ "SET T_GRAPH = 'Y' "
+						+ "WHERE T_EMPNO = ? "
+						+ "AND T_CONTENT = ? ";
+				//등록은 무조건 N
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, todo.getT_empno());
+				pstmt.setString(2, todo.getT_content());
+				result = pstmt.executeUpdate();
+				
+				if(result == 1) {
+					System.out.println("선택된 투두리스트가 완료되었습니다.");
+				}
+				
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				System.out.println("todocheck() 에러: " + ex);
+			}finally {
+				if(pstmt != null) {
+					try {
+						pstmt.close(); 
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				
+				if(conn != null) {
+					try {
+						conn.close(); 	
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+			}
+			return result;
 		}
 }

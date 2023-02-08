@@ -15,7 +15,7 @@ create table BOARD_COMMENT(
 
 insert into BOARD_COMMENT 
 (B_C_NUM, B_C_ID, B_CONTENT, B_COMMENT_NUM, B_COMMENT_RE_REF, B_COMMENT_RE_LEV, B_COMMENT_RE_SEQ) 
-values(1, 'ADMIN', '댓글', 2, 1, 0, 0);
+values(1, 'ADMIN', '댓글', 1, 1, 0, 0);
 insert into BOARD_COMMENT 
 (B_C_NUM, B_C_ID, B_CONTENT, B_COMMENT_NUM, B_COMMENT_RE_REF, B_COMMENT_RE_LEV, B_COMMENT_RE_SEQ) 
 values(2, 'ADMIN', '댓글', 2, 1, 1, 1);

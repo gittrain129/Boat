@@ -19,10 +19,10 @@ create table BOARD (
 insert into BOARD
 (BOARD_NUM,BOARD_NAME,BOARD_PASS,BOARD_SUBJECT,BOARD_CONTENT,BOARD_DEPT,BOARD_RE_REF,BOARD_RE_LEV,
 BOARD_RE_SEQ,BOARD_READCOUNT,BOARD_NOTICE)
-values(21,'어드민', 1234, '공지', '공지', '인사팀', 21,0,0,0,'Y');
+values(1,'어드민', 1234, '첫 글', '첫 글', '인사팀', 1,0,0,0,'N');
 
 delete BOARD
-where BOARD_NOTICE = 'Y'
+where BOARD_NUM = 1
 
 select count(*) from BOARD 
 where BOARD_NOTICE = 'Y';

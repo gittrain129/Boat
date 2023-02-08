@@ -5,8 +5,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <link href="${pageContext.request.contextPath}/ejYang/css/view.css" type="text/css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
-  <script src="${pageContext.request.contextPath}/ejYang/js/view.js"></script><%-- 댓글 --%>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="${pageContext.request.contextPath}/ejYang/js/view.js"></script><%-- 댓글 --%>
   <jsp:include page="/sjKim/boat/header.jsp" />
   <title>게시글 보기</title>
   <script>
@@ -77,7 +77,7 @@
       	  			  class="comment-write-area-text" maxLength="200"></textarea>
       	  </div>
       	  <div class="register-box">
-      	  	<div class="button btn-cancle">취소</div><%-- 댓글의 취소는 display:none, 등록만 보이도록 합니다. --%>
+      	  	<div class="button btn-cancel">취소</div><%-- 댓글의 취소는 display:none, 등록만 보이도록 합니다. --%>
       	  	<div class="button btn-register">등록</div>
       	  </div>
       	</div>

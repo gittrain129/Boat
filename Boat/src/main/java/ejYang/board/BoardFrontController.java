@@ -63,12 +63,12 @@ private static final long serialVersionUID=1L;
 			case "/CommentUpdate.bo":
 				action = new CommentUpdate();
 				break;
-//			case "/CommentDelete.bo":
-//				action = new CommentDelete();
-//				break;
-//			case "/CommentReply.bo":
-//				action = new CommentReply();
-//				break;
+			case "/CommentDelete.bo":
+				action = new CommentDelete();
+				break;
+			case "/CommentReply.bo":
+				action = new CommentReply();
+				break;
 				
 		}//switch end
 		forward = action.execute(request, response);
