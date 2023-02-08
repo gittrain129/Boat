@@ -1,7 +1,9 @@
 	label { font-weight:bold}
   	.containers{
-  		margin-top:200px;
-  		margin-bottom: 150px;
+  		margin-top:270px;
+  		background:#F5F7FF;
+  		padding-bottom: 150px;
+  		padding-top: 50px;
   	}
   	* {
 	  box-sizing: border-box;
@@ -13,9 +15,10 @@
 		width:60%;
 		margin: auto;
 		margin-top: 50px;
-  		background:#F5F7FF;
   		border-radius: 10px;
 	 	padding: 50px;
+  		background: white;
+	 	
 	}
 	input[type=text],input[type=password], select {
 	  width: 100%;

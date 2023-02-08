@@ -59,14 +59,10 @@ header{
     outline: none;
 }
 .inputField button{
-	background: #1e62ff;
-	display: inline;
-    width: 50px;
     height: 50px;
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    float: right;
     color: white;
     font-size: 15px;
     opacity: 0.8;
@@ -77,14 +73,14 @@ header{
 #btn{
 	background: #1e62ff;
 	display: inline;
-	width: 100px;
+	width: 10%;
     height: 50px;
     cursor: pointer;
     float: right;
 }
 .form-check-label{
 	display: inline-block;
-	background: lightgray;
+	background: #dfdede;
     color: black;
     padding-left: 15px;
     width: 97%;
@@ -96,3 +92,52 @@ header{
     margin-top: 20px;
     padding-top: 14px;
 }
+input[type="checkbox"] {
+	position: relative;
+    top: 5px;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 1px solid #999;
+    appearance: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  input[type="checkbox"]:checked {
+    background: #1e62ff;
+    border: none;
+  }
+  #submitbtn{
+  	background-color: #1e62ff;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 15%;
+    margin: 20px 10px 10px 0;
+    opacity: 0.8;
+    display: inline-block;
+  }
+  #submitbtn:hover{
+    opacity: 1;
+  }
+  #resetbtn{
+  	background-color: red;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    opacity: 0.8;
+    display: inline-block;
+    width: 15%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  #resetbtn:hover{
+    opacity: 1;
+  }
+  #btn img{
+  	height: 50px;
+  }
