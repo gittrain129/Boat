@@ -11,25 +11,38 @@
 	<script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
      
 <style>
-        * {
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-a {
-    text-decoration: none;
-}
-table{
+#whole-chat-box{
 width:100%;
 background-color: #A8C0D6;
 
-}
-.message {
-    padding: 40px 0;
-    background-color: #A8C0D6;
+
+ display:flex;
+
+    flex-direction: column-reverse;
+
+    overflow-y:auto;
+
+    height:500px;
+    
+    
+
 }
 
+
+sage {
+    padding: 40px 0;
+    
+    background-color: #A8C0D6;
+}
+#message{
+	width:460px;
+}
 .message .chat {
     display: flex;
     align-items: flex-start;
