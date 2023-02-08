@@ -38,5 +38,7 @@ public class FileBoardReplyView implements Action {
 		forward.setPath("jhLee/file_board/File_bo_reply.jsp");
 		return forward;
 	}
+	
+	
 
 }

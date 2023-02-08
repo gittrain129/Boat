@@ -3,14 +3,12 @@
 
 <!DOCTYPE html>
 <html>
+  <jsp:include page="/sjKim/boat/header.jsp" />
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <!-- include summernote css/js -->
  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
@@ -18,7 +16,6 @@
 
   <link rel="stylesheet" href="jhLee/css/writeform.css">
 
-    
     
 <script src="${pageContext.request.contextPath}/jhLee/js/writeform.js"></script>
 
@@ -29,13 +26,16 @@
 </head>
 <body>
 <div class="container">
- <form action="FileBoardAddAction.filebo" method="post" enctype = "multipart/form-data" name ="fileboardform">
- 	<h1>boat_ 자료실 글쓰기</h1>
+ <form action="FileBoardReplyAction.filebo" method="post" enctype = "multipart/form-data" name ="fileboardform">
+ 	<input type="hidden" value ="${boarddata.FILE_RE_REF}" name="board_re_ref">
+	<input type="hidden" value ="${boarddata.FILE_RE_LEV}" name="board_re_lev">
+	<input type="hidden" value ="${boarddata.FILE_RE_SEQ}" name="board_re_seq">
+ 	<h1>boat_ 답글쓰기</h1>
      
     <div class="form-group">
         <label for="board_subject">제목</label>
         <input name="board_subject" id="board_subject" type="text" maxlength="100"
-        class="form-control" placeholder="제목을 입력하세요">
+        class="form-control" placeholder="제목을 입력하세요" value="Re:${boarddata.FILE_SUBJECT}">
     </div>
  	
 
@@ -53,7 +53,7 @@
             <button type="button" class="btn btn-secondary" id = "deptsel">부서</button>
             <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" id = "deptbutton">
             </button>
-              <div class="dropdown-menu">
+              <div class="dropdown-menu" >
                 <a class="dropdown-item" href="#">홍보팀</a>
                 <a class="dropdown-item" href="#">개발팀</a>
                 <a class="dropdown-item" href="#">인사팀</a>
@@ -62,8 +62,8 @@
               </div>
             </div>
             <input type="hidden" name = "dept" id = "dept">
-       		<input name="board_name" id="board_name" value="" type="text"  class="form-control writer"
-       			placeholder="이름을 입력하세요">
+       		<input name="board_name" id="board_name" value="${boarddata.FILE_NAME}" type="text"  class="form-control writer"
+       			placeholder="이름을 입력하세요" >
   	  </div>
         
     
@@ -99,7 +99,7 @@
 </div><!-- container끝 -->
 <script>
 $(function(){
-
+$("deptsel+div a").text(${boarddata.DEPT})
 
 	
 })//ready끝

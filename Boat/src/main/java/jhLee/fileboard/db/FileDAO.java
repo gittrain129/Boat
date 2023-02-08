@@ -457,16 +457,16 @@ public class FileDAO {
 		+ "				(select b.*, rownum rnum from "
 		+ "					(select file_board.* , nvl(CNT ,0) CNT "
 		+ "					from file_board left outer join  "
-		+ "					 				(select F_COMMENT_NUM ,count(*) as CNT "
-		+ "									from FILE_COMMENT group by F_COMMENT_NUM "
-		+ "									order by  CNT desc) "
+		+ "					 				 (select F_COMMENT_NUM,count(*) CNT "
+		+ "														from FILE_COMMENT "
+		+ "														group by F_COMMENT_NUM) "//댓글순
 		+ "					on FILE_NUM = F_COMMENT_NUM "
-		+ "					where dept = '개발팀' "
-		+ "					and FILE_NAME = '이지현' "
+		+ "					where dept = ? "
+		+ "					and "+search+" = ? "//searchinput
 		+ "				order by FILE_RE_REF desc "
 		+ "				, FILE_READCOUNT desc )b "
-		+ "				where rownum<=10 ) "
-		+ "				where rnum>=1 and rnum<=10 ";
+		+ "				where rownum<= ? ) "//endrow
+		+ "				where rnum>= ? and rnum<= ? ";//startrow,endrow
 		
 		
 		System.out.println(sql);
@@ -476,10 +476,17 @@ public class FileDAO {
 		
 		int startrow = (page - 1) * limit + 1;
 		int endrow = startrow + limit - 1;
-
-		//pstmt.setInt(2, endrow);
-		//pstmt.setInt(3, startrow);
-		//pstmt.setInt(4, endrow);
+		//pstmt.setString(1, order);
+		/*
+		 * pstmt.setString(2, searchinput); pstmt.setString(3, dept); pstmt.setInt(4,
+		 * endrow); pstmt.setInt(5, startrow); pstmt.setInt(6, endrow);
+		 */
+		
+		pstmt.setString(1, searchinput);
+		pstmt.setString(2, dept);
+		pstmt.setInt(3, endrow);
+		pstmt.setInt(4, startrow);
+		pstmt.setInt(5, endrow);
 		
 		rs = pstmt.executeQuery();
 		
@@ -586,6 +593,107 @@ public class FileDAO {
 
 		return x;
 
+	}
+	public int fileboReply(FileboBean filebo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int num =0;
+		
+		String board_max_sql = "select max(FILE_NUM)+1 from file_board";
+		
+		int re_ref = filebo.getFILE_RE_REF();
+		
+		int re_lev = filebo.getFILE_RE_LEV();
+		//같은 관련 글 중에서 해당 글이 출력되는 순서입니다.
+		int re_seq = filebo.getFILE_RE_SEQ();
+		
+		try {
+			con= ds.getConnection();
+			
+			//트랜잭션을 이용하기 위해서 setAutocommit을 false로 설정합니다.
+			con.setAutoCommit(false);
+			pstmt = con.prepareStatement(board_max_sql);
+			rs = pstmt.executeQuery()	;
+			if(rs.next()){
+				num = rs.getInt(1);
+				
+			}
+			pstmt.close();
+			
+			//BOARD_RE_REF,BOARD_RE_SEQ값을 확인하여 원문 글에 답글이 달려있다면
+			//달린 답글들의 BOARD_RE_SEQ값을 1씩 증가시킵니다.
+			//현재 글을 이미 달린 답글보다 앞에 출력되게 하기 위해서 입니다.
+			String sql = "update file_board set FILE_RE_SEQ = FILE_RE_SEQ+1 "
+					+ "where FILE_RE_REF =? "
+					+ "and FILE_RE_SEQ >? ";
+			pstmt= con.prepareStatement(sql);
+			
+			
+			pstmt.setInt(1,re_ref);
+			pstmt.setInt(2,re_seq);
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			//등록할 답변 글의 BOARD_RE_LEV, BOARD_RE_SEQ값을 원문 글보다 1씩 증가시킵니다.
+			re_seq = re_seq+1;
+			re_lev= re_lev+1;
+			System.out.println(re_seq);
+			System.out.println(re_lev);
+			
+			sql = "insert into file_board"
+					+ "(FILE_NUM,FILE_NAME,FILE_PASS,FILE_SUBJECT,"
+					+ "FILE_CONTENT, FILE_FILE,FILE_FILE2, FILE_RE_REF,"
+					+ "FILE_RE_LEV, FILE_RE_SEQ, FILE_READCOUNT,DEPT) "
+					+ "values( "+num+",?,?,?,?,?,?,?,?,?,?,?)";
+					
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, filebo.getFILE_NAME());// 이름
+			pstmt.setInt(2, filebo.getFILE_PASS());// 비번
+			pstmt.setString(3, filebo.getFILE_SUBJECT());// 제목
+			pstmt.setString(4, filebo.getFILE_CONTENT());// 내용
+			pstmt.setString(5, filebo.getFILE_FILE());//답변에는 파일업로드 하지 않습니다.
+			pstmt.setString(6,filebo.getFILE_FILE2());//원문의 글번호
+			pstmt.setInt(7, re_ref);
+			pstmt.setInt(8, re_lev);
+			pstmt.setInt(9, re_seq);
+			pstmt.setInt(10, 0);//board_readcount(조회수)는0
+			pstmt.setString(11,filebo.getDEPT());//board_readcount(조회수)는0
+					if(pstmt.executeUpdate()==1) {
+						con.commit();//commit합니다.
+					}else {
+						con.rollback();
+					}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			System.out.println("fileboReply()에러:"+ex);
+
+			if(con!=null) {
+				try {con.rollback();//rollback합니다.
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		} finally {
+			if(rs!=null)
+				try {rs.close();
+				}catch(SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		return num;
 	}
 
 

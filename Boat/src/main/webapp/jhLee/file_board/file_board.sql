@@ -1,4 +1,6 @@
 --file_board sql
+select * from file_board;
+
 drop table file_board cascade constraints purge;
 
 create table file_board (
