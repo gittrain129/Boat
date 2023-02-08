@@ -17,28 +17,25 @@
     box-sizing: border-box;
 }
 
-a {
-    text-decoration: none;
-}
-table{
+#whole-chat-box{
 width:100%;
 background-color: #A8C0D6;
 
 
-}
-#whole-chat-box{
  display:flex;
 
     flex-direction: column-reverse;
 
     overflow-y:auto;
 
-    height:450px;
+    height:500px;
     
     
 
 }
-.message {
+
+
+sage {
     padding: 40px 0;
     
     background-color: #A8C0D6;
@@ -152,12 +149,17 @@ background-color: #A8C0D6;
          <td>
                <div id="receiver-id" style="font-weight: bold;" title="Copy this ID to the input on send.html.">ID:</div>
          </td>
+           
          </tr>
          <tr>
          <td><div id="status" class="status"></div></td>
          </tr>
          
      </table>
+      
+  <jsp:include page="/jkKim/chat_footer.jsp" /> 
+   
+ 
      
      
      <script type="text/javascript">

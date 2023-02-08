@@ -20,7 +20,7 @@ $(function(){
 </script>
 
 <div>
-<button onclick="window.open('chatView.jsp','BoaTalk','width=400, height=450, location=no, status=no, scrollbars=yes')">채팅뷰 (window.open)열기</button>
+<a href="chat.jk" onclick="window.open('this.href','BoaTalk','width=400, height=490, location=no, status=no, scrollbars=yes')">채팅뷰 (window.open)열기</a>
 <button onclick="window.open('Sender.jsp','BoaTalk','width=400, height=450, location=no, status=no, scrollbars=yes')">채팅뷰 (window.open)열기</button>
 </div>
 
