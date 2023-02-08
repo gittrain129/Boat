@@ -86,8 +86,8 @@ public class CommentDAO {
 		if(state==2) {
 			sort="desc";//최신순
 		}
-		String sql = "select B_C_NUM, B_C_ID, B_CONTENT, REG_DATE, B_COMMENT_RE_LEV, "
-				+ "			 B_COMMENT_RE_SEQ, B_COMMENT_RE_REF, MEMBER.MEMBERFILE "
+		String sql = "select B_C_NUM, B_C_ID, B_CONTENT, B_REG_DATE, B_COMMENT_RE_LEV, "
+				+ "			 B_COMMENT_RE_SEQ, B_COMMENT_RE_REF, MEMBER.IMGSRC "
 				+ "from BOARD_COMMENT join MEMBER "
 				+ "on	 	BOARD_COMMENT.B_C_ID = MEMBER.EMPNO "
 				+ "where 	B_COMMENT_NUM = ? "
@@ -107,11 +107,11 @@ public class CommentDAO {
 				object.addProperty("b_c_num", rs.getInt(1));
 				object.addProperty("b_c_id", rs.getString(2));
 				object.addProperty("b_content", rs.getString(3));
-				object.addProperty("reg_date", rs.getString(4));
+				object.addProperty("b_reg_date", rs.getString(4));
 				object.addProperty("b_comment_re_lev", rs.getInt(5));
 				object.addProperty("b_comment_re_seq", rs.getInt(6));
 				object.addProperty("b_comment_re_ref", rs.getInt(7));
-				object.addProperty("memberfile", rs.getString(8));
+				object.addProperty("imgsrc", rs.getString(8));
 				array.add(object);
 			}
 			
@@ -156,16 +156,16 @@ public class CommentDAO {
 			//context.xml에서 설정한 리소스 jdbc/OracleDB 참조하여 Connection 객체를 얻어 옵니다.
 			conn = ds.getConnection();
 			
-			String sql = "insert into comm "
-					+ "values(com_seq.nextval, ?, ?, sysdate, ?,?,?, com_seq.nextval)";
+			String sql = "insert into BOARD_COMMENT "
+					+ "values(BOARD_COM_SEQ.nextval, ?, ?, sysdate, ?,?,?, BOARD_COM_SEQ.nextval)";
 			
 			//새로운 글을 등록하는 부분입니다.
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, c.getId());
-			pstmt.setString(2, c.getContent());
-			pstmt.setInt(3, c.getComment_board_num());
-			pstmt.setInt(4, c.getComment_re_lev());
-			pstmt.setInt(5, c.getComment_re_seq());
+			pstmt.setString(1, c.getB_c_id());
+			pstmt.setString(2, c.getB_content());
+			pstmt.setInt(3, c.getB_comment_num());
+			pstmt.setInt(4, c.getB_comment_re_lev());
+			pstmt.setInt(5, c.getB_comment_re_seq());
 			
 			result = pstmt.executeUpdate();
 			if(result == 1) 

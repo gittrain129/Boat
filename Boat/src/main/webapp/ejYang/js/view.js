@@ -20,26 +20,81 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 				
 				let output="";
 				
-				
-				
-				
-				
-				
-				
-			 if(rdata.boardlist.length>0){
-				   
-
+				if(rdata.boardlist.length>0){
+					output += '<li class="comment-order-item '+ red1 + '">'
+						   + '	<a href="javascript:getList(1)" class="comment-order-button">등록순 </a>'
+						   + '</li>'
+						   + '<li class="comment-order-item '+ red2 + '">'
+						   + '	<a href="javascript:getList(2)" class="comment-order-button">최신순 </a>'
+						   + '</li>';
+					$('.comment-order-list').html(output);
+					
+					output='';
 					$(rdata.boardlist).each(function(){
+						const lev=this.b_comment_re_lev;
+						let comment_reply='';
+						if(lev==1){
+							comment_reply=' comment-list-item--reply lev1';
+						}else if(lev==2){
+							comment_reply=' comment-list-item--reply lev2';
+						}
+						const profile=this.imgsrc;
+						let src='ejYang/image/profile.png';
+						if(profile){
+							src='ejYang/memberupload/'+profile;
+						}
 						
+						const date = this.b_reg_date.substr(0,16);
 						
+						output += '<li id="' + this.b_c_num + '" class="comment-list-item' + comment_reply + '">'
+							   + '	<div class="comment-nick-area">'
+							   + '	  <img src="' + src +'" alt="프로필 사진" width="36" height="36">'
+							   + '	  <div class="comment-box">'
+							   + '	  	<div class="comment-nick-box">'
+							   + '			<div class="comment-nick-info">'
+							   + '				<div class="comment-nickname">' + this.b_c_id + '</div>'
+							   + '			</div>'	//comment-nick-info
+							   + '		</div>'	//comment-nick-box
+							   + '	  </div>'	//comment-box
+							   + '	  <div class="comment-text-box">'
+							   + '	    <p class="comment-text-view">'
+							   + '	      <span class="text-comment">' + this.b_content + '</span>'
+							   + '	    </p>'
+							   + '	  </div>'//comment-text-box
+							   + '	  <div class="comment-info-box">'
+							   + '	    <span class="comment-info-date">' + date + '</span>';
+						if(lev<2){
+							output += '	<a href="javascript:replyform(' + this.b_c_num +','
+								   + lev + ',' + this.b_comment_re_seq + ','
+								   + this.b_comment_re_ref + ')" class="comment-info-button">답글쓰기</a>'
+						}
+						output += '		</div>'//comment-info-box
+						
+						const admin='ADMIN'
+						if($("#loginid").val()==this.b_c_id || $("#loginid").val()==admin){
+							output += '<div class="comment-tool">'
+								   + '	<div id="comment-list-layer' + this.b_c_num + '" class="LayerMore">'//스타일에서 display none
+								   + '	  <ul class="layer-list">'
+								   + '	  	<li class="layer-item">'
+								   + '		  <a href="javascript:updateForm(' + this.b_c_num + ')"'
+								   + '		     class="layer-button">수정</a>&nbsp;&nbsp;'
+								   + '		  <a href="javascript:del(' + this.b_c_num + ')"'
+								   + '		     class="layer-button">삭제</a></li></ul>'
+								   + '	</div>'//LayerMore
+								   + '</div>'//comment-tool
+						}
+						
+						output += '</div>'//comment-nick-area
+							   + '</li>'//li.comment-list-item
 					})//each end
-			 }//if(rdata.boardlist.length>0)
-			 else{ 
-				
-				
-				
-				
-				
+					
+					$('.comment-list').html(output);
+				}//if(rdata.boardlist.length>0)
+
+			 else{ //댓글 1개가 있는 상태에서 삭제하는 경우 갯수는 0이라 if문을 수행하지 않고 이곳으로 옵니다.
+					//이곳에서 아래의 두 영역을 없앱니다.
+					$('.comment-list').empty();
+					$('.comment-order-list').empty();
 			 }
 			}//success end
 		});//ajax end
@@ -48,7 +103,31 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 //더보기-수정 클릭한 경우에 수정 폼을 보여줍니다.
 function updateForm(num){ //num : 수정할 댓글 글번호
 
+	$(".LayerMore").hide();//수정 삭제 영역도 숨겨요
+	
+	let $num = $('#'+num);
 
+    //선택한 내용을 구합니다.
+    const content=$num.find('.text-comment').text();
+    
+    const selector = '#'+num + '> .comment-nick-area'
+    $(selector).hide();//selector 영역 숨겨요-수정에서 취소를 선택하면 보여줄 예정입니다.
+    
+    //$('.comment-list+.comment-write').clone() : 기본 글쓰기 영역 복사합니다.
+    //글이 있던 영역에 글을 수정할 수 있는 폼으로 바꿉니다.
+    $num.append($('.comment-list+.comment-write').clone());
+    
+    //수정 폼의 <textarea>에 내용을 나타냅니다.
+    $num.find('textarea').val(content);
+    
+    //.btn-register' 영역에 수정할 글 번호를 속성 'data-id'에 나타내고 클래스 'update'를 추가합니다.
+    $num.find('.btn-register').attr('data-id',num).addClass('update').text('수정완료');
+    
+    //폼에서 취소를 사용할 수 있도록 보이게 합니다.
+    $num.find('.btn-cancle').css('display','inline');
+     
+    const count=content.length;
+    $num.find('.comment-write-area-count').text(count+"/200");
     
 	
 }//function(updateForm) end
@@ -80,26 +159,59 @@ $(function() {
 
 	
 	$('.comment-area').on('keyup','.comment-write-area-text', function() {
-	
+		const length=$(this).val().length;
+		$(this).prev().text(length+'/200');
 	});// keyup','.comment-write-area-text', function() {
 	
 	
 	//댓글 등록을 클릭하면 데이터베이스에 저장 -> 저장 성공 후에 리스트 불러옵니다.
 	$('ul+.comment-write .btn-register').click(function() {
+		const content=$('.comment-write-area-text').val();
+		if(!content){//내용없이 등록 클릭한 경우
+			alert("댓글을 입력하세요");
+			return;
+		}
 		
+		$.ajax({
+			url: 'CommentAdd.bo',//원문 등록
+			data : {
+				b_c_id : $("#loginid").val(),
+				b_content : content,//$('.comment-write-area-text').val()
+				b_comment_num : $("#comment_board_num").val(),
+				b_comment_re_lev : 0,//원문인 경우 comment_re_seq는 0,
+									//comment_re_ref는 댓글의 원문 글번호
+				b_comment_re_seq : 0
+			},
+			type : 'post',
+			success : function(rdata) {
+				if(rdata == 1){
+					getList(option);
+				}
+			}
+		})//ajax
+		
+		$('.comment-write-area-text').val('');//textarea 초기화
+		$('.comment-write-area-count').text('0/200');//입력한 글 카운트 초기화		
 	})// $('.btn-register').click(function(){
-	
-	
-	//더보기를 클릭한 경우
-	$(".comment-list").on('click', '.comment-tool-button', function() {        		
-	
-	})
-	
 	
 
 	//수정 후 수정완료를 클릭한 경우
 	$('.comment-area').on('click','.update',function(){
-		
+		const content = $(this).parent().parent().find('textarea').val();
+		if(!content){
+			alert("수정할 글을 입력하세요");
+			return;
+		}
+		const num = $(this).attr('data-id');
+		$.ajax({
+			url:'CommentUpdate.bo',
+			data:{b_c_num :num, b_content :content},//$('.comment-write-area-text').val()
+			success :function(rdata){
+				if(rdata==1){
+					getList(option);
+				}//if
+			}//success
+		})//ajax
 	})//수정 후 수정완료를 클릭한 경우
 	
 	

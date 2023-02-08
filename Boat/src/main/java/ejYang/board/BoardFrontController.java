@@ -57,14 +57,14 @@ private static final long serialVersionUID=1L;
 			case "/CommentList.bo":
 				action = new CommentList();
 				break;
-//			case "/CommentAdd.bo":
-//				action = new CommentAdd();
-//				break;
+			case "/CommentAdd.bo":
+				action = new CommentAdd();
+				break;
+			case "/CommentUpdate.bo":
+				action = new CommentUpdate();
+				break;
 //			case "/CommentDelete.bo":
 //				action = new CommentDelete();
-//				break;
-//			case "/CommentUpdate.bo":
-//				action = new CommentUpdate();
 //				break;
 //			case "/CommentReply.bo":
 //				action = new CommentReply();

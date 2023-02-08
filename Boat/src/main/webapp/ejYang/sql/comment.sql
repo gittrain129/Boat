@@ -4,7 +4,7 @@ create table BOARD_COMMENT(
 	B_C_NUM					number 			PRIMARY KEY,--글번호
 	B_C_ID 					varchar2(30)	references MEMBER(EMPNO),
 	B_CONTENT				varchar2(200),
-	REG_DATE				date,
+	B_REG_DATE				date DEFAULT SYSDATE,
 	B_COMMENT_NUM			number	--원문글번호
 	references BOARD(BOARD_NUM) on delete cascade,--comm 테이블이 참조하는 보드 글 번호
 	B_COMMENT_RE_LEV		number(1)	check(B_COMMENT_RE_LEV in (0,1,2)),--원문이면0 답글이면1
@@ -12,7 +12,17 @@ create table BOARD_COMMENT(
 	B_COMMENT_RE_REF		number	--원문은 자신 글번호, 답글이면 원문 글번호
 );
 --게시판 글이 삭제되면 참조하는 댓글도 삭제됩니다.
-drop sequence com_seq;
+
+insert into BOARD_COMMENT 
+(B_C_NUM, B_C_ID, B_CONTENT, B_COMMENT_NUM, B_COMMENT_RE_REF, B_COMMENT_RE_LEV, B_COMMENT_RE_SEQ) 
+values(1, 'ADMIN', '댓글', 2, 1, 0, 0);
+insert into BOARD_COMMENT 
+(B_C_NUM, B_C_ID, B_CONTENT, B_COMMENT_NUM, B_COMMENT_RE_REF, B_COMMENT_RE_LEV, B_COMMENT_RE_SEQ) 
+values(2, 'ADMIN', '댓글', 2, 1, 1, 1);
+
+
+
+drop sequence BOARD_COM_SEQ;
 
 --시퀀스를 생성합니다.
 create sequence BOARD_COM_SEQ;
@@ -20,6 +30,10 @@ create sequence BOARD_COM_SEQ;
 delete comm;
 
 select*from BOARD_COMMENT;
+
+
+select count(*) from BOARD_COMMENT 
+where B_COMMENT_NUM = 10
 
 
 select B_C_NUM, B_C_ID, B_CONTENT, REG_DATE, B_COMMENT_RE_LEV, 

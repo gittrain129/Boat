@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
  <head>
-  <script src="${pageContext.request.contextPath}/ejYang/js/view.js"></script><%-- 댓글 --%>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <link href="${pageContext.request.contextPath}/ejYang/css/view.css" type="text/css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+  <script src="${pageContext.request.contextPath}/ejYang/js/view.js"></script><%-- 댓글 --%>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <jsp:include page="/sjKim/boat/header.jsp" />
   <title>게시글 보기</title>
@@ -21,6 +21,7 @@
   </script>
  </head>
  <body>
+  <input type="hidden" id="loginid" value="HONG" name="loginid"><%-- view.js에서 사용하기 위해 추가합니다. --%>
   <div class="containers">
   <h2>업무 게시판</h2>
   <p>업무 게시판 입니다.</p>
