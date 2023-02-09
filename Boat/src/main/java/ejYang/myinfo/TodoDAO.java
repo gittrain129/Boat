@@ -36,7 +36,7 @@ public class TodoDAO {
 		
 		String sql = "SELECT*FROM MYINFO "
 				+ "WHERE T_EMPNO = ? "
-				+ "AND T_GRAPH = 'N'"
+				+ "AND T_GRAPH = 'N' "
 				+ "ORDER BY T_DATE ";
 		try {
 			conn = ds.getConnection();
@@ -240,7 +240,7 @@ public class TodoDAO {
 
 		
 		//완료 'N' -> 'Y'
-		public int todocheck(TodoBean todo) {
+		public int todocheck(String empno, String content) {
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			int result = 0;
@@ -254,8 +254,8 @@ public class TodoDAO {
 				//등록은 무조건 N
 				
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, todo.getT_empno());
-				pstmt.setString(2, todo.getT_content());
+				pstmt.setString(1, empno);
+				pstmt.setString(2, content);
 				result = pstmt.executeUpdate();
 				
 				if(result == 1) {
@@ -284,4 +284,165 @@ public class TodoDAO {
 			}
 			return result;
 		}
+
+		
+		//투두 삭제
+		public int tododelete(String empno, String content) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			int result = 0;
+			try {
+				conn = ds.getConnection();
+				
+				String sql = "DELETE MYINFO "
+						+ "WHERE T_EMPNO = ? "
+						+ "AND T_CONTENT = ? ";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, empno);
+				pstmt.setString(2, content);
+				result = pstmt.executeUpdate();
+				
+				if(result == 1) {
+					System.out.println("선택된 투두리스트가 삭제되었습니다.");
+				}
+				
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				System.out.println("tododelete() 에러: " + ex);
+			}finally {
+				if(pstmt != null) {
+					try {
+						pstmt.close(); 
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				
+				if(conn != null) {
+					try {
+						conn.close(); 	
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+			}
+			return result;
+		}
+
+		
+		//N 리스트
+		public JsonArray getNTodoList(String t_empno) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			JsonArray array = new JsonArray();
+			
+			String sql = "SELECT*FROM MYINFO "
+					+ "WHERE T_EMPNO = ? ";
+			try {
+				conn = ds.getConnection();
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, t_empno);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					JsonObject object = new JsonObject();
+					object.addProperty("t_empno", rs.getString(1));
+					object.addProperty("t_content", rs.getString(2));
+					object.addProperty("t_date", rs.getString(3));
+					object.addProperty("t_graph", rs.getString(4));
+					array.add(object);
+				}
+				
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				System.out.println("getNTodoList() 에러: " + ex);
+			}finally {
+				if(rs != null) {
+					try {
+						rs.close(); 
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				
+				if(pstmt != null) {
+					try {
+						pstmt.close(); 
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				
+				if(conn != null) {
+					try {
+						conn.close(); 	
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+			}
+			return array;
+		}
+
+		
+		//Y 리스트
+		public JsonArray getYTodoList(String t_empno) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			JsonArray array = new JsonArray();
+			
+			String sql = "SELECT*FROM MYINFO "
+					+ "WHERE T_EMPNO = ? "
+					+ "AND T_GRAPH = 'Y' ";
+			try {
+				conn = ds.getConnection();
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, t_empno);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					JsonObject object = new JsonObject();
+					object.addProperty("t_empno", rs.getString(1));
+					object.addProperty("t_content", rs.getString(2));
+					object.addProperty("t_date", rs.getString(3));
+					object.addProperty("t_graph", rs.getString(4));
+					array.add(object);
+				}
+				
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				System.out.println("getYTodoList() 에러: " + ex);
+			}finally {
+				if(rs != null) {
+					try {
+						rs.close(); 
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				
+				if(pstmt != null) {
+					try {
+						pstmt.close(); 
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				
+				if(conn != null) {
+					try {
+						conn.close(); 	
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+			}
+			return array;
+		}
+
 }

@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import ejYang.board.Action;
 import ejYang.board.ActionForward;
 
-public class TodoCheck implements Action {
+public class TodoDelete implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 		TodoDAO tdao = new TodoDAO();
 		
 		String empno = request.getParameter("t_empno");
@@ -27,7 +26,7 @@ public class TodoCheck implements Action {
 		for(int i=0;i<content.length;i++) {
 		    System.out.println(content[i]);    
 		    
-		    ok = tdao.todocheck(empno, content[i]);
+		    ok = tdao.tododelete(empno, content[i]);
 		}
 		
 		response.getWriter().print(ok);

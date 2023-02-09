@@ -25,11 +25,24 @@ public class Todolist implements Action {
 		String t_empno = request.getParameter("t_empno");
 		System.out.println("t_empno="+t_empno);
 		
+		//보여지는 전체 리스트
 		JsonObject object = new JsonObject();
 		JsonArray jarray = tdao.getTodoList(t_empno);
 		
 		JsonElement je = new Gson().toJsonTree(jarray);
 		object.add("todolist", je);
+		
+		//전체 리스트
+		JsonArray jarrayn = tdao.getNTodoList(t_empno);
+		
+		JsonElement jen = new Gson().toJsonTree(jarrayn);
+		object.add("ntodolist", jen);
+		
+		//Y 리스트
+		JsonArray jarrayy = tdao.getYTodoList(t_empno);
+		
+		JsonElement jey = new Gson().toJsonTree(jarrayy);
+		object.add("ytodolist", jey);
 		
 		response.setContentType("application/json;charset=utf-8");
 		PrintWriter out = response.getWriter();
