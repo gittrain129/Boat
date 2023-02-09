@@ -22,6 +22,7 @@ public class MemberLoginAction implements Action {
 			}
 		}
 		
+		
 		request.setAttribute("id", id);
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);  //주소 변경없이 jsp페이지의 내용을 보여줍니다.
