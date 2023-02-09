@@ -3,15 +3,23 @@ drop table member cascade constraints purge;
 --2. 관리자 계정 admin, 비번 1234를 만듭니다.
 --3. 사용자 계정을 3개 만듭니다.
 
-create table member(
-	id			varchar2(12),
-	password	varchar2(10),
-	name		varchar2(15),
-	age			number(2),
-	gender		varchar2(3),
-	email		varchar2(30),
-	memberfile 	varchar2(50),
-	primary key(id)
+create table MEMBER(
+	 EMPNO VARCHAR2(12) PRIMARY KEY,
+	 DEPT VARCHAR2(10)
+	 CONSTRAINT BOAT_DEPT_CK CHECK (DEPT IN('홍보팀','개발팀','인사팀','기획팀','영업팀')),
+	 DEPTNO NUMBER(2),
+	 CONSTRAINT BOAT_DEPTNO_CK CHECK (DEPTNO IN('10','20','30','40','50')),
+	 PASSWORD VARCHAR2(10),
+	 PWCHECK VARCHAR2(10),
+	 NAME VARCHAR2(15),
+	 JUMIN varchar2(15),
+	 ADDRESS VARCHAR2(150),
+	 POST NUMBER(5),
+	 GENDER VARCHAR2(3),
+	 EMAIL VARCHAR2(30),
+	 PHONE NUMBER(11),
+	 MEMBERFILE VARCHAR2(50),
+	 IMGSRC VARCHAR2(150)
 );
 
 --memberfile은 회원 정보 수정시 적용합니다.
