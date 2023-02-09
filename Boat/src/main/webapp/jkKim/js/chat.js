@@ -1,46 +1,32 @@
-function getId(signal){
-	const data = `state=ajax`;
-	
-}
+(function start_chat() {
 
-$(function(){
-	   $(window).on("load",function(){
-		alert('ㅎㅇ');
-		
-		 		
-                initialize();
-		
-		
-})
-});
-
-var lastPeerId = null;
-                var peer = null; // Own peer object
-                var peerId = null;
+                var lastPeerId = null;
+                var peer = null; // own peer object
                 var conn = null;
-                var recvId = document.getElementById("receiver-id");
+                var recvIdInput = document.getElementById("receiver-id");
                 var status = document.getElementById("status");
                 var message = document.getElementById("message");
-               // var receiverMessage = document.getElementById("my_box"); //내 메세지
-                //var senderMessage = document.getElementById("your_box"); //받은 메세지
-              
-               
+                
                 var sendMessageBox = document.getElementById("sendMessageBox");
                 var sendButton = document.getElementById("sendButton");
                 var clearMsgsButton = document.getElementById("clearMsgsButton");
+                var connectButton = document.getElementById("connect-button");
+                var cueString = "<span class=\"cueMsg\">Cue: </span>";
 
-
-
-function initialize() {
-                    
-                    peer = new Peer('jkKim', {
+                /**
+                 * Create the Peer object for our end of the connection.
+                 *
+                 * Sets up callbacks that handle any events related to our
+                 * peer object.
+                 */
+                function initialize() {
+                    // Create own peer object with connection to shared PeerJS server
+                    peer = new Peer(null, {
                         debug: 2
                     });
-                    
-					
-					
+
                     peer.on('open', function (id) {
-                       
+                        // Workaround for peer.reconnect deleting previous id
                         if (peer.id === null) {
                             console.log('Received null id from peer open');
                             peer.id = lastPeerId;
@@ -49,29 +35,19 @@ function initialize() {
                         }
 
                         console.log('ID: ' + peer.id);
-                        recvId.innerHTML = "ID: " + peer.id;
-                        status.innerHTML = "Awaiting connection...";
                     });
                     peer.on('connection', function (c) {
-                        // 한번에 한명만 연결되게함
-                        if (conn && conn.open) {
-                            c.on('open', function() {
-                                c.send("Already connected to another client");
-                                setTimeout(function() { c.close(); }, 500);
-                            });
-                            return;
-                        }
-
-                        conn = c;
-                        console.log("Connected to: " + conn.peer);
-                        status.innerHTML = "Connected";
-                        ready();
+                        // Disallow incoming connections
+                        c.on('open', function() {
+                            c.send("Sender does not accept incoming connections");
+                            setTimeout(function() { c.close(); }, 500);
+                        });
                     });
                     peer.on('disconnected', function () {
                         status.innerHTML = "Connection lost. Please reconnect";
                         console.log('Connection lost. Please reconnect');
 
-                       
+                        // Workaround for peer.reconnect deleting previous id
                         peer.id = lastPeerId;
                         peer._lastServerId = lastPeerId;
                         peer.reconnect();
@@ -85,23 +61,77 @@ function initialize() {
                         console.log(err);
                         alert('' + err);
                     });
-                }; //initialize end
+                };
 
+                /**
+                 * Create the connection between the two Peers.
+                 *
+                 * Sets up callbacks that handle any events related to the
+                 * connection and data received on it.
+                 */
+                function join() {
+                    // Close old connection
+                    if (conn) {
+                        conn.close();
+                    }
 
-               
-function ready() {
+                    // Create connection to destination peer specified in the input field
+                    conn = peer.connect(recvIdInput.value, {
+                        reliable: true
+                    });
+
+                    conn.on('open', function () {
+                        status.innerHTML = "Connected to: " + conn.peer;
+                        console.log("Connected to: " + conn.peer);
+
+                        // Check URL params for comamnds that should be sent immediately
+                        var command = getUrlParam("command");
+                        if (command)
+                            conn.send(command);
+                    });
+                    // Handle incoming data (messages only since this is the signal sender)
                     conn.on('data', function (data) {
-                        addyourMessage("<span class=\"peerMsg\">Peer:</span> " + data);
+                        addyourMessage2("<span class=\"peerMsg\">Peer:</span> " + data);
                     });
                     conn.on('close', function () {
-                        status.innerHTML = "Connection reset<br>Awaiting connection...";
-                        conn = null;
+                        status.innerHTML = "Connection closed";
                     });
-                } //reday() end
+                };
+
+                /**
+                 * Get first "GET style" parameter from href.
+                 * This enables delivering an initial command upon page load.
+                 *
+                 * Would have been easier to use location.hash.
+                 */
+                function getUrlParam(name) {
+                    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+                    var regexS = "[\\?&]" + name + "=([^&#]*)";
+                    var regex = new RegExp(regexS);
+                    var results = regex.exec(window.location.href);
+                    if (results == null)
+                        return null;
+                    else
+                        return results[1];
+                };
+
+                /**
+                 * Send a signal via the peer connection and add it to the log.
+                 * This will only occur if the connection is still alive.
+                 */
+                 function signal(sigName) {
+                    if (conn && conn.open) {
+                        conn.send(sigName);
+                        console.log(sigName + " signal sent");
+                        addMessage(cueString + sigName);
+                    } else {
+                        console.log('Connection is closed');
+                    }
+                }
 
                 
 
-function addMessage(msg) {
+                function addMessage(msg) {
                     var now = new Date();
                     var h = now.getHours();
                     var m = addZero(now.getMinutes());
@@ -117,17 +147,11 @@ function addMessage(msg) {
                             t = "0" + t;
                         return t;
                     };
-                    //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
-                    //message.innerHTML = ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" +msg + message.innerHTML +"</div>");
                     message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
-                   
-                } //addmessage() end
-
+                    //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
+                };
                 
-                
-                
-                //다른사람 채팅창용 펑션
-function addyourMessage(msg) {
+                function addyourMessage2(msg) {
                     var now = new Date();
                     var h = now.getHours();
                     var m = addZero(now.getMinutes());
@@ -146,19 +170,12 @@ function addyourMessage(msg) {
                     //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
                     //message.innerHTML = ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" +msg + message.innerHTML +"</div>");
                     message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
-                    
-                } //addyourmessage(end)
-                
-                 
-                
-function clearMessages() {
-                	message.innerHTML = "";
-                    history.go(0);
-                    
-                } //clear messages end
-                
-            
-                
+                }
+
+                function clearMessages() {
+                    message.innerHTML = "";
+                    addMessage("Msgs cleared");
+                };
 
                 // Listen for enter in message box
                 sendMessageBox.addEventListener('keypress', function (e) {
@@ -173,8 +190,8 @@ function clearMessages() {
                         var msg = sendMessageBox.value;
                         sendMessageBox.value = "";
                         conn.send(msg);
-                        console.log("Sent: " + msg)
-                        addMessage("<span class=\"selfMsg\">Self: </span>" + msg);
+                        console.log("Sent: " + msg);
+                        addMessage("<span class=\"selfMsg\">Self: </span> " + msg);
                     } else {
                         console.log('Connection is closed');
                     }
@@ -182,8 +199,9 @@ function clearMessages() {
 
                 // Clear messages box
                 clearMsgsButton.addEventListener('click', clearMessages);
-				
-              
-                	
+                // Start peer connection on click
+                connectButton.addEventListener('click', join);
 
-
+                // Since all our callbacks are setup, start the process of obtaining an ID
+                initialize();
+            });
