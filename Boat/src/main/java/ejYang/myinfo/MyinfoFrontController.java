@@ -30,6 +30,12 @@ private static final long serialVersionUID=1L;
 		
 		//http://localhost:8089/Boat/
 		switch(command) {
+			case "/MyBoardList.my":
+				action = new MyBoardListAction();//내 글 보기
+				break;
+//			case "/MyInfo.my":
+//				action = new MyInfo();//내 글 보기
+//				break;
 			case "/MySchedule.my":
 				action = new TodoAction();//페이지 이동
 				break;
@@ -44,6 +50,9 @@ private static final long serialVersionUID=1L;
 				break;
 			case "/TodoDelete.my":
 				action = new TodoDelete();//글 삭제
+				break;
+			case "/TodoDeleteAll.my":
+				action = new TodoDeleteAll();//12시 전체 글 삭제
 				break;
 				
 		}//switch end
