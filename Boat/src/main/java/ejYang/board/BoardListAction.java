@@ -80,6 +80,13 @@ public class BoardListAction implements Action{
 			endpage = maxpage;
 		
 		String state = request.getParameter("state");
+		
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
+        String nowday = format.format(cal.getTime());
+        
 		if(state == null) {
 			System.out.println("state==null");
 			request.setAttribute("page", page);//현재 페이지 수
@@ -101,11 +108,7 @@ public class BoardListAction implements Action{
 			request.setAttribute("search_field", index);
 			request.setAttribute("search_word", search_word);
 			
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-	        Calendar cal = Calendar.getInstance();
-	        cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
-	        String nowday = format.format(cal.getTime());
-	           
+	        //NEW 표시
 	        System.out.println("nowday=" + nowday);
 	        request.setAttribute("nowday",nowday);
 	        
@@ -131,12 +134,7 @@ public class BoardListAction implements Action{
 			request.setAttribute("search_field", index);
 			request.setAttribute("search_word", search_word);
 			
-
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-	        Calendar cal = Calendar.getInstance();
-	        cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
-	        String nowday = format.format(cal.getTime());
-	           
+	        //NEW 표시   
 	        System.out.println("nowday=" + nowday);
 	        request.setAttribute("nowday",nowday);
 	        

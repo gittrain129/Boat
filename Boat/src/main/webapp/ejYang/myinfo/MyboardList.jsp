@@ -3,7 +3,7 @@
 <html>
  <head> 
   <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
-  <link href="${pageContext.request.contextPath}/ejYang/css/list.css" type="text/css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/ejYang/css/mylist.css" type="text/css" rel="stylesheet">
   <script src="${pageContext.request.contextPath}/ejYang/js/list.js"></script>
   <jsp:include page="/sjKim/boat/header.jsp" />
   <title>내 글 보기</title>
@@ -28,6 +28,7 @@
                 <thead>
                 <tr>
                     <th scope="col" class="th-num">번호</th>
+                    <th scope="col" class="th-cate">카테고리</th>
                     <th scope="col" class="th-title">제목</th>
                     <th scope="col" class="th-dept">부서</th>
                     <th scope="col" class="th-name">작성자</th>
@@ -40,40 +41,71 @@
                 <c:forEach var="b" items="${boardlist}">
                 <tr>
                     <td>
-                    	<c:if test="${b.board_notice == 'Y'}">
-                    		<c:out value="공지"/>
-                    	</c:if>
-                    	<c:if test="${b.board_notice == 'N'}">
-	                    	<c:out value="${num}"/><c:set var="num" value="${num-1}"/>
-                    	</c:if>
+	                    <c:out value="${b.board_num}"/>
                     </td>
-                    
-                    <td class="title-td"><%-- 제목 --%>
-	 		      	  <div>
-	 		      	  	<c:if test="${b.board_re_lev != 0}">	<%-- 답글인 경우 --%>
-	 		      	  		<c:forEach var="a" begin="0" end="${b.board_re_lev*2}" step="1">
-	 		      	  		&nbsp;
-	 		      	  		</c:forEach>
-	 		      	  		<img src="${pageContext.request.contextPath}/ejYang/image/line.png">
-	 		      	  	</c:if>
-	 		      	  	
-	 		      	  	<c:if test="${b.board_re_lev == 0}">	<%-- 원문인 경우 --%>
-	 		      	  		&nbsp;
-	 		      	  	</c:if>
-	 		      	  	
-	 		      	  	<%-- 제목이 너무 길면 '...'으로 처리 --%>
-	 		      	  	<a href="BoardDetailAction.bo?num=${b.board_num}">
-	 		      	  		<c:if test="${b.board_subject.length()>=20}">
-	 		      	  		  <c:out value="${b.board_subject.substring(0,20)}..."/>
-	 		      	  		</c:if>
-	 		      	  		<c:if test="${b.board_subject.length()<20}">
-	 		      	  		  <c:out value="${b.board_subject}"/>
-	 		      	  		  
-	 		      	  		</c:if>
-	 		      	  	</a>&nbsp;[${b.cnt}]
+                    <td>
+	                    <c:choose>
+                    		<c:when test="${b.board_notice == 'Y'}">
+                    			<c:out value="업무 게시판"/>
+                    		</c:when>
+                    		<c:when test="${b.board_notice == 'N'}">
+                    			<c:out value="업무 게시판"/>
+                    		</c:when>
+                    		<c:otherwise>	
+                    			<c:out value="자료실 게시판"/>
+					 	    </c:otherwise>
+                    	</c:choose>
+                    </td>
+                    <td class="title-td">
+                      <div>
+                      	<c:choose>
+                    		<c:when test="${b.board_notice == 'Y'}">
+                    			<%-- 제목이 너무 길면 '...'으로 처리 --%>
+			 		      	  	<a href="BoardDetailAction.bo?num=${b.board_num}">
+			 		      	  		<c:if test="${b.board_subject.length()>=20}">
+			 		      	  		  <c:out value="${b.board_subject.substring(0,20)}..."/>
+			 		      	  		</c:if>
+			 		      	  		<c:if test="${b.board_subject.length()<20}">
+			 		      	  		  <c:out value="${b.board_subject}"/>
+			 		      	  		</c:if>
+			 		      	  	</a>
+                    		</c:when>
+                    		<c:when test="${b.board_notice == 'N'}">
+                    			<%-- 제목이 너무 길면 '...'으로 처리 --%>
+			 		      	  	<a href="BoardDetailAction.bo?num=${b.board_num}">
+			 		      	  		<c:if test="${b.board_subject.length()>=20}">
+			 		      	  		  <c:out value="${b.board_subject.substring(0,20)}..."/>
+			 		      	  		</c:if>
+			 		      	  		<c:if test="${b.board_subject.length()<20}">
+			 		      	  		  <c:out value="${b.board_subject}"/>
+			 		      	  		</c:if>
+			 		      	  	</a>
+                    		</c:when>
+                    		<c:otherwise>	
+                    			<%-- 제목이 너무 길면 '...'으로 처리 --%>
+			 		      	  	<a href="FileBoadrdDetailAction.filebo?num=${b.board_num}">
+			 		      	  		<c:if test="${b.board_subject.length()>=20}">
+			 		      	  		  <c:out value="${b.board_subject.substring(0,20)}..."/>
+			 		      	  		</c:if>
+			 		      	  		<c:if test="${b.board_subject.length()<20}">
+			 		      	  		  <c:out value="${b.board_subject}"/>
+			 		      	  		</c:if>
+			 		      	  	</a>
+					 	    </c:otherwise>
+                    	</c:choose>
+	 		      	  	&nbsp;[${b.cnt}]
 	 		      	  	<c:if test="${b.board_date > nowday}">
 	 		      	  		<img src="${pageContext.request.contextPath}/ejYang/image/new.jpg" id="new">
 	 		      	  	</c:if>
+	 		      	  	<c:choose>
+                    		<c:when test="${b.board_notice == 'Y'}">
+                    		</c:when>
+                    		<c:when test="${b.board_notice == 'N'}">
+                    		</c:when>
+                    		<c:otherwise>	
+                    			<img src="${pageContext.request.contextPath}/ejYang/image/download.png" id="file">
+					 	    </c:otherwise>
+                    	</c:choose>
 	 		      	  </div>
 	 		      	</td>
                     <td><div>${b.board_dept}</div></td>

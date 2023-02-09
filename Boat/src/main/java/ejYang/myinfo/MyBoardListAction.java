@@ -44,7 +44,7 @@ public class MyBoardListAction implements Action {
 		System.out.println("name"+m.getName());
 		
 		MyBoardDAO boarddao = new MyBoardDAO();
-		List<BoardBean> boardlist = new ArrayList<BoardBean>();
+		List<MyBoardBean> boardlist = new ArrayList<MyBoardBean>();
 		
 		int page = 1;	//보여줄 page
 		int limit = 10;	//한 페이지에 보여줄 게시판 목록의 수
@@ -63,7 +63,7 @@ public class MyBoardListAction implements Action {
 		int listcount = boarddao.getMyListCount(name);//글의 갯수 구하기
 		
 		//리스트를 받아옵니다.
-//		boardlist = boarddao.getBoardList(page, limit);
+		boardlist = boarddao.getMyBoardList(page, limit, name);
 		
 		int maxpage = (listcount + limit -1)/limit;
 		System.out.println("총 페이지수 = " +maxpage);
@@ -78,6 +78,12 @@ public class MyBoardListAction implements Action {
 			endpage = maxpage;
 		
 		String state = request.getParameter("state");
+		
+		//NEW 표시
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
+        String nowday = format.format(cal.getTime());
 		if(state == null) {
 			System.out.println("state==null");
 			request.setAttribute("page", page);//현재 페이지 수
@@ -97,11 +103,7 @@ public class MyBoardListAction implements Action {
 			request.setAttribute("limit", limit);
 			//검색에 필요
 			
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-	        Calendar cal = Calendar.getInstance();
-	        cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
-	        String nowday = format.format(cal.getTime());
-	           
+			//NEW 표시
 	        System.out.println("nowday=" + nowday);
 	        request.setAttribute("nowday",nowday);
 	        
@@ -124,12 +126,7 @@ public class MyBoardListAction implements Action {
 			object.addProperty("listcount", listcount);
 			object.addProperty("limit", limit);
 			
-
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-	        Calendar cal = Calendar.getInstance();
-	        cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
-	        String nowday = format.format(cal.getTime());
-	           
+			//NEW 표시   
 	        System.out.println("nowday=" + nowday);
 	        request.setAttribute("nowday",nowday);
 	        

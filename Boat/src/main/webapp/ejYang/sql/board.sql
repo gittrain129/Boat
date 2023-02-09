@@ -32,11 +32,62 @@ create table file_board (
 	DEPT VARCHAR2(30) check (dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀'))
 );
 
---내 글 보기
-select count(*) from BOARD, file_board
-on BOARD_NAME = FILE_NAME
-where BOARD_NAME = 'ADMIN'
 
+--내 글 리스트 
+SELECT * FROM (
+SELECT rownum rnum, J.* FROM(
+SELECT BOARD_NUM, BOARD_SUBJECT, BOARD_DEPT, BOARD_NAME, BOARD_READCOUNT, BOARD_DATE, BOARD_NOTICE FROM BOARD
+where BOARD_NAME = '홍길동' 
+UNION ALL
+SELECT FILE_NUM, FILE_SUBJECT, DEPT, FILE_NAME, FILE_READCOUNT, FILE_DATE, FILE_FILE FROM file_board
+where FILE_NAME = '홍길동' 
+) J
+where rownum <= 4
+ORDER BY BOARD_DATE DESC)
+where rnum>=1 and rnum<=4
+
+
+SELECT * FROM (
+SELECT rownum rnum, J.* FROM(
+SELECT BOARD_NUM, BOARD_SUBJECT, BOARD_DEPT, BOARD_NAME, BOARD_READCOUNT, BOARD_DATE, BOARD_NOTICE, NVL(CNT, 0) AS CNT 
+FROM BOARD LEFT OUTER JOIN  (SELECT B_COMMENT_NUM, COUNT(*) CNT FROM BOARD_COMMENT
+												GROUP BY B_COMMENT_NUM)
+ON BOARD_NUM = B_COMMENT_NUM
+where BOARD_NAME = '홍길동' 
+UNION ALL
+SELECT FILE_NUM, FILE_SUBJECT, DEPT, FILE_NAME, FILE_READCOUNT, FILE_DATE, FILE_FILE, NVL(CNT, 0) AS CNT  
+FROM file_board LEFT OUTER JOIN (SELECT F_COMMENT_NUM, COUNT(*) CNT FROM FILE_COMMENT
+												GROUP BY F_COMMENT_NUM)
+ON FILE_NUM = F_COMMENT_NUM
+where FILE_NAME = '홍길동' 
+) J
+where rownum <= 4
+ORDER BY BOARD_DATE DESC)
+where rnum>=1 and rnum<=4
+
+
+
+SELECT * FROM(
+SELECT * FROM BOARD
+where BOARD_NAME = '홍길동' 
+UNION ALL
+SELECT * FROM file_board
+where FILE_NAME = '홍길동' 
+)
+ORDER BY BOARD_DATE DESC;
+
+
+SELECT * FROM BOARD
+SELECT * FROM file_board
+
+
+--내 글 개수
+SELECT SUM(c) FROM
+(select count(*) c from BOARD
+where BOARD_NAME = '홍길동' 
+UNION ALL
+select count(*) c from file_board
+where FILE_NAME = '길동')
 
 
 insert into BOARD
