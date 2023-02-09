@@ -5,25 +5,25 @@ $(document).ready(function() {
 	// ID중복검사 부분
 	$("#idcheck").click(function() {
 
-		const id = $("#id");
+		const empno = $("#empno");
 		// $.trim(문자열)는  문자열의 앞, 뒤 공백을 제거합니다.
-		const id_value = $.trim(id.val());
-		if (id_value == "") {
-			alert("ID를 입력 하세요");
-			id.focus();
+		const empno_value = $.trim(empno.val());
+		if (empno_value == "") {
+			alert("사원번호를 입력 하세요");
+			empno.focus();
 			return false;
 		} else {
 			// 대소문자, 숫자, _로 총 4개 이상
 			pattern = /^[a-zA-Z0-9_]{4,}$/;
-			if (pattern.test(id_value)) {
-				idcheck_value = id_value;
+			if (pattern.test(empno_value)) {
+				idcheck_value = empno_value;
 				is_idcheck_click = true;
-				const ref = "idcheck?id=" + id_value;
+				const ref = "idcheck?empno=" + empno_value;
 				window.open(ref, "idcheck", "width=350,height=200");
 
 			} else {
 				alert("아이디는 대소문자, 숫자, _로 총 4개 이상이어야 합니다.");
-				id.val('').focus();
+				empno.val('').focus();
 			}
 		}
 	});
@@ -74,38 +74,38 @@ $(document).ready(function() {
 	// 회원가입 버튼 클릭할때 이벤트 처리 부분
 	$("form").submit(function() {
 		// $.trim(문자열)는  문자열의 앞, 뒤 공백을 제거합니다.
-		const id = $("#id");
-		if ($.trim(id.val()) == "") {
-			alert("ID를 입력 하세요");
-			id.focus();
+		const empno = $("#empno");
+		if ($.trim(empno.val()) == "") {
+			alert("사원번호를 입력 하세요");
+			empno.focus();
 			return false;
 		}
 
 
-        if(!$("#id").prop('readOnly')){  //회원가입 폼과 정보 수정 폼에서 동시에 사용할 js입니다.
+        if(!$("#empno").prop('readOnly')){  //회원가입 폼과 정보 수정 폼에서 동시에 사용할 js입니다.
     	                                //회원가입 폼에서만 사용할 문장들 입니다.
     	                                //정보 수정 폼에서는 아이디를 수정하지 않기 때문에 필요없는 부분입니다.
-    	   console.log($("#id").prop('readOnly'))
-	       const submit_id_value=$.trim($("#id").val()) 
-	       if(submit_id_value != idcheck_value){//submit 당시 아이디값과 아이디 중복검사에 사용된 아이디를 비교합니다.
-	    	   alert("ID 중복검사를 하세요");
+    	   console.log($("#empno").prop('readOnly'))
+	       const submit_empno_value=$.trim($("#empno").val()) 
+	       if(submit_empno_value != idcheck_value){//submit 당시 아이디값과 아이디 중복검사에 사용된 아이디를 비교합니다.
+	    	   alert("사원번호 중복검사를 하세요");
 	           return false;
 	       }
 	       
     	   //아이디 중복 검사를 했지만  사용중인 아이디인 경우에는 submit시 경고창 나타납니다.
 	       const result=$("#result").val();       
 	       if(result==-1){
-	    	   alert("사용 가능한 아이디로 다시 입력하세요");
-	    	   $("#id").val('').focus();
+	    	   alert("사용 가능한 사원번호로 다시 입력하세요");
+	    	   $("#empno").val('').focus();
 	    	   return false;
 	       }
        }
 
 
-		const pass = $("#pass");
-		if ($.trim(pass.val()) == "") {
+		const password = $("#password");
+		if ($.trim(password.val()) == "") {
 			alert("비밀번호를 입력 하세요");
-			pass.focus();
+			password.focus();
 			return false;
 		}
 
@@ -174,23 +174,23 @@ $(document).ready(function() {
 		cnt = $('input:checkbox:checked').length;
 
 
-		const post1 = $("#post1");
-		if ($.trim(post1.val()) == "") {
+		const post = $("#post");
+		if ($.trim(post.val()) == "") {
 			alert("우편번호를 입력 하세요");
-			post1.focus();
+			post.focus();
 			return false;
 		}
 
-		if (!$.isNumeric(post1.val())) {
+		if (!$.isNumeric(post.val())) {
 			alert("숫자만 입력 가능 합니다.");
-			post1.val("");
-			post1.focus();
+			post.val("");
+			post.focus();
 			return false;
 		}
 
-		if ($.trim(post1.val()).length != 5) {
+		if ($.trim(post.val()).length != 5) {
 			alert("우편번호는 다섯자리입니다.");
-			post1.focus();
+			post.focus();
 			return false;
 		}
 
@@ -249,7 +249,7 @@ $(document).ready(function() {
  
                 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                $('#post1').val(data.zonecode); //5자리 새우편번호 사용
+                $('#post').val(data.zonecode); //5자리 새우편번호 사용
                 $('#address').val(fullRoadAddr);
             }
         }).open();

@@ -1,4 +1,4 @@
-package net.member.action;
+package sjKim.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import net.member.db.Member;
-import net.member.db.MemberDAO;
+import sjKim.db.Member;
+import sjKim.db.MemberDAO;
+
+
 
 public class MemberUpdateProcessAction implements Action {
 	@Override
@@ -32,8 +34,7 @@ public class MemberUpdateProcessAction implements Action {
 		System.out.println("realFolder=[" + realFolder);
 		try {
 			MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "utf-8", new DefaultFileRenamePolicy());
-			String id = multi.getParameter("id");
-			String name = multi.getParameter("name");
+			String empno = multi.getParameter("empno");
 			int age = Integer.parseInt(multi.getParameter("age"));
 			String gender = multi.getParameter("gender");
 			String email = multi.getParameter("email");
@@ -41,8 +42,8 @@ public class MemberUpdateProcessAction implements Action {
 			String memberfile = multi.getFilesystemName("memberfile");
 			System.out.println("memberfile=" + memberfile);
 			Member m = new Member();
-			m.setAge(age);			m.setEmail(email);			m.setGender(gender);
-			m.setId(id);			m.setName(name);			//m.setPassword(pass);
+			m.setEmail(email);			m.setGender(gender);
+			m.setEmpno(empno);						//m.setPassword(password);
 			m.setMemberfile(memberfile);
 			
 			if(memberfile != null) { //파일을 선택한 경우

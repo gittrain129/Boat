@@ -24,6 +24,7 @@ div.logo{
 
 li {
 	list-style: none; 
+	display: inline-block;
 }
 
                        
@@ -87,15 +88,17 @@ li {
  height:25px;
 }	
 
-.login_header{
-	position: absolute;
-	top:0;
-	right: 20px;
-	margin-top: 62px;
-	display:flex;
-	width:270px;	
-	text-decoration: none;
-	color: black;
+.login_header{	
+	position: fixed;
+    float: right;
+    top: 0;
+    right: 20px;
+    display: inline-block;
+    width: 1000px;
+    text-decoration: none;
+    color: black;
+    text-align: right;
+    font-size: 15px;
 }
 
 .login_header > div {
@@ -125,6 +128,7 @@ li {
             background: none;
             border-radius: 10px;
             border: black;
+            margin-top: 15px;
 }
 
 .login_header > .dropdown_inout select{				
@@ -135,6 +139,14 @@ li {
                 text-align-last: center;             
 }
 
+
+.bg-dark {
+		background-color: none;
+	}
+.navbar-dark .navbar-nav .nav-link {
+	color: black;
+	font-weight: bold;
+}
 </style>
 
 <script src="${pageContext.request.contextPath}/sjKim/js/header.js"></script>
@@ -214,16 +226,26 @@ li {
         
         
         <div class="login_header">	
-        	<div class="login_button">
-        	<a href="${pageContext.request.contextPath}/login.net" target="_self">
-				<span>로그인</span>	
-			</a>
-			</div>
-			<div class="join_button">
-        	<a href="${pageContext.request.contextPath}/join.net" target="_self">
-				<span>회원가입</span>	
-			</a>
-			</div>
+          <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        	<div class="collapse navbar-collapse flex-row-reverse" id="collapsibleNavbar">
+		    	<ul class="navbar-nav">
+		    		<c:if test="${!empty empno}">
+		     	    	<li class="nav-item"><a class="nav-link" >${empno}님이 로그인 되었습니다.</a></li>
+		     	    	<li class="nav-item"><a class="nav-link" href="update_form">| 정보수정 |</a></li>
+		     	    	<c:if test="${empno=='boat'}">
+		     	    		<li class="nav-item"><a class="nav-link" href="list"> 회원정보 |</a></li>
+		     	    	</c:if>
+		     			<li class="nav-item"><a class="nav-link" href="logout">로그아웃</a></li>
+		     		</c:if>
+		     		
+		     		<c:if test="${empty empno}">
+		      			<li class="nav-item"><a class="nav-link" href="login">로그인</a></li>   
+		      			<li class="nav-item"><a class="nav-link" href="join">회원가입</a></li> 
+		      		</c:if>
+		      		
+		   	   </ul>
+		    </div>
+		  </nav>
 			
 		<script src="${pageContext.request.contextPath}/sjKim/js/inout.js"></script>			
 			<div class="dropdown_inout">						

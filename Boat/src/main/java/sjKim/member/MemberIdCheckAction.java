@@ -13,7 +13,7 @@ public class MemberIdCheckAction implements Action {
 	public ActionForward execute (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		MemberDAO dao = new MemberDAO();
-		int result = dao.isId(request.getParameter("id"));
+		int result = dao.isEmpno(request.getParameter("empno"));
 		response.getWriter().print(result);
 		System.out.println(result);
 		return null;

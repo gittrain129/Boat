@@ -24,7 +24,7 @@ public class MemberDAO {
 		}
 	}
 	 
-	public int isId(String id) {
+	public int isEmpno(String empno) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
@@ -32,10 +32,10 @@ public class MemberDAO {
 		try {
 			conn = ds.getConnection();
 			
-			String sql = "select id from member where id=?";
+			String sql = "select empno from member where empno=?";
 			// PreparedStatement 객체 얻기
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, empno);
 			rs = pstmt.executeQuery();
 		
 			if(rs.next()) {
@@ -77,15 +77,18 @@ public class MemberDAO {
 			
 			// PreparedStatement 객체 얻기
 			pstmt = conn.prepareStatement(
-					"insert into member (id, password, name, age, gender, email) "
-					+"values (?,?,?,?,?,?)");
+					"insert into member (empno, password, jumin, address, post, gender, email, memberfile, intro) "
+					+"values (?,?,?,?,?,?,?,?,?)");
 	
-			pstmt.setString(1, m.getId());
+			pstmt.setString(1, m.getEmpno());
 			pstmt.setString(2, m.getPassword());
-			pstmt.setString(3, m.getName());
-			pstmt.setInt(4, m.getAge());
-			pstmt.setString(5, m.getGender());
-			pstmt.setString(6, m.getEmail());
+			pstmt.setString(3, m.getJumin());
+			pstmt.setString(4, m.getAddress());
+			pstmt.setInt(5, m.getPost());
+			pstmt.setString(6, m.getGender());
+			pstmt.setString(7, m.getEmail());
+			pstmt.setString(8, m.getMemberfile());
+			pstmt.setString(9, m.getIntro());
 			
 			result = pstmt.executeUpdate(); //삽입 성공시 result는 1
 			
@@ -112,7 +115,7 @@ public class MemberDAO {
 		return result;
 	}//insert end
 
-	public int isId(String id, String pass) {
+	public int isEmpno(String empno, String password) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
@@ -120,14 +123,14 @@ public class MemberDAO {
 		try {
 			conn = ds.getConnection();
 			
-			String sql = "select id, password from member where id=?";
+			String sql = "select empno, password from member where empno=?";
 			// PreparedStatement 객체 얻기
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, empno);
 			rs = pstmt.executeQuery();
 		
 			if(rs.next()) {
-				if(rs.getString(2).equals(pass)) {
+				if(rs.getString(2).equals(password)) {
 					result = 1;	//아이디와 비밀번호 일치하는 경우
 				}else {
 					result = 0;  //비밀번호가 일치하지 않는 경우
@@ -161,7 +164,7 @@ public class MemberDAO {
 
 	}
 
-	public Member member_info(String id) {
+	public Member member_info(String empno) {
 		Member m = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -169,19 +172,22 @@ public class MemberDAO {
 		try {
 			con = ds.getConnection();
 			
-			String sql = "select * from member where id = ?";
+			String sql = "select * from member where empno = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, empno);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				m = new Member();
-				m.setId(rs.getString(1));
+				m.setEmpno(rs.getString(1));
 				m.setPassword(rs.getString(2));
-				m.setName(rs.getString(3));
-				m.setAge(rs.getInt(4));
-				m.setGender(rs.getString(5));
-				m.setEmail(rs.getString(6));
-				m.setMemberfile(rs.getString(7));
+				m.setJumin(rs.getString(3));
+				m.setAddress(rs.getString(4));
+				m.setPost(rs.getInt(5));
+				m.setGender(rs.getString(6));
+				m.setEmail(rs.getString(7));
+				m.setMemberfile(rs.getString(8));
+				m.setIntro(rs.getString(9));
+
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -219,15 +225,17 @@ public class MemberDAO {
 		try {
 			con = ds.getConnection();
 			
-			String sql = "update member set name = ?, age = ?, gender = ?, email = ?, memberfile = ? "
-					   + " where id = ?";
+			String sql = "update member set name = ?, post = ?, address = ?, gender = ?, email = ?, memberfile = ?, intro = ? "
+					   + " where empno = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m.getName());
-			pstmt.setInt(2, m.getAge());
-			pstmt.setString(3, m.getGender());
-			pstmt.setString(4, m.getEmail());
-			pstmt.setString(5, m.getMemberfile());
-			pstmt.setString(6, m.getId());
+			pstmt.setInt(2, m.getPost());
+			pstmt.setString(3, m.getAddress());
+			pstmt.setString(4, m.getGender());
+			pstmt.setString(5, m.getEmail());
+			pstmt.setString(6, m.getMemberfile());
+			pstmt.setString(7, m.getIntro());
+			pstmt.setString(8, m.getEmpno());
 			result = pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -258,7 +266,7 @@ public class MemberDAO {
 		int x = 0;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement("select count(*) from member where id != 'admin'");
+			pstmt = con.prepareStatement("select count(*) from member where empno != 'boat'");
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
@@ -304,8 +312,8 @@ public class MemberDAO {
 			String sql = "select * "
 					   + " from (select b.*, rownum rnum"
 					   + " 		 from(select * from member "
-					   + "			   where id != 'admin'"
-					   + "			   order by id) b"
+					   + "			   where empno != 'noat'"
+					   + "			   order by empno) b"
 					   + "		 where rownum <= ? "
 					   + 		")"
 					   + "	where rnum >= ? and rnum <= ?";
@@ -322,12 +330,14 @@ public class MemberDAO {
 			
 			while(rs.next()) {
 				Member m = new Member();
-				m.setId(rs.getString("id"));
+				m.setEmpno(rs.getString("empno"));
 				m.setPassword(rs.getString(2));
-				m.setName(rs.getString(3));
-				m.setAge(rs.getInt(4));
+				m.setAddress(rs.getString(3));
+				m.setPost(rs.getInt(4));
 				m.setGender(rs.getString(5));
 				m.setEmail(rs.getString(6));
+				m.setMemberfile(rs.getString(7));
+				m.setIntro(rs.getString(8));
 				list.add(m);				
 			}
 			
@@ -369,7 +379,7 @@ public class MemberDAO {
 		try {
 			con = ds.getConnection();
 			String sql = "select count(*) from member "
-					   + "where id != 'admin' "
+					   + "where empno != 'admin' "
 					   + " and " + field + " like ?"; //and name like '%홍길동%'
 			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
@@ -417,9 +427,9 @@ public class MemberDAO {
 			String sql = "select * "
 					   + " from (select b.*, rownum rnum"
 					   + " 		 from(select * from member "
-					   + "			   where id != 'admin'"
+					   + "			   where empno != 'admin'"
 					   + "			   and " + field + " like ? "
-					   + "			   order by id) b"
+					   + "			   order by empno) b"
 					   + "		 where rownum <= ? "
 					   + 		")"
 					   + "	where rnum between ? and ?";
@@ -441,12 +451,14 @@ public class MemberDAO {
 			
 			while(rs.next()) {
 				Member m = new Member();
-				m.setId(rs.getString("id"));
+				m.setEmpno(rs.getString("empno"));
 				m.setPassword(rs.getString(2));
-				m.setName(rs.getString(3));
-				m.setAge(rs.getInt(4));
+				m.setAddress(rs.getString(3));
+				m.setPost(rs.getInt(4));
 				m.setGender(rs.getString(5));
 				m.setEmail(rs.getString(6));
+				m.setMemberfile(rs.getString(7));
+				m.setIntro(rs.getString(8));
 				list.add(m);				
 			}
 			

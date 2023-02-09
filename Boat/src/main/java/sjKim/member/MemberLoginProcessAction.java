@@ -17,19 +17,19 @@ public class MemberLoginProcessAction implements Action {
 	public ActionForward execute (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ActionForward forward = new ActionForward();
-		String id = request.getParameter("id");
-		String pass = request.getParameter("pass");
+		String empno = request.getParameter("empno");
+		String password = request.getParameter("password");
 		MemberDAO mdao = new MemberDAO();
-		int result = mdao.isId(id, pass);
+		int result = mdao.isEmpno(empno, password);
 		System.out.println("결과는 " + result);
 		
 		//로그인 성공
 		if (result == 1) {
 			HttpSession session = request.getSession();
-			session.setAttribute("id", id);
+			session.setAttribute("empno", empno);
 			
 			String IDStore = request.getParameter("remember");
-			Cookie cookie = new Cookie("id", id);
+			Cookie cookie = new Cookie("empno", empno);
 			
 			//ID 기억하기를 체크한 경우
 			if (IDStore != null && IDStore.equals("store")) {
@@ -49,7 +49,7 @@ public class MemberLoginProcessAction implements Action {
 		} else {
 			String message = "비밀번호가 일치하지 않습니다.";
 			if(result == -1) 
-				message = "아이디가 존재하지 않습니다.";
+				message = "사원번호가 존재하지 않습니다.";
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");

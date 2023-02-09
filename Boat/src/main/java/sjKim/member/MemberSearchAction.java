@@ -1,4 +1,4 @@
-package net.member.action;
+package sjKim.member;
 
 import java.io.IOException;
 import java.util.List;
@@ -7,8 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.member.db.Member;
-import net.member.db.MemberDAO;
+import sjKim.db.Member;
+import sjKim.db.MemberDAO;
+
+
 
 public class MemberSearchAction implements Action {
 	@Override
@@ -41,7 +43,7 @@ public class MemberSearchAction implements Action {
 			list = mdao.getList(page,limit);
 		} else { //검색을 클릭한 경우
 			index = Integer.parseInt(request.getParameter("search_field"));
-			String[] search_field = new String[] { "id", "name", "age", "gender" };
+			String[] search_field = new String[] { "empno", "name", "age", "gender" };
 			search_word = request.getParameter("search_word");
 			listcount = mdao.getListCount(search_field[index], search_word);
 			list = mdao.getList(search_field[index], search_word, page, limit);

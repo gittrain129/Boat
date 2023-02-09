@@ -14,9 +14,9 @@ public class MemberInfoAction implements Action {
 			throws ServletException, IOException {
 				
 		ActionForward forward = new ActionForward();
-		String id = request.getParameter("id");
+		String empno = request.getParameter("empno");
 		MemberDAO mdao = new MemberDAO();
-		Member m = mdao.member_info(id);
+		Member m = mdao.member_info(empno);
 		
 		if(m==null) {
 			forward.setPath("error/error.jsp");

@@ -13,9 +13,9 @@
 			 		location.href = "join.net";
 			 	});
 			 
-				const id = '${id}';
-				if(id){
-					$("#id").val(id);
+				const empno = '${empno}';
+				if(empno){
+					$("#empno").val(empno);
 					$("#remember").prop('checked', true);
 				}
 			})
@@ -32,7 +32,7 @@
       <ul>
         <form id="login" name="loginform" action="loginProcess.net" method="post">
           <li>
-            <input id="id" type="text" placeholder="아이디" name="id" required />
+            <input id="empno" type="text" placeholder="사원번호" name="empno" required />
           </li>
           <li>
             <input id="password" type="password" placeholder="비밀번호" minlength="4" name="password"  required />

@@ -1,4 +1,4 @@
-package net.member.action;
+package sjKim.member;
 
 import java.io.IOException;
 
@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.member.db.Member;
-import net.member.db.MemberDAO;
+import sjKim.db.Member;
+import sjKim.db.MemberDAO;
+
+
 
 public class MemberUpdateAction implements Action {
 	@Override
@@ -16,10 +18,10 @@ public class MemberUpdateAction implements Action {
 			throws ServletException, IOException {
 				
 		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("id");
+		String empno = (String) session.getAttribute("empno");
 		
 		MemberDAO mdao = new MemberDAO();
-		Member m = mdao.member_info(id);
+		Member m = mdao.member_info(empno);
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("member/updateForm.jsp");

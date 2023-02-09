@@ -12,18 +12,18 @@ public class MemberLoginAction implements Action {
 	public ActionForward execute (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String id = "";
+		String empno = "";
 		Cookie[] cookies = request.getCookies();
 		if(cookies != null) {
 			for(int i=0; i<cookies.length; i++) {
-				if(cookies[i].getName().equals("id")) {
-					id=cookies[i].getValue();
+				if(cookies[i].getName().equals("empno")) {
+					empno=cookies[i].getValue();
 				}
 			}
 		}
 		
 		
-		request.setAttribute("id", id);
+		request.setAttribute("empno", empno);
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);  //주소 변경없이 jsp페이지의 내용을 보여줍니다.
 		forward.setPath("sjKim/boat/loginForm.jsp");
