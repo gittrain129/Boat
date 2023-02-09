@@ -14,7 +14,7 @@ CREATE TABLE BOARD(
 	PRIMARY KEY(BOARD_NUM)
 	);
 	
-	select * from BOARD;
+select * from BOARD;
 
 
 select * from board;

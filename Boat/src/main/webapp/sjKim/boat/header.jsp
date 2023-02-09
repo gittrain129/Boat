@@ -196,7 +196,7 @@ li {
                 </li>
 				<li>
 					<img src="${pageContext.request.contextPath}/sjKim/image/boat_icon.png" >
-					<a href="${pageContext.request.contextPath}/chat.jk" onclick="window.open('this.href','BoaTalk','width=400, height=490, location=no, status=no, scrollbars=yes')">
+					<a href="jkKim/chat.jk" onclick="window.open(this.href, '_blank', 'width=400, height=450, top=170px, left=230px, resizable=no,menubar=no,status=no,titlebar=no,toolbar=no, scrollbars=no,directories=no,location=no'); return false;">
 					<span>대화하기</span>
 					</a>
                     <ul class="dept01">
