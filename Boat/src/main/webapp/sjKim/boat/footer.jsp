@@ -21,6 +21,7 @@ footer {
   font-size: 11px;
 }
 
+
 footer a {
   display: inline-block;
   margin: 0 20px 10px 20px;
