@@ -30,15 +30,15 @@
 	  </h2>
 	  <h3>로그인</h3>
       <ul>
-        <form id="login">
+        <form id="login" name="loginform" action="loginProcess.net" method="post">
           <li>
-            <input id="userid" type="text" placeholder="아이디" name="userid" required />
+            <input id="id" type="text" placeholder="아이디" name="id" required />
           </li>
           <li>
-            <input id="userpw" type="password" placeholder="비밀번호" minlength="10" name="userpw"  required />
+            <input id="password" type="password" placeholder="비밀번호" minlength="4" name="password"  required />
           </li>
           <li>
-            <input type="checkbox" id="chk_id" name="chk_id" /><label for="chk_id">아이디저장</label>
+            <input type="checkbox" id="remember" name="remember" value="store"/><label for="chk_id">아이디저장</label>
           </li>
           <li><input type="submit" value="로그인" /></li>
         </form>

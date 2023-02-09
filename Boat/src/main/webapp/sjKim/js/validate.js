@@ -13,8 +13,8 @@ $(document).ready(function() {
 			id.focus();
 			return false;
 		} else {
-			// 첫글자는 대문자이고 두번째부터는 대소문자, 숫자, _로 총 4개 이상
-			pattern = /^[A-Z][a-zA-Z0-9_]{3,}$/;
+			// 대소문자, 숫자, _로 총 4개 이상
+			pattern = /^[a-zA-Z0-9_]{4,}$/;
 			if (pattern.test(id_value)) {
 				idcheck_value = id_value;
 				is_idcheck_click = true;
@@ -22,7 +22,7 @@ $(document).ready(function() {
 				window.open(ref, "idcheck", "width=350,height=200");
 
 			} else {
-				alert("첫글자는 대문자이고 두번째부터는 대소문자, 숫자, _로 총 4개 이상이어야 합니다.");
+				alert("아이디는 대소문자, 숫자, _로 총 4개 이상이어야 합니다.");
 				id.val('').focus();
 			}
 		}
@@ -173,11 +173,6 @@ $(document).ready(function() {
 
 		cnt = $('input:checkbox:checked').length;
 
-		if (cnt < 2) {
-			alert("취미는 2개이상 선택하세요");
-			return false;
-		}
-
 
 		const post1 = $("#post1");
 		if ($.trim(post1.val()) == "") {
@@ -272,7 +267,7 @@ $(document).ready(function() {
 			
 			const pattern = /(gif|jpg|jpeg|png)$/i; //i(ignore case)는 대소문자 무시를 의미
 			if (pattern.test(f_upload)){
-				$('#f_upload').text(f_upload);
+			//	$('#f_upload').text(f_upload);
 				
 				const reader = new FileReader(); //파일을 읽기 위한 객체 생성
 			
@@ -283,7 +278,7 @@ $(document).ready(function() {
 				reader.readAsDataURL(event.target.files[0]);
 				
 				reader.onload = function() { //읽기에 성공했을 때 실행되는 이벤트 핸들러
-					$('#showImage > img').attr('src', this.result);
+					$('#showImage > img').attr('src', this.result); 
 				};
 			}else{
 				alert('이미지 파일(gif,jpg,jpeg,png)이 아닌 경우는 무시됩니다.');
@@ -292,18 +287,17 @@ $(document).ready(function() {
 				$(this).val('')
 				$('input[name=check]').val('');
 			}
-			
-			 function onClickUpload() {
-            let myInput = document.getElementById("memberfile");
-            myInput.click();
-        	}
+						
 		})//chage()
 		
 		
 });// ready() end
 
 
-
+function onClickUpload() {
+            let myInput = document.getElementById("memberfile");
+            myInput.click();
+        	}
 
 
 
