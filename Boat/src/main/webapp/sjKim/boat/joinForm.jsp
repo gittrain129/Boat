@@ -19,7 +19,7 @@
 </head>
 
 <body>
-	<form name='myform' method="post" action='join_ok' id='myform' >
+	<form name='myform' method="post" action='joinProcess.net' method="post" id='myform' >
 	  <div class="container">
 		
 		<div class="logo">       				
@@ -52,8 +52,8 @@
 							<img src="${src}" width="130px" alt="profile">	
 						</span>
 	
-							<input type="file" name="memberfile" accept="image/*" style="visibility: hidden;">
-							<button onclick="onClickUpload();" id="f_upload">업로드</button>
+							<input type="file" id="memberfile" name="memberfile" accept="image/*" style="display:none;">
+							<button type="button" onclick="onClickUpload();" id="f_upload">업로드</button>
 					</label>				
 				</div>
 				

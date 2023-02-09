@@ -20,3 +20,5 @@ create table comm(
  delete comm;
  
  select * from comm
+ 
+ 

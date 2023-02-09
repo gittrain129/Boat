@@ -3,6 +3,7 @@ package sjKim.member;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,20 +11,50 @@ import javax.servlet.http.HttpServletResponse;
 import sjKim.db.Member;
 import sjKim.db.MemberDAO;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 public class MemberJoinProcessAction implements Action {
 	public ActionForward execute (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String id = request.getParameter("id");
-		String pass = request.getParameter("pass");
-		String name = request.getParameter("name");
-		int age = Integer.parseInt(request.getParameter("age"));
-		String gender = request.getParameter("gender");
-		String email = request.getParameter("email");
+		String realFolder = "";
+		
+		// webapp아래에 꼭 포더 생성하세요
+		String saveFolder = "memberupload";
+		
+		int fileSize = 10 * 1024 * 1024; //업로드할 파일의 최대 사이즈 입니다. 5MB
+		
+		//실제 저장 경로를 지정합니다.
+		ServletContext sc = request.getServletContext();
+		realFolder = sc.getRealPath(saveFolder);
+		System.out.println("realFolder=[" + realFolder);
+		
+		MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "utf-8", new DefaultFileRenamePolicy());
+		
+		String id = multi.getParameter("id");
+		String pass = multi.getParameter("pass");
+		String name = multi.getParameter("name");
+		int age = Integer.parseInt(multi.getParameter("age"));
+		String gender = multi.getParameter("gender");
+		String email = multi.getParameter("email");
+		String memberfile = multi.getFilesystemName("memberfile");
+		
+		System.out.println("memberfile=" + memberfile);
 		
 		Member m = new Member();
 		m.setAge(age);		m.setEmail(email);		m.setGender(gender);
 		m.setId(id); 		m.setName(name); 		m.setPassword(pass);
+		m.setMemberfile(memberfile);
+		
+		if(memberfile != null) { //파일을 선택한 경우
+			m.setMemberfile(memberfile);
+		}
+		//기존 파일 그대로 사용하는 경우
+	//	else if(request.getParameter("check") != "") {
+	//		m.setMemberfile(request.getParameter("check"));
+	//	}
+		
 		
 		MemberDAO mdao = new MemberDAO();
 		int result = mdao.insert(m);
