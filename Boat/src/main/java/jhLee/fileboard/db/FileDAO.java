@@ -463,7 +463,7 @@ public class FileDAO {
 		+ "														order by CNT desc) "//댓글순
 		+ "					on FILE_NUM = F_COMMENT_NUM "
 		+ "					where "
-		+  					dept+ search + " like ? "
+		+  					search + " like ? " +dept 
 		+ "				"+order+" )b "//조회수
 		+ "				where rownum<= ? ) "//endrow//최신순
 		+ "				where rnum>= ? and rnum<= ? ";//startrow,endrow
@@ -551,20 +551,20 @@ public class FileDAO {
 			String sql = "select count(*) "
 					+ "					from file_board "
 					+ "					where "
-					+ 					 dept 
-					+  					searchsel+" like ?  ";
+					+  					searchsel+" like ?  "
+					+ 					 dept ;
 					
 			pstmt = con.prepareStatement(sql);
 			System.out.println(sql);
 			
-			pstmt.setString(1,"%"+searchinput+"%");
+			pstmt.setString(1,'%'+searchinput+'%');
 			
 			
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				x = rs.getInt(1);
 			}
-
+			System.out.println("x="+x);
 		} catch (Exception e) {
 			System.out.println("getListCount()에러: " + e);
 			System.out.println(e.getMessage());

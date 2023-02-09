@@ -20,12 +20,8 @@ $(document).ready(function(){
 			console.log(sel)
 		
 			
-		//	$('#dept').val(dept);
-			
-			//$('#deptsel').text(dept)
-			
-		//	const deptval=$('#dept').val()		
-		//	console.log('deptval ='+deptval)
+		$('#dept').val(dept);
+			console.log($('#dept').val())			
 	
 	})//drop downclick 끝
 	
