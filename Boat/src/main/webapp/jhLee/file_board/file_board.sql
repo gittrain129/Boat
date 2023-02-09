@@ -1,6 +1,6 @@
 --file_board sql
 select * from file_board;
-
+delete from file_board
 drop table file_board cascade constraints purge;
 
 
@@ -257,3 +257,52 @@ select * from file_board where FILE_NUM =?
 			 order by CNT desc, FILE_RE_REF desc , FILE_RE_SEQ asc  )b 	
 		 where rownum<= 10 ) 			
 	 where rnum>= 1 and rnum<= 10 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 select * from 			
+	 
+	 (select b.*, rownum rnum from 		
+	 
+	 (select file_board.* , nvl(CNT ,0) CNT 	
+	 from file_board left outer join  			
+	 (select F_COMMENT_NUM,count(*) CNT 		
+	 from FILE_COMMENT 						
+	 group by F_COMMENT_NUM				
+	 order by CNT desc) 			
+	 on FILE_NUM = F_COMMENT_NUM 		
+	 where  dept = '기획팀 ' and FILE_SUBJECT like ? 		
+	 order by  FILE_DATE desc  )b 	
+	 
+	 where rownum<= ? ) 			
+	 where rnum>= ? and rnum<= ? 
+	 
+	 
+	 
+	  select * from 			
+		  (select b.*, rownum rnum from 	
+			  (select file_board.* , nvl(CNT ,0) CNT 
+			  from file_board left outer join  		
+				  (select F_COMMENT_NUM,count(*) CNT 	
+				  from FILE_COMMENT 					
+				  group by F_COMMENT_NUM				
+				  order by CNT desc) 				
+			  on FILE_NUM = F_COMMENT_NUM 		
+			  where ㅇㄷFILE_SUBJECT like '%안%' 		
+			  order by CNT desc  )b 		
+		  where rownum<= 10 ) 			
+	  where rnum>= 1 and rnum<= 10 
+	  
+	  
+	  
+	  select count(*) 	
+	  from file_board 				
+	  where  FILE_SUBJECT like '%%'  and dept = '개발팀'
+	  select count(*) 					from file_board 					where FILE_SUBJECT like  '%%'  and dept = '기획팀 ' 
+	  select count(*) 					from file_board 					where FILE_SUBJECT like "%%"   and dept = '기획팀 ' 

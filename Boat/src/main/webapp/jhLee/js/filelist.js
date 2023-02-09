@@ -1,8 +1,14 @@
 	function go(page){
 			searchsel = $("#search").text();
+			if(searchsel =="검색옵션")searchsel =="";
+		
 			searchinput = $("#searchinput").val();
-			dept=$("#dept").text();
-			order=$("#order").text();
+			dept = $("#dept").text();
+			if(dept =="부서별"||dept=="전체")dept = "";
+			
+			order = $("#order").text();
+			
+			if(order =="정렬")order =="";
 			const data = `state=ajax&page=${page}&searchsel=${searchsel}&searchinput=${searchinput}&dept=${dept}&order=${order}`;
 			ajax(data);
 	};
@@ -41,6 +47,7 @@
 					$("tbody").remove();
 					
 					let num = data.listcount-(data.page-1)*data.limit;
+					let nowday = new Date(data.nowday);
 					console.log(num)
 					let output ="<tbody>";
 					$(data.boardlist).each(
@@ -63,7 +70,7 @@
 							//console.log(item.nowday-item.FILE_DATE)
 									let today = new Date(item.FILE_DATE);
 									//console.log(item.nowday)
-									let nowday = new Date(item.nowday);
+									
 									
 								//	console.log("today날짜는어찌되었는가"+today)
 								//	console.log("nowday날짜는어찌되었는가"+nowday)
@@ -76,9 +83,10 @@
 								//	console.log("new날짜"+item.FILE_DATE-moment().format())
 								
 									
-								//	console.log("nowday"+item.nowday)
+									console.log("nowday"+nowday)
+									console.log(item.FILE_DATE > nowday)
 									let imgnew ="";
-									if(item.FILE_DATE>item.nowday){
+									if(new Date(item.FILE_DATE) > nowday){
 										imgnew='<img src="/Boat/jhLee/image/new.jpg" id="new">'
 									}
 						
@@ -88,7 +96,7 @@
 									+'</a>['+item.CNT+']'+imgnew+'</div>'
 							//d윗문장지우기
 							
-							output +='</td><td><div class="dept">'+item.dept+'</div></td>'
+							output +='</td><td><div class="dept">'+item.DEPT+'</div></td>'
 							output +='<td><div class="writer">'+item.FILE_NAME+'</div></td>'
 							output +='<td><div class="count">'+item.FILE_READCOUNT+'</div></td>'
 							output +='<td><div class="date">'+item.FILE_DATE+'</div></td>'
@@ -132,6 +140,11 @@
 					output+=setPaging(href,digit);
 					$('.paging').append(output)
 				}//if(data.listcount)>0 end
+				else{
+						$("tbody").empty();
+						$('tbody').append("<tr><td colspan ='8'><h2>검색내용이 없습니다</h2></td></tr>")//table끝
+							$(".paging").empty();
+				}
 			},
 			error:function(){
 				console.log('에러')
@@ -162,14 +175,19 @@
 			
 			$("#searchinput").focus();
 			
+			//왜잉지 작동안됨 ㅇㅇ
 			if($("#search").text() === "제목"){
 				$("#searchinput").attr('placeholder','제목을 입력하세요')
 				console.log(searchval);
 			}else if($("#search").text() === "작성자"){
 				$("#searchinput").attr('placeholder','이름을 입력하세요')
 			}
-			searchsel = searchval;
-			
+		})
+		
+		$("#searchinput").keyup(function(event){
+			if(event.keyCode==13) {
+				go(1);
+				}
 		})
 		//돋보기
 		$("#searhcbtn2").click(function(){
@@ -187,35 +205,20 @@
 	
 		$('#deptbtn+div a').click(function(){
 			dept = $(this).text();
-			console.log(dept);
 			$('#dept').text(dept);
-				console.log(dept);
 				$('#deptval').val(dept);
-				console.log($('#deptval').val(dept));
 				go(1);
 			
+				console.log(dept);
 		});
 				
 
 		$('#orderbtn+div a').click(function(){
-			 order_val =$(this).text();
-				console.log(order_val);
-
-				//#orderval = inputhidden
-				$("#order").text(order_val);
+			 order =$(this).text();
+				$('#order').text(order)
 				
-				switch(order_val){
-					case '댓글순':
-					$('#orderval').val();
-					
-								break;
-					case '최신순':
-					$('#orderval').val('');
-								break;
-					case '조회순':
-					$('#orderval').val('');
-								break;
-				}
+				console.log(order);
+
 		go(1);
 		})
 

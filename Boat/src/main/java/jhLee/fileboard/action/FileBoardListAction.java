@@ -29,7 +29,12 @@ public class FileBoardListAction implements Action {
 
 	int page = 1;
 	int limit = 10; 
-	
+	if(request.getParameter("page")!=null){
+		page = Integer.parseInt(request.getParameter("page"));
+	}
+	if(request.getParameter("limit")!=null) {
+		limit = Integer.parseInt(request.getParameter("limit"));
+	}
 	
 	String state = request.getParameter("state");
 	//state ="ajax";
@@ -61,12 +66,6 @@ public class FileBoardListAction implements Action {
 	
 	if(state ==null) {
 	
-		if(request.getParameter("page")!=null){
-			page = Integer.parseInt(request.getParameter("page"));
-		}
-		if(request.getParameter("limit")!=null) {
-			limit = Integer.parseInt(request.getParameter("limit"));
-		}
 		
 		//System.out.println(limit);
 		//System.out.println("state ==null");
@@ -95,8 +94,7 @@ public class FileBoardListAction implements Action {
 		
 		//글 목록 페이지로 이동하기 위해 경로 를 설정합니다.
 		forward.setPath("/jhLee/file_board/File_bo_List.jsp");
-		//System.out.println(filebolist);
-		return forward;//BoardFrontController.java 로 리턴됩니다.
+		return forward;
 	
 	
 		}else {
@@ -108,29 +106,31 @@ public class FileBoardListAction implements Action {
 	
 		
 		String dept="";  
-		String dept_ =request.getParameter("dept");
+		String dept_ =request.getParameter("dept").trim();
 		System.out.println("dept ="+dept+"되라고좀");
-		if(dept_.equals("부서별")||dept_.equals("전체")) {
+		if(dept_.equals("")||dept_.equals("전체")) {
 			 dept = "";
 		}else {
-			dept =" dept = '"+dept_+ " ' and ";
+			
+			dept =" and dept = '"+dept_+ "' ";
 		}
 			object.addProperty("dept", dept);
 			
-		System.out.println(dept);
-		 String searchsel =request.getParameter("searchsel");
+		 String searchsel =request.getParameter("searchsel").trim();
+		 System.out.println(searchsel);
 			if(searchsel.equals("작성자")) {
 				searchsel="FILE_NAME";
 			}else {
 				searchsel="FILE_SUBJECT";
 			}
-			
 		object.addProperty("searchsel", searchsel);
 	
 		String searchinput = request.getParameter("searchinput");
 	    String order = request.getParameter("order"); //최신순조회순댓글순 asc desc 쿼리
 	    
-	    if(order.equals("정렬")||order.equals("최신순")){
+	    if(order.equals("정렬")){
+	    	order = " order by  FILE_RE_REF desc , FILE_RE_SEQ asc ";
+	    }else if(order.equals("최신순")) {
 	    	order = "order by  "
 	    			+ "FILE_DATE desc ";
 	    }else if(order.equals("조회순")) {
@@ -152,7 +152,7 @@ public class FileBoardListAction implements Action {
 		System.out.println("order :"+ order);
 		
 	    listcount = boarddao.getListcount(dept,searchsel,searchinput);
-	    
+	    System.out.println("ajax사용 후 listcount : "+listcount);
 		filebolist = boarddao.getList(dept,searchsel,searchinput,order,page,limit);
 		
 		

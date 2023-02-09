@@ -15,7 +15,43 @@ F_COMMENT_RE_REF number(1)
 );
 
 create sequence filecom nocache;
+
+drop sequence filecom;
+
 select * from file_board;
+
+
+update file_board set FILE_DATE = '2023-02-01'
+where file_num = 8;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 create table file_board (
 	FILE_NUM NUMBER(5) primary key,
 	FILE_NAME VARCHAR2(30), 
@@ -152,7 +188,19 @@ FILE_NAME file_board
 
 
 
-
+  select * from 			
+  (select b.*, rownum rnum from 			
+  (select file_board.* , nvl(CNT ,0) CNT 	
+  from file_board left outer join  			
+  (select F_COMMENT_NUM,count(*) CNT 			
+  from FILE_COMMENT 							
+  group by F_COMMENT_NUM						
+  order by CNT desc) 				
+  on FILE_NUM = F_COMMENT_NUM 			
+  where FILE_SUBJECT like '%지%' 			
+  order by  FILE_DATE desc  )b 			
+  where rownum<= 10 ) 			
+  where rnum>= 1 and rnum<= 10 
 
 
 
