@@ -32,10 +32,13 @@
         <c:if test="${todolist == null}">
         </c:if>--%>
         </div>
+        <div class="graphbar">
+        	<%-- <span>일정 현황</span>
+        	<progress value="4" max="7"></progress>--%>
+        </div>
         <div class="footer">
             <button type="submit" id="submitbtn">완료</button>
             <button type="reset" id="resetbtn">삭제</button>
-		    <progress value="50" max="100"></progress>
         </div>
         
    </div>

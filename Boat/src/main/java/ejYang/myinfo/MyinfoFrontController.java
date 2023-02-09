@@ -40,7 +40,10 @@ private static final long serialVersionUID=1L;
 				action = new TodoAdd();//투두 추가
 				break;
 			case "/TodoCheck.my":
-				action = new TodoCheck();//글 목록
+				action = new TodoCheck();//투두 완료
+				break;
+			case "/TodoDelete.my":
+				action = new TodoDelete();//글 삭제
 				break;
 				
 		}//switch end
