@@ -20,8 +20,12 @@ public class SenderViewAction implements jkKim_Action {
 			throws ServletException, IOException {
 		jkKim_MemberDAO mdao = new jkKim_MemberDAO();
 		List<jkKim_Member> memberlist = new ArrayList<jkKim_Member>();
+		jkKim_ActionForward forward = new jkKim_ActionForward();
 		
 		String dept_sql = "";
+		String empno_id ="";
+		
+		
 		
 		memberlist = mdao.getMemberList();
 		int listcount =mdao.getListCount(dept_sql);
@@ -30,33 +34,43 @@ public class SenderViewAction implements jkKim_Action {
 		
 		if(request.getParameter("rownum")!=null) {
 		int rownum = Integer.parseInt(request.getParameter("rownum"));
-		String name_id = mdao.getName_id(rownum);
+			empno_id = mdao.getName_id(rownum);
+			System.out.println("넘어온 rownum = " + request.getParameter("rownum"));
 		}
 		
 		
 		
 		
-		
+		if(state == null) {
 		
 		request.setAttribute("listcount", listcount);
 		request.setAttribute("memberlist", memberlist);
-		
-		jkKim_ActionForward forward = new jkKim_ActionForward();
+				
 		forward.setRedirect(false);
-		
-		
 		forward.setPath("/jkKim/chat_sender_select.jsp");
 		return forward; 
-/*
-		if(state == "ajax") {
+		
+		} else {
+			System.out.println("보내려고하는 name_id = " + empno_id);
+			 
+						
+			JsonObject obj = new JsonObject();
+			obj.addProperty("empno_id", empno_id);
+			response.setContentType("application/json;charset=utf-8");
+			response.getWriter().print(obj);
+			System.out.println(obj.toString());
+			return null;
 			
-			request.setAttribute("name_id", name_id); 
 			
-			
-			
-			forward.setPath("/jkKim/chatView_Sender.jsp");
-			return forward; 
 		}
-	*/
+	
+		
+		
+		
+		
+		
+		
+		
+		
 }
 }

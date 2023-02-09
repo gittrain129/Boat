@@ -256,25 +256,30 @@ public class jkKim_MemberDAO {
 		
 		
 			List<jkKim_Member> list = new ArrayList<jkKim_Member>();
-			String name_id = "";
+			String empno_id = "";
+			System.out.println("DAO까지 넘어온 rownum = " + rownum);
 			
 		try {	
 			conn = ds.getConnection();
 		
 			
 			
-			String sql = "select rownum, empno, name, dept, email, imgsrc from member order by deptno asc"
-					+ " where rownum = ? ";
+			String sql = "select j.* "
+					+" from (select rownum rnum, empno, name, dept, email, imgsrc from member  order by deptno asc) j "
+					+" where j.rnum = ? ";
 					
 			
 			
 			pstmt = conn.prepareStatement(sql); //sql.toString()
 			pstmt.setInt(1, rownum);
 			rs=pstmt.executeQuery();
-			
+			while (rs.next()) {
+				empno_id = rs.getString("empno");
+						
+			}
 		
-		name_id = rs.getString("name");
-		return name_id;
+		
+		return empno_id;
 		}//try end
 		catch(Exception se) {
 			se.printStackTrace();
@@ -300,7 +305,7 @@ public class jkKim_MemberDAO {
 				System.out.println(e.getMessage());
 			}
 	}
-		return name_id;
+		return empno_id;
 		
 	}
 

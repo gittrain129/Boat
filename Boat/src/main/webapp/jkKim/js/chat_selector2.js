@@ -23,11 +23,12 @@ function ajax(sdata){
       dataType : "json",
       cache : false,
       success : function(data){
-	
+	console.log(data.empno_id)
+	window.location.href='chatView_Sender.jsp?empno_id=' + data.empno_id;
 	
 	 }, //success end
          error : function() {
-            console.log('에러');
+	        console.log('에러');
          }
    })//ajax end
 }//function ajax end

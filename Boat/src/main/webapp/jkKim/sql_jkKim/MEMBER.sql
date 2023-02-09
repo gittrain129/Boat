@@ -56,6 +56,12 @@ IMGSRC VARCHAR2(150)
   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
  VALUES('235002','영업팀','50','123456','123456','최동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
+ 
+   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
+ VALUES('235003','영업팀','50','123456','123456','gildong','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
+ 
+ 
+ 
  select * from member
  
  select name, pwcheck from member;
@@ -94,8 +100,11 @@ where where rnum >=1 and rnum <=8
 
 
 
+select rownum, empno, name, dept, email, imgsrc from member  where rownum = 2 order by deptno asc
 
-
+select j.*
+from (select rownum rnum, empno, name, dept, email, imgsrc from member  order by deptno asc) j
+where j.rnum = 2
 
 
 
