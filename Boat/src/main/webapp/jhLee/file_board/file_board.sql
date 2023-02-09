@@ -23,6 +23,8 @@ create table file_board (
 	DEPT VARCHAR2(30) check (dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀'))
 	);
 	update file_board set file_date = sysdate;
+	
+	
 	insert into file_board
 	values(1,1,1,1,1,1,1,0,0,0,0,sysdate);
 	
@@ -305,4 +307,21 @@ select * from file_board where FILE_NUM =?
 	  from file_board 				
 	  where  FILE_SUBJECT like '%%'  and dept = '개발팀'
 	  select count(*) 					from file_board 					where FILE_SUBJECT like  '%%'  and dept = '기획팀 ' 
-	  select count(*) 					from file_board 					where FILE_SUBJECT like "%%"   and dept = '기획팀 ' 
+	  select count(*) 					from file_board 					where FILE_SUBJECT like "%%"   and dept = '기획팀 '
+	  
+	  
+	  
+	  
+	  
+	 select * from FILE_COMMENT
+	  
+	  
+	  update FILE_COMMENT set f_c_id = 'ADMIN'
+	  
+	  
+	  select F_C_NUM, FILE_COMMENT.F_C_ID, F_CONTENT,
+	  F_COMMENT_DATE, F_COMMENT_RE_LEV, F_COMMENT_RE_SEQ,
+	  F_COMMENT_RE_REF, member.memberfile from FILE_COMMENT 
+	  join member on FILE_COMMENT.F_C_ID = member.empno where F_COMMENT_NUM = 29
+	  order by F_COMMENT_RE_REF asc, 	
+	  F_COMMENT_RE_SEQ asc
