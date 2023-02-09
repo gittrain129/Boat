@@ -200,8 +200,12 @@ li {
 					<span>대화하기</span>
 					</a>
                     <ul class="dept01">
-                    	<li id="nop">&nbsp;</li>
-                    	<li id="nop">&nbsp;</li>
+                   <a href="jkKim/chat.jk" onclick="window.open(this.href, '_blank', 'width=400, height=450, top=170px, left=230px, resizable=no,menubar=no,status=no,titlebar=no,toolbar=no, scrollbars=no,directories=no,location=no'); return false;">
+     					<li id="nop">채팅수신</li>
+     				</a>
+					<a href="jkKim/Sender_chat.jk" onclick="window.open(this.href, '_blank', 'width=400, height=450, top=170px, left=230px, resizable=no,menubar=no,status=no,titlebar=no,toolbar=no, scrollbars=no,directories=no,location=no'); return false;">
+     				   	<li id="nop">채팅발신</li>
+     				</a>
                     	<li id="nop">&nbsp;</li>
                     </ul>
                 </li>

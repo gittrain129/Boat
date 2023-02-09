@@ -186,6 +186,124 @@ public class jkKim_MemberDAO {
 	      return jk;
 	   }
 
+	public List<jkKim_Member> getMemberList() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+			List<jkKim_Member> list = new ArrayList<jkKim_Member>();
+			
+			
+		try {	
+			conn = ds.getConnection();
+		
+			
+			
+			String sql = "select rownum, empno, name, dept, email, imgsrc from member order by deptno asc ";
+					
+			
+			
+			pstmt = conn.prepareStatement(sql); //sql.toString()
+			
+			rs=pstmt.executeQuery();
+			
+		
+			// DB에서 가져온 데이터를 VO객체에 담습니다.
+			while (rs.next()) {
+				jkKim_Member b = new jkKim_Member();
+				b.setName(rs.getString("name"));
+				b.setDept(rs.getString("dept"));
+				b.setEmail(rs.getString("email"));
+				b.setImgsrc(rs.getString("imgsrc"));
+				b.setRownum(rs.getString("rownum"));
+				list.add(b);
+						
+			}
+									
+		}//try end
+		catch(Exception se) {
+			se.printStackTrace();
+			System.out.println("getBoardList() 에러"  + se);
+			
+		}finally {
+			try {
+				if(rs != null)
+					rs.close();
+			}catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+				try {
+				if(pstmt!=null)
+					pstmt.close();
+			}catch(SQLException e) {
+				System.out.println(e.getMessage());
+			}
+			try {
+				if(conn!=null)
+					conn.close();
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+	}
+		return list;
+	}
+
+	public String getName_id(int rownum) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+			List<jkKim_Member> list = new ArrayList<jkKim_Member>();
+			String name_id = "";
+			
+		try {	
+			conn = ds.getConnection();
+		
+			
+			
+			String sql = "select rownum, empno, name, dept, email, imgsrc from member order by deptno asc"
+					+ " where rownum = ? ";
+					
+			
+			
+			pstmt = conn.prepareStatement(sql); //sql.toString()
+			pstmt.setInt(1, rownum);
+			rs=pstmt.executeQuery();
+			
+		
+		name_id = rs.getString("name");
+		return name_id;
+		}//try end
+		catch(Exception se) {
+			se.printStackTrace();
+			System.out.println("getBoardList() 에러"  + se);
+			
+		}finally {
+			try {
+				if(rs != null)
+					rs.close();
+			}catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+				try {
+				if(pstmt!=null)
+					pstmt.close();
+			}catch(SQLException e) {
+				System.out.println(e.getMessage());
+			}
+			try {
+				if(conn!=null)
+					conn.close();
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+	}
+		return name_id;
+		
+	}
+
 	
 	
 	
