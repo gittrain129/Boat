@@ -68,8 +68,8 @@ public class FileBoardListAction implements Action {
 			limit = Integer.parseInt(request.getParameter("limit"));
 		}
 		
-		System.out.println(limit);
-		System.out.println("state ==null");
+		//System.out.println(limit);
+		//System.out.println("state ==null");
 		request.setAttribute("page", page);//현재 페이지 수 
 		request.setAttribute("maxpage", maxpage);
 		
@@ -89,62 +89,75 @@ public class FileBoardListAction implements Action {
 		
 	
      
-        System.out.println("nowday=" + nowday);
+        //System.out.println("nowday=" + nowday);
         request.setAttribute("nowday",nowday);
         
 		
 		//글 목록 페이지로 이동하기 위해 경로 를 설정합니다.
 		forward.setPath("/jhLee/file_board/File_bo_List.jsp");
-		System.out.println(filebolist);
+		//System.out.println(filebolist);
 		return forward;//BoardFrontController.java 로 리턴됩니다.
 	
 	
 		}else {
+			
 		System.out.println("state = ajax");
+		
 		JsonObject object = new JsonObject();
 		
-		String dept =request.getParameter("dept");
-		if(!dept.equals("부서별")) {
-			
-			object.addProperty("dept", dept);
-			}else {
-				dept = "";
-			}
-		object.addProperty("dept", dept);
+	
 		
+		String dept="";  
+		String dept_ =request.getParameter("dept");
+		System.out.println("dept ="+dept+"되라고좀");
+		if(dept_.equals("부서별")||dept_.equals("전체")) {
+			 dept = "";
+		}else {
+			dept =" dept = '"+dept_+ " ' and ";
+		}
+			object.addProperty("dept", dept);
+			
+		System.out.println(dept);
 		 String searchsel =request.getParameter("searchsel");
-		 System.out.println("55555"+searchsel);
 			if(searchsel.equals("작성자")) {
 				searchsel="FILE_NAME";
 			}else {
 				searchsel="FILE_SUBJECT";
 			}
 			
-			 System.out.println("55555"+searchsel);
 		object.addProperty("searchsel", searchsel);
 	
 		String searchinput = request.getParameter("searchinput");
 	    String order = request.getParameter("order"); //최신순조회순댓글순 asc desc 쿼리
 	    
-	    if(order.equals("정렬")){
-	    	order = "";
-	    }else if(order.equals("최신순")) {
-	    		order="asc";
-	    }else if(order.equals("조회순")){
-	    		order="desc";
-	    }else {
-	    		order="(select F_COMMENT_NUM ,count(*) 'CNT' from FILE_COMMENT group by F_COMMENT_NUM order by  CNT desc)";
+	    if(order.equals("정렬")||order.equals("최신순")){
+	    	order = "order by  "
+	    			+ "FILE_DATE desc ";
+	    }else if(order.equals("조회순")) {
+	    	
+	    		order="order by FILE_READCOUNT desc ";
+	    		
+	    }else if(order.equals("댓글순")){
+	    	
+	    		order="order by CNT desc ";
+	    				
+	    		
 	   	}
 		object.addProperty("order", order);
 		object.addProperty("searchinput", searchinput);
 			
-	    listcount = boarddao.getListcount(dept,searchsel,searchinput,order);
+		System.out.println("dept :"+ dept);
+		System.out.println("searchsel :"+ searchsel);
+		System.out.println("searchinput"+ searchinput);
+		System.out.println("order :"+ order);
+		
+	    listcount = boarddao.getListcount(dept,searchsel,searchinput);
+	    
 		filebolist = boarddao.getList(dept,searchsel,searchinput,order,page,limit);
-		 
-		 System.out.println("dept :"+ dept);
-		 System.out.println("searchsel :"+ searchsel);
-		 System.out.println("searchinput"+ searchinput);
-		 System.out.println("order :"+ order);
+		
+		
+		System.out.println("listcount :"+ listcount);
+
 
 		 maxpage = (listcount+limit -1)/limit;
 		 System.out.println("총페이지수 = "+ maxpage);
@@ -166,7 +179,7 @@ public class FileBoardListAction implements Action {
 		object.addProperty("endpage", endpage);
 		object.addProperty("listcount",listcount);
 		object.addProperty("limit", limit);
-		System.out.println("11111111"+nowday);
+		//System.out.println("11111111"+nowday);
 		object.addProperty("nowday",nowday);
 		
 		//ㅣList => JsonElement

@@ -3,6 +3,10 @@ select * from file_board;
 
 drop table file_board cascade constraints purge;
 
+
+	update 	file_board set FILE_DATE= '2023-01-01'
+	where dept = '인사팀';
+
 create table file_board (
 	FILE_NUM NUMBER(5) primary key,
 	FILE_NAME VARCHAR2(30), 
@@ -170,3 +174,86 @@ select * from file_board where FILE_NUM =?
 					and FILE_NAME = '이지현' 
 				order by FILE_RE_REF desc 
 				, FILE_READCOUNT desc 
+				
+				
+	 select * from 
+					(select b.*, rownum rnum from 
+						(select file_board.* , nvl(CNT ,0) CNT 
+					from file_board left outer join  
+						 				 (select F_COMMENT_NUM,count(*) CNT 
+																from FILE_COMMENT 
+																group by F_COMMENT_NUM
+															order by CNT desc)
+						on FILE_NUM = F_COMMENT_NUM 
+					where dept = ? 
+						and FILE_SUBJECT like '%1%' 
+						order by  FILE_RE_REF desc )b 
+					where rownum<= 10 ) 
+				where rnum>= 1 and rnum<= 10; 	
+				
+	 select * from 
+					(select b.*, rownum rnum from 
+						(select file_board.* , nvl(CNT ,0) CNT 
+					from file_board left outer join  
+						 				 (select F_COMMENT_NUM,count(*) CNT 
+																from FILE_COMMENT 
+																group by F_COMMENT_NUM
+															order by CNT desc)
+						on FILE_NUM = F_COMMENT_NUM 
+					where dept = '개발팀' 
+						and FILE_SUBJECT like '%1%' 
+						order by  FILE_RE_REF desc , FILE_RE_SEQ asc )b 
+					where rownum<= 10 ) 
+				where rnum>= 1 and rnum<= 10; 			
+				
+				
+				select * from 
+						(select b.*, rownum rnum from 
+					(select file_board.* , nvl(CNT ,0) CNT 
+						from file_board left outer join  
+							 				 (select F_COMMENT_NUM,count(*) CNT 
+																from FILE_COMMENT 
+																group by F_COMMENT_NUM
+																order by CNT desc) 
+							on FILE_NUM = F_COMMENT_NUM 
+							where dept = '개발팀'						and FILE_SUBJECT like '%1%'  
+						order by  FILE_RE_REF desc )b 
+						where rownum<= ? ) 
+					where rnum>= ? and rnum<= ?
+					
+					
+					
+					select count(*) 
+								from file_board 
+								where dept = '개발팀','홍보팀','인사팀','기획팀','영업팀'
+										and FILE_SUBJECT like '%1%'  
+								order by  FILE_RE_REF desc;
+ 
+								
+	 select * from 				(select b.*, rownum rnum from 				
+	 (select file_board.* , nvl(CNT ,0) CNT 					
+	 from file_board left outer join  					 			
+	 (select F_COMMENT_NUM,count(*) CNT 									
+	 from FILE_COMMENT 													
+	 group by F_COMMENT_NUM												
+	 order by CNT desc) 				
+	 on FILE_NUM = F_COMMENT_NUM 	
+	 where  dept = '인사팀' FILE_SUBJECT like "%1%" 	
+	 order by  FILE_RE_REF desc , FILE_RE_SEQ asc  )b 
+	 where rownum<= 10 ) 				
+	 where rnum>= 1 and rnum<= 10 
+	 
+	 
+	 select * from 			
+		 (select b.*, rownum rnum from 		
+			 (select file_board.* , nvl(CNT ,0) CNT 	
+			 from file_board left outer join  			
+				 (select F_COMMENT_NUM,count(*) CNT 		
+				 from FILE_COMMENT 							
+				 group by F_COMMENT_NUM						
+				 order by CNT desc) 				
+			 on FILE_NUM = F_COMMENT_NUM 			
+			 where  dept = '기획팀 ' and FILE_SUBJECT like '%1%'  		
+			 order by CNT desc, FILE_RE_REF desc , FILE_RE_SEQ asc  )b 	
+		 where rownum<= 10 ) 			
+	 where rnum>= 1 and rnum<= 10 

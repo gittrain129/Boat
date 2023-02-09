@@ -459,34 +459,34 @@ public class FileDAO {
 		+ "					from file_board left outer join  "
 		+ "					 				 (select F_COMMENT_NUM,count(*) CNT "
 		+ "														from FILE_COMMENT "
-		+ "														group by F_COMMENT_NUM) "//댓글순
+		+ "														group by F_COMMENT_NUM"
+		+ "														order by CNT desc) "//댓글순
 		+ "					on FILE_NUM = F_COMMENT_NUM "
-		+ "					where dept = ? "
-		+ "					and "+search+" = ? "//searchinput
-		+ "				order by FILE_RE_REF desc "
-		+ "				, FILE_READCOUNT desc )b "
-		+ "				where rownum<= ? ) "//endrow
+		+ "					where "
+		+  					dept+ search + " like ? "
+		+ "				"+order+" )b "//조회수
+		+ "				where rownum<= ? ) "//endrow//최신순
 		+ "				where rnum>= ? and rnum<= ? ";//startrow,endrow
 		
 		
 		System.out.println(sql);
 
 		pstmt = con.prepareStatement(sql);
-		//pstmt.setString(1,"%"+search_word+"%");
 		
 		int startrow = (page - 1) * limit + 1;
 		int endrow = startrow + limit - 1;
+		
+		//pstmt.setString(1,"%"+search_word+"%");
 		//pstmt.setString(1, order);
 		/*
 		 * pstmt.setString(2, searchinput); pstmt.setString(3, dept); pstmt.setInt(4,
 		 * endrow); pstmt.setInt(5, startrow); pstmt.setInt(6, endrow);
 		 */
 		
-		pstmt.setString(1, searchinput);
-		pstmt.setString(2, dept);
-		pstmt.setInt(3, endrow);
-		pstmt.setInt(4, startrow);
-		pstmt.setInt(5, endrow);
+		pstmt.setString(1, '%'+searchinput+'%');
+		pstmt.setInt(2, endrow);
+		pstmt.setInt(3, startrow);
+		pstmt.setInt(4, endrow);
 		
 		rs = pstmt.executeQuery();
 		
@@ -508,7 +508,7 @@ public class FileDAO {
 			m.setFILE_DATE(rs.getString("FILE_DATE"));
 			list.add(m);
 		}
-		System.out.println(list.size());
+		System.out.println("list.seze()= "+list.size());
 		
 	} catch (Exception se) {
 		se.printStackTrace();
@@ -540,7 +540,7 @@ public class FileDAO {
 
 	return list;
 	}
-	public int getListcount(String dept, String searchsel, String searchinput, String order) {
+	public int getListcount(String dept, String searchsel, String searchinput) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -550,14 +550,16 @@ public class FileDAO {
 			con = ds.getConnection();
 			String sql = "select count(*) "
 					+ "					from file_board "
-					+ "					where dept = '개발팀' "
-					+ "					and FILE_NAME = '이지현' "
-					+ "				order by FILE_RE_REF desc "
-					+ "				, FILE_READCOUNT desc "
-					+ "";
+					+ "					where "
+					+ 					 dept 
+					+  					searchsel+" like ?  ";
+					
 			pstmt = con.prepareStatement(sql);
 			System.out.println(sql);
-
+			
+			pstmt.setString(1,"%"+searchinput+"%");
+			
+			
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				x = rs.getInt(1);

@@ -69,7 +69,6 @@
 	      // full-calendar 생성하기
 	      calendar = new FullCalendar.Calendar(calendarEl, {
 	    		events :all_events,
-	    	  
 	        	height: '600px', // calendar 높이 설정
 	       		 expandRows: true, // 화면에 맞게 높이 재설정
 	        
