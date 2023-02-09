@@ -25,14 +25,14 @@ function del(num){//num : 댓글 번호
 function getList(state){//현재 선택한 댓글 정렬방식을 저장합니다. 1=>등록순, 2=>최신순
 	    console.log(state)
 	    option=state;
-	    console.log$("#comment_board_num").val()
+	    console.log($("#comment_board_num").val());
 		$.ajax({
 			type:"post",
 			url:"FileCommentList.filebo",
 			data : {"F_COMMENT_NUM" : $("#comment_board_num").val(), state:state},
 			dataType:"json",
 			success:function(rdata){
-				console.log(rdata.boardlist.length);
+				console.log(rdata.boardlist.length+"1313");
 				$('#count').text(rdata.listcount).css('font-family','arial,sans-serif')
 				let red1 = 'red';
 				let red2 ='red';
@@ -61,31 +61,34 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 					comment_reply =' comment-list-item--reply lev2';
 					
 				}
-				const profile = this.memberfile;
+								const profile = this.memberfile;
 				let src ='image/profile.png';
 				if(profile){
 					src='memberupload/'+profile;
 				}
-				
-				output +=' <div class="d-flex mt-4">'
-                        +'                    <div class="flex-shrink-0"><img class="rounded-circle" src="'+src+' alt="..." /></div>'
-                        +'                    <div class="ms-3">'
-                        +'                        <div class="fw-bold" id="'+this.num+'">'+this.F_C_ID
-                       	+'							<div class="comment-info-box">'/*선생님꺼 */
-						+'							<span class="comment-info-data">'+this.F_COMMENT_DATE + '</span>'
-			if(lev<2){
-				output +='	<a href="javascript:replyform('+this.num +','
-						+ lev +','+this.F_COMMENT_RE_SEQ+','
-						+ this.F_COMMENT_RE_REF +')" class="comment-info-button">답글쓰기</a>'
-						}
-							output+='</div>'//comment-info-box;
-						+							this.F_CONTENT
-                        +'                    </div>'
-                        +'                 </div>'+
-                        +'                 </div>'+
-                        +'                 </div>';
-                
-					
+				output +='<li id ="'+this.num+'"class="comment-list-item '+comment_reply + '">'
+						+'	<div class ="comment-nick-area">'
+						+'	<img src="'+src+'" alt ="프로필사진" width="36" height="36">'
+						+'	<div class ="comment-box">'
+						+'		<div class ="comment-nick-box">'
+						+'			<div class="comment-nick-info">'
+						+'				<div class="comment-nickname">'+ this.id + '</div>'
+						+'			</div>'//comment-nick-info
+						+'		</div>'//comment-nick-box
+						+'	</div>'//comment-box
+						+'	<div class ="comment-text-box">'
+						+'		<p class-"comment-text-view">'
+						+'			<span class="text-comment">'+ this.content + '</span>'
+						+'		</p>'
+						+'	</div>'//comment-text-box
+						+'	<div class="comment-info-box">'
+						+'		<span class="comment-info-data">'+this.reg_date + '</span>';	
+				if(lev<2){
+					output +='	<a href="javascript:replyform('+this.num +','
+							+ lev +','+this.comment_re_seq+','
+							+ this.comment_re_ref +')" class="comment-info-button">답글쓰기</a>'
+				}
+				output+='</div>'//comment-info-box;
 				
 				if($("#loginid").val()==this.id){
 					output+='<div class="comment-tool">'
@@ -95,20 +98,23 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 						+'		<div id = "comment-list-item-layer'+this.num+'" class="LayerMore">'//스타일에서 display:none
 						+'		<ul class="layer-list">'
 						+'			<li class="layer-item">'
-						+'			<a href="javascript:updateForm('+this.F_C_NUM+')"'
+						+'			<a href="javascript:updateForm('+this.num+')"'
 						+'			class="layer-button">수정</a>&nbsp;&nbsp;'
-						+'			<a href="javascript:del('+this.F_C_NUM+')"'
+						+'			<a href="javascript:del('+this.num+')"'
 						+'			class="layer-button">삭제</a></li></ul>'
 						+'		</div>'
 						+'		</div>'
 				}
+						output+='</div>'//comment-nick-area
+						+'		</li>'//li.comment-list-item
 			})//each end
-			$('.d-flex.mt-4').prependTo(output);
+
+			$('.comment-order-list').html(output);
 			}//if(rdata.boardlist.length>0)
 			else{//댓글 1개가 있는 상태에서 삭제하는 경우 갯수는 0이라 if문을 수행하지 않고 이곳으로 옵니다.
 				//이곳에서 아래의 두 영역을 없앱니다.
-				$('.d-flex.mt-4').empty();
-				
+				$('.comment-list').empty();
+				$('.comment-order-list').empty();
 			}
 				
 			
@@ -118,7 +124,67 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 			}
 		});//ajax end
 	}//function(getList) end
+
+
+	function updateForm(num){ //num : 수정할 댓글 글번호
+
+    //수정 폼이 있는 상태에서 더보기를 클릭할 수 없도록 더 보기 영역을 숨겨요
+	$(".comment-tool").hide();
 	
+	$(".LayerMore").hide(); //수정 삭제 영역도 숨겨요
+	
+	let $num = $('#'+num);
+	
+	//선택한 내용을 구합니다.
+	const content=$num.find('.text-comment').text(); 
+	
+	const selector = '#'+num + '> .comment-nick-area'
+	$(selector).hide(); //selector 영역 숨겨요-수정에서 취소를 선택하면 보여줄 예정입니다.
+	
+	//$('.comment-list+.comment-write').clone() : 기본 글쓰기 영역 복사합니다.
+	//글이 있던 영역에 글을 수정할 수 있는 폼으로 바꿉니다.
+	$num.append($('.comment-list+.comment-write').clone());
+	
+	//수정 폼의 <textarea>에 내용을 나타냅니다.
+	$num.find('textarea').val(content); 
+	
+	//'.btn-register' 영역에 수정할 글 번호를 속성 'data-id'에 나타내고 클래스 'update'를 추가합니다.
+	$num.find('.btn-register').attr('data-id',num).addClass('update').text('수정완료');
+	
+	//폼에서 취소를 사용할 수 있도록 보이게 합니다.원래 안보였던건데  점점점클릭하면 보이게 
+	$num.find('.btn-cancel').css('display','block'); 
+	
+	const count=content.length;
+	$num.find('.comment-write-area-count').text(count+"/200");
+	
+}//function(updateForm) end
+
+function replyform(num,lev,seq,ref){
+	//수정 삭제 영역 선택 후 답글쓰기를 클릭한 경우
+	$(".LayerMore").hide();//수정삭제영역숨경요
+	
+	let output='<li class="comment-list-item comment-list-item--reply lev'+lev+'"></li>'
+	const $num= $('#'+num);
+	//선택한 글 뒤에 답글 폼을 추가합니다.
+	$num.after(output);
+	
+	//글쓰기 영역 복사합니다.
+	output =$('.comment-list+.comment-write').clone();
+	
+	const $num_next =$num.next();
+	//선택한 글 뒤에 답글 폼 생성합니다.
+	$num_next.html(output);
+	
+	// 답글 폼의 < textarea>의 속성 'placeholder' 를 답글을 남겨보세요
+	$num_next.find('textarea').attr('placeholder','답글을 남겨보세요');
+	
+	// 답글 폼의 '.btn-cancel 보여주고 .reply-cancel클래스추가
+	$num_next.find('.btn-cancel').css('display','block').addClass('reply-cancel');
+
+	$num_next.find('.btn-register').addClass('reply')
+				.attr('data-ref',ref).attr('data-lev',lev).attr('data-seq',seq).text('답글완료');
+}//function(replyform) end
+
 $(function() {
 	getList(option);  //처음 로드 될때는 등록순 정렬
 	

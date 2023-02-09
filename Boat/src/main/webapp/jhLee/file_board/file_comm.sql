@@ -1,4 +1,5 @@
 drop table FILE_COMMENT cascade constraints purge;
+
 update FILE_COMMENT set F_COMMENT_NUM =16
 where F_COMMENT_NUM =18;
 

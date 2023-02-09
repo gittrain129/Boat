@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+ <jsp:include page="/sjKim/boat/header.jsp" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="jhLee/js/fileview.js"></script>
@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="jhLee/css/fileview.css">
   <link rel="stylesheet" href="jhLee/css/fileview2.css">
   
-   <jsp:include page="/sjKim/boat/header.jsp" />
+  
 </head>
 <body>
 <input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
@@ -151,19 +151,14 @@
 		<button type="submit" class="btn btn-primary">전송</button>
 		<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 	    </form>
+	    
 	    </div>
 		</div>
 		</div>
 		</div>
 <%--id="myModal"end --%>
-
-<div class="comment">
- <section class="mb-5">
-        <div class="card bg-light">
-               <div class="card-body">
-                                <!-- Comment form-->
-             <form class="mb-4">
-                 <div class="comment-area">
+       <div class="card-body bg-light comment card">
+       <div class="comment-area">
 		<div class="comment-head">
 			<h3 class="comment-count">
 			댓글<sup id="count"></sup><%--superscript(윗첨자) --%>
@@ -187,10 +182,8 @@
 				<div class="button btn-register">등록</div>
 			</div>
 		</div><%--comment-write end --%>
-	</div><%--comment-area end --%>		
-            </form>
-	 							
-	 							
+		</div>
+	</div><%--card-body end --%>		
 	 							
 								
 								<%--댓글 입력 js ajax추가부분 --%>
@@ -214,77 +207,6 @@
 
 
 
-
-
-  <div class="d-flex mb-4">
-                                    <!-- Parent comment-->
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">${empno}</div><!--  this.F_C_ID -->
-                                        ${F_CONTENT}  MEMBER.DEPT <br> <Br>
-
-this.F_COMMENT_DATE<Br>
-
-<div class="comment">
- <section class="mb-5">
-                        <div class="card bg-light">
-                            <div class="card-body">
-                            <div class="comment-area">
-								<div class="comment-head">
-									<h5 class="comment-count">
-										댓글<sup id="count"></sup><%--superscript(윗첨자) --%>
-									</h5>
-									<div class ="comment-order">
-										<ul class="comment-order-list">
-										</ul>
-									</div>
-							</div><%--comment head 끝 --%>
-							
-							
-                                <!-- Comment form-->
-                                <form class="mb-4">
-                                <textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
-                                <!-- Comment with nested comments-->
-                                <div class="d-flex mb-4">
-                                    <!-- Parent comment-->
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">
-                                        Commenter Name</div>
-                                          ${F_CONTENT}  MEMBER.DEPT <br> <Br>
-
-											this.F_COMMENT_DATE<Br>
-                                        <!-- Child comment 1-->
-                                        <div class="d-flex mt-4">
-                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">Commenter Name</div>
-                                                And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                                            </div>
-                                        </div>
-                                        <!-- Child comment 2-->
-                                        <div class="d-flex mt-4">
-                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">Commenter Name</div>
-                                                When you put money directly to a problem, it makes a good headline.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single comment-->
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-<%-- class="card bg-light">end --%>
-</div><%-- class="comment end --%>
         </div>
         
          <jsp:include page="/sjKim/boat/footer.jsp" />
