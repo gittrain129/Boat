@@ -191,7 +191,6 @@ http://localhost:8088/Boat/FileBoardList.filebo
    이전
    	<c:if test="${page<=1}">
      <a href="#" class="btnPage gray">
-   
      <img src="jhLee/image/pre.png" alt="이전10개" width="10px">  
      </a>
    	</c:if>
@@ -233,6 +232,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
         </button>
    
         <div class="dropdown-menu">
+            <a class="dropdown-item" href="javascript:go(1);">전체</a>
             <a class="dropdown-item" href="javascript:go(1);">홍보팀</a>
             <a class="dropdown-item" href="javascript:go(1);">개발팀</a>
             <a class="dropdown-item" href="javascript:go(1);">인사팀</a>

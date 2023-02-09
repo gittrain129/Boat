@@ -39,11 +39,13 @@
 				
 				if(data.listcount>0){//총 갯수가 0보다 큰 경우
 					$("tbody").remove();
+					
 					let num = data.listcount-(data.page-1)*data.limit;
 					console.log(num)
 					let output ="<tbody>";
 					$(data.boardlist).each(
 						function(index,item){
+						//	console.log("부서명이 뭐니'+item.DEPT);
 							output+='<tr><td><div class="num">'+(num--)+'</div></td>'
 							const blank_count= item.FILE_RE_LEV *2+1;
 							let blank = '&nbsp';
@@ -86,7 +88,7 @@
 									+'</a>['+item.CNT+']'+imgnew+'</div>'
 							//d윗문장지우기
 							
-							output +='</td><td><div class="dept">'+item.DEPT+'</div></td>'
+							output +='</td><td><div class="dept">'+item.dept+'</div></td>'
 							output +='<td><div class="writer">'+item.FILE_NAME+'</div></td>'
 							output +='<td><div class="count">'+item.FILE_READCOUNT+'</div></td>'
 							output +='<td><div class="date">'+item.FILE_DATE+'</div></td>'
@@ -204,8 +206,7 @@
 				
 				switch(order_val){
 					case '댓글순':
-					$('#orderval').val(
-							;
+					$('#orderval').val();
 					
 								break;
 					case '최신순':

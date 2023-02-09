@@ -183,9 +183,9 @@ li {
                         
                     </ul>
                 </li>
-                <li><a href="${pageContext.request.contextPath}/project_calendarshow.cal" target="_self"><span>공유업무</span></a>
+                <li><a href="${pageContext.request.contextPath}/project_calendarstart.cal" target="_self"><span>공유업무</span></a>
                     <ul class="dept01">
-                    	<a href="${pageContext.request.contextPath}/jhLee/calendar.jsp" target="_self">
+                    	<a href="${pageContext.request.contextPath}/project_calendarstart.cal" target="_self">
                         	<li id="nop">캘린더</li>
                         </a>
                         <a href="${pageContext.request.contextPath}/jkKim/address.jk" target="_self">

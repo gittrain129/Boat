@@ -34,6 +34,11 @@ public class CalendarFrontController extends javax.servlet.http.HttpServlet {
 		ActionForward forward = null;
 		Action action = null;
 				switch(command) {
+				
+				case "/project_calendarstart.cal":
+					action = new CalAllshow();
+					break;
+					
 				case "/project_calendarallSave.cal":
 					action = new CalAllsaveAction();
 					break;
