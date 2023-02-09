@@ -29,6 +29,7 @@ public class chatAction implements jkKim_Action {
 		if(state == null) {
 			HttpSession session = request.getSession();
 			String id = (String) session.getAttribute("id");
+			if(id != null) {
 			System.out.println("sessionid = " + id);
 			jkKim_Member chatid = mdao.chatIdFind(id);
 			
@@ -41,6 +42,11 @@ public class chatAction implements jkKim_Action {
 			forward.setRedirect(false);
 			forward.setPath("/jkKim/chatView.jsp");
 			return forward; 
+			}else {
+				forward.setRedirect(false);
+				forward.setPath("/jkKim/chatView.jsp");
+				return forward; 
+			}
 		}else {
 		
 		

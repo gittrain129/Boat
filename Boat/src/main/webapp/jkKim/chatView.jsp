@@ -42,7 +42,7 @@ sage {
     background-color: #A8C0D6;
 }
 #message{
-	width:460px;
+	width:400px;
 }
 .message .chat {
     display: flex;

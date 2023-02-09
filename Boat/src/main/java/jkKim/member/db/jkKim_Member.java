@@ -15,6 +15,14 @@ public class jkKim_Member {
 	private int phone;
 	private String memberfile;
 	private String imgsrc;
+	private String rownum;
+	
+	public String getRownum() {
+		return rownum;
+	}
+	public void setRownum(String rownum) {
+		this.rownum = rownum;
+	}
 	public String getEmpno() {
 		return empno;
 	}
@@ -99,4 +107,5 @@ public class jkKim_Member {
 	public void setImgsrc(String imgsrc) {
 		this.imgsrc = imgsrc;
 	}
+	
 }
