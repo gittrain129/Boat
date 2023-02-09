@@ -34,7 +34,7 @@ body {
 	background: #f5f7ff;
 	padding: 50px;
 	border-radius: 10px;
-    margin-bottom: 150px;
+    margin-bottom: 200px;
 }
 header{
 	text-align: center;
@@ -82,20 +82,21 @@ header{
 	display: inline-block;
 	background: #dfdede;
     color: black;
+    padding-top: 14px;
+    padding-bottom: 14px;
     padding-left: 15px;
+    padding-right: 15px;
     width: 97%;
-    height: 50px;
     border: none;
     font-size: 15px;
     border-radius: 5px;
     outline: none;
     margin-top: 20px;
-    padding-top: 14px;
     margin-left: 8px;
 }
 input[type="checkbox"] {
-	position: relative;
-    top: 5px;
+	position: inline-block;
+    /*top: 5px;*/
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
@@ -103,6 +104,7 @@ input[type="checkbox"] {
     appearance: none;
     cursor: pointer;
     transition: background 0.2s;
+    vertical-align:middle;
   }
 
   input[type="checkbox"]:checked {

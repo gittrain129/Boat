@@ -15,9 +15,17 @@ function getList(t_empno){
 				
 				if(rdata.todolist.length>0){
 					
+					
 					$(rdata.todolist).each(function(){
+						
+						
+					let content = this.t_content;
+					//if(content.length>=55){
+						//content=content.substr(0,55) + "...";//0부터 20개 부분 문자열 추출
+					//}
+					
 						output += '<input class="form-check-input" name="chklist" type="checkbox" id="' +this.t_content+ '">'
-						output += '<label class="form-check-label" for="'+this.t_content+'">' +this.t_content+ '</label>'
+						output += '<label class="form-check-label" for="'+this.t_content+'">' +content+ '</label>'
 					})//each end
 					
 					$('.order-list').html(output);
@@ -38,13 +46,33 @@ function getList(t_empno){
 }//getList end
 
 
-
+//12시 삭제
+function getDelete(t_empno){
+	$.ajax({
+			url: 'TodoDeleteAll.my',
+			data : {t_empno : $("#loginid").val()},
+			type : 'post',
+			success : function(rdata) {
+				if(rdata == 1){
+					getList(t_empno);
+				}
+			}
+		})//ajax
+		
+		$("#addValue").val('').focus();
+}
 
 
 $(document).ready(function(){
 	getList(t_empno);
 	$("#addValue").focus();
 	
+	var date = new Date();
+	console.log(date.getHours())
+	console.log(date.getMinutes())
+	if(23-date.getHours()==0 && 60-date.getMinutes()==0){
+		getDelete(t_empno)
+	}
 	
 	//추가 버튼 클릭할 때 이벤트 부분
 	$("#btn").click(function(){

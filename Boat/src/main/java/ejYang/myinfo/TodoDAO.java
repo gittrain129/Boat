@@ -445,4 +445,47 @@ public class TodoDAO {
 			return array;
 		}
 
+		
+		//12시 전체 삭제
+		public int tododeleteall(String empno) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			int result = 0;
+			try {
+				conn = ds.getConnection();
+				
+				String sql = "DELETE MYINFO "
+						+ "WHERE T_EMPNO = ? ";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, empno);
+				result = pstmt.executeUpdate();
+				
+				if(result == 1) {
+					System.out.println("전체 투두리스트가 삭제되었습니다.");
+				}
+				
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				System.out.println("tododeleteall() 에러: " + ex);
+			}finally {
+				if(pstmt != null) {
+					try {
+						pstmt.close(); 
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				
+				if(conn != null) {
+					try {
+						conn.close(); 	
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+			}
+			return result;
+		}
+
 }
