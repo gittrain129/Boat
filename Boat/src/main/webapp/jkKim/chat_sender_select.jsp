@@ -61,7 +61,7 @@ body > div > ul > li{
                   
                   <div class="profile">
                   <p>${m.name }</p>
-                  <p>조장 ${m.dept }</p>
+                  <p>${m.dept }</p>
                   </div>
                   
            </li>

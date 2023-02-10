@@ -23,11 +23,10 @@ function ajax(sdata){
       dataType : "json",
       cache : false,
       success : function(data){
-
+	console.log('여기에요');
 	console.log(data.empno_id);
-	
-	window.location.href='chatView_Sender.jsp?empno_id=' + data.empno_id + '&imgsrc=' + data.imgsrc;
-	//window.location.href='chatView_Sender.jsp?imgsrc=' + data.imgsrc;
+	console.log(data.imgsrc);
+	window.location.href='chatView_Sender.jsp?empno_id=' + data.empno_id;
 	
 	 }, //success end
          error : function() {

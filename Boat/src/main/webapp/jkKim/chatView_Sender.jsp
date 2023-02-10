@@ -169,7 +169,7 @@ sage {
                 var clearMsgsButton = document.getElementById("clearMsgsButton");
                 var connectButton = document.getElementById("connect-button");
                 var empno_id = "${param.empno_id }";
-               
+                var imgsrc = "${param.imgsrc }";
                
 
               
@@ -226,6 +226,7 @@ sage {
                         conn.close();
                     }
 					console.log(empno_id);
+					console.log(imgsrc);
                   //-------------------------------------------------------------------&**^&
                     conn = peer.connect(empno_id, {
                         reliable: true
@@ -345,6 +346,7 @@ sage {
 
                
                 initialize();
+                conn.send(imgsrc);
                 
             })();
         </script>
