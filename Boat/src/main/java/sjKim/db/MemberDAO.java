@@ -266,7 +266,7 @@ public class MemberDAO {
 		int x = 0;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement("select count(*) from member where empno != 'boat'");
+			pstmt = con.prepareStatement("select count(*) from member where empno != 'ADMIN'");
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
