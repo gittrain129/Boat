@@ -22,6 +22,7 @@ public class FileBoardModifyView implements Action {
 		boarddao.setReadCountUpdate(num);
 		
 		boarddata = boarddao.getDetail(num);
+		
 		System.out.println(boarddata);
 		
 		//boarddata = null;//error테스트를 위한 값설정
