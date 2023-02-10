@@ -8,6 +8,9 @@
   
 <style>
 
+* {
+min-wight: 1200px;
+}
 
 
 div.logo{
@@ -139,14 +142,21 @@ li {
                 text-align-last: center;             
 }
 
-
-.bg-dark {
-		background-color: none !important;
-	}
-.navbar-dark .navbar-nav .nav-link {
-	color: black;
+.login_nav {
+	display: inline-block;
+	text-decoration: none;
+	color: black !important;
 	font-weight: bold;
+	font-size: 14px;
+	margin-bottom:0;
 }
+
+li.login-item {
+	text-decoration: none;
+	color:black !important;
+}
+
+
 </style>
 
 <script src="${pageContext.request.contextPath}/sjKim/js/header.js"></script>
@@ -227,19 +237,19 @@ li {
         
         <div class="login_header">	
          	<div class="login_button">
-		    	<ul class="login_nav">
+		    	<ul class="login_nav" style="display: flex;">
 		    		<c:if test="${!empty empno}">
-		     	    	<li class="nav-item"><a class="nav-link" >${empno}님이 로그인 되었습니다.</a></li>
-		     	    	<li class="nav-item"><a class="nav-link" href="update_form">| 정보수정 |</a></li>
-		     	    	<c:if test="${empno=='boat'}">
-		     	    		<li class="nav-item"><a class="nav-link" href="list"> 회원정보 |</a></li>
+		     	    	<li class="login-item" ><a class="login-link" style="color:black;">${empno}님이 로그인 되었습니다.</a></li>
+		     	    	<li class="login-item" ><a class="login-link" style="color:black;"href="update_form">&nbsp;| 정보수정 |</a></li>
+		     	    	<c:if test="${empno=='ADMIN'}">
+		     	    		<li class="login-item"><a class="login-link" style="color:black" href="list">&nbsp;회원정보 |</a></li>
 		     	    	</c:if>
-		     			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout.net">로그아웃</a></li>
+		     			<li class="login-item"><a class="login-link" style="color:black;" href="${pageContext.request.contextPath}/logout.net">&nbsp;로그아웃</a></li>
 		     		</c:if>
 		     		
 		     		<c:if test="${empty empno}">
-		      			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login.net" target="_self">로그인</a></li> 
-		      			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/join.net" target="_self">회원가입</a></li> 
+		      			<li class="login-item"><a class="login-link" style="color:black;" href="${pageContext.request.contextPath}/login.net" target="_self">로그인 |&nbsp;</a></li> 
+		      			<li class="login-item"><a class="login-link" style="color:black;" href="${pageContext.request.contextPath}/join.net" target="_self">회원가입</a></li> 
 		      		</c:if>
 		      		
 		   	   </ul>
