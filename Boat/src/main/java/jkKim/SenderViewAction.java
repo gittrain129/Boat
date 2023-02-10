@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 
@@ -22,12 +23,29 @@ public class SenderViewAction implements jkKim_Action {
 		List<jkKim_Member> memberlist = new ArrayList<jkKim_Member>();
 		jkKim_ActionForward forward = new jkKim_ActionForward();
 		
-		String dept_sql = "";
+		
+		String id = null;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("empno") != null) {
+		id = (String) session.getAttribute("empno");
+		}
+		
+		
+		String dept_sql = " ";
 		String empno_id ="";
+		String imgsrc = "";
 		
+		if (id != null) {
+			System.out.println("sessionid = " + id);
+			dept_sql = "where empno not like '%"+ id + "%' ";
+			
+		}
 		
+				
 		
-		memberlist = mdao.getMemberList();
+		memberlist = mdao.getMemberList(dept_sql);
+		
 		int listcount =mdao.getListCount(dept_sql);
 		
 		String state = request.getParameter("state");
@@ -35,6 +53,7 @@ public class SenderViewAction implements jkKim_Action {
 		if(request.getParameter("rownum")!=null) {
 		int rownum = Integer.parseInt(request.getParameter("rownum"));
 			empno_id = mdao.getName_id(rownum);
+			imgsrc = mdao.getImgsrc(rownum);
 			System.out.println("넘어온 rownum = " + request.getParameter("rownum"));
 		}
 		
@@ -56,6 +75,7 @@ public class SenderViewAction implements jkKim_Action {
 						
 			JsonObject obj = new JsonObject();
 			obj.addProperty("empno_id", empno_id);
+			obj.addProperty("imgsrc", imgsrc);
 			response.setContentType("application/json;charset=utf-8");
 			response.getWriter().print(obj);
 			System.out.println(obj.toString());

@@ -12,7 +12,6 @@
   
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="jhLee/js/fileview.js"></script>
     <title>자료실 게시판</title>
 
@@ -123,7 +122,7 @@
             <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">이전</a>
             <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">다음</a>
 
-		  <a href="#" id ='delete'>
+		  <a id ='delete'>
 			  <button id = 'deletebtn' class="btn btn-danger" data-toggle ="modal"
 			  data-target="#myModal">삭제</button>
 			</a>
@@ -152,14 +151,13 @@
 		<button type="submit" class="btn btn-primary">전송</button>
 		<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 	    </form>
-	    
 	    </div>
 		</div>
 		</div>
 		</div>
 <%--id="myModal"end --%>
        <div class="commcard">
-       <div>
+    
        <div class="comment-area">
 		<div class="comment-head">
 			<h3 class="comment-count">
@@ -170,7 +168,7 @@
 				</ul>		
 			</div>
 		</div><%--comment head 끝 --%>
-		</div>
+		
 		<ul class="comment-list">
 		</ul>
 		<div class="comment-write">
@@ -185,18 +183,16 @@
 				<div class="button btn-register">등록</div>
 			</div>
 		</div><%--comment-write end --%>
-		</div>
+		
 	</div><%--card-body end --%>		
 	 							
 								
 								<%--댓글 입력 js ajax추가부분 --%>
 								
 								
- 							 </div>
                         </div>
-                    </section>
 <%-- class="card bg-light">end --%>
-</div><%-- class="comment end --%>
+<%-- class="comment end --%>
 
 
 
