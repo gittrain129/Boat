@@ -260,9 +260,9 @@ li.login-item {
 			<div class="dropdown_inout">						
                <select id="inout" name="inout" onchange="select_inout()" required autofocus>
                		<option value="" selected disabled hidden>출근현황</option>
-				    <option style= "background-color: #18a8f1" value="출근">출근</option>
-				    <option style= "background-color: #f5de16" value="외출">외출</option>
-				    <option style= "background-color: #ff5858" value="퇴근">퇴근</option>
+				    <option style= "background-color: #18a8f1" value="출근" id="works">출근</option>
+				    <option style= "background-color: #f5de16" value="외출" id="outs">외출</option>
+				    <option style= "background-color: #ff5858" value="퇴근" id="leave">퇴근</option>
 				</select>
 	        </div>
 		     
