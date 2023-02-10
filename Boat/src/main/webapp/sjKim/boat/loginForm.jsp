@@ -25,8 +25,10 @@
   <body>
   
     <section class="login">
-      <h2 class="logo">       				
-		<img src="${pageContext.request.contextPath}/sjKim/image/main_logo.jpg" style="width: 200px; height: 200px;">				
+      <h2 class="logo">  
+       <a href="http://localhost:8088/Boat/index.jsp">     				
+		<img src="${pageContext.request.contextPath}/sjKim/image/main_logo.jpg" style="width: 200px; height: 200px;">	
+	   </a>			
 	  </h2>
 	  <h3>로그인</h3>
       <ul>
