@@ -1,7 +1,23 @@
 drop table FILE_COMMENT cascade constraints purge;
+
 update FILE_COMMENT set F_COMMENT_NUM =16
 where F_COMMENT_NUM =18;
 
+select F_C_NUM, FILE_COMMENT.F_C_ID,
+F_CONTENT, F_COMMENT_DATE, F_COMMENT_RE_LEV,
+F_COMMENT_RE_SEQ, F_COMMENT_RE_REF, member.memberfile 
+from FILE_COMMENT join member on 
+FILE_COMMENT.F_C_ID = member.empno 
+where F_COMMENT_NUM = 27 order by F_COMMENT_RE_REF asc, 		
+F_COMMENT_RE_SEQ asc
+
+select count(*) from FILE_COMMENT
+				where F_COMMENT_NUM = 29
+
+select * from member;
+
+
+update FILE_COMMENT set f_c_id = 'ADMIN'
 
 create table FILE_COMMENT (
 F_C_NUM number primary key,
@@ -18,6 +34,7 @@ create sequence filecom nocache;
 
 drop sequence filecom;
 
+select * from FILE_COMMENT;
 select * from file_board;
 
 

@@ -20,17 +20,20 @@ public class FileBoardCommentList implements Action {
 		// TODO Auto-generated method stub
 	FileboComDAO dao = new FileboComDAO();
 	
-	int comment_board_num = Integer.parseInt(request.getParameter("comment_board_num"));
+	int comment_board_num = Integer.parseInt(request.getParameter("F_COMMENT_NUM"));
+	System.out.println(comment_board_num);
 	int state = Integer.parseInt(request.getParameter("state"));
 	
 	
-	int listcount = dao.getfilecomListcount(comment_board_num);
-	
 	JsonObject object = new JsonObject();
+	int listcount = dao.getfilecomListcount(comment_board_num);
 	JsonArray jarray = dao.getfileCommentList(comment_board_num,state);
+	System.out.println("listcount :"+listcount);
 	
-	System.out.println("1"+jarray);
-			object.addProperty("listcount",listcount);
+	object.addProperty("listcount",listcount);
+	
+	System.out.println("jarray :"+jarray);
+	
 	
 	JsonElement je = new Gson().toJsonTree(jarray);
 	object.add("boardlist", je);

@@ -287,10 +287,7 @@
   
   
   
-  <%--전체 저장 버튼 누르면 월간 페이지 전체 저장 가능--%>
- <div id = "cal_save_wrap">
- <button id ="cal_save" onclick="allSave();">전체 저장</button>
- </div>
+ 
  
  	<div id='calendar'></div>
  </div>

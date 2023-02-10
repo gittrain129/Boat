@@ -138,7 +138,7 @@ public class FileboComDAO {
 		if(state ==2) {
 			sort="desc";
 		}
-		String sql = "select FILE_NUM, FILE_COMMENT.F_C_ID, F_CONTENT, F_COMMENT_DATE, F_COMMENT_RE_LEV, "
+		String sql = "select F_C_NUM, FILE_COMMENT.F_C_ID, F_CONTENT, F_COMMENT_DATE, F_COMMENT_RE_LEV, "
 				   + "F_COMMENT_RE_SEQ, F_COMMENT_RE_REF, member.memberfile "
 				   + "from FILE_COMMENT join member "
 				   + "on FILE_COMMENT.F_C_ID = member.empno "
@@ -169,7 +169,7 @@ public class FileboComDAO {
 				object.addProperty("comment_re_ref", rs.getInt(7));
 				object.addProperty("memberfile", rs.getString(8));
 				array.add(object);
-
+System.out.println(object);
 			}
 			
 		} catch (Exception e) {

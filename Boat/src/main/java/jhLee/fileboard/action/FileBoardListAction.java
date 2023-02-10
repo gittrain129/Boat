@@ -107,7 +107,6 @@ public class FileBoardListAction implements Action {
 		
 		String dept="";  
 		String dept_ =request.getParameter("dept").trim();
-		System.out.println("dept ="+dept+"되라고좀");
 		if(dept_.equals("")||dept_.equals("전체")) {
 			 dept = "";
 		}else {
