@@ -153,7 +153,7 @@ public class jkKim_MemberDAO {
 	         conn = ds.getConnection();
 	         StringBuilder sql = new StringBuilder();
 	         sql.append("select empno,imgsrc from member ");
-	         sql.append("where name = ?");
+	         sql.append("where empno = ?");
 	         pstmt = conn.prepareStatement(sql.toString());
 	         pstmt.setString(1, id);
 	         rs = pstmt.executeQuery();

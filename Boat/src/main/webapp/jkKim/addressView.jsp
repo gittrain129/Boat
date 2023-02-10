@@ -12,7 +12,18 @@
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="${pageContext.request.contextPath}/jkKim/css/addressView.css" type="text/css" rel="stylesheet">
  <script src=${pageContext.request.contextPath}/jkKim/js/addressView2.js></script>
+ <style>
  
+#dept{
+ width: 150px;
+
+ 
+ }
+
+ 
+
+ 
+ </style>
 
   <jsp:include page="/sjKim/boat/header.jsp" />
   </head>
@@ -23,8 +34,15 @@
     
 	<c:if test="${listcount > 0 }">
 	
+
+	
+	
+	
+  		<div id="whole-body">
+      <div class="row" > <!--  카드 포함한 div -->
+
 	  <!-- 부서선택 셀렉트 바-->
-  <div class="rows" style="position:absolute; right:100px;">
+  <div id="blocking" style=width:15%;>
    <select class="form-control" id="dept" >
   <option selected value="1">모든부서</option>
   <option value="2">홍보팀</option>
@@ -32,15 +50,20 @@
   <option value="4">인사팀</option>
   <option value="5">기획팀</option>
   <option value="6">영업팀</option>
-	</select>
+	</select>	
 	</div>
-	<!-- 부서선택 셀렉트 바 끝 -->
 	
-	
-	
-  		<div id="whole-body">
-      <div class="row" id="cardbody"> <!--  카드 포함한 div -->
+	<div class="container" id="search_body2" style="width:50%; position:relative; left:315px;">
+            <div class="row">
+            <input type='text' name='search' id='search' class=" col-8 ml-3">
+            <button class="btn btn-info" name='search-btn' id='search-btn'>검색</button>
+         </div>
       
+   </div>
+	
+	<!-- 부서선택 셀렉트 바 끝 -->
+
+     <div class="row" id="cardbody">
       <c:forEach var="m" items="${memberlist }">
       <!-- 1인 카드 시작 -->
       
@@ -63,6 +86,7 @@
         
     
         </c:forEach>
+        </div>
       </div>
       </div>
      
@@ -115,13 +139,7 @@
 		<h3 style="text-align:center">등록된 유저가 없습니다</h3>
 	</c:if>
 	
-	<div class="container">
-            <div class="row">
-            <input type='text' name='search' id='search' class=" col-8 ml-3">
-            <button class="btn btn-info" name='search-btn' id='search-btn'>검색</button>
-         </div>
-      
-   </div>
+	
    <footer>
     <jsp:include page="/sjKim/boat/footer.jsp" /> 
    </footer>
