@@ -15,7 +15,7 @@ public class MemberLogoutAction implements Action {
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
 		session.invalidate();
-		forward.setPath("login.net");
+		forward.setPath("mainPage.net");
 		forward.setRedirect(true);
 		
 		return forward ;

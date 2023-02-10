@@ -44,7 +44,7 @@ public class MemberLoginProcessAction implements Action {
 			}
 			
 			forward.setRedirect(true);
-			forward.setPath("BoardList.bo");
+			forward.setPath("mainPage.net");
 			return forward;
 		} else {
 			String message = "비밀번호가 일치하지 않습니다.";
