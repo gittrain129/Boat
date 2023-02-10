@@ -15,12 +15,15 @@ create table MEMBER(
 	 JUMIN varchar2(15),
 	 ADDRESS VARCHAR2(150),
 	 POST NUMBER(5),
-	 GENDER VARCHAR2(3),
+	 gender		char(1) check(gender in ('m', 'f')),
 	 EMAIL VARCHAR2(30),
 	 PHONE NUMBER(11),
 	 MEMBERFILE VARCHAR2(50),
-	 IMGSRC VARCHAR2(150)
+	 IMGSRC VARCHAR2(150),
+	 register_date date default sysdate,
+	 intro		varchar2(100)
 );
 
 --memberfile은 회원 정보 수정시 적용합니다.
 select * from member;
+

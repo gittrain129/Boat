@@ -30,7 +30,7 @@ legend {
 }
 
 
-#post1 {
+#post {
 	width: 70%;
 }
 
@@ -38,14 +38,14 @@ legend {
 	width: 48%
 }
 
-#id+input{
+#empno+input{
 	width: 30%;
 	background:#18a8f1;
 	line-height: 10px;
 	vertical-align: bottom;
 	color:white;
 } 
-#post1+input {
+#post+input {
 	width: 29%;
 	background:#18a8f1;
 	line-height: 10px;
@@ -71,7 +71,7 @@ textarea {
 }
 
 .container2 {
-	border: 1px solid lightgray;
+	border: 1px solid #18a8f1;
 	padding: 1.5% 1%;
 	word-spacing: 10px;
 	margin-bottom: 20px;

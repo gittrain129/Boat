@@ -32,20 +32,24 @@ public class MemberJoinProcessAction implements Action {
 		
 		MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "utf-8", new DefaultFileRenamePolicy());
 		
-		String id = multi.getParameter("id");
-		String pass = multi.getParameter("pass");
-		String name = multi.getParameter("name");
-		int age = Integer.parseInt(multi.getParameter("age"));
+		String empno = multi.getParameter("empno");
+		String password = multi.getParameter("password");
+		String jumin = multi.getParameter("jumin");	
+		String address = multi.getParameter("address");
+		int post = Integer.parseInt(multi.getParameter("post"));
 		String gender = multi.getParameter("gender");
-		String email = multi.getParameter("email");
+		String email = multi.getParameter("email");		
 		String memberfile = multi.getFilesystemName("memberfile");
+		String intro = multi.getParameter("intro");
+		
 		
 		System.out.println("memberfile=" + memberfile);
 		
 		Member m = new Member();
-		m.setAge(age);		m.setEmail(email);		m.setGender(gender);
-		m.setId(id); 		m.setName(name); 		m.setPassword(pass);
-		m.setMemberfile(memberfile);
+		m.setEmail(email);		m.setIntro(intro);		m.setGender(gender);
+		m.setEmpno(empno); 	 	m.setPassword(password);
+		m.setMemberfile(memberfile); m.setJumin(jumin); m.setAddress(address);
+		m.setPost(post);
 		
 		if(memberfile != null) { //파일을 선택한 경우
 			m.setMemberfile(memberfile);

@@ -19,7 +19,7 @@
 </head>
 
 <body>
-	<form name='myform' method="post" action='joinProcess.net' method="post" id='myform' >
+	<form name='myform' method="post" action='joinProcess.net' id='myform' enctype="multipart/form-data" >
 	  <div class="container">
 		
 		<div class="logo">       				
@@ -32,7 +32,7 @@
 			 		&nbsp;양식을 모두 작성해주세요
 					<label for="id" style="padding-top: 45px;">사원번호</label>
 					<div style="width:600px">
-						<input type='text' placeholder='Enter id' name='id' id='id' style="width:60%">
+						<input type='text' placeholder='Enter id' name='empno' id='empno' style="width:60%">
 						<input type='button' value="ID중복검사" id="idcheck" ><input type="hidden" id="result">
 						<div id="opener_message"></div>
 					</div>
@@ -59,7 +59,7 @@
 				
 				
 				<label for="pass" style="padding-top: 10px;">비밀번호</label>
-					<input type='password' placeholder='Enter Password' name='pass' id='pass' >
+					<input type='password' placeholder='Enter Password' name='password' id='password' >
 				
 					
 				<label for="jumin1">주민번호</label>
@@ -92,8 +92,8 @@
 					<input type='radio' name='gender' value='f' id='gender2' onclick="return false">여자
 				</div>
 
-				<label for="post1">우편번호</label>
-					<input type='text' size='5' maxLength='5' name='post1' id='post1' readOnly>
+				<label for="post">우편번호</label>
+					<input type='text' size='5' maxLength='5' name='post' id='post' readOnly>
 					<input type='button' value="우편검색" id="postcode">
 				
 							
