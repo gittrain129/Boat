@@ -1,4 +1,4 @@
-drop table BOAT cascade constraints purge;
+drop table member cascade constraints purge;
 
 create table member(
 EMPNO VARCHAR2(12) PRIMARY KEY,
@@ -20,45 +20,45 @@ IMGSRC VARCHAR2(150)
 );
 
  INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('ADMIN','','','123456','123456','홍길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','admin@boat.com','01012345678','안녕하세요 반갑습니다','/uploadImage/adminImage');
+ VALUES('ADMIN','','','aAbB123456','aAbB123456','홍길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','admin@boat.com','01012345678','안녕하세요 반갑습니다','/uploadImage/adminImage');
  
  
  
   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('231001','홍보팀','10','123456','123456','홍길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','hgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
+ VALUES('231001','홍보팀','10','aAbB123456','aAbB123456','홍길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','hgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
    INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('232001','개발팀','20','123456','123456','박길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
+ VALUES('232001','개발팀','20','aAbB123456','aAbB123456','박길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('233001','인사팀','30','123456','123456','김길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
+ VALUES('233001','인사팀','30','aAbB123456','aAbB123456','김길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('234001','기획팀','40','123456','123456','이길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
+ VALUES('234001','기획팀','40','aAbB123456','aAbB123456','이길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('235001','영업팀','50','123456','123456','최길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
+ VALUES('235001','영업팀','50','aAbB123456','aAbB123456','최길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
  
  
    INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('231002','홍보팀','10','123456','123456','홍동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','hgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
+ VALUES('231002','홍보팀','10','aAbB123456','aAbB123456','홍동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','hgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
     INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('232002','개발팀','20','123456','123456','박동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
+ VALUES('232002','개발팀','20','aAbB123456','aAbB123456','박동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('233002','인사팀','30','123456','123456','김동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
+ VALUES('233002','인사팀','30','aAbB123456','aAbB123456','김동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
    INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('234002','기획팀','40','123456','123456','이동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
+ VALUES('234002','기획팀','40','aAbB123456','aAbB123456','이동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('235002','영업팀','50','123456','123456','최동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
+ VALUES('235002','영업팀','50','aAbB123456','aAbB123456','최동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
  
    INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('235003','영업팀','50','123456','123456','gildong','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
+ VALUES('235003','영업팀','50','aAbB123456','aAbB123456','gildong','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
  
  

@@ -177,8 +177,8 @@ sage {
                 var sendButton = document.getElementById("sendButton");
                 var clearMsgsButton = document.getElementById("clearMsgsButton");
                 
-                 //var idid = "${idid.empno}";     
-                 var idid= "231001"
+                 var idid = "${idid.empno}";     
+                // var idid= "231001"
                  
                 
                

@@ -2,7 +2,6 @@ package jkKim;
 
 import java.io.IOException;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,50 +21,49 @@ public class chatAction implements jkKim_Action {
 			throws ServletException, IOException {
 		jkKim_MemberDAO mdao = new jkKim_MemberDAO();
 		jkKim_ActionForward forward = new jkKim_ActionForward();
+
+		String state = "default";
+		if( request.getParameter("state") != null) {
+		state = request.getParameter("state");
+		System.out.println("state = " +state);
+		}
 		
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("empno");
 		
-		
-		String state = request.getParameter("state");
-		if(state == null) {
-			HttpSession session = request.getSession();
-			String id = (String) session.getAttribute("id");
-			if(id != null) {
+		jkKim_Member chatid = null;
+		if (id != null) {
 			System.out.println("sessionid = " + id);
-			jkKim_Member chatid = mdao.chatIdFind(id);
-			
-		
+			chatid = mdao.chatIdFind(id);
 			System.out.println("chatid.getName() = " + chatid.getEmpno());
+		}
+		System.out.println("여기까지 진행됨1");
+		
+		if (state.equals("default")) {
 			
-			
-			
-			request.setAttribute("idid", chatid);
-			forward.setRedirect(false);
-			forward.setPath("/jkKim/chatView.jsp");
-			return forward; 
-			}else {
-				
-				
+			System.out.println("여기까지 진행됨2");
+				request.setAttribute("idid", chatid);
 				forward.setRedirect(false);
 				forward.setPath("/jkKim/chatView.jsp");
-				return forward; 
-			}
-		}else {
-		
-		
-			JsonObject obj = new JsonObject();
-			obj.addProperty("test", "test"); 
-						
-			response.setContentType("application/json;charset=utf-8");
-			response.getWriter().print(obj);
-			System.out.println(obj.toString());
-			return null;
-	}
+				return forward;
+				/*
+				 * }else {
+				 * 
+				 * 
+				 * forward.setRedirect(false); forward.setPath("/jkKim/chatView.jsp"); return
+				 * forward; }
+				 */
+			} else {
+				System.out.println("여기까지 진행됨3");
+				JsonObject obj = new JsonObject();
+				obj.addProperty("test", "test");
 
-		
-		
-		
-		
-		
-		
-}
+				response.setContentType("application/json;charset=utf-8");
+				response.getWriter().print(obj);
+				System.out.println(obj.toString());
+				return null;
+			}
+
+		}
+	
 }

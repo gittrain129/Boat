@@ -47,7 +47,7 @@ body > div > ul > li{
 
 <div>
    <div class="profile-title">
-   <h2>조직원</h2>
+   <h2>사원</h2>
    <p><c:out value="${listcount }"></c:out></p>
    </div>
  <ul>
