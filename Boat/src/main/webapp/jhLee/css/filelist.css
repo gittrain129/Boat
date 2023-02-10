@@ -19,6 +19,14 @@ caption {
 	border : none;
 	background-color : white;
 }
+.filebo{
+	text-decoration: none;
+	color : black;
+}
+.filebo:hover{
+	color : black;
+	text-decoration: none;
+}
 a {
 	text-decoration: none;
 }
@@ -147,7 +155,7 @@ input {
 	line-height: 1.2em;
 }
 
-.paging .num a:hover, .paging .num {
+.num a:hover, .paging .num {
 	color: rgb(0, 173, 238);
 }
 
@@ -189,10 +197,13 @@ img {
 .gray{
 color : gray;
 opacity : 0.5;
-}
 
-.underline:hover{
+}
+/* .underline:hover{
 	border-bottom : 1px solid  rgb(0, 173, 238);
+} */
+.gray:hover{
+	text-decoration : none;
 }
 #new,.file{
 	width : 20px;}

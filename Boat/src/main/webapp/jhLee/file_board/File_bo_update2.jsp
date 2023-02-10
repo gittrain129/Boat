@@ -15,7 +15,7 @@
 
   <link rel="stylesheet" href="jhLee/css/writeform.css">
 
-<script src="${pageContext.request.contextPath}/jhLee/js/writeform.js"></script>
+<script src="${pageContext.request.contextPath}/jhLee/js/fileupdate.js"></script>
 
 <style>
 
@@ -24,8 +24,8 @@
 </head>
 <body>
 <div class="container">
- <form action="FileBoardAddAction.filebo" method="post" enctype = "multipart/form-data" name ="fileboardform">
- 	<h1>boat_  글 수정페이지2</h1>
+ <form action="FileBoardDownAction.filebo" method="post" enctype = "multipart/form-data" name ="modifyform">
+ 	<h1>boat_ 글 수정페이지</h1>
      <input type="hidden" name="board_num" value="${boarddata.FILE_NUM}">
      
     <div class="form-group">
@@ -57,9 +57,9 @@
                 <a class="dropdown-item" href="#">영업팀</a>
               </div>
             </div>
-            <input type="hidden" name = "dept" id = "dept">
+            <input type="hidden" name = "dept" id = "dept" value ="{boarddata.DEPT}">
        		<input name="board_name" id="board_name" type="text"  class="form-control writer"
-       			placeholder="이름을 입력하세요" value="${boarddata.FILE_NAME }">
+      			placeholder="이름을 입력하세요" value="${boarddata.FILE_NAME }">
   	  </div>
     
 
@@ -74,7 +74,8 @@
  		<input name="board_file" id="upfile" type="file">
 		 </label>
 	 	
- 		<span id ="filevalue"></span>
+ 		<span id ="filevalue">${boarddata.FILE_FILE }</span>
+ 		 <img alt="파일삭제" src="jhLee/image/remove.png" width ="10px" class="remove1" style ="width : 10px;">
  	</div>
  	<div class="form-group file2">
  		<label>
@@ -83,7 +84,8 @@
  		<input name="board_file2" id="upfile2" type="file">
 		 </label>
 	 	
- 		<span id ="filevalue2"></span>
+ 		<span id ="filevalue2">${boarddata.FILE_FILE2 }</span>
+ 		 <img alt="파일삭제" src="jhLee/image/remove.png" width ="10px" class="remove2" style ="width : 10px;">
  	</div>
  	
  	<div class="form-group btn-group2">
@@ -93,9 +95,15 @@
  
  </form>
 </div><!-- container끝 -->
-<!-- <script>
+<script>
+var deptsel = $('#deptsel').text()
+console.log(deptsel)
 $(function(){
-	$('#summernote').val(" ${boarddata.FILE_CONTENT}");
+	console.log($('#deptsel').text())
+	$('#deptsel').text('${boarddata.DEPT }');
+	//$('#deptsel').text(${boarddata.FILE_NAME });
+	
+/* 	$('#summernote').val(" ${boarddata.FILE_CONTENT}");
 	 $('#summernote').summernote({
 		 	placeholder: '내용을 입력하세요.',
 	       tabsize: 2,
@@ -110,10 +118,10 @@ $(function(){
 	        }
 	 });
 	
+ */
 	
 })//ready끝
-
-</script> -->
+</script>
  <jsp:include page="/sjKim/boat/footer.jsp" />
 </body>
 </html>
