@@ -100,6 +100,19 @@ $(document).ready(function() {
 	    	   return false;
 	       }
        }
+		const name = $("#name");
+		if ($.trim(name.val()) == "") {
+			alert("이름을 입력 하세요");
+			name.focus();
+			return false;
+		}
+
+		const age = $("#age");
+		if ($.trim(age.val()) == "") {
+			alert("나이를 입력 하세요");
+			age.focus();
+			return false;
+		}
 
 
 		const password = $("#password");

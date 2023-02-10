@@ -242,7 +242,7 @@ li.login-item {
 		     	    	<li class="login-item" ><a class="login-link" style="color:black;">${empno}님이 로그인 되었습니다.</a></li>
 		     	    	<li class="login-item" ><a class="login-link" style="color:black;"href="update_form">&nbsp;| 정보수정 |</a></li>
 		     	    	<c:if test="${empno=='ADMIN'}">
-		     	    		<li class="login-item"><a class="login-link" style="color:black" href="list">&nbsp;회원정보 |</a></li>
+		     	    		<li class="login-item"><a class="login-link" style="color:black" href="${pageContext.request.contextPath}/memberList.net">&nbsp;관리자 |</a></li>
 		     	    	</c:if>
 		     			<li class="login-item"><a class="login-link" style="color:black;" href="${pageContext.request.contextPath}/logout.net">&nbsp;로그아웃</a></li>
 		     		</c:if>
@@ -258,11 +258,13 @@ li.login-item {
 			
 		<script src="${pageContext.request.contextPath}/sjKim/js/inout.js"></script>			
 			<div class="dropdown_inout">						
-               <select id="inout" name="inout" onchange="select_inout()" required autofocus>
+               <select id="inout" name="inout" onchange="select_inout()" style="border-color:transparent;" required autofocus>
                		<option value="" selected disabled hidden>출근현황</option>
 				    <option style= "background-color: #18a8f1" value="출근" id="works">출근</option>
-				    <option style= "background-color: #f5de16" value="외출" id="outs">외출</option>
-				    <option style= "background-color: #ff5858" value="퇴근" id="leave">퇴근</option>
+
+	                <option style= "background-color: #f5de16" value="외출" id="outs">외출</option>
+	                <option style= "background-color: #ff5858" value="퇴근" id="leave">퇴근</option>
+
 				</select>
 	        </div>
 		     

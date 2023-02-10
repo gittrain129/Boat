@@ -29,17 +29,22 @@
 		<fieldset>
 			<legend>회원가입</legend>
 				<div class="top_block1">
-			 		&nbsp;양식을 모두 작성해주세요
-					<label for="id" style="padding-top: 45px;">사원번호</label>
+					<label for="id" >사원번호</label>
 					<div style="width:600px">
-						<input type='text' placeholder='Enter id' name='empno' id='empno' style="width:60%">
+						<input type='text' placeholder='사원번호를 입력하세요..' name='empno' id='empno' style="width:60%">
 						<input type='button' value="ID중복검사" id="idcheck" ><input type="hidden" id="result">
 						<div id="opener_message"></div>
 					</div>
+				
+					<label for="name" style="padding-top: 10px;">이름</label>
+					<input type='text' placeholder='성함을 입력하세요..' name='name' id='name' style="width:550px;" >
+					
+					<label for="age" style="padding-top: 10px;">나이</label>
+					<input type='text' placeholder='나이를 입력하세요..' name='age' id='age' style="width:550px;" >
 				</div>
 				
 				<div class="top_block2">
-					<label style="text-align: center;">
+					<label style="text-align: center; margin-top:50px;">
 						
 						<span id="showImage">
 							<c:if test='${empty memberinfo.memberfile}'>
@@ -59,7 +64,7 @@
 				
 				
 				<label for="pass" style="padding-top: 10px;">비밀번호</label>
-					<input type='password' placeholder='Enter Password' name='password' id='password' >
+					<input type='password' placeholder='비밀번호를 입력하세요..' name='password' id='password' >
 				
 					
 				<label for="jumin1">주민번호</label>
@@ -106,7 +111,7 @@
 				
 				<div class="clearfix">
 					<button type="submit" class="signupbtn">회원가입</button>
-					<button type="reset"  class="cancelbtn">취소</button>
+					<button type="reset" onClick="location.href='mainPage.net'" class="cancelbtn">취소</button>
       			</div>
 
 		</fieldset>
