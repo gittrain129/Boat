@@ -43,6 +43,8 @@ public class chatAction implements jkKim_Action {
 			forward.setPath("/jkKim/chatView.jsp");
 			return forward; 
 			}else {
+				
+				
 				forward.setRedirect(false);
 				forward.setPath("/jkKim/chatView.jsp");
 				return forward; 

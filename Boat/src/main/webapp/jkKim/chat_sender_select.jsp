@@ -12,7 +12,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="${pageContext.request.contextPath}/jkKim/css/chat_sender_select.css" type="text/css" rel="stylesheet">
- <script src=${pageContext.request.contextPath}/jkKim/js/chat_selector.js></script>
+ <script src=${pageContext.request.contextPath}/jkKim/js/chat_selector2.js></script>
 
 </head>
 <style>

@@ -113,16 +113,15 @@ sage {
         
     </head>
     <body>
-       
+     
         <table class="control">
             <tr>
-                <td class="title">Status:</td>
+                <td class="title">${param.empno_id }의 대화방</td>
             </tr>
             <tr>
                 <td>
-                    <span style="font-weight: bold">연결할ID: </span>
-                    <input type="text" id="receiver-id" title="Input the ID">
-                    <button id="connect-button">Connect</button>
+                    <input type="text" id="receiver-id" title="Input the ID" value="${param.empno_id }">
+                    <button id="connect-button">Connect</button> 
                 </td>
             </tr>
             <tr>
@@ -169,11 +168,13 @@ sage {
                 var sendButton = document.getElementById("sendButton");
                 var clearMsgsButton = document.getElementById("clearMsgsButton");
                 var connectButton = document.getElementById("connect-button");
+                var empno_id = "${param.empno_id }";
+               
                
 
               
                 function initialize() {
-                   
+                	console.log('initialize 시작');
                     peer = new Peer(null, {
                         debug: 2
                     });
@@ -188,6 +189,8 @@ sage {
                         }
 
                         console.log('ID: ' + peer.id);
+                        join();
+                       
                     });
                     peer.on('connection', function (c) {
                         
@@ -214,16 +217,17 @@ sage {
                         console.log(err);
                         alert('' + err);
                     });
+                    
                 };
 
-              
+              //-------------------------------------------------------------------&**^&
                 function join() {
                         if (conn) {
                         conn.close();
                     }
-
-                  
-                    conn = peer.connect(recvIdInput.value, {
+					console.log(empno_id);
+                  //-------------------------------------------------------------------&**^&
+                    conn = peer.connect(empno_id, {
                         reliable: true
                     });
 
@@ -245,7 +249,8 @@ sage {
                     });
                 };
 
-           
+              //-------------------------------------------------------------------&**^&
+              
                 function getUrlParam(name) {
                     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
                     var regexS = "[\\?&]" + name + "=([^&#]*)";
@@ -336,10 +341,11 @@ sage {
                 
                 clearMsgsButton.addEventListener('click', clearMessages);
                 // Start peer connection on click
-                connectButton.addEventListener('click', join);
+               // connectButton.addEventListener('click', join);
 
                
                 initialize();
+                
             })();
         </script>
     </body>
