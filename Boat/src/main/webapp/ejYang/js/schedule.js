@@ -70,7 +70,7 @@ $(document).ready(function(){
 	var date = new Date();
 	console.log(date.getHours())
 	console.log(date.getMinutes())
-	if(23-date.getHours()==0 && 60-date.getMinutes()==0){
+	if(10-date.getHours()==0 && 28-date.getMinutes()==0){
 		getDelete(t_empno)
 	}
 	
