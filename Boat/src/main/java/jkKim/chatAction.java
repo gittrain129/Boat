@@ -43,6 +43,7 @@ public class chatAction implements jkKim_Action {
 			
 			System.out.println("여기까지 진행됨2");
 				request.setAttribute("idid", chatid);
+				
 				forward.setRedirect(false);
 				forward.setPath("/jkKim/chatView.jsp");
 				return forward;

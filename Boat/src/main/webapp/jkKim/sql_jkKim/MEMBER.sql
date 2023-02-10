@@ -107,8 +107,9 @@ from (select rownum rnum, empno, name, dept, email, imgsrc from member  order by
 where j.rnum = 2
 
 
+select count(*) from member where empno not like '%ADMIN%'
 
-
+select rownum, empno, name, dept, email, imgsrc from member where empno not like '%ADMIN%' order by deptno asc 
 
 
 

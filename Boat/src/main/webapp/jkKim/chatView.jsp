@@ -12,6 +12,7 @@
 	
 
 <style>
+
 * {
     padding: 0;
     margin: 0;
@@ -61,7 +62,7 @@ sage {
 
 .message .chat .icon i {
     position: absolute;
-    top: 10px;
+    top: 00px;
     left: 50%;
     font-size: 2.5rem;
     color: #aaa;
@@ -110,6 +111,8 @@ sage {
     content: "▶";
     color: #F9EB54;
 }
+
+
 </style>
 
 </head>
@@ -176,6 +179,8 @@ sage {
                 var sendMessageBox = document.getElementById("sendMessageBox");
                 var sendButton = document.getElementById("sendButton");
                 var clearMsgsButton = document.getElementById("clearMsgsButton");
+                var imgsrc = "${idid.imgsrc}";
+                var yourimg = "";
                 
                  var idid = "${idid.empno}";     
                 // var idid= "231001"
@@ -243,6 +248,13 @@ sage {
                
                 function ready() {
                     conn.on('data', function (data) {
+                    	console.log(data);
+                    	if (data.subString(0,6).equals('/image')){
+                    		yourimg = data;
+                    		console.log(data);
+                    		
+                    	}
+                    	
                         addyourMessage("<span class=\"peerMsg\">Peer:</span> " + data);
                     });
                     conn.on('close', function () {
@@ -271,8 +283,8 @@ sage {
                     };
                     //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
                     //message.innerHTML = ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" +msg + message.innerHTML +"</div>");
-                    message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
-                   
+                    message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"><img src='${pageContext.request.contextPath}${idid.imgsrc}' alt=''></i></div><div class=\"textbox\">" + msg +"</div>");
+                    																											//	${idid.imgsrc}
                 }
 
                 

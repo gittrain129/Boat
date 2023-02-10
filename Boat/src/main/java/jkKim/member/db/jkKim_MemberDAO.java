@@ -44,12 +44,18 @@ public class jkKim_MemberDAO {
 		try {	
 			conn = ds.getConnection();
 			//empno는 orderby용으로 불러만옴
+			if( dept_sql.equals(" ")) {
+				dept_sql = "where";
+			} else {
+				dept_sql += " and";
+				
+			}
 			
-			
+						
 			String sql = "select j.* "
 					+ " from (select rownum rnum, "
 					+ "		k.* "
-					+ "	from (select empno, name, dept, email, imgsrc from member " + dept_sql + " order by deptno asc) k "
+					+ "	from (select empno, name, dept, email, imgsrc from member " + dept_sql + " empno not like '%ADMIN%' order by deptno asc) k "
 					+ " ) j "
 					+ " where rnum >=? and rnum <=? ";
 			
@@ -105,10 +111,21 @@ public class jkKim_MemberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result=0;
+		
+		
+		
 		try {
+			if( dept_sql.equals(" ")) {
+				dept_sql = "where";
+			} else {
+				dept_sql += "and";
+				
+			}
+			
 			conn = ds.getConnection();
 			
-			String sql = "select count(*) from member" + dept_sql;
+			String sql = "select count(*) from member " + dept_sql + " empno not like '%ADMIN%' ";
+			
 			
 			pstmt = conn.prepareStatement(sql); //sql.toString()
 			rs=pstmt.executeQuery();
@@ -186,7 +203,7 @@ public class jkKim_MemberDAO {
 	      return jk;
 	   }
 
-	public List<jkKim_Member> getMemberList() {
+	public List<jkKim_Member> getMemberList(String dept_sql) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -195,13 +212,22 @@ public class jkKim_MemberDAO {
 			List<jkKim_Member> list = new ArrayList<jkKim_Member>();
 			
 			
+			if( dept_sql.equals(" ")) {
+				dept_sql = "where";
+			} else {
+				dept_sql += "and";
+				
+			}
+			
+			
 		try {	
 			conn = ds.getConnection();
 		
 			
 			
-			String sql = "select rownum, empno, name, dept, email, imgsrc from member order by deptno asc ";
-					
+			String sql = "select rownum, empno, name, dept, email, imgsrc from member "+ dept_sql +" empno not like '%ADMIN%' order by deptno asc ";
+				
+			
 			
 			
 			pstmt = conn.prepareStatement(sql); //sql.toString()
@@ -306,6 +332,66 @@ public class jkKim_MemberDAO {
 			}
 	}
 		return empno_id;
+		
+	}
+
+	public String getImgsrc(int rownum) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+			List<jkKim_Member> list = new ArrayList<jkKim_Member>();
+			String imgsrc = "";
+			System.out.println("DAO까지 넘어온 rownum = " + rownum);
+			
+		try {	
+			conn = ds.getConnection();
+		
+			
+			
+			String sql = "select j.* "
+					+" from (select rownum rnum, empno, name, dept, email, imgsrc from member  order by deptno asc) j "
+					+" where j.rnum = ? ";
+					
+			
+			
+			pstmt = conn.prepareStatement(sql); //sql.toString()
+			pstmt.setInt(1, rownum);
+			rs=pstmt.executeQuery();
+			while (rs.next()) {
+				imgsrc = rs.getString("imgsrc");
+						
+			}
+		
+		
+		return imgsrc;
+		}//try end
+		catch(Exception se) {
+			se.printStackTrace();
+			System.out.println("getBoardList() 에러"  + se);
+			
+		}finally {
+			try {
+				if(rs != null)
+					rs.close();
+			}catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+				try {
+				if(pstmt!=null)
+					pstmt.close();
+			}catch(SQLException e) {
+				System.out.println(e.getMessage());
+			}
+			try {
+				if(conn!=null)
+					conn.close();
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+	}
+		return imgsrc;
 		
 	}
 
