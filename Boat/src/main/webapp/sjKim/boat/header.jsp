@@ -24,7 +24,6 @@ div.logo{
 
 li {
 	list-style: none; 
-	display: inline-block;
 }
 
                        
@@ -37,6 +36,7 @@ li {
 	text-align: center; 
 	height: 40px; 
 	left:10%;
+	z-index:10;
 	}
 	
 .topMenu:after {
@@ -94,11 +94,11 @@ li {
     top: 0;
     right: 20px;
     display: inline-block;
-    width: 1000px;
     text-decoration: none;
     color: black;
     text-align: right;
     font-size: 15px;
+    
 }
 
 .login_header > div {
@@ -141,7 +141,7 @@ li {
 
 
 .bg-dark {
-		background-color: none;
+		background-color: none !important;
 	}
 .navbar-dark .navbar-nav .nav-link {
 	color: black;
@@ -172,10 +172,10 @@ li {
                 </li>
                 <li><a href="https://www.naver.com" target="_self"><span>내 정보</span></a>
                     <ul class="dept01">
-                    	<a href="https://www.naver.com" target="_self">
+                    	<a href="${pageContext.request.contextPath}/MyInfo.my" target="_self">
                         	<li id="nop">내 정보 보기</li>
                         </a>
-                        <a href="https://www.naver.com" target="_self">
+                        <a href="${pageContext.request.contextPath}/MyBoardList.my" target="_self">
                         	<li id="nop">내 &nbsp;글 &nbsp;보기</li>
                         </a>
                         <a href="${pageContext.request.contextPath}/MySchedule.my" target="_self">
@@ -226,26 +226,25 @@ li {
         
         
         <div class="login_header">	
-          <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        	<div class="collapse navbar-collapse flex-row-reverse" id="collapsibleNavbar">
-		    	<ul class="navbar-nav">
+         	<div class="login_button">
+		    	<ul class="login_nav">
 		    		<c:if test="${!empty empno}">
 		     	    	<li class="nav-item"><a class="nav-link" >${empno}님이 로그인 되었습니다.</a></li>
 		     	    	<li class="nav-item"><a class="nav-link" href="update_form">| 정보수정 |</a></li>
 		     	    	<c:if test="${empno=='boat'}">
 		     	    		<li class="nav-item"><a class="nav-link" href="list"> 회원정보 |</a></li>
 		     	    	</c:if>
-		     			<li class="nav-item"><a class="nav-link" href="logout">로그아웃</a></li>
+		     			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout.net">로그아웃</a></li>
 		     		</c:if>
 		     		
 		     		<c:if test="${empty empno}">
-		      			<li class="nav-item"><a class="nav-link" href="login">로그인</a></li>   
-		      			<li class="nav-item"><a class="nav-link" href="join">회원가입</a></li> 
+		      			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login.net" target="_self">로그인</a></li> 
+		      			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/join.net" target="_self">회원가입</a></li> 
 		      		</c:if>
 		      		
 		   	   </ul>
 		    </div>
-		  </nav>
+		  
 			
 		<script src="${pageContext.request.contextPath}/sjKim/js/inout.js"></script>			
 			<div class="dropdown_inout">						
