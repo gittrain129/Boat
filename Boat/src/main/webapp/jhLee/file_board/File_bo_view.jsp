@@ -22,10 +22,11 @@
   
 </head>
 <body>
-<input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
+<input type="hidden" id ="loginid" value ="ADMIN" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
+<%-- <input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>--%>
     <div class="board_wrap">
         <div class="board_title">
-            <strong>자료실 게시판</strong>
+            <strong><a href="${pageContext.request.contextPath}/FileBoardList.filebo" target="_self">자료실 게시판</a></strong>
             <p>자료실 게시판 입니다.</p>
 
 
@@ -157,7 +158,8 @@
 		</div>
 		</div>
 <%--id="myModal"end --%>
-       <div class="card-body bg-light comment card">
+       <div class="commcard">
+       <div>
        <div class="comment-area">
 		<div class="comment-head">
 			<h3 class="comment-count">
@@ -168,6 +170,7 @@
 				</ul>		
 			</div>
 		</div><%--comment head 끝 --%>
+		</div>
 		<ul class="comment-list">
 		</ul>
 		<div class="comment-write">

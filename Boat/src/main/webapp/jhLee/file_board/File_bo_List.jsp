@@ -39,7 +39,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
     <div class="container">
     <div class = "File_board_list_wrap">
         <div class="File_board_Title">
-            <Strong>자료실 게시판</Strong>
+            <Strong><a class = "filebo" href="${pageContext.request.contextPath}/FileBoardList.filebo" target="_self">자료실 게시판</a></Strong>
             <p>자료실 게시판 입니다.</p>
 
         </div>

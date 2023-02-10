@@ -87,7 +87,6 @@ textarea.comment-write-area-text {
 .comment-area .comment-list .comment-nick-area {
 	position: relative;
 	padding: 12px 23px 10px 0;
-		width : 700px;
 }
 
 .comment-list-item--reply.lev1 {
@@ -97,13 +96,8 @@ textarea.comment-write-area-text {
 .comment-list-item--reply.lev2 {
 	margin-left: 92px;
 }
-.ms-3{
-	
-	width : 700px;
-}
-.comment-area .comment-list .comment-list-item {
-	width : 700px;
 
+.comment-area .comment-list .comment-list-item {
 	position: relative;
 	border-top: 1px solid #f2f2f2;
 }

@@ -23,7 +23,7 @@ function del(num){//num : 댓글 번호
 
 	
 function getList(state){//현재 선택한 댓글 정렬방식을 저장합니다. 1=>등록순, 2=>최신순
-	    console.log(state)
+	    console.log('state = '+state)
 	    option=state;
 	    console.log($("#comment_board_num").val());
 		$.ajax({
@@ -66,7 +66,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 				if(profile){
 					src='memberupload/'+profile;
 				}
-				output +=' <div class="ms-3">'
+			//	output +=' <div class="ms-3">'
 				output +='<li id ="'+this.num+'"class="comment-list-item '+comment_reply + '">'
 						+'	<div class ="comment-nick-area">'
 						+'	<img src="'+src+'" alt ="프로필사진" width="36" height="36">'
@@ -111,7 +111,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 						+'		</li>'//li.comment-list-item
 			})//each end
 
-			$('.comment-order-list').html(output);
+			$('.comment-list').html(output);
 			}//if(rdata.boardlist.length>0)
 			else{//댓글 1개가 있는 상태에서 삭제하는 경우 갯수는 0이라 if문을 수행하지 않고 이곳으로 옵니다.
 				//이곳에서 아래의 두 영역을 없앱니다.

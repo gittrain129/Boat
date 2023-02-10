@@ -1,7 +1,17 @@
 @charset "utf-8";
 
 
-
+ .commcard{
+	background-color : #f8f9fa!important;
+	min-height : 1px;
+	padding : 1.25rem;
+	/* display : flex;
+	flex-diretion : column; */
+	border : 1px solid rgba(0,0,0,.125);
+	border-radius : 0.25rem;	
+	box-sizing : border-box;
+	display : block;
+} 
 
 ul,li{
     list-style: none;
