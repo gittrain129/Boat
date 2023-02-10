@@ -66,6 +66,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 				if(profile){
 					src='memberupload/'+profile;
 				}
+				output +=' <div class="ms-3">'
 				output +='<li id ="'+this.num+'"class="comment-list-item '+comment_reply + '">'
 						+'	<div class ="comment-nick-area">'
 						+'	<img src="'+src+'" alt ="프로필사진" width="36" height="36">'
@@ -83,6 +84,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 						+'	</div>'//comment-text-box
 						+'	<div class="comment-info-box">'
 						+'		<span class="comment-info-data">'+this.reg_date + '</span>';	
+						+'	</div>'//comment-text-box
 				if(lev<2){
 					output +='	<a href="javascript:replyform('+this.num +','
 							+ lev +','+this.comment_re_seq+','
