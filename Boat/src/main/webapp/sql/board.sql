@@ -1,0 +1,35 @@
+drop table BOARD cascade constraints purge;
+
+create table BOARD (
+	BOARD_NUM NUMBER(5) primary key,
+	BOARD_NAME VARCHAR2(30), 
+	BOARD_PASS NUMBER(30),
+	BOARD_SUBJECT VARCHAR2(300),	
+	BOARD_CONTENT VARCHAR2(4000),		
+	BOARD_DEPT VARCHAR2(10),		
+	BOARD_RE_REF NUMBER(5),	
+	BOARD_RE_LEV NUMBER(5),	
+	BOARD_RE_SEQ NUMBER(5),
+	BOARD_READCOUNT NUMBER(5),
+	BOARD_DATE DATE DEFAULT SYSDATE,
+	BOARD_NOTICE VARCHAR2(2) 
+	CONSTRAINT BOARD_NO_CK check(BOARD_NOTICE in ('Y','N'))
+);
+	
+select * from BOARD;
+
+delete from board;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
