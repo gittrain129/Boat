@@ -1,6 +1,7 @@
  
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
      <jsp:include page="/sjKim/boat/header.jsp" />
 <!DOCTYPE html>
 <html>
@@ -38,6 +39,7 @@
  <script>
  var calendar =null;
  // calendar element 취득
+ 	var obj = null;
 
  $(document).ready(function(){
 	      
@@ -119,22 +121,42 @@
 	            },
 	            //ok
 	            select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
-	              var title = prompt('일정추가:');
-	           		 console.log(arg.start);
+	            	  $('#addevent').modal('toggle');
 	            
-	             
-	              if (title) {
-	                calendar.addEvent({
-	                  title: title,
-	                  start: arg.start,
-	                  end: arg.end,
-	                  allDay: arg.allDay,
-	                  Boolean//?
-	                		  })
-	              savedata(cal_data(calendar.getEvents()));
+	            	 	obj = new Object();
+	            	 	var color =null;
+	            $('#saveBtn').click(function(){
+	            	var title =$('#title').val();
+	            	
+		            var start = arg.start;
+		           	var startmoment =moment(start).format("YYYY-MM-DD HH:mm:ss");
+		           	 var end = arg.end;
+		           	 var endmoment = moment(end).format("YYYY-MM-DD HH:mm:ss");
+		           		obj.title =  title;
+		           		obj.start = startmoment
+		           		obj.end = endmoment;
+		           		obj.allDay = arg.allDay;
+		           		color = 	 $('#color').val();
+		           		obj.color = color;
+		         	  	 obj.empno = $('#empno').val();
+		         	  	 savedata(obj); 
+		         		$("#addevent").modal('hide');
+		         	  
+		         	     
+		         	/*     calendar.addEvent({
+			                  title: title,
+			                  start: arg.start,
+			                  end: arg.end,
+			                  allDay: arg.allDay,
+			                  Boolean,
+			                  color :  color
+			                		  })  */
+			                		  
+	            });
+		         	  	
+	           
 	                
 	                //ok
-	              }
 	              calendar.unselect();//titlt입력중에는 선택되지말아여
 	              
 	            },   eventClick: function (arg) {
@@ -168,9 +190,9 @@
 	    //뽑을때 각각 데이터로 뽑아냄 json값
 	    function cal_data(allEvent){
 	     		 var events = new Array();
+		   		 var obj = new Object();
 	     		 for(var i=0; i<allEvent.length;i++){
 	     		 
-		   		 var obj = new Object();
  		   		var startevent = moment(allEvent[i]._instance.range.start).format("YYYY-MM-DD HH:mm:ss");
 	//	   		var startevent = moment(allEvent[i]._instance.range.start).format("YYYY-M-D ");
 	//	   		var endevent = moment(allEvent[i]._instance.range.end).format("YYYY-M-D");
@@ -181,6 +203,7 @@
 		   		 obj.start = startevent//시작날짜 및 시간
 		   		 obj.end   = endevent //마침 날짜 및 시간
 	    		}
+	     		 obj.empno = $('#empno').val();
 	     	 
 	     	return obj
 	      }
@@ -215,13 +238,15 @@
 	   			type:'POST',
 	   			url:'${pageContext.request.contextPath}/project_calendarallSave.cal',
 	   			data:jsondata,
-	   			dataType:"json",
 	   			async:true,
 	   			success:function(rdata){
 	   				console.log('모든 데이터 저장하였습니다.');
 	   			
+	   			
 	   			},
-	   			error:function(request,status,error){},
+	   			error:function(request,status,error){
+	   				console.log('saveerror')
+	   			},
 	   			complete:function(){}
 	   		}) 
 	    }//save data끝
@@ -286,10 +311,43 @@
 	  </div>
   </div>
   <%-- 추후 삭제 예정 --%>
-  
-  
-  
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addevent">
+  Launch demo modal
+</button>
+
  
+<!-- Modal -->
+<div class="modal fade" id="addevent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class = "form-control" id = 'title'>
+        <select class="form-control" id ="color">
+  			<option value ="pink">분홍색</option>
+  			<option value ="orange">노란색</option>
+  			<option value ="lightgreen">연두색</option>
+		<c:if test="${empno =='ADMIN'}">
+  			<option value ="">하늘색(관리자)</option>
+		</c:if>
+			</select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id ="saveBtn">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Modal end -->
+  
+ <input type="hidden" name ="empno" value="${empno}" id="empno">
  
  	<div id='calendar'></div>
  </div>

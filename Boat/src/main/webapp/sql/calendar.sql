@@ -1,19 +1,16 @@
 	--calendar sql
 	--테이블 정의서 Number, E_NAME, START_DATE, END_DATE, ALLDAY
 	
-
 	
-	
---dept empno추가 필요
 create table boat_Calendar (
 schedule_code number (2) primary key,
 event_name varchar2 (55),
 start_date varchar2  (55),
 end_date varchar2	 (55),
-allday varchar2(10) check (allday  in('true','false'))
+allday varchar2(10) check (allday  in('true','false')),
+empno varchar2(20),
+color varchar2(20)
 );
-
-
 
 delete from boat_Calendar;
 

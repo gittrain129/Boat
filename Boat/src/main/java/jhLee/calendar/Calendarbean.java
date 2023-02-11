@@ -7,6 +7,10 @@ public class Calendarbean {
 	String start_date;
 	String end_date;
 	String allday;
+	String empno;
+	String color;
+	//현재 사용 안함.
+	String dept;
 	/*
 	 * 1 id 추가
 	 * 2 color 추가
@@ -14,6 +18,26 @@ public class Calendarbean {
 	 * 4. 쉽게하려면 admin 추가
 	 */
 	
+	
+	public String getEmpno() {
+		return empno;
+	}
+	public void setEmpno(String empno) {
+		this.empno = empno;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public String getDept() {
+		return dept;
+	}
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+
 	
 	public int getSchedule_code() {
 		return schedule_code;
