@@ -1,6 +1,9 @@
 @charset "utf-8";
 
-
+.boardviewhr{
+	width : 80%!important;
+	margin-top: 18%!important;
+}
  .commcard{
 	background-color : #f8f9fa!important;
 	min-height : 1px;
@@ -24,8 +27,9 @@ a{
 
 .board_wrap{
     width : 1000px;
-    margin:200px auto;
+    margin:0px auto;
     padding : 50px;
+    padding-bottom : 200px;
 	 
 }
 

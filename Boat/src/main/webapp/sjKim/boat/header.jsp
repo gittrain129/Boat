@@ -173,7 +173,7 @@ li.login-item {
             
                 <li><a href="https://www.naver.com" target="_self"><span>회사소개</span></a>
                     <ul class="dept01">
-                    	<a href="https://www.naver.com" target="_self">
+                    	<a href="${pageContext.request.contextPath}/map.cal" target="_self">
                         	<li id="nop">오시는길</li>
                         </a>
                         <li id="nop">&nbsp;</li>

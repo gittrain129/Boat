@@ -22,7 +22,8 @@
 </head>
 <body>
 <input type="hidden" id ="loginid" value ="ADMIN" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
-<%-- <input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>--%>
+<%-- <input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
+<hr class = "boardviewhr">
     <div class="board_wrap">
         <div class="board_title">
             <strong><a href="${pageContext.request.contextPath}/FileBoardList.filebo" target="_self">자료실 게시판</a></strong>
