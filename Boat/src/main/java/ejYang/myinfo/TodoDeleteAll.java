@@ -15,7 +15,7 @@ public class TodoDeleteAll implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-TodoDAO tdao = new TodoDAO();
+		TodoDAO tdao = new TodoDAO();
 		
 		String empno = request.getParameter("t_empno");
 		System.out.println("t_empno="+request.getParameter("t_empno"));

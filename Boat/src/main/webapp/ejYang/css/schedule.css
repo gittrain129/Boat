@@ -34,7 +34,7 @@ body {
 	background: #f5f7ff;
 	padding: 50px;
 	border-radius: 10px;
-    margin-bottom: 200px;
+    margin-bottom: 300px;
 }
 header{
 	text-align: center;
@@ -126,6 +126,21 @@ input[type="checkbox"] {
     opacity: 1;
   }
   #resetbtn{
+  	background-color: #28a745;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    opacity: 0.8;
+    display: inline-block;
+    width: 15%;
+    margin: 20px 10px 10px 0;
+  }
+  #resetbtn:hover{
+    opacity: 1;
+  }
+  #allresetbtn{
   	background-color: red;
     color: white;
     padding: 16px 20px;
@@ -135,10 +150,9 @@ input[type="checkbox"] {
     opacity: 0.8;
     display: inline-block;
     width: 15%;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin: 20px 10px 10px 0;
   }
-  #resetbtn:hover{
+  #allresetbtn:hover{
     opacity: 1;
   }
   #btn img{

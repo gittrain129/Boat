@@ -4,5 +4,3 @@ function select_inout(){
     $("#inout").css("color",color);		
     $("#inout").css("background-color",bgcolor);			
 }
-
-
