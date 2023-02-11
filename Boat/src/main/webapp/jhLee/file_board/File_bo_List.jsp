@@ -44,6 +44,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
             <p>자료실 게시판 입니다.</p>
 
         </div>
+              <input type="text" name = "empno" id = "empno" value = ${empno}>
        
        <div>
    <div>
@@ -120,10 +121,10 @@ http://localhost:8088/Boat/FileBoardList.filebo
 							&nbsp;
 						</c:if>
 					
-						
-						<a href ="FileBoadrdDetailAction.filebo?num=${b.FILE_NUM}">
+						<c:if test="${!empty empno}">
+						<a href ="FileBoadDetailAction.filebo?num=${b.FILE_NUM}">
 							<%-- FileBoardDetailAction22번줄 getParameter("num") --%>
-							
+						</c:if>
 							<c:if test="${b.FILE_SUBJECT.length()>=20}">
 								&nbsp;	&nbsp;	&nbsp;	<c:out value="${b.FILE_SUBJECT.substring(0,20)}..."/>
 							</c:if>
@@ -135,20 +136,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
 						
 					
 						
-						
-					<%--	<jsp:useBean id="today" class="java.util.Date"></jsp:useBean>
-						<%@page import="java.util.Date" 
-						<c:set var ="now" value ="<%=new Date() %>"/>
-
-  					<fmt:parseNumber value="${now / (1000 * 60 * 60 * 24)}" var="nowDays" integerOnly="true" />    
-    				<fmt:parseNumber value="${b.FILE_DATE / (1000 * 60 * 60 * 24)}" var="regDays" integerOnly="true" /> 
-
-  					<c:set value="${regDays- nowDays }" var="dayDiff" />
-						
-						
-							<c:if test="${dayDiff}<(1000 * 60 * 60 * 24)">
-							 <img alt="파일다운" src="${pageContext.request.contextPath}/jhLee/image/down.png" width="10px">
-							</c:if>  --%>
+			
 						<c:if test="${b.FILE_DATE > nowday}">
 	 		      	  		<img src="${pageContext.request.contextPath}/ejYang/image/new.jpg" id="new">
 	 		      	  	</c:if>

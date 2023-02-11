@@ -4,7 +4,7 @@
 
 --dept empno추가 필요
 create table boat_Calendar (
-schedule_code number (2) primary key,
+schedule_code varchar2 (500) primary key,
 event_name varchar2 (55),
 start_date varchar2  (55),
 end_date varchar2	 (55),
@@ -12,9 +12,11 @@ allday varchar2(10) check (allday  in('true','false')),
 empno varchar2(20),
 color varchar2(20)
 );
+update boat_Calendar set empno = 'ADMIN';
+
 dept varchar2(10) CHECK (DEPT IN('홍보팀','개발팀','인사팀','기획팀','영업팀')),
 delete from boat_Calendar;
-
+delete from boat_Calendar where event_name = '<홍보팀>1313' and empno = ''
 select * from boat_Calendar;
 
 create sequence cal_seq nocache;

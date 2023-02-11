@@ -123,6 +123,7 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	            eventChange: function(obj) { // 이벤트가 수정되면 발생하는 이벤트
 	              console.log(obj);
 	          	console.log('이벤트 수정함');
+	          	console.log(event._def.title)
 	            
 	            },
 	            eventRemove: function(obj){ // 이벤트가 삭제되면 발생하는 이벤트
@@ -149,7 +150,7 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 
 	            	            if (confirm("삭제하시겠습니까?")) {
 	            		 arg.event.remove();
-	            	      /*         $.ajax({
+	            	          $.ajax({
 	            	                type: "POST",
 	            	                url: "${pageContext.request.contextPath}/project_calendardelete.cal",
 	            	                contentType: "application/json; charset=utf-8",
@@ -159,7 +160,7 @@ http://localhost:8089/Boat/project_calendarallSave.cal
 	            	                  console.log("삭제완료");
 	            	                 // arg.event.remove();
 	            	                }
-	            	})//ajax 끝 */
+	            	})//ajax 끝 
 	            	}else{
 	            		console.log('삭제 실패');
 	            	}

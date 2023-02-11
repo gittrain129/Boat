@@ -29,7 +29,8 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 		$.ajax({
 			type:"post",
 			url:"FileCommentList.filebo",
-			data : {"F_COMMENT_NUM" : $("#comment_board_num").val(), state:state},
+			data : {"F_COMMENT_NUM" : $("#comment_board_num").val(), state:state}
+			,
 			dataType:"json",
 			success:function(rdata){
 				console.log(rdata.boardlist.length+"1313");
@@ -53,7 +54,8 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 			$('.comment-order-list').html(output);
 			output='';
 			$(rdata.boardlist).each(function(){
-				const lev = this.F_COMMENT_RE_LEV;
+				const lev = this.comment_re_lev;
+				console.log(lev);
 				let comment_reply ='';
 				if(lev==1){
 					comment_reply =' comment-list-item--reply lev1';
@@ -61,12 +63,11 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 					comment_reply =' comment-list-item--reply lev2';
 					
 				}
-								const profile = this.memberfile;
+				const profile = this.memberfile;
 				let src ='image/profile.png';
 				if(profile){
 					src='memberupload/'+profile;
 				}
-			//	output +=' <div class="ms-3">'
 				output +='<li id ="'+this.num+'"class="comment-list-item '+comment_reply + '">'
 						+'	<div class ="comment-nick-area">'
 						+'	<img src="'+src+'" alt ="프로필사진" width="36" height="36">'
@@ -188,6 +189,18 @@ function replyform(num,lev,seq,ref){
 }//function(replyform) end
 
 $(function() {
+/*		if($('#empno').val()=""){
+	alert('로그인 후 이용 가능합니다.');}
+	
+	alert('로그인 후 이용 가능합니다.');
+	$('a').click(function(){
+		
+
+	
+	
+	})*/
+	console.log($('#empno').val()+"empno있나요");
+	
 	getList(option);  //처음 로드 될때는 등록순 정렬
 	
 	$('form[name="deleteForm"]').submit(function() {
@@ -340,7 +353,6 @@ $(function() {
 		}
 		
 	})//답글쓰기  후 취소 버튼을 클릭한 경우
-	
 	
 	
 })//ready

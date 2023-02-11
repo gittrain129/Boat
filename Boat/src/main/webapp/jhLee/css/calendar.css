@@ -3,6 +3,30 @@
  hr{
    margin-top : 18%;
  }
+ option{
+ font-weight: 700}
+ .ad{
+ color : pink;
+ }
+ .devel{
+ color : orange;
+ }
+ .hire{
+ color : lightgreen;
+ }
+ .plan{
+ color : purple;
+ }
+ .sales{
+ color : blue;
+ }
+ .personal{
+ color : gray;
+ }
+ .red{color : red;}
+ #mobtn{
+ display:none;
+ }
   body {
     
     font-size: 14px;

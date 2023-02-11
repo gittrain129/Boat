@@ -21,14 +21,14 @@ public class FileBoardCommentList implements Action {
 	FileboComDAO dao = new FileboComDAO();
 	
 	int comment_board_num = Integer.parseInt(request.getParameter("F_COMMENT_NUM"));
-	System.out.println(comment_board_num);
+	System.out.println("comment_board_num: "+comment_board_num);
 	int state = Integer.parseInt(request.getParameter("state"));
 	
 	
 	JsonObject object = new JsonObject();
 	int listcount = dao.getfilecomListcount(comment_board_num);
 	JsonArray jarray = dao.getfileCommentList(comment_board_num,state);
-	System.out.println("listcount :"+listcount);
+	System.out.println("FileBoardCommentList 의 istcount():"+listcount);
 	
 	object.addProperty("listcount",listcount);
 	
