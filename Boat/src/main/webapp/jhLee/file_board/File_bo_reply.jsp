@@ -26,6 +26,7 @@
 </head>
 <body>
 <div class="container">
+<%-- <hr class = "writehr">--%>
  <form action="FileBoardReplyAction.filebo" method="post" enctype = "multipart/form-data" name ="fileboardform">
  	<input type="hidden" value ="${boarddata.FILE_RE_REF}" name="board_re_ref">
 	<input type="hidden" value ="${boarddata.FILE_RE_LEV}" name="board_re_lev">

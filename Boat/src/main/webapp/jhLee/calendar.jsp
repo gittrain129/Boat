@@ -253,8 +253,10 @@
 
 <body>
 
-<%-- 추후 삭제 예정 --%>
+<div class="cal_container">
+ <hr class = "calhr">
  <div id = cal_wrap>
+<%-- 추후 삭제 예정 --%>
  <div id = drag_wrap>
 	 <div id='external-events'>
 	    <p>
@@ -291,6 +293,7 @@
  
  	<div id='calendar'></div>
  </div>
+ </div><%--calcontainer --%>
  <script>
 
  </script>

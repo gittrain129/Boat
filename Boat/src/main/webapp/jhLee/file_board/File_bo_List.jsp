@@ -7,7 +7,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head> 
 	  <jsp:include page="/sjKim/boat/header.jsp" />
 	  
@@ -36,6 +36,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
 </head>
 </head>
 <body>
+<hr>
     <div class="container">
     <div class = "File_board_list_wrap">
         <div class="File_board_Title">
@@ -112,7 +113,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
 							<c:forEach var ="a" begin="0" end="${b.FILE_RE_LEV*2}" step="1">
 							&nbsp;
 							</c:forEach>
-							<img alt="들여쓰기" src="${pageContext.request.contextPath}/jhLee/image/file.png">
+							<img alt="들여쓰기" src="${pageContext.request.contextPath}/jhLee/image/line.gif">
 						</c:if>
 			
 						<c:if test="${b.FILE_RE_LEV==0}"><%--원문인 경우 --%>
