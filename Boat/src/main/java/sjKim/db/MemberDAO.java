@@ -77,9 +77,10 @@ public class MemberDAO {
 			
 			// PreparedStatement 객체 얻기
 			pstmt = conn.prepareStatement(
-					"insert into member (empno, password, jumin, address, post, gender, email, memberfile, intro) "
+					"insert into member (empno, password, jumin, address, post, gender, email, memberfile, intro,imgsrc) "
 					+"values (?,?,?,?,?,?,?,?,?)");
 	
+			String img = "/memberupload/";
 			pstmt.setString(1, m.getEmpno());
 			pstmt.setString(2, m.getPassword());
 			pstmt.setString(3, m.getJumin());
@@ -89,6 +90,7 @@ public class MemberDAO {
 			pstmt.setString(7, m.getEmail());
 			pstmt.setString(8, m.getMemberfile());
 			pstmt.setString(9, m.getIntro());
+			pstmt.setString(10,img+ m.getMemberfile());
 			
 			result = pstmt.executeUpdate(); //삽입 성공시 result는 1
 			
