@@ -24,7 +24,7 @@ create table MEMBER(
 	 EMAIL VARCHAR2(30),
 	 PHONE NUMBER(11),
 	 MEMBERFILE VARCHAR2(50),
-	 IMGSRC VARCHAR2(150),
+	 IMGSRC VARCHAR2(150),	 
 	 register_date date default sysdate,
 	 intro		varchar2(100),
 	 AGE		NUMBER(3)
