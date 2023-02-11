@@ -35,6 +35,25 @@ background-color: #A8C0D6;
     
 
 }
+#sendButton{
+border: none;
+border-radius: 5px;
+width:55px;
+margin-left:10px;
+}
+
+#sendMessageBox{
+border: none;
+border-radius: 5px;
+width:320px;
+
+}
+
+#sendMessageBox:focus{
+outline:none;
+
+}
+
 
 
 sage {
@@ -117,11 +136,12 @@ sage {
 
 </head>
 <body>
-     
+     <div class="title" style="position:fixed;">내 대화방</div>
      <table class="display" id="whole-chat-box">
            <tr>
            <td>
-		<div class="message" id="message">
+           	<div class="message" id="message">
+			<!--
         		<div class="chat ch1">
             		<div class="icon"><i class="fa-solid fa-user"></i></div>
             		<div class="textbox" id="your_box">안녕하세요.</div>
@@ -130,7 +150,7 @@ sage {
             		<div class="icon"><i class="fa-solid fa-user"></i></div>
             		<div class="textbox" id="my_box">안녕하세요</div>
         		</div>
-        		
+        	  -->	
 		</div>
 		</td>		
         </tr>
@@ -138,7 +158,7 @@ sage {
                 <td>
                     <input type="text" id="sendMessageBox" placeholder="Enter a message..."  />
                     <button type="button" id="sendButton">전송</button>
-                    <button type="button" id="clearMsgsButton">리셋</button>
+                    <button type="button" id="clearMsgsButton" style="display:none">리셋</button>
                   
                     
                 </td>
@@ -180,9 +200,8 @@ sage {
                 var sendButton = document.getElementById("sendButton");
                 var clearMsgsButton = document.getElementById("clearMsgsButton");
                 var imgsrc = "${idid.imgsrc}";
-                var yourimg = "";
-                
-                 var idid = "${idid.empno}";     
+                var idid = "${idid.empno}";     
+                var sendimgsrc = "<img src='${pageContext.request.contextPath}" +imgsrc+"' alt=''>"
                 // var idid= "231001"
                  
                 
@@ -248,14 +267,13 @@ sage {
                
                 function ready() {
                     conn.on('data', function (data) {
-                    	console.log(data);
-                    	if (data.subString(0,6).equals('/image')){
-                    		yourimg = data;
-                    		console.log(data);
-                    		
-                    	}
+                    	console.log(data+'어어어');
                     	
-                        addyourMessage("<span class=\"peerMsg\">Peer:</span> " + data);
+                    	
+                    		
+                    	
+                    	//addyourMessage("<span class=\"peerMsg\">Peer:</span> " + data);
+                        addyourMessage(data);
                     });
                     conn.on('close', function () {
                         status.innerHTML = "Connection reset<br>Awaiting connection...";
@@ -283,9 +301,9 @@ sage {
                     };
                     //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
                     //message.innerHTML = ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" +msg + message.innerHTML +"</div>");
-                    message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"><img src='${pageContext.request.contextPath}${idid.imgsrc}' alt=''></i></div><div class=\"textbox\">" + msg +"</div>");
-                    																											//	${idid.imgsrc}
-                }
+                    message.innerHTML = message.innerHTML + "<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\">" +sendimgsrc +"</i></div><div class=\"textbox\">" + msg +"</div>";
+                };																											//	${idid.imgsrc}
+               
 
                 
                 //다른사람 채팅창용 펑션
@@ -307,8 +325,9 @@ sage {
                     };
                     //message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
                     //message.innerHTML = ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" +msg + message.innerHTML +"</div>");
-                    message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
-                    
+                    //message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
+                    message.innerHTML = message.innerHTML + msg;
+
                 }
                 
                 /* 추가할지말지
@@ -345,11 +364,14 @@ sage {
                 // Send message
                 sendButton.addEventListener('click', function () {
                     if (conn && conn.open) {
-                        var msg = sendMessageBox.value;
+                        var msg1 = sendMessageBox.value;
+                        var msg = "<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\">" +sendimgsrc +"</i></div><div class=\"textbox\">" + msg1 +"</div>";
+                        
                         sendMessageBox.value = "";
                         conn.send(msg);
                         console.log("Sent: " + msg)
-                        addMessage("<span class=\"selfMsg\">Self: </span>" + msg);
+                        addMessage(msg1);
+                        //addMessage("<span class=\"selfMsg\">Self: </span>" + msg);
                     } else {
                         console.log('Connection is closed');
                     }
