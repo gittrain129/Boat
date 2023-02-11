@@ -37,7 +37,7 @@ private static final long serialVersionUID=1L;
 				action = new MyBoardListAction();//내 글 보기
 				break;
 			case "/MySchedule.my":
-				action = new TodoAction();//페이지 이동
+				action = new TodoAction();//투두 페이지 이동
 				break;
 			case "/Todolist.my":
 				action = new Todolist();//글 목록
@@ -52,7 +52,7 @@ private static final long serialVersionUID=1L;
 				action = new TodoDelete();//글 삭제
 				break;
 			case "/TodoDeleteAll.my":
-				action = new TodoDeleteAll();//12시 전체 글 삭제
+				action = new TodoDeleteAll();//전체 글 삭제
 				break;
 				
 		}//switch end

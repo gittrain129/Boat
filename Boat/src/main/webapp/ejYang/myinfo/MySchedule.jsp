@@ -9,8 +9,8 @@
   <title>내 할일 보기</title>
  </head>
  <body>
-   <header>To-do-List</header> 
-   <input type="hidden" id="loginid" value="ADMIN" name="loginid"><%-- 본인 자료 가져오기 위해 추가 --%>       
+   <header>${myinfo.name}의 To-do-List</header> 
+   <input type="hidden" id="loginid" value="${empno}" name="loginid"><%-- 본인 자료 가져오기 위해 추가 --%>       
    <div class="wrapper">
         <p>내 일정</p>
         <div class="inputField">
@@ -39,6 +39,7 @@
         <div class="footer">
             <button type="submit" id="submitbtn">완료</button>
             <button type="reset" id="resetbtn">삭제</button>
+            <button type="reset" id="allresetbtn">전체삭제</button>
         </div>
         
    </div>

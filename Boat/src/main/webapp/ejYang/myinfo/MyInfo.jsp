@@ -4,7 +4,7 @@
  <head> 
   <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
   <link href="${pageContext.request.contextPath}/ejYang/css/myinfo.css" type="text/css" rel="stylesheet">
-  <script src="${pageContext.request.contextPath}/ejYang/js/myinfo.js"></script>
+  <%--<script src="${pageContext.request.contextPath}/ejYang/js/myinfo.js"></script>--%>
   <jsp:include page="/sjKim/boat/header.jsp" />
   <title>내 정보 보기</title>
  </head>

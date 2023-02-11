@@ -41,7 +41,7 @@ public class MyBoardListAction implements Action {
 		m = mdao.member_info(empno);
 		//세션 추가되면 삭제
 		String name = m.getName();
-		System.out.println("name"+m.getName());
+		System.out.println("name"+m.getName());//이름 가져오기
 		
 		MyBoardDAO boarddao = new MyBoardDAO();
 		List<MyBoardBean> boardlist = new ArrayList<MyBoardBean>();

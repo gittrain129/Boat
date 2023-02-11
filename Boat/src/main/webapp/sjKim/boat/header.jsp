@@ -160,9 +160,10 @@ li.login-item {
 </style>
 
 <script src="${pageContext.request.contextPath}/sjKim/js/header.js"></script>
+<input type="hidden" id="headerloginid" value="${empno}" name="headerloginid">
 
  		<div class="logo">       		
-			<a href="http://localhost:8088/Boat/index.jsp">
+			<a href="${pageContext.request.contextPath}/index.jsp">
 				<img src="${pageContext.request.contextPath}/sjKim/image/main_logo.jpg" style="float:left; width: 120px; height: 120px;">
 			</a>					
 		</div>
@@ -180,7 +181,7 @@ li.login-item {
                         <li id="nop">&nbsp;</li>
                     </ul>
                 </li>
-                <li><a href="https://www.naver.com" target="_self"><span>내 정보</span></a>
+                <li><a href="${pageContext.request.contextPath}/MyInfo.my" target="_self"><span>내 정보</span></a>
                     <ul class="dept01">
                     	<a href="${pageContext.request.contextPath}/MyInfo.my" target="_self">
                         	<li id="nop">내 정보 보기</li>
@@ -257,14 +258,13 @@ li.login-item {
 		  
 			
 		<script src="${pageContext.request.contextPath}/sjKim/js/inout.js"></script>			
+		<script src="${pageContext.request.contextPath}/ejYang/js/myinfo.js"></script>			
 			<div class="dropdown_inout">						
                <select id="inout" name="inout" onchange="select_inout()" style="border-color:transparent;" required autofocus>
                		<option value="" selected disabled hidden>출근현황</option>
 				    <option style= "background-color: #18a8f1" value="출근" id="works">출근</option>
-
 	                <option style= "background-color: #f5de16" value="외출" id="outs">외출</option>
 	                <option style= "background-color: #ff5858" value="퇴근" id="leave">퇴근</option>
-
 				</select>
 	        </div>
 		     

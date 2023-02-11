@@ -67,12 +67,16 @@ $(document).ready(function(){
 	getList(t_empno);
 	$("#addValue").focus();
 	
-	var date = new Date();
-	console.log(date.getHours())
-	console.log(date.getMinutes())
-	if(10-date.getHours()==0 && 28-date.getMinutes()==0){
-		getDelete(t_empno)
-	}
+	//var date = new Date();
+	//console.log(date.getHours())
+	//console.log(date.getMinutes())
+	//if(20-date.getHours()==0 && 36-date.getMinutes()==0){
+		//getDelete(t_empno)
+	//}
+	//12시에 실행 실패
+	
+	
+	
 	
 	//추가 버튼 클릭할 때 이벤트 부분
 	$("#btn").click(function(){
@@ -162,6 +166,31 @@ $(document).ready(function(){
 			url: 'TodoDelete.my',
 			traditional : true,
 			data : {t_empno : $("#loginid").val(), checkArray: checkboxValues},
+			type : 'post',
+			success : function(rdata) {
+				if(rdata == 1){
+					getList(t_empno);
+				}
+			}
+		})//ajax
+		
+		$("#addValue").val('').focus();
+	});//click end
+	
+	
+	
+	//전체 삭제 버튼
+	$("#allresetbtn").click(function(){
+		
+		const answer = confirm("정말 삭제하시겠습니까?");
+  		console.log(answer);//취소를 클릭한 경우-false
+  		if(!answer){//취소를 클릭한 경우
+  			event.preventDefault();//이동하지 않습니다.
+  		}
+		
+		$.ajax({
+			url: 'TodoDeleteAll.my',
+			data : {t_empno : $("#loginid").val()},
 			type : 'post',
 			success : function(rdata) {
 				if(rdata == 1){
