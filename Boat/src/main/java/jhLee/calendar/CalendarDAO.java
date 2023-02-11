@@ -43,8 +43,9 @@ public class CalendarDAO {
 			con = ds.getConnection();
 
 			
-			String sql = "insert into boat_Calendar "
-					+ "	values(cal_seq.nextval,?,?,?,?)";
+			String sql = "insert into boat_Calendar"
+					+ "(schedule_code,event_name,start_date,end_date,allday,empno,color) "
+					+ "	values(cal_seq.nextval,?,?,?,?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 
@@ -52,6 +53,8 @@ public class CalendarDAO {
 			pstmt.setString(2,cal.getStart_date());
 			pstmt.setString(3,cal.getEnd_date());
 			pstmt.setString(4,cal.getAllday());
+			pstmt.setString(5,cal.getEmpno());
+			pstmt.setString(6,cal.getColor());
 
 			result = pstmt.executeUpdate();
 
@@ -150,6 +153,7 @@ public class CalendarDAO {
 				json.addProperty("start", rs.getString("start_date"));
 				json.addProperty("end", rs.getString("end_date"));
 				json.addProperty("allDay", rs.getString("allday"));
+				json.addProperty("color", rs.getString("color"));
 				
 				
 				list.add(json);
@@ -187,6 +191,17 @@ public class CalendarDAO {
 
 		return list;
 
+	}
+	public String getempno() {
+		
+		
+		
+		
+		
+		
+		
+		
+		return null;
 	}
 
 

@@ -542,6 +542,7 @@ public class FileDAO {
 
 	return list;
 	}
+	//검색어에 따른 글 갯수
 	public int getListcount(String dept, String searchsel, String searchinput) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -598,6 +599,8 @@ public class FileDAO {
 		return x;
 
 	}
+	
+	//파일 답글
 	public int fileboReply(FileboBean filebo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -699,6 +702,8 @@ public class FileDAO {
 			}
 		return num;
 	}
+	
+	//파일 글 삭제 원글 삭제시 답글 같이 삭제됨
 	public boolean fileboardDelete(int num) {
 		
 		Connection con = null;

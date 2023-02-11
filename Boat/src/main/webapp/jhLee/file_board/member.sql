@@ -20,10 +20,10 @@ create table MEMBER(
  IMGSRC VARCHAR2(150)
  );
  
- INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('ADMIN','','','123456','123456','홍길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','admin@boat.com','01012345678','안녕하세요 반갑습니다','/uploadImage/adminImage');
+ INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,EMAIL,PHONE,MEMBERFILE,IMGSRC)
+ VALUES('ADMIN','','','1','123456','홍길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','admin@boat.com','01012345678','안녕하세요 반갑습니다','/uploadImage/adminImage');
  
- 
+ update member set password =123456 where empno ='ADMIN'
  
   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
  VALUES('231001','홍보팀','10','123456','123456','홍길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','남','hgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
