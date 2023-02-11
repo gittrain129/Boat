@@ -78,7 +78,7 @@ public class MemberDAO {
 			// PreparedStatement 객체 얻기
 			pstmt = conn.prepareStatement(
 					"insert into member (empno, password, jumin, address, post, gender, email, memberfile, intro,imgsrc) "
-					+"values (?,?,?,?,?,?,?,?,?)");
+					+"values (?,?,?,?,?,?,?,?,?,?)");
 	
 			String img = "/memberupload/";
 			pstmt.setString(1, m.getEmpno());
@@ -227,8 +227,10 @@ public class MemberDAO {
 		try {
 			con = ds.getConnection();
 			
-			String sql = "update member set name = ?, post = ?, address = ?, gender = ?, email = ?, memberfile = ?, intro = ? "
+			String sql = "update member set name = ?, post = ?, address = ?, gender = ?, email = ?, memberfile = ?, intro = ? imgsrc = ? "
 					   + " where empno = ?";
+			
+			String img = "/memberupload/";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m.getName());
 			pstmt.setInt(2, m.getPost());
@@ -237,7 +239,8 @@ public class MemberDAO {
 			pstmt.setString(5, m.getEmail());
 			pstmt.setString(6, m.getMemberfile());
 			pstmt.setString(7, m.getIntro());
-			pstmt.setString(8, m.getEmpno());
+			pstmt.setString(8,img+ m.getMemberfile());
+			pstmt.setString(9, m.getEmpno());
 			result = pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
