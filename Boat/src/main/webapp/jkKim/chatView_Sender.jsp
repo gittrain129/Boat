@@ -11,6 +11,7 @@
 	<script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
      
 <style>
+
 * {
     padding: 0;
     margin: 0;
@@ -18,21 +19,33 @@
 }
 
 #whole-chat-box{
-width:100%;
-background-color: #A8C0D6;
-
-
- display:flex;
-
+	width:100%;
+	background-color: #A8C0D6;
+	 display:flex;
     flex-direction: column-reverse;
-
     overflow-y:auto;
-
     height:500px;
-    
-    
+  
+}
+#sendButton{
+border: none;
+border-radius: 5px;
+width:55px;
+margin-left:10px;
+}
+
+#sendMessageBox{
+border: none;
+border-radius: 5px;
+width:320px;
 
 }
+
+#sendMessageBox:focus{
+outline:none;
+
+}
+
 
 
 sage {
@@ -41,7 +54,7 @@ sage {
     background-color: #A8C0D6;
 }
 #message{
-	width:460px;
+	width:400px;
 }
 .message .chat {
     display: flex;
@@ -60,7 +73,7 @@ sage {
 
 .message .chat .icon i {
     position: absolute;
-    top: 10px;
+    top: 00px;
     left: 50%;
     font-size: 2.5rem;
     color: #aaa;
@@ -109,24 +122,27 @@ sage {
     content: "▶";
     color: #F9EB54;
 }
+
+
 </style>
+
         
     </head>
     <body>
-     
-        <table class="control">
-            <tr>
-                <td class="title">${param.empno_id }의 대화방</td>
-            </tr>
-            <tr>
+		<div class="title" style="position:fixed;">${param.empno_id }의 대화방
+		
+		</div>
+		<table class="display" id="whole-chat-box">
+             <tr>
                 <td>
-                    <input type="text" id="receiver-id" title="Input the ID" value="${param.empno_id }">
-                    <button id="connect-button">Connect</button> 
+                    <input type="hidden" id="receiver-id" title="Input the ID" value="${param.empno_id }">
+                    <button id="connect-button" style="display:none">Connect</button> 
                 </td>
             </tr>
             <tr>
            <td>
 			<div class="message" id="message">
+			<!-- 
             <div class="chat ch1">
             		<div class="icon"><i class="fa-solid fa-user"></i></div>
             		<div class="textbox" id="your_box">안녕하세요.</div>
@@ -135,6 +151,7 @@ sage {
             		<div class="icon"><i class="fa-solid fa-user"></i></div>
             		<div class="textbox" id="my_box">안녕하세요</div>
         		</div>
+        	 -->
         		</div>
         		</td>
         		</tr>
@@ -142,9 +159,9 @@ sage {
             
             <tr>
              <td>
-                    <input type="text" id="sendMessageBox" placeholder="Enter a message..."  />
-                    <button type="button" id="sendButton">Send</button>
-                    <button type="button" id="clearMsgsButton">Clear Msgs (Local)</button>
+                   <input type="text" id="sendMessageBox" placeholder="Enter a message..."  />
+                    <button type="button" id="sendButton">전송</button>
+                    <button type="button" id="clearMsgsButton" style="display:none">리셋</button>
                 </td>
             </tr>
             <tr>
@@ -152,6 +169,7 @@ sage {
             </tr>
             
         </table>
+          <jsp:include page="/jkKim/chat_footer.jsp" /> 
 
 
         <script type="text/javascript">
@@ -170,7 +188,7 @@ sage {
                 var connectButton = document.getElementById("connect-button");
                 var empno_id = "${param.empno_id }";
                 var imgsrc = "${param.imgsrc }";
-               
+                
 
               
                 function initialize() {
@@ -190,6 +208,7 @@ sage {
 
                         console.log('ID: ' + peer.id);
                         join();
+                        
                        
                     });
                     peer.on('connection', function (c) {
@@ -243,7 +262,7 @@ sage {
                     });
                
                     conn.on('data', function (data) {
-                        addyourMessage2("<span class=\"peerMsg\">Peer:</span> " + data);
+                        addyourMessage2(data);
                     });
                     conn.on('close', function () {
                         status.innerHTML = "Connection closed";
@@ -292,8 +311,11 @@ sage {
                             t = "0" + t;
                         return t;
                     };
-                    message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
-                };
+                    message.innerHTML = message.innerHTML + "<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\">" +sendimgsrc +"</i></div><div class=\"textbox\">" + msg +"</div>";
+                };																										//	<img src='${pageContext.request.contextPath}${idid.imgsrc}' alt=''>
+                																										//	<img src='${pageContext.request.contextPath}'+ imgsrc' alt=''>
+                var sendimgsrc = "<img src='${pageContext.request.contextPath}" +imgsrc+"' alt=''>"
+                
                 
                 function addyourMessage2(msg) {
                     var now = new Date();
@@ -311,7 +333,8 @@ sage {
                             t = "0" + t;
                         return t;
                     };
-                    message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
+                    message.innerHTML = message.innerHTML + msg;
+                    //message.innerHTML = message.innerHTML + ("<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg +"</div>");
                 }
 
                 function clearMessages() {
@@ -329,11 +352,13 @@ sage {
                 
                 sendButton.addEventListener('click', function () {
                     if (conn && conn.open) {
-                        var msg = sendMessageBox.value;
+                        var msg1 = sendMessageBox.value;
+                        var msg = "<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\">" +sendimgsrc +"</i></div><div class=\"textbox\">" + msg1 +"</div>";
+                        			//"<br><div class=\"chat ch1\"><div class=\"icon\"><i class=\"fa-solid fa-user\"></i></div><div class=\"textbox\">" + msg1 +"</div>"
                         sendMessageBox.value = "";
                         conn.send(msg);
                         console.log("Sent: " + msg);
-                        addMessage("<span class=\"selfMsg\">Self: </span> " + msg);
+                        addMessage(msg1);
                     } else {
                         console.log('Connection is closed');
                     }
@@ -346,7 +371,7 @@ sage {
 
                
                 initialize();
-                conn.send(imgsrc);
+                
                 
             })();
         </script>
