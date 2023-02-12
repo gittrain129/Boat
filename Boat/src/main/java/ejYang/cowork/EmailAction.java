@@ -18,10 +18,10 @@ public class EmailAction implements Action{
 //		HttpSession session = request.getSession();
 //		String adminempno = (String) session.getAttribute("empno");//admin
 		
-//		String memberempno = request.getParameter("empno");//주소록에서 넘겨받을 회원
+		String memberempno = request.getParameter("empno");//주소록에서 넘겨받을 회원
 		String adminempno = "ADMIN";//페이지 완성되면 삭제
-		String memberempno = "ADMIN3";//페이지 완성되면 삭제
-		
+		//String memberempno = "ADMIN3";//페이지 완성되면 삭제
+		System.out.println("전송받은 memberempno = " + memberempno);
 		ActionForward forward=new ActionForward();
 		MemberDAO mdao = new MemberDAO();
 		Member admininfo = mdao.member_info(adminempno);
