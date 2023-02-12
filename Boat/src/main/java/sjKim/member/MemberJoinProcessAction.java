@@ -35,7 +35,7 @@ public class MemberJoinProcessAction implements Action {
 		String empno = multi.getParameter("empno");
 		String password = multi.getParameter("password");
 		String name = multi.getParameter("name");
-		String age = multi.getParameter("age");
+		int age = Integer.parseInt(multi.getParameter("age"));
 		String jumin = multi.getParameter("jumin");	
 		String address = multi.getParameter("address");
 		int post = Integer.parseInt(multi.getParameter("post"));

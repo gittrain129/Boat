@@ -92,7 +92,7 @@ li {
 }	
 
 .login_header{	
-	position: fixed;
+	position: absolute;
     float: right;
     top: 0;
     right: 20px;
@@ -241,7 +241,7 @@ li.login-item {
 		    	<ul class="login_nav" style="display: flex;">
 		    		<c:if test="${!empty empno}">
 		     	    	<li class="login-item" ><a class="login-link" style="color:black;">${empno}님이 로그인 되었습니다.</a></li>
-		     	    	<li class="login-item" ><a class="login-link" style="color:black;"href="update_form">&nbsp;| 정보수정 |</a></li>
+		     	    	<li class="login-item" ><a class="login-link" style="color:black;"href="${pageContext.request.contextPath}/memberUpdate.net">&nbsp;| 정보수정 |</a></li>
 		     	    	<c:if test="${empno=='ADMIN'}">
 		     	    		<li class="login-item"><a class="login-link" style="color:black" href="${pageContext.request.contextPath}/memberList.net">&nbsp;관리자 |</a></li>
 		     	    	</c:if>

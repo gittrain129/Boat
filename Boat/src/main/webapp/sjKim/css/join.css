@@ -34,7 +34,7 @@ legend {
 	width: 70%;
 }
 
-#jumin1, #jumin2 {
+input[name='jumin'], #jumin2 {
 	width: 48%
 }
 

@@ -15,7 +15,7 @@ body{
 	margin-top: 20%;
 	margin-right:0;
 	margin-left:0;
-	margin-bottom:0;
+	margin-bottom:20%;
 }
 
 h2{
