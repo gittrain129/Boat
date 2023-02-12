@@ -15,8 +15,14 @@ public class FileboBean {
 	private String FILE_DATE;
 	private int CNT;
 	private String DEPT;
-
+	private String FIlE_EMPNO;
 	
+	public String getFIlE_EMPNO() {
+		return FIlE_EMPNO;
+	}
+	public void setFIlE_EMPNO(String file_empno) {
+		FIlE_EMPNO = file_empno;
+	}
 	public String getDEPT() {
 		return DEPT;
 	}

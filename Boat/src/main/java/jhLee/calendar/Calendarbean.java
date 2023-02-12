@@ -9,14 +9,8 @@ public class Calendarbean {
 	String allday;
 	String empno;
 	String color;
-	//현재 사용 안함.
 	String dept;
-	/*
-	 * 1 id 추가
-	 * 2 color 추가
-	 * 3 dept  추가
-	 * 4. 쉽게하려면 admin 추가
-	 */
+
 	
 	
 	public String getEmpno() {

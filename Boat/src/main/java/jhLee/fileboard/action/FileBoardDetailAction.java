@@ -17,13 +17,19 @@ public class FileBoardDetailAction implements Action {
 		//File_bo_view.jsp
 		
 		FileboBean Filedata = new FileboBean();
+		FileboBean Fileprev = new FileboBean();
+		FileboBean Filenext = new FileboBean();
 		FileDAO filedao = new FileDAO();
 		
 		int num =Integer.parseInt(request.getParameter("num"));
+		String empno = request.getParameter("empno");
 		
 		filedao.setReadCountUpdate(num);
-		
 		Filedata = filedao.getDetail(num);
+		
+	
+		Fileprev = filedao.getPrevDetail(num);
+		Filenext = filedao.getNextDetail(num);
 		
 		if(Filedata ==null) {
 			System.out.println("상세보기 실패");
@@ -36,6 +42,9 @@ public class FileBoardDetailAction implements Action {
 		}
 		System.out.println("상세보기 성공");
 		request.setAttribute("boarddata",Filedata);
+		request.setAttribute("Fileprev",Fileprev);
+		request.setAttribute("Filenext",Filenext);
+		//request.setAttribute("empno",empno);
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("jhLee/file_board/File_bo_view.jsp");

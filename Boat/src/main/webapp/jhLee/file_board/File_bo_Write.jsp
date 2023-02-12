@@ -28,6 +28,7 @@
         <input name="board_subject" id="board_subject" type="text" maxlength="100"
         class="form-control" placeholder="제목을 입력하세요">
     </div>
+    <input type ="hidden" name ="empno" value="${empno}">
  	
 
  	<div class="form-group">

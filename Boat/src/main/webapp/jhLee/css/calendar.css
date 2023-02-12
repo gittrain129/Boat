@@ -1,7 +1,7 @@
 @charset "utf-8";
  /* body 스타일 */
  hr{
-   margin-top : 18%;
+   margin-top : 16%;
  }
  option{
  font-weight: 700}
@@ -27,6 +27,9 @@
  #mobtn{
  display:none;
  }
+ 
+ #title.form-control{
+ margin-bottom: 10px;}
   body {
     
     font-size: 14px;
@@ -84,11 +87,11 @@
   padding-top : 40px;
     margin-left: 100px;
     margin-bottom : 200px;
-       max-width: 1100px; 
+       max-width: 1300px; 
   }
  
   #calendar {
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto;
   }
   #cal_save_wrap{

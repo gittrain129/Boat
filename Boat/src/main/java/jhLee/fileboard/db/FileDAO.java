@@ -188,10 +188,11 @@ public class FileDAO {
 			 			+ "	FILE_RE_SEQ , "
 						+ "	FILE_READCOUNT, "
 						+ " DEPT,"
-						+ "FILE_DATE"
+						+ "FILE_DATE,"
+						+ "FIlE_EMPNO"
 						
 						+ "	) "
-						+ "values ("+max_sql+",?,?,?,?,?,?,"+max_sql+",?,?,?,"+"'"+filedata.getDEPT()+"'"+",sysdate)";
+						+ "values ("+max_sql+",?,?,?,?,?,?,"+max_sql+",?,?,?,"+"'"+filedata.getDEPT()+"'"+",sysdate,?)";
 				
 				pstmt = con.prepareStatement(sql);
 				System.out.println(sql);
@@ -206,6 +207,7 @@ public class FileDAO {
 				pstmt.setInt(7, 0);
 				pstmt.setInt(8, 0);
 				pstmt.setInt(9, 0);
+				pstmt.setString(10, filedata.getFIlE_EMPNO());
 
 				result = pstmt.executeUpdate();
 
@@ -310,6 +312,7 @@ public class FileDAO {
 					board.setFILE_READCOUNT(rs.getInt("FILE_READCOUNT"));
 					board.setFILE_DATE(rs.getString("FILE_DATE"));// 날짜
 					board.setDEPT(rs.getString("DEPT"));
+					board.setFIlE_EMPNO(rs.getString("FILE_EMPNO"));
 					
 					System.out.println(sql);
 
@@ -651,8 +654,8 @@ public class FileDAO {
 			sql = "insert into file_board"
 					+ "(FILE_NUM,FILE_NAME,FILE_PASS,FILE_SUBJECT,"
 					+ "FILE_CONTENT, FILE_FILE,FILE_FILE2, FILE_RE_REF,"
-					+ "FILE_RE_LEV, FILE_RE_SEQ, FILE_READCOUNT,DEPT,FILE_DATE) "
-					+ "values( "+num+",?,?,?,?,?,?,?,?,?,?,?,sysdate)";
+					+ "FILE_RE_LEV, FILE_RE_SEQ, FILE_READCOUNT,DEPT,FILE_DATE,FILE_EMPNO) "
+					+ "values( "+num+",?,?,?,?,?,?,?,?,?,?,?,sysdate,?)";
 					
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, filebo.getFILE_NAME());// 이름
@@ -665,7 +668,8 @@ public class FileDAO {
 			pstmt.setInt(8, re_lev);
 			pstmt.setInt(9, re_seq);
 			pstmt.setInt(10, 0);//board_readcount(조회수)는0
-			pstmt.setString(11,filebo.getDEPT());//board_readcount(조회수)는0
+			pstmt.setString(11,filebo.getDEPT());//
+			pstmt.setString(11,filebo.getFIlE_EMPNO());
 					if(pstmt.executeUpdate()==1) {
 						con.commit();//commit합니다.
 					}else {
@@ -780,6 +784,170 @@ public class FileDAO {
 				}
 			}
 		return result_check;
+	}
+	public FileboBean getPrevDetail(int num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		FileboBean board = null;
+		String sql =" SELECT * FROM "
+				+ "					(SELECT * FROM( "
+				+ "						select ROWNUM RNUM, J.* from "
+				+ "								(select * from file_board "
+				+ "								ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J "
+				+ "					 )WHERE RNUM > (select RNUM from "
+				+ "													(select ROWNUM RNUM, J.* from "
+				+ "													(select * from file_board "
+				+ "														ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J) "
+				+ "											WHERE FILE_NUM = ?) "
+				+ "					) WHERE RNUM = (SELECT MIN(RNUM) FROM( "
+				+ "										select ROWNUM RNUM, J.* from "
+				+ "												(select * from file_board "
+				+ "												ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J "
+				+ "									) WHERE RNUM > (select RNUM from  "
+				+ "																	(select ROWNUM RNUM, J.* from "
+				+ "																		(select * from file_board "
+				+ "																		ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J) "
+				+ "															WHERE FILE_NUM = ?)) ";
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, num);
+			System.out.println("파일 게시판" +num+"번글 수정중입니다.");
+			
+			 rs =  pstmt.executeQuery();
+			 if(rs.next()) {
+				  board = new FileboBean();
+				  	board.setFILE_NUM(rs.getInt("FILE_NUM"));
+					board.setFILE_NAME(rs.getString("FILE_NAME"));// 이름
+					board.setFILE_PASS(rs.getInt("FILE_PASS"));// 비번
+					board.setFILE_SUBJECT(rs.getString("FILE_SUBJECT"));// 제목
+					board.setFILE_CONTENT(rs.getString("FILE_CONTENT"));// 내용
+					board.setFILE_FILE(rs.getString("FILE_FILE"));
+					board.setFILE_FILE2(rs.getString("FILE_FILE2"));
+
+					// 원문의 경우 BOARD_RE_LEV,BOARD_RE_SEQ 의 필드값음 0입니다.
+
+					board.setFILE_RE_REF(rs.getInt("FILE_RE_REF"));
+					board.setFILE_RE_LEV(rs.getInt("FILE_RE_LEV"));//
+					board.setFILE_RE_SEQ(rs.getInt("FILE_RE_SEQ"));// 답글번호 원글-1
+					board.setFILE_READCOUNT(rs.getInt("FILE_READCOUNT"));
+					board.setFILE_DATE(rs.getString("FILE_DATE"));// 날짜
+					board.setDEPT(rs.getString("DEPT"));
+					board.setFIlE_EMPNO(rs.getString("FILE_EMPNO"));
+					
+					System.out.println(sql);
+
+			 }
+			 
+
+		} catch (Exception ex) {
+			System.out.println("getPrevDetail() 에러: " + ex);
+			ex.printStackTrace();
+
+		} finally {
+			if (pstmt != null) {
+			try {
+					pstmt.close();// 꼭 닫아줘야함 ㅇㅇ
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			if (con != null)
+			try {
+					con.close();// 꼭 닫아줘야함 ㅇㅇ
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			}
+		}
+		return board;
+
+
+	}
+	public FileboBean getNextDetail(int num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		FileboBean board = null;
+		String sql =" SELECT * FROM( "
+				+ "					select ROWNUM RNUM, J.* from "
+				+ "					(select * from file_board "
+				+ "					ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J "
+				+ "					WHERE ROWNUM <	(select RNUM from "
+				+ "									(select ROWNUM RNUM, J.* from "
+				+ "									(select * from file_board "
+				+ "									ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J) "
+				+ "									WHERE FILE_NUM = ?) "
+				+ "					) WHERE RNUM = (SELECT MAX(RNUM) from "
+				+ "									(select ROWNUM RNUM, J.* from "
+				+ "									(select * from file_board "
+				+ "									ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J "
+				+ "									WHERE ROWNUM <	(select RNUM from "
+				+ "													(select ROWNUM RNUM, J.* from "
+				+ "													(select * from file_board "
+				+ "													ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J) "
+				+ "													WHERE FILE_NUM = ?))) ";
+		
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, num);
+			System.out.println("파일 게시판" +num+"번글 수정중입니다.");
+			
+			 rs =  pstmt.executeQuery();
+			 if(rs.next()) {
+				  board = new FileboBean();
+				  	board.setFILE_NUM(rs.getInt("FILE_NUM"));
+					board.setFILE_NAME(rs.getString("FILE_NAME"));// 이름
+					board.setFILE_PASS(rs.getInt("FILE_PASS"));// 비번
+					board.setFILE_SUBJECT(rs.getString("FILE_SUBJECT"));// 제목
+					board.setFILE_CONTENT(rs.getString("FILE_CONTENT"));// 내용
+					board.setFILE_FILE(rs.getString("FILE_FILE"));
+					board.setFILE_FILE2(rs.getString("FILE_FILE2"));
+					board.setFILE_RE_REF(rs.getInt("FILE_RE_REF"));
+					board.setFILE_RE_LEV(rs.getInt("FILE_RE_LEV"));//
+					board.setFILE_RE_SEQ(rs.getInt("FILE_RE_SEQ"));// 답글번호 원글-1
+					board.setFILE_READCOUNT(rs.getInt("FILE_READCOUNT"));
+					board.setFILE_DATE(rs.getString("FILE_DATE"));// 날짜
+					board.setDEPT(rs.getString("DEPT"));
+					board.setFIlE_EMPNO(rs.getString("FILE_EMPNO"));
+					
+					System.out.println(sql);
+
+			 }
+			 
+
+		} catch (Exception ex) {
+			System.out.println("getNextDetail() 에러: " + ex);
+			ex.printStackTrace();
+
+		} finally {
+			if (pstmt != null) {
+			try {
+					pstmt.close();// 꼭 닫아줘야함 ㅇㅇ
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			if (con != null)
+			try {
+					con.close();// 꼭 닫아줘야함 ㅇㅇ
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			}
+		}
+		return board;
+
+
 	}
 
 

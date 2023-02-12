@@ -15,21 +15,17 @@
 
 	function setPaging(href,digit){
 		let arractive ="";
-		let gray = "";
+		let gray = "arractive ";
 		if(href==""){//href가 빈문자열인 경우
 			if(isNaN(digit)){//이전 &nbsp;또는 다음&nbsp;
-				gray="gray";
+				gray+="gray";
 			}else{
 				arractive="arractive"
 			}
 		}
 		console.log("page는 "+$("#page").val())
-		let firstItem = "";
-		if($("#page").val()==digit){
-			firstItem="firstItem";
-		}
-		let output =`<span class="num ${arractive}">`;
-		let anchor =`<a class = 'firstItem ${gray}' ${href}${firstItem}>${digit}</a></span>`
+		let output =`<span class="num ">`;
+		let anchor =`<a class = ' ${gray} ${arractive}' ${href}>${digit}</a></span>`
 		output+=anchor;
 		return output;
 	}//setpaging끝

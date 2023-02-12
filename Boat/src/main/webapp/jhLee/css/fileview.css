@@ -2,7 +2,7 @@
 
 .boardviewhr{
 	width : 80%!important;
-	margin-top: 18%!important;
+	margin-top: 16%!important;
 }
  .commcard{
 	background-color : #f8f9fa!important;
@@ -147,5 +147,36 @@ font-size: 14px;
     	min-height:354px;
 }
 .board_view .info dl:first-child{
-	margin-left: 400px
+	margin-left: 350px
+}
+.next{
+	width : 80%;
+	padding : 10px;
+	display: block;
+	border : none;
+	margin :  0 auto;
+	text-align : center;
+	
+}
+.next a {
+	width : 330px;
+	border : white;
+}
+
+
+.personal{
+	display : inline-block;
+	position : absolute;
+	right : 150px;
+}
+
+#pretitle,#nexttitle{
+	font-weight : 700;
+	color : dark-gray
+}
+.nextbtn{
+	color :  rgb(0, 173, 238);
+}
+a:hover{
+	text-decoration :none;
 }
