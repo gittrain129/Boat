@@ -69,6 +69,8 @@ a {
 }
 
 </style>
+ <link rel="stylesheet" href="jhLee/css/mainpage.css">
+ 
 <title>BOAT 메인페이지</title>
 </head>
 <body>
@@ -76,29 +78,29 @@ a {
 	<div class="body_content">
 		
 			<div class="body_menu">
-				<a href="https://www.naver.com" target="_black">
+				<a href="${pageContext.request.contextPath}/map.cal" target="_black">
 				<img src="sjKim/image/blue_button.png" >
-				</a>
 				<span class="image_text">오시는길</span>
+				</a>
 			</div>
 			<div class="body_menu">
-				<a href="https://www.naver.com" target="_black">
+				<a href="${pageContext.request.contextPath}/MyInfo.my" target="_black">
 				<img src="sjKim/image/blue_button.png" >
-				</a>
 				<span class="image_text">내 정보 보기</span>
+				</a>
 			</div>
 			<div class="body_menu">
-				<a href="https://www.naver.com" target="_black">
+				<a href="${pageContext.request.contextPath}/MyBoardList.my" target="_black">
 				<img src="sjKim/image/blue_button.png" >
-				</a>
 				<span class="image_text">내 글 보기</span>		
+				</a>
 					
 			</div>
 			<div class="body_menu">
-				<a href="https://www.naver.com" target="_black">
+				<a href="${pageContext.request.contextPath}/MySchedule.my" target="_black">
 				<img src="sjKim/image/blue_button.png" >
+				<span class="image_text">내 할일 보기</span>
 				</a>
-				<span class="image_text">내 일정 보기</span>
 			</div>
 		</div> 
 		
@@ -106,28 +108,28 @@ a {
 		<div class="body_content">
 		
 			<div class="body_menu">
-				<a href="https://www.naver.com" target="_black">
+				<a href="${pageContext.request.contextPath}/BoardList.bo" target="_black">
 				<img src="sjKim/image/blue_button.png" >
-				</a>
 				<span class="image_text">업무 게시판</span>
+				</a>
 			</div>
 			<div class="body_menu">
-				<a href="https://www.naver.com" target="_black">
+				<a href="${pageContext.request.contextPath}/FileBoardList.filebo" target="_black">
 				<img src="sjKim/image/blue_button.png" >
-				</a>
 				<span class="image_text">자료실</span>
+				</a>
 			</div>
 			<div class="body_menu">
-				<a href="https://www.naver.com" target="_black">
+				<a href="${pageContext.request.contextPath}/project_calendarstart.cal" target="_black">
 				<img src="sjKim/image/blue_button.png" >
-				</a>
 				<span class="image_text">캘린더</span>
+				</a>
 			</div>
 		    <div class="body_menu">
-		    	<a href="https://www.naver.com" target="_black">
+		    	<a href="${pageContext.request.contextPath}/jkKim/address.jk" target="_black">
 				<img src="sjKim/image/blue_button.png" >
-				</a>
 				<span class="image_text">주소록</span>
+				</a>
 			</div>
   
 		</div> 

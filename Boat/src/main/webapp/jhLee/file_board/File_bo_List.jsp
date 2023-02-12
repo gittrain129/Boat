@@ -44,7 +44,8 @@ http://localhost:8088/Boat/FileBoardList.filebo
             <p>자료실 게시판 입니다.</p>
 
         </div>
-              <input type="text" name = "empno" id = "empno" value = ${empno}>
+              <input type="hidden" name = "empno" id = "empno" value = ${empno}>
+         
        
        <div>
    <div>
@@ -177,31 +178,31 @@ http://localhost:8088/Boat/FileBoardList.filebo
 
 
    <p class="paging">
-   이전
+ 
    	<c:if test="${page<=1}">
-     <a href="#" class="btnPage gray">
+       <a class="btnPage gray firstItem">이전&nbsp;
      <img src="jhLee/image/pre.png" alt="이전10개" width="10px">  
      </a>
    	</c:if>
    	<c:if test="${page>1}">
-     <a href="FileBoardList.filebo?page=${page-1}" class="btnPage underline"><img src="jhLee/image/pre.png" alt="이전10개" width="10px"></a>
+     <a href="FileBoardList.filebo?page=${page-1}" class="btnPage arractive firstItem">이전&nbsp;<img src="jhLee/image/pre.png" alt="이전10개" width="10px"></a>
    	</c:if>
    	
  
    	<c:forEach var="a" begin="${startpage}" end="${endpage}">
    		<c:if test="${a==page}">
-     		<span class="num"><a href="#" class="firstItem">${a}</a> </span> 
+     		<span class="num"><a class="firstItem">${a}</a> </span> 
    		</c:if>
    		<c:if test="${a !=page}">
-     		<span class="num"><a href="FileBoardList.filebo?page=${a}" class="" >${a}</a> </span> 
+     		<span class="num"><a href="FileBoardList.filebo?page=${a}" class="fistItem" >${a}</a> </span> 
    		</c:if>
    		</c:forEach>
    	
    	<c:if test="${page>=maxpage }">
-     <a href="#" class="btnPage gray"><img src="jhLee/image/next.png" alt="다음10개" />다음</a>
+     <a  class="btnPage gray firstItem"><img src="jhLee/image/next.png" alt="다음10개" />&nbsp;다음</a>
    	</c:if>
    	<c:if test="${page<maxpage}">
-	     <a href="FileBoardList.filebo?page=${page+1}" class="btnPage underline"><img src="jhLee/image/next.png" alt="다음10개" /></a>
+	     <a href="FileBoardList.filebo?page=${page+1}" class="btnPage arractive fistItem"><img src="jhLee/image/next.png" alt="다음10개" />&nbsp;다음</a>
    	</c:if>
    </p>
    
