@@ -880,5 +880,69 @@ public class BoardDAO {
 		return board;
 	}
 
+
+	//ajax 총 글 개수
+	public int getListCount(String search_field, String search_word, String department) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int x = 0;
+		
+		if(department.equals("selected"))
+			department = "";
+		else
+			department = "AND BOARD_DEPT = '"+department+"'";
+		System.out.println("department= "+department);	
+		
+		try {
+			con = ds.getConnection();
+			String sql = "select count(*) from BOARD "
+					+ "where "+ search_field + " like ? "
+					+ department ;
+					
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,"%"+search_word+"%");
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				x = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println("ajax getListCount()에러: " + e);
+			System.out.println(e.getMessage());
+			e.getStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+
+					System.out.println(e.getMessage());
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+
+					System.out.println(e.getMessage());
+				}
+		}
+		return x;
+	}
+
+
+	//ajax 검색
+	public List<BoardBean> getBoardList(String string, String search_word, String department, String string2, int page,
+			int limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }
