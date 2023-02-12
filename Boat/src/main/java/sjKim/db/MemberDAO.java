@@ -32,7 +32,7 @@ public class MemberDAO {
 		try {
 			conn = ds.getConnection();
 			
-			String sql = "select empno from member where empno=?";
+			String sql = "select empno from member where empno = ?";
 			// PreparedStatement 객체 얻기
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, empno);
@@ -66,6 +66,8 @@ public class MemberDAO {
 			}//finally end
 			return result;
 	} //isId end
+	
+	
 
 	public int insert(Member m) {
 		Connection conn = null;
@@ -77,22 +79,24 @@ public class MemberDAO {
 			
 			// PreparedStatement 객체 얻기
 			pstmt = conn.prepareStatement(
-					"insert into member (empno, name, age, password, jumin, address, post, gender, email, memberfile, intro,imgsrc) "
-					+"values (?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into member (empno, dept, deptno, name, age, password, jumin, address, post, gender, email, memberfile, intro,imgsrc) "
+					+"values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 	
 			String img = "/memberupload/";
 			pstmt.setString(1, m.getEmpno());
-			pstmt.setString(2, m.getName());
-			pstmt.setInt(3, m.getAge());
-			pstmt.setString(4, m.getPassword());
-			pstmt.setString(5, m.getJumin());
-			pstmt.setString(6, m.getAddress());
-			pstmt.setInt(7, m.getPost());
-			pstmt.setString(8, m.getGender());
-			pstmt.setString(9, m.getEmail());
-			pstmt.setString(10, m.getMemberfile());
-			pstmt.setString(11, m.getIntro());
-			pstmt.setString(12,img+ m.getMemberfile());
+			pstmt.setString(2, m.getDept());
+			pstmt.setInt(3, m.getDeptno());
+			pstmt.setString(4, m.getName());
+			pstmt.setInt(5, m.getAge());
+			pstmt.setString(6, m.getPassword());
+			pstmt.setString(7, m.getJumin());
+			pstmt.setString(8, m.getAddress());
+			pstmt.setInt(9, m.getPost());
+			pstmt.setString(10, m.getGender());
+			pstmt.setString(11, m.getEmail());
+			pstmt.setString(12, m.getMemberfile());
+			pstmt.setString(13, m.getIntro());
+			pstmt.setString(14,img+ m.getMemberfile());
 			
 			result = pstmt.executeUpdate(); //삽입 성공시 result는 1
 			
@@ -229,21 +233,23 @@ public class MemberDAO {
 		try {
 			con = ds.getConnection();
 			
-			String sql = "update member set name = ?, age = ?, post = ?, address = ?, gender = ?, email = ?, memberfile = ?, intro = ? imgsrc = ? "
+			String sql = "update member set dept = ?, deptno = ?, name = ?, age = ?, post = ?, address = ?, gender = ?, email = ?, memberfile = ?, intro = ? imgsrc = ? "
 					   + " where empno = ?";
 			
 			String img = "/memberupload/";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, m.getName());
-			pstmt.setInt(2, m.getAge());
-			pstmt.setInt(3, m.getPost());
-			pstmt.setString(4, m.getAddress());
-			pstmt.setString(5, m.getGender());
-			pstmt.setString(6, m.getEmail());
-			pstmt.setString(7, m.getMemberfile());
-			pstmt.setString(8, m.getIntro());
-			pstmt.setString(9,img+ m.getMemberfile());
-			pstmt.setString(10, m.getEmpno());
+			pstmt.setString(1, m.getDept());
+			pstmt.setInt(2, m.getDeptno());
+			pstmt.setString(3, m.getName());
+			pstmt.setInt(4, m.getAge());
+			pstmt.setInt(5, m.getPost());
+			pstmt.setString(6, m.getAddress());
+			pstmt.setString(7, m.getGender());
+			pstmt.setString(8, m.getEmail());
+			pstmt.setString(9, m.getMemberfile());
+			pstmt.setString(10, m.getIntro());
+			pstmt.setString(11,img+ m.getMemberfile());
+			pstmt.setString(12, m.getEmpno());
 			result = pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -495,6 +501,39 @@ public class MemberDAO {
 			
 			}
 		return list ;
+	}
+	
+	
+	
+	public int delete(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int result=0;
+		try {
+			con = ds.getConnection();
+			String sql="delete from member where id = ? ";			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			result=pstmt.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.out.println("List<Member> getList() 에러: " + ex);
+		} finally {
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (con != null)
+				try {			
+					con.close();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			
+			}
+		return result;
 	}
 	
 	

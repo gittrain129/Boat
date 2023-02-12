@@ -33,6 +33,8 @@ public class MemberJoinProcessAction implements Action {
 		MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "utf-8", new DefaultFileRenamePolicy());
 		
 		String empno = multi.getParameter("empno");
+		String dept = multi.getParameter("dept");
+		int deptno = Integer.parseInt(multi.getParameter("deptno"));
 		String password = multi.getParameter("password");
 		String name = multi.getParameter("name");
 		int age = Integer.parseInt(multi.getParameter("age"));
@@ -51,7 +53,8 @@ public class MemberJoinProcessAction implements Action {
 		m.setEmail(email);		m.setIntro(intro);		m.setGender(gender);
 		m.setEmpno(empno); 	 	m.setPassword(password); m.setName(name);
 		m.setMemberfile(memberfile); m.setJumin(jumin); m.setAddress(address);
-		m.setPost(post);		m.setAge(age);
+		m.setPost(post);		m.setAge(age);		   m.setDept(dept);
+		m.setDeptno(deptno);
 		
 		if(memberfile != null) { //파일을 선택한 경우
 			m.setMemberfile(memberfile);

@@ -3,74 +3,109 @@
 <html>
 <head>
 <title>회원관리 시스템 회원수정 페이지</title>
-<link href="${pageContext.request.contextPath}/sjKim/css/join.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/sjKim/css/update.css" rel="stylesheet" type="text/css">
 <style>
 
-h3 {
-	text-align: center; color: #1a92b9;
-}
-
-input[type=file] {
-	display:none;
-}
-
+span{
+		font-size: 15px;
+		margin-bottom: 10px;
+	}
 </style>
+
+<script src="${pageContext.request.contextPath}/sjKim/js/jquery-3.6.3.js"></script>
+<script src="${pageContext.request.contextPath}/sjKim/js/join.js"></script>
+<script src="${pageContext.request.contextPath}/sjKim/js/submit.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 </head>
+
 <body>
-	<jsp:include page="header.jsp" />
-	<form name = "joinform" action="updateProcess.net" method="post" enctype="multipart/form-data">
-		<h3>회원 정보 수정</h3>
-		<hr>
-		<b>아이디</b>
-		<input type="text" name="empno" value="${memberinfo.empno}" readonly>
-		
-		<b>비밀번호</b>
-		<input type='password' name='password' value="${memberinfo.password}" readonly>	
-			
-		<b>이름</b>
-		<input type='text' name='name' value="${memberinfo.name}" placeholder='Enter name' required>
-			
-		<b>나이</b>
-		<input type='text' name='age' value="${memberinfo.age}" placeholder='Enter age' maxLength="2" required>
-			
-		<b>성별</b>
-		<div>
-			<input type='radio' name='gender' value='남' ><span>남자</span>
-			<input type='radio' name='gender' value='여' ><span>여자</span>
-		</div>
-			
-		<b>이메일 주소 </b>
-		<input type='text' name='email' value="${memberinfo.email}" placeholder='Enter email' required>
-		<span id="email_message"></span>
-		
-		<b>프로필 사진</b>
-		<label>
-			<img src="image/attach.png" width="10px">
-			<span id="filename">${memberinfo.memberfile}</span>
-			<span id="showImage">
-				<c:if test='${empty memberinfo.memberfile}'>
-					<c:set var='src' value='image/profile.png'/>
-				</c:if>
-				<c:if test='${!empty memberinfo.memberfile}'>
-					<c:set var='src' value='${"memberupload/"}${memberinfo.memberfile}'/>
-					<input type="hidden" name="check" value="${memberinfo.memberfile}"> <%-- 파일이 있는데 변경하지 않은 경우 --%>
-				</c:if>
-				<img src="${src}" width="30px" alt="profile">	
-			</span>
-				<%-- accept: 업로드할 파일 타입을 설정합니다.
-					 <input type="file" accept="파일 확장자|audio/*|video/*|image/*">
-					 	(1) 파일 확장자는 .png .jpg .pdf .hwp 처럼 (.)으로 시작되는 파일 확장자를 의미합니다.
-					 				예)accept = " .png, .jpg, .pdf, .hwp"
-					 	(2) audio/* : 모든 타입의 오디오 파일
-					 	(3) image/* : 모든 타입의 이미지 파일
-				 --%>
-				 <input type="file" name="memberfile" accept="image/*">
-		</label>
-		<div class= "clearfix">
-			<button type="submit" class="submitbtn">수정</button>
-			<button type="button" class="cancelbtn">취소</button>
-		</div>
+	
+	<form name = "joinform" id="joinform" action="updateProcess.net" method="post" enctype="multipart/form-data">
+		<div class="container">
+		<fieldset>
+			<legend>내 정보 수정</legend>
+				<div class="top_block1">
+						<label for="id" >사원번호</label>
+						<input type='text' name='empno' id='empno' style="width:550px" value="${memberinfo.empno}" readonly>
+					
+						<label for="dept" style="padding-top: 10px;">부서명</label>
+						<input type='text' placeholder='부서명을 입력하세요..' name='dept' id='dept' style="width:550px;" value="${memberinfo.dept}" >
+						
+						<label for="deptno" style="padding-top: 10px;">부서번호</label>
+						<input type='text' placeholder='부서번호를 입력하세요..' name='deptno' id='deptno' style="width:550px;" value="${memberinfo.deptno}">
+					
+						<label for="name" style="padding-top: 10px;">이름</label>
+						<input type='text' placeholder='성함을 입력하세요..' name='name' id='name' style="width:550px;" value="${memberinfo.name}">
+						
+						<label for="age" style="padding-top: 10px;">나이</label>
+						<input type='text' placeholder='나이를 입력하세요..' name='age' id='age' style="width:550px;" maxLength="3" value="${memberinfo.age}" maxLength="3" required>
+						<span id="message"></span>
+				</div>
+				
+				<div class="top_block2">
+					<label style="text-align: center; margin-top:50px;">
+						<span id="filename">${memberinfo.memberfile}</span>
+						<span id="showImage">
+							<c:if test='${empty memberinfo.memberfile}'>
+								<c:set var='src' value='sjKim/image/profile.png'/>
+							</c:if>
+							<c:if test='${!empty memberinfo.memberfile}'>
+								<c:set var='src' value='${"memberupload/"}${memberinfo.memberfile}'/>
+								<input type="hidden" name="check" value="${memberinfo.memberfile}"> <%-- 파일이 있는데 변경하지 않은 경우 --%>
+							</c:if>
+							<img src="${src}" width="130px" alt="profile">	
+						</span>
+	
+							<input type="file" id="memberfile" name="memberfile" accept="image/*" style="display:none;">
+							<button type="button" onclick="onClickUpload();" id="f_upload">업로드</button>
+					</label>				
+				</div>
+				
+					<label for="pass" style="padding-top: 10px;">비밀번호</label>
+					<input type='password' name='password' value="${memberinfo.password}" readonly>	
+						
+					<label for="jumin">주민번호</label>
+					<input type='text' placeholder='주민번호 앞자리'
+							name='jumin' id='jumin'  value="${memberinfo.jumin}" > 
+					<b>-</b>
+					<input type='text' placeholder='주민번호 뒷자리'  
+							name='jumin2' id='jumin2' value="●●●●●●●" readonly >
+							
+					<label for="email">이메일</label>
+					<input type='text' name='email' value="${memberinfo.email}" placeholder='Enter email' maxLength="30" required>
+					<span id="email_message"></span>
+					
+							
+					<label>성별</label>
+					<div class="container2">
+						<input type='radio' name='gender' value='남' ><span>남자</span>
+						<input type='radio' name='gender' value='여' ><span>여자</span>
+					</div>
+						
+					<label for="post">우편번호</label>
+					<input type='text' size='5' maxLength='5' name='post' id='post' value="${memberinfo.post}" readOnly>
+					<input type='button' value="우편검색" id="postcode">
+				
+							
+					<label for="address">주소</label>
+					<input type='text' size='50' name='address' id='address' value="${memberinfo.address}">
+				
+				
+					<label for="intro">자기소개</label>
+					<textarea rows='10' name="intro" id="intro" maxLength="100" value="${memberinfo.intro}"></textarea>
+					
+					
+					<div class= "clearfix">
+						<button type="submit" class="submitbtn">수정</button>
+						<button type="button" class="cancelbtn">취소</button>
+					</div>
+					
+	   </fieldset>
+	  </div>
 	</form>
+	
+	
 	<script>
 		
 		//성별 체크해주는 부분
@@ -83,14 +118,14 @@ input[type=file] {
 		
 		//처음 화면 로드시 보여줄 이메일은 이미 체크 완료된 것이므로 기본 checkemail=true입니다.
 		let checkemail=true;
-		$("input:eq(6)").on('keyup', 
+		$("input[name=email]").on('keyup', 
 				function() {
 					$("#email_message").empty();
 					//[A-Za-z0-9_]와 동일한 것이 \w입니다.
 					//+는 1회 이상 반복을 의미하고 {1,}와 동일합니다.
 					//\w+ 는 [A-Za-z0-9_]를 1개이상 사용하라는 의미입니다.
 					const pattern = /^\w+@\w+[.]\w{3}$/;
-					const email = $("input:eq(6)").val();
+					const email = $("input[name=email]").val();
 						if (!pattern.test(email)) {
 							$("#email_message").css('color', 'red')
 										 	   .html("이메일형식이 맞지 않습니다.");
