@@ -34,6 +34,8 @@ public class MemberJoinProcessAction implements Action {
 		
 		String empno = multi.getParameter("empno");
 		String password = multi.getParameter("password");
+		String name = multi.getParameter("name");
+		int age = Integer.parseInt(multi.getParameter("age"));
 		String jumin = multi.getParameter("jumin");	
 		String address = multi.getParameter("address");
 		int post = Integer.parseInt(multi.getParameter("post"));
@@ -47,9 +49,9 @@ public class MemberJoinProcessAction implements Action {
 		
 		Member m = new Member();
 		m.setEmail(email);		m.setIntro(intro);		m.setGender(gender);
-		m.setEmpno(empno); 	 	m.setPassword(password);
+		m.setEmpno(empno); 	 	m.setPassword(password); m.setName(name);
 		m.setMemberfile(memberfile); m.setJumin(jumin); m.setAddress(address);
-		m.setPost(post);
+		m.setPost(post);		m.setAge(age);
 		
 		if(memberfile != null) { //파일을 선택한 경우
 			m.setMemberfile(memberfile);

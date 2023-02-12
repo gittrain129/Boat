@@ -15,6 +15,9 @@ public class Member {
 	private int pone;
 	private String memberfile;
 	private String imgsrc;
+	private String register_date;
+	private String intro;
+	private int age;
 	
 	
 	public String getEmpno() {
@@ -56,8 +59,8 @@ public class Member {
 	public String getJumin() {
 		return jumin;
 	}
-	public void setJumin(String string) {
-		this.jumin = string;
+	public void setJumin(String jumin) {
+		this.jumin = jumin;
 	}
 	public String getAddress() {
 		return address;
@@ -100,6 +103,24 @@ public class Member {
 	}
 	public void setImgsrc(String imgsrc) {
 		this.imgsrc = imgsrc;
+	}
+	public String getRegister_date() {
+		return register_date;
+	}
+	public void setRegister_date(String register_date) {
+		this.register_date = register_date;
+	}
+	public String getIntro() {
+		return intro;
+	}
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
 	}
 	
 }

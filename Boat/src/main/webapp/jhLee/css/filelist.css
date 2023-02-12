@@ -1,6 +1,10 @@
+hr{
+	position : relative;
+	margin-top: 18%!important;
+	width : 80%}
 
 .container {
-	 margin-top: 10%;
+	
 	width: 80%
 }
 
@@ -31,7 +35,8 @@ a {
 	text-decoration: none;
 }
 a:hover{
-	font-weight : 600;
+	font-weight : 700;
+	color : rgb(0, 173, 238);
 }
 
 tr th div,tr th span{
@@ -107,9 +112,9 @@ tr:nth-child(n+3) {
 	text-align: left;
 }
 
-.File_board_list tbody tr td:nth-child(2):hover {
+/*.File_board_list tbody tr td:nth-child(2):hover {
 	text-decoration: underline
-}
+}*/
 
 .btntwo { 
 	margin-top: 30px;
@@ -155,10 +160,13 @@ input {
 	line-height: 1.2em;
 }
 
-.num a:hover, .paging .num {
+.num a:hover .num, .num a:hover a ,.btnPage.arractive:hover {
 	color: rgb(0, 173, 238);
 }
-
+.btnPage.arractive{
+	text-decoration : none;
+	color: rgb(0, 173, 238);
+}
 
 .paging .num .firstItem ,a:focus  {
 	font-weight: bold;
@@ -204,8 +212,11 @@ opacity : 0.5;
 } */
 .gray:hover{
 	text-decoration : none;
+	color : gray;
+	font-weight : 400
 }
 #new,.file{
 	width : 20px;}
 
 
+a{text-decoration : none;}

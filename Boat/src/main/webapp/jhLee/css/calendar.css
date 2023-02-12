@@ -1,5 +1,32 @@
 @charset "utf-8";
  /* body 스타일 */
+ hr{
+   margin-top : 18%;
+ }
+ option{
+ font-weight: 700}
+ .ad{
+ color : pink;
+ }
+ .devel{
+ color : orange;
+ }
+ .hire{
+ color : lightgreen;
+ }
+ .plan{
+ color : purple;
+ }
+ .sales{
+ color : blue;
+ }
+ .personal{
+ color : gray;
+ }
+ .red{color : red;}
+ #mobtn{
+ display:none;
+ }
   body {
     
     font-size: 14px;
@@ -15,7 +42,7 @@
     border: 1px solid #ccc;
     background: #eee;
     text-align: left;
-    margin-top : 100px;
+  
   }
   
   /* 현재 없는 선택자 */
@@ -46,8 +73,15 @@
 /* 현재 없는 선택자 */
 
 /* 달력 감싸기 (드래그이벤트 포함)  */
-  #cal_wrap {
+.cal_container{
+	
   margin-top:16%;
+}
+.calhr{
+	margin-left: 100px;
+}
+  #cal_wrap {
+  padding-top : 40px;
     margin-left: 100px;
     margin-bottom : 200px;
        max-width: 1100px; 

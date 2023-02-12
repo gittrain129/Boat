@@ -26,7 +26,7 @@
   
     <section class="login">
       <h2 class="logo">  
-       <a href="http://localhost:8088/Boat/index.jsp">     				
+       <a href="${pageContext.request.contextPath}/index.jsp">     				
 		<img src="${pageContext.request.contextPath}/sjKim/image/main_logo.jpg" style="width: 200px; height: 200px;">	
 	   </a>			
 	  </h2>

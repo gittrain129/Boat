@@ -35,6 +35,10 @@ public class CalendarFrontController extends javax.servlet.http.HttpServlet {
 		Action action = null;
 				switch(command) {
 				
+				case "/map.cal":
+					action = new mapshow();
+					break;
+					
 				case "/project_calendarstart.cal":
 					action = new CalAllshow();
 					break;
@@ -48,6 +52,9 @@ public class CalendarFrontController extends javax.servlet.http.HttpServlet {
 					break;
 				case "/project_calendarshow.cal":
 					action = new CalShowAction();
+					break;
+				case "//project_calupdate.cal":
+					action = new Calupdate();
 					break;
 					
 				

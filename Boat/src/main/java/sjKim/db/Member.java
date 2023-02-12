@@ -12,6 +12,7 @@ public class Member {
 	private String password;
 	private String pwcheck;
 	private String name;
+	private int age;
 	private String jumin;
 	private String address;
 	private int post;
@@ -130,6 +131,12 @@ public class Member {
 	}
 	public void setRegister_date(String register_date) {
 		this.register_date = register_date;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
 	}
 	
 	

@@ -1,6 +1,7 @@
  
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
      <jsp:include page="/sjKim/boat/header.jsp" />
 <!DOCTYPE html>
 <html>
@@ -38,6 +39,8 @@
  <script>
  var calendar =null;
  // calendar element 취득
+ 	var obj = null;
+ 	var object = null;
 
  $(document).ready(function(){
 	      
@@ -69,6 +72,7 @@
 	      // full-calendar 생성하기
 	      calendar = new FullCalendar.Calendar(calendarEl, {
 	    		events :all_events,
+	    		
 	        	height: '600px', // calendar 높이 설정
 	       		 expandRows: true, // 화면에 맞게 높이 재설정
 	        
@@ -96,21 +100,26 @@
 	          eventAdd: function(arg) { // 이벤트가 추가되면 발생하는 이벤트
 	              console.log(arg);
 	          	console.log('이벤트 변경 및 추가');
-/* 
-                calendar.addEvent({
-                  title: title,
-                  start: arg.start,
-                  end: arg.end,
-                  allDay: arg.allDay,
-                  Boolean//?
-                		  }) 
-              }*/
+	          	 var id = arg.id
+		            console.log("아이디있대"+id);
+
 	          	
 	            },
 	            eventChange: function(obj) { // 이벤트가 수정되면 발생하는 이벤트
 	              console.log(obj);
 	          	console.log('이벤트 수정함');
-	            
+	            var start = arg.start;
+	           	var startmoment =moment(start).format("YYYY-MM-DD HH:mm:ss");
+	           	 var end = arg.end;
+	           	 var endmoment = moment(end).format("YYYY-MM-DD HH:mm:ss");
+	           		obj.title =  title;
+	           		obj.start = startmoment
+	           		obj.end = endmoment;
+	           		obj.allDay = arg.allDay;
+	           		color = 	 $('#color').val();
+	           		obj.color = color;
+	         	  	 obj.empno = $('#empno').val();
+	         	  	 update(obj); 
 	            },
 	            eventRemove: function(obj){ // 이벤트가 삭제되면 발생하는 이벤트
 	              console.log(obj);
@@ -119,38 +128,84 @@
 	            },
 	            //ok
 	            select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
-	              var title = prompt('일정추가:');
-	           		 console.log(arg.start);
+	           console.log(arg);
+	            var id = arg.id
+	            console.log("아이디있대"+id);
+	            	$('#addevent').modal('toggle');
 	            
-	             
-	              if (title) {
-	                calendar.addEvent({
-	                  title: title,
-	                  start: arg.start,
-	                  end: arg.end,
-	                  allDay: arg.allDay,
-	                  Boolean//?
-	                		  })
-	              savedata(cal_data(calendar.getEvents()));
-	                
+	            	 	
+	            	 	var color =null;
+	            $('#saveBtn').click(function(){
+	            	var title =$('#title').val();
+	            	color = 	 $('#color').val();
+	            	if($('#title').val()==""){
+	            		alert('일정을 입력해주세요');
+	            		return false;
+	            		$('#title').focus();
+	            	}
+	              console.log(arg.id)
+		            var start = arg.start;
+		           	var startmoment =moment(start).format("YYYY-MM-DD HH:mm:ss");
+		           	 var end = arg.end;
+		           	 var endmoment = moment(end).format("YYYY-MM-DD HH:mm:ss");
+	                if(title!=""){
+	                	obj = new Object();
+		           	 	obj.id = arg.defId;
+		           		obj.title =  title;
+		           		obj.start = startmoment
+		           		obj.end = endmoment;
+		           		obj.allDay = arg.allDay;
+		           		color = 	 $('#color').val();
+		           		obj.color = color;
+		         	  	 obj.empno = $('#empno').val();
+	                }	
+		         	  	$.ajax({
+		    	   			type:'POST',
+		    	   			url:'${pageContext.request.contextPath}/project_calendarallSave.cal',
+		    	   			data:obj,
+		    	   			async:true,
+		    	   			success:function(rdata){
+		    	   				console.log('모든 데이터 저장하였습니다.');
+		    	   				$('#title').val("");		
+		    	   			  location.reload();
+		    	   			},
+		    	   			error:function(request,status,error){
+		    	   				console.log('saveerror')
+		    	   				 
+		    	   			},
+		    	   			complete:function(){}
+		    	   		}) 
+		         	  
+		 $("#addevent").modal('hide');
+			                		  
+			                		  
+	            });
 	                //ok
-	              }
-	              calendar.unselect();//titlt입력중에는 선택되지말아여
-	              
 	            },   eventClick: function (arg) {
-
+	            	console.log(arg)
+	            	console.log(arg.event.title)
+	            	var title = arg.event.title;
+	            	console.log(typeof(title))
+	            	console.log(title)
+	            	var empno = $('#empno').val();
+	            	console.log(empno)
+	             object = new Object();
+	           	object.title = title;
+	           object.empno = empno;
 	            	            if (confirm("삭제하시겠습니까?")) {
-	            		 arg.event.remove();
 	            	     $.ajax({
 	            	                type: "POST",
 	            	                url: "${pageContext.request.contextPath}/project_calendardelete.cal",
-	            	                contentType: "application/json; charset=utf-8",
-									data : arg,
-	            	                dataType: "json",
+									data : object,
 	            	                success: function (result) {
 	            	                  console.log("삭제완료");
-	            	                 // arg.event.remove();
-	            	                }
+	            	                  arg.event.remove();
+	            	 location.reload();
+	            	                },error:function(error){
+	            		alert('등록한 글만 삭제 가능합니다.')
+	            		console.log(error);
+	            	}
+	            	
 	            	})//ajax 끝 
 	            	}else{
 	            		console.log('삭제 실패');
@@ -166,11 +221,11 @@
 	    
 	    //전체 이벤트 뽑아냄(그달의 전체 이벤트)
 	    //뽑을때 각각 데이터로 뽑아냄 json값
-	    function cal_data(allEvent){
+	/*     function cal_data(allEvent){
 	     		 var events = new Array();
+		   		 var obj = new Object();
 	     		 for(var i=0; i<allEvent.length;i++){
 	     		 
-		   		 var obj = new Object();
  		   		var startevent = moment(allEvent[i]._instance.range.start).format("YYYY-MM-DD HH:mm:ss");
 	//	   		var startevent = moment(allEvent[i]._instance.range.start).format("YYYY-M-D ");
 	//	   		var endevent = moment(allEvent[i]._instance.range.end).format("YYYY-M-D");
@@ -181,23 +236,24 @@
 		   		 obj.start = startevent//시작날짜 및 시간
 		   		 obj.end   = endevent //마침 날짜 및 시간
 	    		}
+	     		 obj.empno = $('#empno').val();
 	     	 
 	     	return obj
-	      }
+	      } */
    
    
 	    //selectable 저장
-	    function save(){
+	  /*   function save(){
 	    allEvent = calendar.getEvents();
 	    console.log(allEvent);
 	    console.log("현재 이벤트 저장합니다.");
 	    let obj = cal_data(allEvent);
 	   	 savedata(obj);
 	   	 
-	    }
+	    } */
 	    
 	    //전체 버튼 누르면 저장됨
-	    function allSave(){
+	   /*  function allSave(){
 	    allEvent =	 calendar.getEvents();
 	   	 console.log(allEvent);
 	   	 alert("전체 이벤트 저장합니다.");
@@ -206,22 +262,43 @@
 	   	 
 	    let obj = cal_data(allEvent);
 	   	 savedata(obj);
-	   	 }
+	   	 } */
 	    
 
 	    //이벤트 db저장 ajax
-	    function savedata(jsondata){
+	  /*   function savedata(jsondata){
 	   		$.ajax({
 	   			type:'POST',
 	   			url:'${pageContext.request.contextPath}/project_calendarallSave.cal',
 	   			data:jsondata,
-	   			dataType:"json",
 	   			async:true,
 	   			success:function(rdata){
 	   				console.log('모든 데이터 저장하였습니다.');
+	   				$('#title').val("");		
 	   			
 	   			},
-	   			error:function(request,status,error){},
+	   			error:function(request,status,error){
+	   				console.log('saveerror')
+	   			},
+	   			complete:function(){}
+	   		}) 
+	    }//save data끝 */
+	    
+	    
+	    function update(jsondata){
+	   		$.ajax({
+	   			type:'POST',
+	   			url:'${pageContext.request.contextPath}/project_calupdate.cal',
+	   			data:jsondata,
+	   			async:true,
+	   			success:function(rdata){
+	   				console.log('모든 데이터 저장하였습니다.');
+	   				$('#title').val("");		
+	   			
+	   			},
+	   			error:function(request,status,error){
+	   				console.log('saveerror')
+	   			},
 	   			complete:function(){}
 	   		}) 
 	    }//save data끝
@@ -253,8 +330,10 @@
 
 <body>
 
-<%-- 추후 삭제 예정 --%>
+<div class="cal_container">
+ <hr class = "calhr">
  <div id = cal_wrap>
+<%-- 추후 삭제 예정 --%>
  <div id = drag_wrap>
 	 <div id='external-events'>
 	    <p>
@@ -284,13 +363,51 @@
 	  </div>
   </div>
   <%-- 추후 삭제 예정 --%>
-  
-  
-  
+    <!-- Button trigger modal -->
+<button id="mobtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addevent">
+  Launch demo modal
+</button>
+
  
+<!-- Modal -->
+<div class="modal fade" id="addevent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      일정추가
+        <input type="text" class = "form-control" id = 'title'>
+        <select class="form-control" id ="color">
+  			<option value ="pink" class="ad">홍보팀</option>
+  			<option value ="orange" class = "devel">개발팀</option>
+  			<option value ="lightgreen" class = "hire">인사팀</option>
+  			<option value ="purple" class = "plan">기획팀</option>
+  			<option value ="" class = "sales">영업팀</option>
+  			<option value ="lightgray" class = "personal">개인일정</option>
+		<c:if test="${empno =='ADMIN'}">
+  			<option value ="red">(관리자)</option>
+		</c:if>
+			</select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id ="saveBtn">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Modal end -->
+  
+ <input type="hidden" name ="empno" value="${empno}" id="empno">
  
  	<div id='calendar'></div>
  </div>
+ </div><%--calcontainer --%>
  <script>
 
  </script>

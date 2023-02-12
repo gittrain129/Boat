@@ -289,7 +289,7 @@ public class FileDAO {
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setInt(1, num);
-			
+			System.out.println("파일 게시판" +num+"번글 수정중입니다.");
 			
 			 rs =  pstmt.executeQuery();
 			 if(rs.next()) {
@@ -347,8 +347,8 @@ public class FileDAO {
 		ResultSet rs = null;
 		boolean result = false;
 		String board_sql = "select FILE_PASS from file_board where FILE_NUM = ? ";
-		
-
+		System.out.println("파일 게시판"+ num+ " 번 글 삭제나 수정중");
+		System.out.println("DAO"+pass);
 		try {
 			con = ds.getConnection();
 			
@@ -397,21 +397,23 @@ public class FileDAO {
 	public boolean boardModify(FileboBean modifyboard) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "update file_board set FILE_SUBJECT=?, FILE_CONTENT=?, FILE_FILE = ? ,FILE_FILE2 =? "
+		String sql = "update file_board set FILE_SUBJECT=?, FILE_CONTENT=?, FILE_FILE = ? ,FILE_FILE2 =? ,DEPT = ? "
 				+ "where FILE_NUM =? ";
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-
+			System.out.println(modifyboard.getDEPT());
 			pstmt.setString(1, modifyboard.getFILE_SUBJECT());
 			pstmt.setString(2,modifyboard.getFILE_CONTENT());
 			pstmt.setString(3, modifyboard.getFILE_FILE());
 			pstmt.setString(4, modifyboard.getFILE_FILE2());
-			pstmt.setInt(5, modifyboard.getFILE_NUM());
+			pstmt.setString(5, modifyboard.getDEPT());
+			pstmt.setInt(6, modifyboard.getFILE_NUM());
+			
 			int result = pstmt.executeUpdate();
 			
 			if(result ==1) {
-				System.out.println("성공업데이트");
+				System.out.println("modi성공업데이트");
 				return true;
 			}
 			
@@ -540,6 +542,7 @@ public class FileDAO {
 
 	return list;
 	}
+	//검색어에 따른 글 갯수
 	public int getListcount(String dept, String searchsel, String searchinput) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -596,6 +599,8 @@ public class FileDAO {
 		return x;
 
 	}
+	
+	//파일 답글
 	public int fileboReply(FileboBean filebo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -697,6 +702,8 @@ public class FileDAO {
 			}
 		return num;
 	}
+	
+	//파일 글 삭제 원글 삭제시 답글 같이 삭제됨
 	public boolean fileboardDelete(int num) {
 		
 		Connection con = null;

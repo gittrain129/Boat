@@ -77,18 +77,22 @@ public class MemberDAO {
 			
 			// PreparedStatement 객체 얻기
 			pstmt = conn.prepareStatement(
-					"insert into member (empno, password, jumin, address, post, gender, email, memberfile, intro) "
-					+"values (?,?,?,?,?,?,?,?,?)");
+					"insert into member (empno, name, age, password, jumin, address, post, gender, email, memberfile, intro,imgsrc) "
+					+"values (?,?,?,?,?,?,?,?,?,?,?,?)");
 	
+			String img = "/memberupload/";
 			pstmt.setString(1, m.getEmpno());
-			pstmt.setString(2, m.getPassword());
-			pstmt.setString(3, m.getJumin());
-			pstmt.setString(4, m.getAddress());
-			pstmt.setInt(5, m.getPost());
-			pstmt.setString(6, m.getGender());
-			pstmt.setString(7, m.getEmail());
-			pstmt.setString(8, m.getMemberfile());
-			pstmt.setString(9, m.getIntro());
+			pstmt.setString(2, m.getName());
+			pstmt.setInt(3, m.getAge());
+			pstmt.setString(4, m.getPassword());
+			pstmt.setString(5, m.getJumin());
+			pstmt.setString(6, m.getAddress());
+			pstmt.setInt(7, m.getPost());
+			pstmt.setString(8, m.getGender());
+			pstmt.setString(9, m.getEmail());
+			pstmt.setString(10, m.getMemberfile());
+			pstmt.setString(11, m.getIntro());
+			pstmt.setString(12,img+ m.getMemberfile());
 			
 			result = pstmt.executeUpdate(); //삽입 성공시 result는 1
 			
@@ -123,7 +127,7 @@ public class MemberDAO {
 		try {
 			conn = ds.getConnection();
 			
-			String sql = "select empno, password from member where empno=?";
+			String sql = "select empno, password from member where empno = ?";
 			// PreparedStatement 객체 얻기
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, empno);
@@ -225,17 +229,21 @@ public class MemberDAO {
 		try {
 			con = ds.getConnection();
 			
-			String sql = "update member set name = ?, post = ?, address = ?, gender = ?, email = ?, memberfile = ?, intro = ? "
+			String sql = "update member set name = ?, age = ?, post = ?, address = ?, gender = ?, email = ?, memberfile = ?, intro = ? imgsrc = ? "
 					   + " where empno = ?";
+			
+			String img = "/memberupload/";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m.getName());
-			pstmt.setInt(2, m.getPost());
-			pstmt.setString(3, m.getAddress());
-			pstmt.setString(4, m.getGender());
-			pstmt.setString(5, m.getEmail());
-			pstmt.setString(6, m.getMemberfile());
-			pstmt.setString(7, m.getIntro());
-			pstmt.setString(8, m.getEmpno());
+			pstmt.setInt(2, m.getAge());
+			pstmt.setInt(3, m.getPost());
+			pstmt.setString(4, m.getAddress());
+			pstmt.setString(5, m.getGender());
+			pstmt.setString(6, m.getEmail());
+			pstmt.setString(7, m.getMemberfile());
+			pstmt.setString(8, m.getIntro());
+			pstmt.setString(9,img+ m.getMemberfile());
+			pstmt.setString(10, m.getEmpno());
 			result = pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();

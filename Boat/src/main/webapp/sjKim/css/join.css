@@ -7,10 +7,10 @@ body {
 	box-sizing: border-box;
 }
 
-select, input[type=text], input[type=password], input[type="button"] {
+select, input[type=text], input[type=password], input[type="button"]{
 	width: 100%;
 	padding: 15px;
-	margin: 5px 0 22px 0;
+	margin: 5px 0 15px 0;
 	display: inline-block;
 	border: none;
 	background: #f1f1f1;
@@ -34,7 +34,7 @@ legend {
 	width: 70%;
 }
 
-#jumin1, #jumin2 {
+input[name='jumin'], #jumin2 {
 	width: 48%
 }
 
@@ -118,7 +118,7 @@ body {
 
 #myform {
 	background-color: #fefefe;
-	margin: 3% auto 5% auto;
+	margin: 3% auto 15% auto;
 	width: 850px;
 	padding: 16px;
 }

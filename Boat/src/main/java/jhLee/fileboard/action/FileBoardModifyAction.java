@@ -42,6 +42,7 @@ public class FileBoardModifyAction implements Action {
 				
 			int num = Integer.parseInt(multi.getParameter("board_num"));
 			String pass = multi.getParameter("board_pass");
+			System.out.println("수정한 페이지에서 입력한 비밀번호"+pass);
 			
 			boolean usercheck = boarddao.isBoardWriter(num,pass);
 			
@@ -61,22 +62,27 @@ public class FileBoardModifyAction implements Action {
 			boarddata.setFILE_NUM(num);
 			boarddata.setFILE_SUBJECT(multi.getParameter("board_subject"));
 			boarddata.setFILE_CONTENT(multi.getParameter("board_content"));
-
+			boarddata.setDEPT(multi.getParameter("dept"));
 			
 			String check = multi.getParameter("check");
 			System.out.println("check="+check);
 			String check2 = multi.getParameter("check2");
-			if(check !=null || check2 !=null){
+			
+			if(check !=null){
 				boarddata.setFILE_FILE(check);
-				boarddata.setFILE_FILE2(check2);
 				}else {
 					//업로드된 파일의 시스템상에 업로든된 실제 파일명을 얻어 옵니다.
 					String filename =multi.getFilesystemName("board_file");
 					boarddata.setFILE_FILE(filename);
-					String filename2 =multi.getFilesystemName("board_file2");
-					boarddata.setFILE_FILE2(filename2);
 				}
 			
+			if(check2 !=null){
+				boarddata.setFILE_FILE2(check2);
+			}else {
+				//업로드된 파일의 시스템상에 업로든된 실제 파일명을 얻어 옵니다.
+				String filename =multi.getFilesystemName("board_file2");
+				boarddata.setFILE_FILE2(filename);
+			}
 			//DAO에서 수정 메서드 호출하여 수정합니다.
 			result = boarddao.boardModify(boarddata);
 		
@@ -90,11 +96,11 @@ public class FileBoardModifyAction implements Action {
 			
 			}
 			//수정이 성공일 경우
-			System.out.println("게시판 수정 완료");
+			System.out.println("게시판 수정이 완료되었습니다.");
 			
 			forward.setRedirect(true);
 			//수정한 글 내용을 보여주기 위해 글 내용 보기 페이지로 이동하기 위해 경로를 설정합니다.
-			forward.setPath("BoadrdDetailAction.bo?num="+boarddata.getFILE_NUM());
+			forward.setPath("FileBoadrdDetailAction.filebo?num="+boarddata.getFILE_NUM());
 			return forward;
 			
 		}catch(IOException e) {

@@ -17,6 +17,14 @@
 				<td>${memberinfo.empno}</td><%-- Member클래스의 --%>
 			</tr>
 			<tr>
+				<td>이름</td>
+				<td>${memberinfo.name}</td>
+			</tr>
+			<tr>
+				<td>나이</td>
+				<td>${memberinfo.age}</td>
+			</tr>
+			<tr>
 				<td>비밀번호</td>
 				<td>${memberinfo.password}</td>
 			</tr>

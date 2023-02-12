@@ -10,7 +10,7 @@ update member set empno = 'ADMIN';
 
 create table MEMBER(
 	 EMPNO VARCHAR2(12) PRIMARY KEY,
-	 DEPT VARCHAR2(10)
+	 DEPT VARCHAR2(10),
 	 CONSTRAINT BOAT_DEPT_CK CHECK (DEPT IN('홍보팀','개발팀','인사팀','기획팀','영업팀')),
 	 DEPTNO NUMBER(2),
 	 CONSTRAINT BOAT_DEPTNO_CK CHECK (DEPTNO IN('10','20','30','40','50')),
@@ -24,9 +24,10 @@ create table MEMBER(
 	 EMAIL VARCHAR2(30),
 	 PHONE NUMBER(11),
 	 MEMBERFILE VARCHAR2(50),
-	 IMGSRC VARCHAR2(150),
+	 IMGSRC VARCHAR2(150),	 
 	 register_date date default sysdate,
-	 intro		varchar2(100)
+	 intro		varchar2(100),
+	 AGE		NUMBER(3)
 );
 
 --memberfile은 회원 정보 수정시 적용합니다.

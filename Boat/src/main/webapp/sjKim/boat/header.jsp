@@ -92,7 +92,7 @@ li {
 }	
 
 .login_header{	
-	position: fixed;
+	position: absolute;
     float: right;
     top: 0;
     right: 20px;
@@ -158,11 +158,13 @@ li.login-item {
 
 
 </style>
-
+ <link rel="stylesheet" href="jhLee/css/heder.css">
+ <script src="${pageContext.request.contextPath}/jhLee/js/header.js"></script>
 <script src="${pageContext.request.contextPath}/sjKim/js/header.js"></script>
+<input type="hidden" id="headerloginid" value="${empno}" name="headerloginid">
 
  		<div class="logo">       		
-			<a href="http://localhost:8088/Boat/index.jsp">
+			<a href="${pageContext.request.contextPath}/index.jsp">
 				<img src="${pageContext.request.contextPath}/sjKim/image/main_logo.jpg" style="float:left; width: 120px; height: 120px;">
 			</a>					
 		</div>
@@ -171,16 +173,16 @@ li.login-item {
         
             <ul class="menu01">
             
-                <li><a href="https://www.naver.com" target="_self"><span>회사소개</span></a>
+                <li><a href="${pageContext.request.contextPath}/map.cal" target="_self"><span>회사소개</span></a>
                     <ul class="dept01">
-                    	<a href="https://www.naver.com" target="_self">
+                    	<a href="${pageContext.request.contextPath}/map.cal" target="_self">
                         	<li id="nop">오시는길</li>
                         </a>
                         <li id="nop">&nbsp;</li>
                         <li id="nop">&nbsp;</li>
                     </ul>
                 </li>
-                <li><a href="https://www.naver.com" target="_self"><span>내 정보</span></a>
+                <li><a href="${pageContext.request.contextPath}/MyInfo.my" target="_self"><span>내 정보</span></a>
                     <ul class="dept01">
                     	<a href="${pageContext.request.contextPath}/MyInfo.my" target="_self">
                         	<li id="nop">내 정보 보기</li>
@@ -240,9 +242,9 @@ li.login-item {
 		    	<ul class="login_nav" style="display: flex;">
 		    		<c:if test="${!empty empno}">
 		     	    	<li class="login-item" ><a class="login-link" style="color:black;">${empno}님이 로그인 되었습니다.</a></li>
-		     	    	<li class="login-item" ><a class="login-link" style="color:black;"href="update_form">&nbsp;| 정보수정 |</a></li>
+		     	    	<li class="login-item" ><a class="login-link" style="color:black;"href="${pageContext.request.contextPath}/memberUpdate.net">&nbsp;| 정보수정 |</a></li>
 		     	    	<c:if test="${empno=='ADMIN'}">
-		     	    		<li class="login-item"><a class="login-link" style="color:black" href="list">&nbsp;회원정보 |</a></li>
+		     	    		<li class="login-item"><a class="login-link" style="color:black" href="${pageContext.request.contextPath}/memberList.net">&nbsp;관리자 |</a></li>
 		     	    	</c:if>
 		     			<li class="login-item"><a class="login-link" style="color:black;" href="${pageContext.request.contextPath}/logout.net">&nbsp;로그아웃</a></li>
 		     		</c:if>
@@ -257,12 +259,13 @@ li.login-item {
 		  
 			
 		<script src="${pageContext.request.contextPath}/sjKim/js/inout.js"></script>			
+		<script src="${pageContext.request.contextPath}/ejYang/js/myinfo.js"></script>			
 			<div class="dropdown_inout">						
-               <select id="inout" name="inout" onchange="select_inout()" required autofocus>
+               <select id="inout" name="inout" onchange="select_inout()" style="border-color:transparent;" required autofocus>
                		<option value="" selected disabled hidden>출근현황</option>
-				    <option style= "background-color: #18a8f1" value="출근">출근</option>
-				    <option style= "background-color: #f5de16" value="외출">외출</option>
-				    <option style= "background-color: #ff5858" value="퇴근">퇴근</option>
+				    <option style= "background-color: #18a8f1" value="출근" id="works">출근</option>
+	                <option style= "background-color: #f5de16" value="외출" id="outs">외출</option>
+	                <option style= "background-color: #ff5858" value="퇴근" id="leave">퇴근</option>
 				</select>
 	        </div>
 		     

@@ -12,7 +12,6 @@
   
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="jhLee/js/fileview.js"></script>
     <title>자료실 게시판</title>
 
@@ -22,8 +21,9 @@
   
 </head>
 <body>
-<input type="hidden" id ="loginid" value ="ADMIN" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
-<%-- <input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>--%>
+<input type="hidden" id ="loginid" value ="${empno }" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
+<%-- <input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
+<hr class = "boardviewhr">
     <div class="board_wrap">
         <div class="board_title">
             <strong><a href="${pageContext.request.contextPath}/FileBoardList.filebo" target="_self">자료실 게시판</a></strong>
@@ -123,7 +123,7 @@
             <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">이전</a>
             <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">다음</a>
 
-		  <a href="#" id ='delete'>
+		  <a id ='delete'>
 			  <button id = 'deletebtn' class="btn btn-danger" data-toggle ="modal"
 			  data-target="#myModal">삭제</button>
 			</a>
@@ -152,14 +152,13 @@
 		<button type="submit" class="btn btn-primary">전송</button>
 		<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 	    </form>
-	    
 	    </div>
 		</div>
 		</div>
 		</div>
 <%--id="myModal"end --%>
        <div class="commcard">
-       <div>
+    
        <div class="comment-area">
 		<div class="comment-head">
 			<h3 class="comment-count">
@@ -170,12 +169,12 @@
 				</ul>		
 			</div>
 		</div><%--comment head 끝 --%>
-		</div>
+		
 		<ul class="comment-list">
 		</ul>
 		<div class="comment-write">
 			<div class="comment-write-area">
-				<b class="comment-write-area-name">${id}</b>
+				<b class="comment-write-area-name"> ${DEPT}${NAME}${empno}</b>
 				<span class="comment-write-area-count">0/200</span>
 				<textarea placeholder="댓글을 남겨보세요" rows="1"
 					class="comment-write-area-text form-control" maxlength="200"></textarea>
@@ -185,18 +184,16 @@
 				<div class="button btn-register">등록</div>
 			</div>
 		</div><%--comment-write end --%>
-		</div>
+		
 	</div><%--card-body end --%>		
 	 							
 								
 								<%--댓글 입력 js ajax추가부분 --%>
 								
 								
- 							 </div>
                         </div>
-                    </section>
 <%-- class="card bg-light">end --%>
-</div><%-- class="comment end --%>
+<%-- class="comment end --%>
 
 
 

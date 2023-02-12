@@ -54,6 +54,9 @@ public class MemberDAO {
 				m.setPone(rs.getInt(12));
 				m.setMemberfile(rs.getString(13));
 				m.setImgsrc(rs.getString(14));
+				m.setRegister_date(rs.getString(15));
+				m.setIntro(rs.getString(16));
+				m.setAge(rs.getInt(17));
 			}
 			
 		}catch(Exception se) {
@@ -86,67 +89,6 @@ public class MemberDAO {
 	}
 	
 	
-	//내 글 보기에서 사용
-	public JsonArray my_info(String empno) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		JsonArray array = new JsonArray();
-		try {
-			conn = ds.getConnection();
-			
-			String select_sql = "select*from MEMBER where EMPNO = ?";
-			pstmt = conn.prepareStatement(select_sql.toString());
-			pstmt.setString(1, empno);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				JsonObject object = new JsonObject();
-				object.addProperty("empno", rs.getString(1));
-				object.addProperty("dept", rs.getString(2));
-				object.addProperty("deptno", rs.getInt(3));
-				object.addProperty("password", rs.getString(4));
-				object.addProperty("pwcheck", rs.getString(5));
-				object.addProperty("name", rs.getString(6));
-				object.addProperty("jumin", rs.getString(7));
-				object.addProperty("address", rs.getString(8));
-				object.addProperty("post", rs.getInt(9));
-				object.addProperty("gender", rs.getString(10));
-				object.addProperty("email", rs.getString(11));
-				object.addProperty("pone", rs.getInt(12));
-				object.addProperty("memberfile", rs.getString(13));
-				object.addProperty("imgsrc", rs.getString(14));
-				array.add(object);
-			}
-			
-		}catch(Exception se) {
-			se.printStackTrace();
-			System.out.println("member_info() 에러:" + se);
-		}finally {
-			
-			try {
-				if(rs != null)
-					rs.close(); 
-			}catch(Exception e) {
-				System.out.println(e.getMessage());
-			}
-			
-			try {
-				if(pstmt != null)
-					pstmt.close(); 
-			}catch(Exception e) {
-				System.out.println(e.getMessage());
-			}
-			
-			try {
-				if(conn != null)
-					conn.close(); 	
-			}catch(Exception e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		return array;
-	}
 
 
 }

@@ -43,8 +43,9 @@ public class CalendarDAO {
 			con = ds.getConnection();
 
 			
-			String sql = "insert into boat_Calendar "
-					+ "	values(cal_seq.nextval,?,?,?,?)";
+			String sql = "insert into boat_Calendar"
+					+ "(schedule_code,event_name,start_date,end_date,allday,empno,color) "
+					+ "	values(cal_seq.nextval,?,?,?,?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 
@@ -52,6 +53,8 @@ public class CalendarDAO {
 			pstmt.setString(2,cal.getStart_date());
 			pstmt.setString(3,cal.getEnd_date());
 			pstmt.setString(4,cal.getAllday());
+			pstmt.setString(5,cal.getEmpno());
+			pstmt.setString(6,cal.getColor());
 
 			result = pstmt.executeUpdate();
 
@@ -85,11 +88,13 @@ public class CalendarDAO {
 		return result;
 
 	}
-	public boolean caldelelte(String title) {
+	
+	
+	public boolean caldelelte(String title, String empno) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "delete from boat_Calendar where title = ? ";
+		String sql = "delete from boat_Calendar where event_name = ? and empno = ? ";
 		
 		boolean result_check = false;
 		
@@ -98,12 +103,13 @@ public class CalendarDAO {
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, title);
+			pstmt.setString(2, empno);
 			
 			int count =pstmt.executeUpdate();
-			
-				if(count>=1)
+			System.out.println(count);
+				if(count>=1) {
 					result_check=true;//삭제가 안된 경우에는false반환
-			
+				}
 			
 		}catch(Exception ex) {
 			System.out.println("caldelelte()에러:"+ex);
@@ -124,6 +130,8 @@ public class CalendarDAO {
 			}
 		return result_check;
 	}
+	
+	
 	public JsonArray getCalList() {
 		//		public List<Calendarbean> getCalList(empno) {
 
@@ -150,6 +158,7 @@ public class CalendarDAO {
 				json.addProperty("start", rs.getString("start_date"));
 				json.addProperty("end", rs.getString("end_date"));
 				json.addProperty("allDay", rs.getString("allday"));
+				json.addProperty("color", rs.getString("color"));
 				
 				
 				list.add(json);
@@ -186,6 +195,62 @@ public class CalendarDAO {
 		}
 
 		return list;
+
+	}
+	public String getempno() {
+		
+		
+		return null;
+	}
+	
+	
+	public int update(Calendarbean cal) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		try {
+			con = ds.getConnection();
+
+			
+			String sql = "update boat_Calendar set start_date =? end_date =? where schedule_code =? ";
+			
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1,cal.getStart_date());
+			pstmt.setString(2,cal.getEnd_date());
+			pstmt.setString(1,cal.getEvent_name() );
+
+			result = pstmt.executeUpdate();
+
+
+			if(result ==1) {
+				System.out.println("데이터 삽입이 모두완료되었습니다.");
+			}
+		} catch (Exception ex) {
+			System.out.println("saveall() 에러: " + ex);
+			
+			ex.printStackTrace();
+
+		} finally {
+			if (pstmt != null) {
+			try {
+					pstmt.close();// 꼭 닫아줘야함 ㅇㅇ
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			if (con != null)
+			try {
+					con.close();// 꼭 닫아줘야함 ㅇㅇ
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			}
+		}
+
+		return result;
 
 	}
 

@@ -73,7 +73,7 @@ public class MemberSearchAction implements Action {
 		request.setAttribute("search_field", index);
 		request.setAttribute("search_word", search_word);
 		
-		forward.setPath("member/memberList.jsp");
+		forward.setPath("sjKim/boat/memberList.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}
