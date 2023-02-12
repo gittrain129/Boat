@@ -14,14 +14,28 @@
 		text-align:center;
 	}
 	span{font-size:1.5rem; color:#5d5de2}
+	
+	#error-image:hover{
+	cursor:pointer;
+	}
+	
 </style>
 </head>
 <body>
 	<div>
-		<p><img src="${pageContext.request.contextPath}/image/error.png" width="100px"></p>
+		<p><img src="${pageContext.request.contextPath}/jkKim/image/logo.jpg" width="100px" id="error-image" onclick="go_home()">
+		
+		</p>
 		<p> 로그인 후 이용해주세요 <br>
 			${message}</p>
 		<span>서비스 이용에 불편을 드려 &nbsp;&nbsp;&nbsp; 죄송합니다.</span>
 	</div>
+	<script>
+	function go_home(){
+		window.location='${pageContext.request.contextPath}/index.jsp';
+		
+	}
+	</script>
+	
 </body>
 </html>

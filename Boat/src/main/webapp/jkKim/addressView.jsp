@@ -17,7 +17,7 @@
 #dept{
  width: 150px;
 
- 
+ 				
  }
   body> p { margin:20px 0px; }
       
@@ -39,12 +39,7 @@
     <div class="container"> <!-- 카드+ 페이지 전체포함한 div -->
     
 	<c:if test="${listcount > 0 }">
-	
-
-	
-	
-	
-  		<div id="whole-body">
+	<div id="whole-body">
       <div class="row" > <!--  카드 포함한 div -->
 
 	  <!-- 부서선택 셀렉트 바-->
@@ -61,8 +56,8 @@
 	
 	<div class="container" id="search_body2" style="width:50%; position:relative; left:315px;">
             <div class="row">
-            <input type='text' name='search' id='search' class=" col-8 ml-3">
-            <button class="btn btn-info" name='search-btn' id='search-btn'>검색</button>
+            <input type="text" name="search" id="search" class="col-8 ml-3">
+            <button class="btn btn-info" name="search-btn" id="search-btn">검색</button>
          </div>
       
    </div>
@@ -73,17 +68,18 @@
       <c:forEach var="m" items="${memberlist }">
       <!-- 1인 카드 시작 -->
       
-        <div class="col-3">
+        <div class='col-3' >
           <p> </p>
           <div class="card">
           
             <div class="card-header">
               ${m.dept }
             </div>
-            <img src=${pageContext.request.contextPath}${m.imgsrc} onerror="this.src='${pageContext.request.contextPath}/image/ano.png'"  width="260.5px" height="260.5px" style="object-fit:cover;" />
+            <img src=${pageContext.request.contextPath}${m.imgsrc} onerror="this.src='${pageContext.request.contextPath}/image/ano.png'"  style="object-fit:cover;" />
             <div class="card-body">
               <h5 class="card-title">${m.name }</h5>
-              <p class="card-text" id="ori-email-tag" onclick="send_empno()">이메일: ${m.email }</p>
+              <p class='card-text'>이메일: ${m.email } </p>
+             <!--  <p class="card-text" id="ori-email-tag" onclick="send_empno()">이메일: ${m.email }</p> -->
               <!-- <a href="#" class="btn btn-primary">More</a>  -->
               <!-- onClick 이메일로 연결하기 -->
             </div> <!-- 카드바디 3가지 끝 -->

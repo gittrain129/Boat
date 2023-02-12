@@ -102,7 +102,7 @@ public class AddressViewAction implements jkKim_Action {
 				
 				//글 목록 페이지로 이동하기 위한 경로 설정
 				forward.setPath("/jkKim/addressView.jsp");
-				return forward; //BoardFrontController.java로 리턴
+				return forward; //FrontController.java로 리턴
 				
 			}else {
 						

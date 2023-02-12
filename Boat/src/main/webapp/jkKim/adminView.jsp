@@ -82,7 +82,7 @@ cursor:pointer;
             <div class="card-header">
               ${m.dept }
             </div>
-            <img src=${pageContext.request.contextPath}${m.imgsrc} onerror="this.src='${pageContext.request.contextPath}/image/ano.png'"  width="260.5px" height="260.5px" style="object-fit:cover;" />
+            <img src=${pageContext.request.contextPath}${m.imgsrc} onerror="this.src='${pageContext.request.contextPath}/image/ano.png'" style="object-fit:cover;" />
             <div class="card-body">
               <h5 class="card-title">${m.name }</h5>
               <p class="card-text" id="ori-email-tag" onclick="send_empno()">이메일: ${m.email }</p>
@@ -113,7 +113,7 @@ cursor:pointer;
 			</c:if>
 			<c:if test="${page >1 }">
 			<li class="page-item">
-				<a href="address.jk?page=${page-1 }" class="page-link">이전 &nbsp;</a></li>
+				<a href="adminView.jk?page=${page-1 }" class="page-link">이전 &nbsp;</a></li>
 			</c:if>
 			
 			<c:forEach var="a" begin="${startpage }" end="${endpage }">
@@ -124,7 +124,7 @@ cursor:pointer;
 				</c:if>
 				<c:if test="${a !=page }">
 				<li class="page-item">
-					<a href="address.jk?page=${a }" class="page-link">${a }</a>
+					<a href="adminView.jk?page=${a }" class="page-link">${a }</a>
 				</li>
 				</c:if>		
 			</c:forEach>
@@ -136,7 +136,7 @@ cursor:pointer;
 			</c:if>
 			<c:if test="${page < maxpage }">
 				<li class="page-item">
-					<a href="address.jk?page=${page+1 }"
+					<a href="adminView.jk?page=${page+1 }"
 					class="page-link">&nbsp;다음</a>
 				</li>
 			</c:if>
