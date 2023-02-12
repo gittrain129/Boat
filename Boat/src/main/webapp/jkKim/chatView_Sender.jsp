@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>BoaTalk -- Sender</title>
+<title>BoaTalk -- 발신</title>
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -68,12 +68,12 @@ sage {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #eee;
+   background-color: #A8C0D6;
 }
 
 .message .chat .icon i {
-    position: absolute;
-    top: 00px;
+  position: absolute;
+    top: -11px;
     left: 50%;
     font-size: 2.5rem;
     color: #aaa;
@@ -188,7 +188,7 @@ sage {
                 var connectButton = document.getElementById("connect-button");
                 var empno_id = "${param.empno_id }";
                 var imgsrc = "${param.imgsrc }";
-                
+                var sendimgsrc = "<img src='${pageContext.request.contextPath}" +imgsrc+"' onerror=\"this.src='${pageContext.request.contextPath}/image/ano.png'\" width=50px; height=50px; style=\"object-fit:cover;\">"
 
               
                 function initialize() {
@@ -314,7 +314,9 @@ sage {
                     message.innerHTML = message.innerHTML + "<br><div class=\"chat ch2\"><div class=\"icon\"><i class=\"fa-solid fa-user\">" +sendimgsrc +"</i></div><div class=\"textbox\">" + msg +"</div>";
                 };																										//	<img src='${pageContext.request.contextPath}${idid.imgsrc}' alt=''>
                 																										//	<img src='${pageContext.request.contextPath}'+ imgsrc' alt=''>
-                var sendimgsrc = "<img src='${pageContext.request.contextPath}" +imgsrc+"' alt=''>"
+                
+                
+                
                 
                 
                 function addyourMessage2(msg) {

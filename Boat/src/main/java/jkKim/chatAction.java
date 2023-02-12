@@ -27,9 +27,21 @@ public class chatAction implements jkKim_Action {
 		state = request.getParameter("state");
 		System.out.println("state = " +state);
 		}
+				
+		
+		String id = null;
 		
 		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("empno");
+		if(session.getAttribute("empno") != null) {
+		id = (String) session.getAttribute("empno");
+		} else {
+			forward.setRedirect(false);
+			forward.setPath("/jkKim/error.jsp");
+			return forward; 
+			
+		}
+		
+		
 		
 		jkKim_Member chatid = null;
 		if (id != null) {

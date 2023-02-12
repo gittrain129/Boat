@@ -29,6 +29,11 @@ public class SenderViewAction implements jkKim_Action {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("empno") != null) {
 		id = (String) session.getAttribute("empno");
+		} else {
+			forward.setRedirect(false);
+			forward.setPath("/jkKim/error.jsp");
+			return forward; 
+			
 		}
 		
 		

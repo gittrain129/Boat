@@ -26,21 +26,28 @@ div.icon{
     margin: 0.3125rem; /* 5px (16px 브라우저 기준) */
     margin-left: 0.625rem;
 }
-
+/*transform: translateX(-50%); */
 div.icon i {
     position: absolute;
-    top: 00px;
+    top: -10px;
     left: 50%;
     font-size: 2.5rem;
     color: #aaa;
     transform: translateX(-50%);
     
 }
+
+ 
+
 body > div > ul > li{
 	border-top: 1px solid rgb(202, 200, 200);
     padding-top: 0.625rem;
 }
-
+body > div > ul > li:hover{
+	cursor:pointer;
+	opacity:0.6;
+	
+}
 
 </style>
 <body>
@@ -56,7 +63,7 @@ body > div > ul > li{
 			 <li id="lili" value="${m.rownum }">
 			 <input type="hidden" class="hidden_v" value="${m.name }">
 			 	  <div class="icon"><i class="fa-solid fa-user">
-			 	  <img src="${pageContext.request.contextPath}${m.imgsrc}" alt="">
+			 	  <img src="${pageContext.request.contextPath}${m.imgsrc}" onerror="this.src='${pageContext.request.contextPath}/image/ano.png'" width=50px; height=50px; style="object-fit:cover;">
 			 	  </i></div>
                   
                   <div class="profile">
