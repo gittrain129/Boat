@@ -11,6 +11,7 @@
  
  <body>
  	<div class="info-wrap">
+ 	<h2>내 정보 보기</h2>
  	<div class="info">
  	<section>
  		<h1>${myinfo.dept}</h1>

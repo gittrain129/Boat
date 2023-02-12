@@ -54,6 +54,9 @@ public class MemberDAO {
 				m.setPone(rs.getInt(12));
 				m.setMemberfile(rs.getString(13));
 				m.setImgsrc(rs.getString(14));
+				m.setRegister_date(rs.getString(15));
+				m.setIntro(rs.getString(16));
+				m.setAge(rs.getInt(17));
 			}
 			
 		}catch(Exception se) {
