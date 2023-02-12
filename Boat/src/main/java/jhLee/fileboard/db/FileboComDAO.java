@@ -36,15 +36,16 @@ public class FileboComDAO {
 
 			
 			String sql = "insert into FILE_COMMENT "
-					+ "values(filecom.nextval,?,?,sysdate,?,?,?,filecom.nextval)";
+					+ "values(filecom.nextval,?,?,sysdate,?,?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1,co.getF_C_ID() );
 			pstmt.setString(2,co.getF_CONTENT());
 			pstmt.setInt(3,co.getF_COMMENT_NUM() );
-			pstmt.setInt(4,co.getF_COMMENT_RE_LEV());
+			pstmt.setInt(4,co.getF_COMMENT_RE_LEV() );
 			pstmt.setInt(5,co.getF_COMMENT_RE_SEQ());
+			pstmt.setInt(6,co.getF_COMMENT_RE_REF());
 
 			result = pstmt.executeUpdate();
 
@@ -169,7 +170,7 @@ public class FileboComDAO {
 				object.addProperty("comment_re_ref", rs.getInt(7));
 				object.addProperty("memberfile", rs.getString(8));
 				array.add(object);
-System.out.println(object);
+System.out.println("getfileCommentList"+object);
 			}
 			
 		} catch (Exception e) {
@@ -324,7 +325,7 @@ System.out.println(object);
 		pstmt.executeUpdate();
 		pstmt.close();
 		
-		String sql = "insert into comm values(com_seq.nextval, ?,?,sysdate,?,?,?,?)";
+		String sql = "insert into FILE_COMMENT values(filecom.nextval, ?,?,sysdate,?,?,?,?)";
 		
 			pstmt= con.prepareStatement(sql);
 			

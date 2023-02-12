@@ -88,11 +88,13 @@ public class CalendarDAO {
 		return result;
 
 	}
-	public boolean caldelelte(String title) {
+	
+	
+	public boolean caldelelte(String title, String empno) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "delete from boat_Calendar where title = ? ";
+		String sql = "delete from boat_Calendar where event_name = ? and empno = ? ";
 		
 		boolean result_check = false;
 		
@@ -101,12 +103,13 @@ public class CalendarDAO {
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, title);
+			pstmt.setString(2, empno);
 			
 			int count =pstmt.executeUpdate();
-			
-				if(count>=1)
+			System.out.println(count);
+				if(count>=1) {
 					result_check=true;//삭제가 안된 경우에는false반환
-			
+				}
 			
 		}catch(Exception ex) {
 			System.out.println("caldelelte()에러:"+ex);
@@ -127,6 +130,8 @@ public class CalendarDAO {
 			}
 		return result_check;
 	}
+	
+	
 	public JsonArray getCalList() {
 		//		public List<Calendarbean> getCalList(empno) {
 
@@ -195,13 +200,58 @@ public class CalendarDAO {
 	public String getempno() {
 		
 		
-		
-		
-		
-		
-		
-		
 		return null;
+	}
+	
+	
+	public int update(Calendarbean cal) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		try {
+			con = ds.getConnection();
+
+			
+			String sql = "update boat_Calendar set start_date =? end_date =? where schedule_code =? ";
+			
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1,cal.getStart_date());
+			pstmt.setString(2,cal.getEnd_date());
+			pstmt.setString(1,cal.getEvent_name() );
+
+			result = pstmt.executeUpdate();
+
+
+			if(result ==1) {
+				System.out.println("데이터 삽입이 모두완료되었습니다.");
+			}
+		} catch (Exception ex) {
+			System.out.println("saveall() 에러: " + ex);
+			
+			ex.printStackTrace();
+
+		} finally {
+			if (pstmt != null) {
+			try {
+					pstmt.close();// 꼭 닫아줘야함 ㅇㅇ
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			if (con != null)
+			try {
+					con.close();// 꼭 닫아줘야함 ㅇㅇ
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			}
+		}
+
+		return result;
+
 	}
 
 

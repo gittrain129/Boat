@@ -44,6 +44,8 @@ http://localhost:8088/Boat/FileBoardList.filebo
             <p>자료실 게시판 입니다.</p>
 
         </div>
+              <input type="hidden" name = "empno" id = "empno" value = ${empno}>
+         
        
        <div>
    <div>
@@ -120,10 +122,10 @@ http://localhost:8088/Boat/FileBoardList.filebo
 							&nbsp;
 						</c:if>
 					
-						
-						<a href ="FileBoadrdDetailAction.filebo?num=${b.FILE_NUM}">
+						<c:if test="${!empty empno}">
+						<a href ="FileBoadDetailAction.filebo?num=${b.FILE_NUM}">
 							<%-- FileBoardDetailAction22번줄 getParameter("num") --%>
-							
+						</c:if>
 							<c:if test="${b.FILE_SUBJECT.length()>=20}">
 								&nbsp;	&nbsp;	&nbsp;	<c:out value="${b.FILE_SUBJECT.substring(0,20)}..."/>
 							</c:if>
@@ -135,20 +137,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
 						
 					
 						
-						
-					<%--	<jsp:useBean id="today" class="java.util.Date"></jsp:useBean>
-						<%@page import="java.util.Date" 
-						<c:set var ="now" value ="<%=new Date() %>"/>
-
-  					<fmt:parseNumber value="${now / (1000 * 60 * 60 * 24)}" var="nowDays" integerOnly="true" />    
-    				<fmt:parseNumber value="${b.FILE_DATE / (1000 * 60 * 60 * 24)}" var="regDays" integerOnly="true" /> 
-
-  					<c:set value="${regDays- nowDays }" var="dayDiff" />
-						
-						
-							<c:if test="${dayDiff}<(1000 * 60 * 60 * 24)">
-							 <img alt="파일다운" src="${pageContext.request.contextPath}/jhLee/image/down.png" width="10px">
-							</c:if>  --%>
+			
 						<c:if test="${b.FILE_DATE > nowday}">
 	 		      	  		<img src="${pageContext.request.contextPath}/ejYang/image/new.jpg" id="new">
 	 		      	  	</c:if>
@@ -189,31 +178,31 @@ http://localhost:8088/Boat/FileBoardList.filebo
 
 
    <p class="paging">
-   이전
+ 
    	<c:if test="${page<=1}">
-     <a href="#" class="btnPage gray">
+       <a class="btnPage gray firstItem">이전&nbsp;
      <img src="jhLee/image/pre.png" alt="이전10개" width="10px">  
      </a>
    	</c:if>
    	<c:if test="${page>1}">
-     <a href="FileBoardList.filebo?page=${page-1}" class="btnPage underline"><img src="jhLee/image/pre.png" alt="이전10개" width="10px"></a>
+     <a href="FileBoardList.filebo?page=${page-1}" class="btnPage arractive firstItem">이전&nbsp;<img src="jhLee/image/pre.png" alt="이전10개" width="10px"></a>
    	</c:if>
    	
  
    	<c:forEach var="a" begin="${startpage}" end="${endpage}">
    		<c:if test="${a==page}">
-     		<span class="num"><a href="#" class="firstItem">${a}</a> </span> 
+     		<span class="num"><a class="firstItem">${a}</a> </span> 
    		</c:if>
    		<c:if test="${a !=page}">
-     		<span class="num"><a href="FileBoardList.filebo?page=${a}" class="" >${a}</a> </span> 
+     		<span class="num"><a href="FileBoardList.filebo?page=${a}" class="fistItem" >${a}</a> </span> 
    		</c:if>
    		</c:forEach>
    	
    	<c:if test="${page>=maxpage }">
-     <a href="#" class="btnPage gray"><img src="jhLee/image/next.png" alt="다음10개" />다음</a>
+     <a  class="btnPage gray firstItem"><img src="jhLee/image/next.png" alt="다음10개" />&nbsp;다음</a>
    	</c:if>
    	<c:if test="${page<maxpage}">
-	     <a href="FileBoardList.filebo?page=${page+1}" class="btnPage underline"><img src="jhLee/image/next.png" alt="다음10개" /></a>
+	     <a href="FileBoardList.filebo?page=${page+1}" class="btnPage arractive fistItem"><img src="jhLee/image/next.png" alt="다음10개" />&nbsp;다음</a>
    	</c:if>
    </p>
    

@@ -158,7 +158,8 @@ li.login-item {
 
 
 </style>
-
+ <link rel="stylesheet" href="jhLee/css/heder.css">
+ <script src="${pageContext.request.contextPath}/jhLee/js/header.js"></script>
 <script src="${pageContext.request.contextPath}/sjKim/js/header.js"></script>
 <input type="hidden" id="headerloginid" value="${empno}" name="headerloginid">
 
@@ -172,7 +173,7 @@ li.login-item {
         
             <ul class="menu01">
             
-                <li><a href="https://www.naver.com" target="_self"><span>회사소개</span></a>
+                <li><a href="${pageContext.request.contextPath}/map.cal" target="_self"><span>회사소개</span></a>
                     <ul class="dept01">
                     	<a href="${pageContext.request.contextPath}/map.cal" target="_self">
                         	<li id="nop">오시는길</li>

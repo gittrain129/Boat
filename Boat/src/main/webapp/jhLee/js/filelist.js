@@ -14,18 +14,22 @@
 	};
 
 	function setPaging(href,digit){
-	
-		let underline ="";
+		let arractive ="";
 		let gray = "";
 		if(href==""){//href가 빈문자열인 경우
 			if(isNaN(digit)){//이전 &nbsp;또는 다음&nbsp;
 				gray="gray";
 			}else{
-				underline="underline"
+				arractive="arractive"
 			}
 		}
-		let output =`<span class="num ${underline}">`;
-		let anchor =`<a class = 'firstItem ${gray}' ${href}>${digit}</a></span>`
+		console.log("page는 "+$("#page").val())
+		let firstItem = "";
+		if($("#page").val()==digit){
+			firstItem="firstItem";
+		}
+		let output =`<span class="num ${arractive}">`;
+		let anchor =`<a class = 'firstItem ${gray}' ${href}${firstItem}>${digit}</a></span>`
 		output+=anchor;
 		return output;
 	}//setpaging끝
@@ -132,7 +136,7 @@
 						}
 						output += setPaging(href, digit); //아래랑 처리하는 내용이 반복이라 setPaging() 메소드 만들어서 사용함
 					}
-					digit='&nbsp;다음&nbsp;<img src="jhLee/image/next.png" alt="다음10개" />';
+					digit='<img src="jhLee/image/next.png" alt="다음10개" />&nbsp;다음';
 					href="";
 					if(data.page<data.maxpage){
 						href='href=javascript:go('+(data.page+1)+')';
@@ -159,6 +163,10 @@
 	var order;
 
 	$(function() {
+		
+		if($('#empno').val()===""){
+		alert('로그인 후 사용 가능한 게시판입니다.')	
+		}
 			//글쓰기 버튼
 		$("#write").click(function() {
 				location.href = "FileBoardWrite.filebo";

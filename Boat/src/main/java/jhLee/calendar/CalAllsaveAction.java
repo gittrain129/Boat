@@ -25,17 +25,40 @@ public class CalAllsaveAction implements Action {
 		CalendarDAO caldao = new CalendarDAO();
 		
 		//Member mem = new Member();
-		
+		  
+		String id = request.getParameter("id");
 		String empno = request.getParameter("empno");
-		String title = request.getParameter("title");
+		String color = request.getParameter("color");
+		String dept = "";
+		switch(color) {
+		case "pink" :
+			dept = "<홍보팀>";
+			break;
+		case "orange" :
+			dept = "<개발팀>";
+			break;
+		case "lightgreen" :
+			dept = "<인사팀>";
+			break;
+		case "purple" :
+			dept = "<기획팀>";
+			break;
+		case "" :
+			dept = "<영업팀>";
+			break;
+		case "lightgray" :
+			dept = "<개인일정>";
+			break;
+		}
+		String title = dept+request.getParameter("title");
 		String allday = request.getParameter("allDay");
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
-		String color = request.getParameter("color");
 		
 		//int empno = request.getParameter("empno");
 		//LocalDateTime startDate = LocalDateTime.parse(start,dateTimeFormatter);
 	     //LocalDateTime endDate = LocalDateTime.parse(end, dateTimeFormatter);
+		System.out.println("calid : "+id);     
 	    System.out.println(empno);     
 		System.out.println(title);
 		System.out.println(allday);
@@ -53,6 +76,7 @@ public class CalAllsaveAction implements Action {
 	
 		
 		cal.setAllday(allday);
+		
 		cal.setEvent_name(title);
 		cal.setStart_date(start);
 		cal.setEnd_date(end);
@@ -66,11 +90,7 @@ public class CalAllsaveAction implements Action {
 		
 		//월간달력 전체 이벤트 추가합니다.
 		
-		ActionForward forward = new ActionForward();
-		forward.setRedirect(false);  //주소 변경없이 jsp페이지의 내용을 보여줍니다.
-		//request.setAttribute(color, forward)
-		forward.setPath("/project_calendarshow.cal");
-		return forward;
+	return null;
 	}
 
 }

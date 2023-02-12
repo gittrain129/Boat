@@ -21,7 +21,7 @@
   
 </head>
 <body>
-<input type="hidden" id ="loginid" value ="ADMIN" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
+<input type="hidden" id ="loginid" value ="${empno }" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
 <%-- <input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
 <hr class = "boardviewhr">
     <div class="board_wrap">
@@ -174,7 +174,7 @@
 		</ul>
 		<div class="comment-write">
 			<div class="comment-write-area">
-				<b class="comment-write-area-name">${id}</b>
+				<b class="comment-write-area-name"> ${DEPT}${NAME}${empno}</b>
 				<span class="comment-write-area-count">0/200</span>
 				<textarea placeholder="댓글을 남겨보세요" rows="1"
 					class="comment-write-area-text form-control" maxlength="200"></textarea>

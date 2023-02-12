@@ -14,14 +14,20 @@ public class CaldeleteAction implements Action {
 
 		CalendarDAO caldao = new CalendarDAO();
 		String title = request.getParameter("title");
-		//이름이나 empno로 바꿔야함
+		
+		 System.out.println("title"+title);
+		 String empno = request.getParameter("empno");
+		 System.out.println(empno);
 		boolean result =false;
-		result = caldao.caldelelte(title);
 		
 		
 		
-		// result = caldao.caldelelte(title,empno);
-		//delte from boat_calendar where title = 'title' and empno = '';
+		 result = caldao.caldelelte(title,empno);
+		 System.out.println(result);
+		 
+		 if(result ==true) {
+			 System.out.println("++삭제 완료");
+		 }
 		
 		return null;
 	}
