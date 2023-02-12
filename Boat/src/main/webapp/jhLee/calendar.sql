@@ -1,7 +1,7 @@
 	--calendar sql
 	--테이블 정의서 Number, E_NAME, START_DATE, END_DATE, ALLDAY
 	drop table boat_Calendar cascade constraints purge;
-
+SELECT * FROM MEMBER;
 --dept empno추가 필요
 create table boat_Calendar (
 schedule_code varchar2 (500) primary key,
