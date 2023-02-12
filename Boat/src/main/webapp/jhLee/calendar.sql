@@ -10,15 +10,21 @@ start_date varchar2  (55),
 end_date varchar2	 (55),
 allday varchar2(10) check (allday  in('true','false')),
 empno varchar2(20),
-color varchar2(20)
+color varchar2(20),
+DEPT varchar2(15) CHECK (DEPT IN('홍보팀','개발팀','인사팀','기획팀','영업팀','개인일정','관리자'))
 );
 update boat_Calendar set empno = 'ADMIN';
+
+update boat_Calendar set start_date ='2023-01-31 00:00:00' , end_date ='2023-02-01 00:00:00' where empno ='ADMIN' and event_name = '<기획팀>654' 
+
 
 dept varchar2(10) CHECK (DEPT IN('홍보팀','개발팀','인사팀','기획팀','영업팀')),
 delete from boat_Calendar;
 delete from boat_Calendar where event_name = '<홍보팀>1313' and empno = ''
 select * from boat_Calendar;
 
+update boat_Calendar set start_date ='2023-02-12' end_date ='2023-02-12' where empno ='ADMIN'
+update boat_Calendar set start_date ='2023-02-01 00:00:00' , end_date ='2023-02-02 00:00:00' where empno ='ADMIN' and event_name = '<인사팀>ㅁㄹㅇ'; 
 create sequence cal_seq nocache;
 
 insert into boat_Calendar 

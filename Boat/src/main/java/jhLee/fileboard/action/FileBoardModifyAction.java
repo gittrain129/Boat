@@ -60,6 +60,8 @@ public class FileBoardModifyAction implements Action {
 			//비밀전호가 일치하는 경우 수정 내용을 설정합니다.
 			//BOARDBEAN객체에 글 등록 폼에서 입력 받은 정보들을 저장합니다.
 			boarddata.setFILE_NUM(num);
+			
+			boarddata.setFIlE_EMPNO(multi.getParameter("empno"));
 			boarddata.setFILE_SUBJECT(multi.getParameter("board_subject"));
 			boarddata.setFILE_CONTENT(multi.getParameter("board_content"));
 			boarddata.setDEPT(multi.getParameter("dept"));

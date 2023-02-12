@@ -25,7 +25,7 @@
  <form action="FileBoardModifyAction.filebo" method="post" enctype = "multipart/form-data" name ="modifyform">
  	<h1>boat_ 글 수정페이지</h1>
      <input type="hidden" name="board_num" value="${boarddata.FILE_NUM}">
-     
+     <input type ="hidden" name = "empno" value="${empno}">
     <div class="form-group">
         <label for="board_subject">제목</label>
         <input name="board_subject" id="board_subject" type="text" maxlength="100"

@@ -3,6 +3,7 @@
 	margin-top : 30px;
 	margin-left : 200px;
 	margin-bottom : 200px;
+
 }
 
 
@@ -21,7 +22,15 @@ a{text-decoration : none;}
     padding: 1rem 3rem;
   }
 }
+#map{
+	top :50px;
+	float : left;
+}
 .mapdetail{
 	
+		float : left;
+		left : 30px;
+		margin : 20px;
+		margin-bottom : 200px;
 	
 }

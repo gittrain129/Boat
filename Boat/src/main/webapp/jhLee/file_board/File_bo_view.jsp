@@ -108,28 +108,38 @@
         </div>
         <div class="bt_wrap">
         
+           
             <a href="FileBoardList.filebo" class="on">목록</a>
             
-              <!-- <c:if test="${boarddata.FILE_NAME ==id||id=='admin'}"></c:if> -->
-              
-			  <a href="FileBoardModifyView.filebo?num=${boarddata.FILE_NUM}">
-		         수정
-			  </a>
-			  
-			  <%--href의 주소를 #으로 설정합니다. --%>
 			  
             <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">답변</a>
              
-            <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">이전</a>
-            <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">다음</a>
-
-		  <a id ='delete'>
-			  <button id = 'deletebtn' class="btn btn-danger" data-toggle ="modal"
+		<c:if test="${boarddata.FIlE_EMPNO ==empno||empno=='ADMIN'}">
+		<div class = "personal">
+			 <a href="FileBoardModifyView.filebo?num=${boarddata.FILE_NUM}" class = "update">
+		         수정
+			  </a>
+			  <a id ='delete'>
+		  	<button id = 'deletebtn' class="btn btn-danger" data-toggle ="modal"
 			  data-target="#myModal">삭제</button>
 			</a>
-			  
-
-
+			</div>
+		</c:if>
+		
+		
+		<div class = "next">
+		 	<c:if test="${!empty Fileprev}">
+		 	<a href ="FileBoadDetailAction.filebo?num=${Fileprev.FILE_NUM}"><span class = "nextbtn">&lt; 이전글&nbsp;&nbsp;</span><span id ="pretitle">${Fileprev.FILE_SUBJECT}</span></a>
+            </c:if>
+            
+		 	<c:if test="${!empty Filenext}">
+            <a href ="FileBoadDetailAction.filebo?num=${Filenext.FILE_NUM}"><span id ="nexttitle">${Filenext.FILE_SUBJECT}</span><span class = "nextbtn">&nbsp;&nbsp;다음글 &gt;</span></a>
+            </c:if>
+            
+		 </div>
+		  
+		
+</div>
         </div><%--"bt_wrap끝 --%>
 <%-- modal 시작 --%>
 	  <div class="modal" id="myModal">

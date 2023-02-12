@@ -39,7 +39,7 @@ public class FileBoardAddAction implements Action {
 					"utf-8",
 					new DefaultFileRenamePolicy()
 					);
-			
+			Filedata.setFIlE_EMPNO(multi.getParameter("empno"));
 			Filedata.setFILE_NAME(multi.getParameter("board_name"));
 			Filedata.setFILE_PASS(Integer.parseInt(multi.getParameter("board_pass")));
 			Filedata.setFILE_SUBJECT(multi.getParameter("board_subject"));

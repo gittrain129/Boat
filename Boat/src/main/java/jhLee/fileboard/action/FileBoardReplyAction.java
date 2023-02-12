@@ -43,6 +43,7 @@ public class FileBoardReplyAction implements Action {
 			
 		int result = 0;
 		System.out.println(multi.getParameter("board_pass"));
+		filebo.setFIlE_EMPNO(multi.getParameter("empno"));
 		filebo.setFILE_NAME(multi.getParameter("board_name"));
 		filebo.setFILE_PASS(Integer.parseInt(multi.getParameter("board_pass").trim()));
 		filebo.setFILE_SUBJECT(multi.getParameter("board_subject"));

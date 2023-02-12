@@ -33,7 +33,7 @@
 	<input type="hidden" value ="${boarddata.FILE_RE_LEV}" name="board_re_lev">
 	<input type="hidden" value ="${boarddata.FILE_RE_SEQ}" name="board_re_seq">
  	<h1>boat_ 답글쓰기</h1>
-     
+     <input type ="hidden" name = "empno" value="${empno}">
     <div class="form-group">
         <label for="board_subject">제목</label>
         <input name="board_subject" id="board_subject" type="text" maxlength="100"

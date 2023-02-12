@@ -15,18 +15,20 @@ public class Calupdate implements Action {
 		CalendarDAO caldao = new CalendarDAO();
 		
 		String empno = request.getParameter("empno");
-		String title = request.getParameter("title");
-		String allday = request.getParameter("allDay");
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
-		String color = request.getParameter("color");
+		String title = request.getParameter("title");
+		System.out.println("시작");
+		System.out.println(empno);
+		System.out.println(start);
+		System.out.println(end);
+		System.out.println(title);
+		System.out.println("끝");
 		
-		cal.setAllday(allday);
-		cal.setEvent_name(title);
 		cal.setStart_date(start);
 		cal.setEnd_date(end);
 		cal.setEmpno(empno);
-		cal.setColor(color);
+		cal.setEvent_name(title);;
 		
 		int update = caldao.update(cal);
 		if(update ==1) {

@@ -44,8 +44,8 @@ public class CalendarDAO {
 
 			
 			String sql = "insert into boat_Calendar"
-					+ "(schedule_code,event_name,start_date,end_date,allday,empno,color) "
-					+ "	values(cal_seq.nextval,?,?,?,?,?,?)";
+					+ "(schedule_code,event_name,start_date,end_date,allday,empno,color,dept) "
+					+ "	values(cal_seq.nextval,?,?,?,?,?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 
@@ -55,6 +55,7 @@ public class CalendarDAO {
 			pstmt.setString(4,cal.getAllday());
 			pstmt.setString(5,cal.getEmpno());
 			pstmt.setString(6,cal.getColor());
+			pstmt.setString(7,cal.getDept());
 
 			result = pstmt.executeUpdate();
 
@@ -213,22 +214,30 @@ public class CalendarDAO {
 			con = ds.getConnection();
 
 			
-			String sql = "update boat_Calendar set start_date =? end_date =? where schedule_code =? ";
-			
+			String sql = "update boat_Calendar set start_date =? , end_date =? where empno =? and event_name = ? ";
+			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
 
+			System.out.println(cal.getEmpno());
+			System.out.println(cal.getStart_date());
+			System.out.println(cal.getEnd_date());
+			System.out.println(cal.getEvent_name());
+			
 			pstmt.setString(1,cal.getStart_date());
 			pstmt.setString(2,cal.getEnd_date());
-			pstmt.setString(1,cal.getEvent_name() );
+			pstmt.setString(3,cal.getEmpno() );
+			pstmt.setString(4,cal.getEvent_name() );
 
 			result = pstmt.executeUpdate();
 
 
 			if(result ==1) {
 				System.out.println("데이터 삽입이 모두완료되었습니다.");
+			}else {
+				System.out.println("수정실패");
 			}
 		} catch (Exception ex) {
-			System.out.println("saveall() 에러: " + ex);
+			System.out.println("update() 에러: " + ex);
 			
 			ex.printStackTrace();
 
@@ -251,6 +260,68 @@ public class CalendarDAO {
 		}
 
 		return result;
+
+	}
+	public JsonArray getCalList(String dept) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from  boat_Calendar where dept = ? ";
+		
+		JsonArray list = new JsonArray();
+		try {
+			con = ds.getConnection();
+
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1,dept);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {// 더이상 읽을 데이터가 없을때까지 반복
+				JsonObject json = new JsonObject();
+				json.addProperty("id", rs.getInt("schedule_code"));
+				json.addProperty("title", rs.getString("event_name"));
+				json.addProperty("start", rs.getString("start_date"));
+				json.addProperty("end", rs.getString("end_date"));
+				json.addProperty("allDay", rs.getString("allday"));
+				json.addProperty("color", rs.getString("color"));
+				
+				
+				list.add(json);
+			}
+			return list;
+
+		} catch (Exception ex) {
+			System.out.println("getCalList() 에러: " + ex);
+			
+			ex.printStackTrace();
+
+		} finally {
+			if (rs != null)
+			try {
+					rs.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			if (pstmt != null) {
+			try {
+					pstmt.close();// 꼭 닫아줘야함 ㅇㅇ
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			if (con != null)
+			try {
+					con.close();// 꼭 닫아줘야함 ㅇㅇ
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			}
+		}
+
+		return list;
 
 	}
 

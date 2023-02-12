@@ -20,9 +20,12 @@ create table file_board (
 	FILE_RE_SEQ NUMBER(5),
 	FILE_READCOUNT NUMBER(5),
 	FILE_DATE DATE ,
-	DEPT VARCHAR2(30) check (dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀'))
+	DEPT VARCHAR2(30) check (dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀')),
+	FIlE_EMPNO varchar2(50)
+	
 	);
 	update file_board set file_date = sysdate;
+	update member set password= '1234';
 	
 	
 	insert into file_board
@@ -325,3 +328,68 @@ select * from file_board where FILE_NUM =?
 	  join member on FILE_COMMENT.F_C_ID = member.empno where F_COMMENT_NUM = 29
 	  order by F_COMMENT_RE_REF asc, 	
 	  F_COMMENT_RE_SEQ asc
+	  
+	  
+	  SELECT * FROM 
+					(SELECT * FROM( 
+						select ROWNUM RNUM, J.* from 
+								(select * from file_board 
+								ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J 
+					 )WHERE RNUM > (select RNUM from 
+													(select ROWNUM RNUM, J.* from 
+													(select * from file_board 
+														ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J) 
+											WHERE FILE_NUM = 5) 
+					) WHERE RNUM = (SELECT MIN(RNUM) FROM( 
+										select ROWNUM RNUM, J.* from 
+												(select * from file_board 
+												ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J 
+									) WHERE RNUM > (select RNUM from  
+																	(select ROWNUM RNUM, J.* from 
+																		(select * from file_board 
+																		ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J) 
+															WHERE FILE_NUM = 5)) 
+	  
+	  
+	  next
+	  SELECT * FROM( 
+					select ROWNUM RNUM, J.* from 
+					(select * from file_board 
+					ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J 
+					WHERE ROWNUM <	(select RNUM from 
+									(select ROWNUM RNUM, J.* from 
+									(select * from file_board 
+									ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J) 
+									WHERE FILE_NUM = 5) 
+					) WHERE RNUM = (SELECT MAX(RNUM) from 
+									(select ROWNUM RNUM, J.* from 
+									(select * from file_board 
+									ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J 
+									WHERE ROWNUM <	(select RNUM from 
+													(select ROWNUM RNUM, J.* from 
+													(select * from file_board 
+													ORDER BY FILE_RE_REF DESC, FILE_RE_SEQ ASC) J) 
+													WHERE FILE_NUM = 5)))
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  

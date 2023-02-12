@@ -19,9 +19,10 @@ create table file_board (
 	FILE_RE_SEQ NUMBER(5),
 	FILE_READCOUNT NUMBER(5),
 	FILE_DATE DATE ,
-	DEPT VARCHAR2(30) check (dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀'))
+	DEPT VARCHAR2(30) check (dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀')),
+	FIlE_EMPNO varchar2(50)
+	
 	);
-
 
 --public class FileDAO {
 --	public int getListcount() {

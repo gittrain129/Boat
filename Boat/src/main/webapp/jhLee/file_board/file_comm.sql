@@ -29,7 +29,7 @@ F_COMMENT_RE_LEV number check(f_comment_re_lev in(0,1,2)),
 F_COMMENT_RE_SEQ number(38), 
 F_COMMENT_RE_REF number(38) 
 );
-
+select * from member;
 create sequence filecom nocache;
 
 drop sequence filecom;

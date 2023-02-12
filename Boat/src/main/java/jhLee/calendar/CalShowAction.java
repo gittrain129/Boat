@@ -14,24 +14,19 @@ public class CalShowAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-
+		//dept 선택시 보여줌
+		
 		CalendarDAO caldao = new CalendarDAO();
-		
-		
 		JsonArray callist = null;
+		String dept = request.getParameter("info");
+		System.out.println(dept);
+		
+		callist = caldao.getCalList(dept);
 		
 		
-		callist = caldao.getCalList();
 		
-		
-		
-		
-		response.setContentType("application/json;charset=utf-8");
 		response.getWriter().print(callist);
-		
 		System.out.println(callist.toString());
-		
-		
 		return null;
 	}
 

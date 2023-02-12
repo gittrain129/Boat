@@ -33,21 +33,31 @@ public class CalAllsaveAction implements Action {
 		switch(color) {
 		case "pink" :
 			dept = "<홍보팀>";
+			cal.setDept("홍보팀");
 			break;
 		case "orange" :
 			dept = "<개발팀>";
+			cal.setDept("개발팀");
 			break;
 		case "lightgreen" :
 			dept = "<인사팀>";
+			cal.setDept("인사팀");
 			break;
 		case "purple" :
 			dept = "<기획팀>";
+			cal.setDept("기획팀");
 			break;
 		case "" :
 			dept = "<영업팀>";
+			cal.setDept("영업팀");
 			break;
 		case "lightgray" :
 			dept = "<개인일정>";
+			cal.setDept("개인일정");
+			break;
+		case "red" :
+			dept = "<전체>";
+			cal.setDept("관리자");
 			break;
 		}
 		String title = dept+request.getParameter("title");
@@ -55,9 +65,6 @@ public class CalAllsaveAction implements Action {
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
 		
-		//int empno = request.getParameter("empno");
-		//LocalDateTime startDate = LocalDateTime.parse(start,dateTimeFormatter);
-	     //LocalDateTime endDate = LocalDateTime.parse(end, dateTimeFormatter);
 		System.out.println("calid : "+id);     
 	    System.out.println(empno);     
 		System.out.println(title);
@@ -67,12 +74,6 @@ public class CalAllsaveAction implements Action {
 		System.out.println(color);
 		System.out.println("확인");
 		
-		/*
-		 * SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS"); Date date; try {
-		 * date = sdf.parse(start); System.out.println(date.getTime()); } catch
-		 * (ParseException e) { // TODO Auto-generated catch block e.printStackTrace();
-		 * } Calendar c = Calendar.getInstance(); c.add(Calendar.MILLISECOND, 1);
-		 */
 	
 		
 		cal.setAllday(allday);
