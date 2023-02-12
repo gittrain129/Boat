@@ -39,33 +39,33 @@ public class BoardListAction implements Action{
 		System.out.println("넘어온 limit =" + limit);
 		
 		
-		//검색 기능
-		int listcount = 0;
-		int index=-1;//search_field에 존재하지 않는 값으로 초기화
+//		//검색 기능
+//		int listcount = 0;
+//		int index=-1;//search_field에 존재하지 않는 값으로 초기화
+//		
+//		String search_word="";
+//		//(BoardList.bo?page=2$search_field=-1&search_word=)
+//		if(request.getParameter("search_word") == null
+//				|| request.getParameter("search_word").equals("")) {
+//			//총 리스트 수를 받아옵니다.
+//			listcount = boarddao.getListCount();
+//			//리스트를 받아옵니다.
+//			boardlist = boarddao.getBoardList(page, limit);
+//		}else {//검색을 클릭한 경우
+//			index= Integer.parseInt(request.getParameter("search_field"));
+//			String[] search_field = new String[] {"BOARD_NAME","BOARD_SUBJECT"};//"board_name","board_subject"
+//			search_word = request.getParameter("search_word");
+//			listcount = boarddao.getListCount(search_field[index], search_word);
+//			boardlist = boarddao.getBoardList(search_field[index], search_word, page, limit);
+//		}
+//		//검색 기능 끝
 		
-		String search_word="";
-		//(BoardList.bo?page=2$search_field=-1&search_word=)
-		if(request.getParameter("search_word") == null
-				|| request.getParameter("search_word").equals("")) {
-			//총 리스트 수를 받아옵니다.
-			listcount = boarddao.getListCount();
-			//리스트를 받아옵니다.
-			boardlist = boarddao.getBoardList(page, limit);
-		}else {//검색을 클릭한 경우
-			index= Integer.parseInt(request.getParameter("search_field"));
-			String[] search_field = new String[] {"BOARD_NAME","BOARD_SUBJECT"};//"board_name","board_subject"
-			search_word = request.getParameter("search_word");
-			listcount = boarddao.getListCount(search_field[index], search_word);
-			boardlist = boarddao.getBoardList(search_field[index], search_word, page, limit);
-		}
-		//검색 기능 끝
 		
+		//총 리스트 수를 받아옵니다.
+		int listcount = boarddao.getListCount();//글의 갯수 구하기
 		
-//		//총 리스트 수를 받아옵니다.
-//		int listcount = boarddao.getListCount();//글의 갯수 구하기
-		
-//		//리스트를 받아옵니다.
-//		boardlist = boarddao.getBoardList(page, limit);
+		//리스트를 받아옵니다.
+		boardlist = boarddao.getBoardList(page, limit);
 		
 		int maxpage = (listcount + limit -1)/limit;
 		System.out.println("총 페이지수 = " +maxpage);
@@ -104,14 +104,13 @@ public class BoardListAction implements Action{
 			request.setAttribute("boardlist", boardlist);
 			
 			request.setAttribute("limit", limit);
-			//검색에 필요
-			request.setAttribute("search_field", index);
-			request.setAttribute("search_word", search_word);
+//			//검색에 필요
+//			request.setAttribute("search_field", index);
+//			request.setAttribute("search_word", search_word);
 			
 	        //NEW 표시
 	        System.out.println("nowday=" + nowday);
 	        request.setAttribute("nowday",nowday);
-	        
 	           
 			ActionForward forward = new ActionForward();
 			forward.setRedirect(false);
@@ -123,6 +122,31 @@ public class BoardListAction implements Action{
 		}else {
 			System.out.println("state=ajax");
 			
+			
+			//ajax 검색
+			int index=-1;//search_field에 존재하지 않는 값으로 초기화
+			String search_word="";
+			
+			//검색 셀렉트
+			index= Integer.parseInt(request.getParameter("search_field"));
+			String[] search_field = new String[] {"BOARD_NAME","BOARD_SUBJECT"};//"board_name","board_subject"
+			
+			//검색어
+			search_word = request.getParameter("search_word");
+			
+			//부서명
+			String department =request.getParameter("department");
+			
+			//정렬
+			//int listse =Integer.parseInt(request.getParameter("listse"));
+			String[] search_listse = new String[] {"BOARD_NAME","BOARD_SUBJECT"};
+			
+			listcount = boarddao.getListCount(search_field[index], search_word, department);
+			//boardlist = boarddao.getBoardList(search_field[index], search_word, department, search_listse[listse], page, limit);
+			
+			//ajax 검색
+			
+			
 			JsonObject object = new JsonObject();
 			object.addProperty("page", page);//{"page": 변수 page의 값} 형식으로 저장
 			object.addProperty("maxpage", maxpage);
@@ -131,12 +155,13 @@ public class BoardListAction implements Action{
 			object.addProperty("listcount", listcount);
 			object.addProperty("limit", limit);
 			//검색에 필요
-			request.setAttribute("search_field", index);
-			request.setAttribute("search_word", search_word);
+			System.out.println("index=" + index);
+			object.addProperty("search_field", index);
+			object.addProperty("search_word", search_word);
 			
 	        //NEW 표시   
 	        System.out.println("nowday=" + nowday);
-	        request.setAttribute("nowday",nowday);
+	        object.addProperty("nowday",nowday);
 	        
 			
 			JsonElement je = new Gson().toJsonTree(boardlist);

@@ -4,7 +4,6 @@
  <head> 
   <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
   <link href="${pageContext.request.contextPath}/ejYang/css/mylist.css" type="text/css" rel="stylesheet">
-  <script src="${pageContext.request.contextPath}/ejYang/js/list.js"></script>
   <jsp:include page="/sjKim/boat/header.jsp" />
   <title>내 글 보기</title>
  </head>
@@ -42,7 +41,12 @@
                 <c:forEach var="b" items="${boardlist}">
                 <tr>
                     <td>
-	                    <c:out value="${b.board_num}"/>
+                    	<c:if test="${b.board_notice == 'Y'}">
+	                    	<c:out value="공지"/>
+	                    </c:if>
+                    	<c:if test="${b.board_notice != 'Y'}">
+	                    	<c:out value="${b.board_num}"/>
+	                    </c:if>
                     </td>
                     <td>
 	                    <c:choose>

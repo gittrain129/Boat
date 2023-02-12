@@ -8,37 +8,11 @@
   <jsp:include page="/sjKim/boat/header.jsp" />
   <title>업무 게시판</title>
   <script>
-	$(function(){
-		//검색 클릭 후 응답화면에는 검색시 선택한 필드가 선택되도록 합니다.
-		let selectedValue = '${search_field}'
-		if(selectedValue != '-1')
-			$('#country').val(selectedValue);
-		else
-			selectedValue=0;	//선택된 필드가 없는 경우 기본적으로 작성자를 선택하도록 합니다.
-			
-		//검색 후 selectedValue값에 따라 placeholder가 나타나도록 합니다.
-		const message = ["작성자를","제목을"];
-		$('input').attr("placeholder", message[selectedValue] + " 입력하세요.");
-		
-		//검색 버튼 클릭한 경우
-		$(".btn-dark").click(function(){
-			//검색어 공백 유효성 검사합니다.
-			if($("input").val() == ''){
-				alert("검색어를 입력하세요.");
-				$("input").focus();
-				return false;
-			}
-		});//button click end
-		
-		//검색어 입력창에 placeholder가 나타나도록 합니다.
-		$('#country').change(function(){
-			selectedValue = $(this).val();
-			$("input").val('');
-			$("input").attr("placeholder",message[selectedValue] + " 입력하세요.");
-		})//$('#country').change end
-		
-	})
- </script>
+  	$(function(){
+  		$("#country").val(0).prop("selected", true);
+  		$('input').attr("placeholder", "작성자를 입력하세요.");
+  	})
+  </script>
  </head>
  <body>
 <section class="notice">
@@ -49,7 +23,6 @@
         <h2><a class = "bolist" href="${pageContext.request.contextPath}/BoardList.bo" target="_self">업무 게시판</a></h2>
         <p>업무 게시판 입니다.</p>
             <div class="search-window">
-                <form action="BoardList.bo" class="search-form" method="post">
                     <div class="search-wrap">
                     	<select id="country" name="search_field">
 				          <option value="0">작성자</option>
@@ -59,7 +32,6 @@
                         		placeholder="검색어를 입력해주세요." value="${search_word}">
                     <button type="submit" class="btn btn-dark">검색</button>
                     </div>
-                </form>
             <span>총 글 개수 : ${listcount}</span>
             </div>
         </div>
@@ -86,6 +58,7 @@
                     <td>
                     	<c:if test="${b.board_notice == 'Y'}">
                     		<c:out value="공지"/>
+                    		<c:set var="num" value="${num-1}"/>
                     	</c:if>
                     	<c:if test="${b.board_notice == 'N'}">
 	                    	<c:out value="${num}"/><c:set var="num" value="${num-1}"/>
@@ -155,16 +128,18 @@
  				 </c:if>
 			   </div>
 			   <select id="department" name="department">
-		          <option value="pr">홍보팀</option>
-		          <option value="dt">개발팀</option>
-		          <option value="hr">인사팀</option>
-		          <option value="pt">기획팀</option>
-		          <option value="st">영업팀</option>
+		          <option value="selected" selected>부서명</option>
+		          <option value="홍보팀">홍보팀</option>
+		          <option value="개발팀">개발팀</option>
+		          <option value="인사팀">인사팀</option>
+		          <option value="기획팀">기획팀</option>
+		          <option value="영업팀">영업팀</option>
 		       </select>
 			   <select id="listse" name="listse">
-		          <option value="pr">최신순</option>
-		          <option value="dt">조회순</option>
-		          <option value="hr">댓글순</option>
+		          <option value="selecteds" selected>정렬</option>
+		          <option value="0">최신순</option>
+		          <option value="1">조회순</option>
+		          <option value="2">댓글순</option>
 		       </select>
 			   <button type="submit" class="btn write">글쓰기</button>
 			</div>		

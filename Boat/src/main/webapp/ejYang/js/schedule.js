@@ -1,5 +1,10 @@
 const t_empno = $("#loginid").val();
 
+//강제 새로고침
+function reload() {
+    (location || window.location || document.location).reload();
+}
+
 //조회
 function getList(t_empno){
 	
@@ -36,13 +41,13 @@ function getList(t_empno){
 					output2 += '<span>일정 현황 '+percent.substr(0,4)+'%</span>'
 					output2 += '<progress value="'+rdata.ytodolist.length+'" max="'+rdata.ntodolist.length+'"></progress>'
 					$('.graphbar').html(output2);
-					
 				}else{
 					$('.order-list').empty();
 					$('.graphbar').empty();
 			 	}
 			}// success end
 	});//ajax end
+	
 }//getList end
 
 
@@ -106,10 +111,12 @@ $(document).ready(function(){
 				
 				if(rdata == 1){
 					getList(t_empno);
+					
 				}
 			}
 		})//ajax
 
+		reload()
 		$("#addValue").val('').focus();
 	});//click end
 	
@@ -146,6 +153,7 @@ $(document).ready(function(){
 			}
 		})//ajax
 		
+		reload()
 		$("#addValue").val('').focus();
 	});//click end
 	
@@ -174,13 +182,14 @@ $(document).ready(function(){
 			}
 		})//ajax
 		
+		reload()
 		$("#addValue").val('').focus();
 	});//click end
 	
 	
 	
 	//전체 삭제 버튼
-	$("#allresetbtn").click(function(){
+	$("#allresetbtn").click(function(event){
 		
 		const answer = confirm("정말 삭제하시겠습니까?");
   		console.log(answer);//취소를 클릭한 경우-false
@@ -199,6 +208,7 @@ $(document).ready(function(){
 			}
 		})//ajax
 		
+		reload()
 		$("#addValue").val('').focus();
 	});//click end
 	

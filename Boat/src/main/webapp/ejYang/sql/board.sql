@@ -16,6 +16,8 @@ create table BOARD (
 	CONSTRAINT BOARD_NO_CK check(BOARD_NOTICE in ('Y','N'))
 );
 
+select*from BOARD
+
 create table file_board (
 	FILE_NUM NUMBER(5) primary key,
 	FILE_NAME VARCHAR2(30), 
