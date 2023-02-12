@@ -1,6 +1,7 @@
 package ejYang.myinfo;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,7 +18,6 @@ import com.google.gson.JsonObject;
 
 import ejYang.board.Action;
 import ejYang.board.ActionForward;
-import ejYang.board.BoardBean;
 import ejYang.member.Member;
 import ejYang.member.MemberDAO;
 
@@ -27,19 +27,33 @@ public class MyBoardListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//로그인 세션
-//		HttpSession session = request.getSession();
-//		String empno = (String) session.getAttribute("empno");
-//		
-//		MemberDAO mdao = new MemberDAO();
-//		Member m = new Member();
-//		m = mdao.member_info(empno);
-		//로그인 세션 추가
+		HttpSession session = request.getSession();
+		String empno = (String) session.getAttribute("empno");
 		
-		String empno = "ADMIN";
+		//로그인 안하면
+		if(empno == null) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 후 이용하시길 바랍니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+			return null;
+		}
+		
 		MemberDAO mdao = new MemberDAO();
 		Member m = new Member();
 		m = mdao.member_info(empno);
+		//로그인 세션 추가
+		
+//		String empno = "ADMIN";
+//		MemberDAO mdao = new MemberDAO();
+//		Member m = new Member();
+//		m = mdao.member_info(empno);
 		//세션 추가되면 삭제
+		
+		
 		String name = m.getName();
 		System.out.println("name"+m.getName());//이름 가져오기
 		

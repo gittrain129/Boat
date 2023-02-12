@@ -19,6 +19,7 @@
 		    border-radius: 10px;
 		    background: #F5F7FF;
 		    margin-bottom: 150px;
+		    margin-bottom: 300px;
 		}
 		.container > h2 {text-align: center; width:auto; padding: 10px; font-weight:bold; margin-bottom:40px}
 		.form-control {

@@ -18,18 +18,18 @@ public class BoardReplyView implements Action{
 		BoardDAO boarddao = new BoardDAO();
 		BoardBean boarddata = new BoardBean();
 		
-//		HttpSession session = request.getSession();
-//		String empno = (String) session.getAttribute("empno");
-//		
-//		MemberDAO mdao = new MemberDAO();
-//		Member m = new Member();
-//		m = mdao.member_info(empno);
-		//로그인 세션 추가
+		HttpSession session = request.getSession();
+		String empno = (String) session.getAttribute("empno");
 		
-		String empno = "ADMIN";
 		MemberDAO mdao = new MemberDAO();
 		Member m = new Member();
 		m = mdao.member_info(empno);
+		//로그인 세션 추가
+		
+//		String empno = "ADMIN";
+//		MemberDAO mdao = new MemberDAO();
+//		Member m = new Member();
+//		m = mdao.member_info(empno);
 		//세션 추가되면 삭제
 		
 		//파라미터로 전달받은 수정할 글 번호를 num변수에 저장합니다.

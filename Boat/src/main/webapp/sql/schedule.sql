@@ -10,3 +10,5 @@ create table MYINFO (
 );
 
 --글내용, 완료(Y,N), 날짜(SYSDATE)
+
+select*from MYINFO

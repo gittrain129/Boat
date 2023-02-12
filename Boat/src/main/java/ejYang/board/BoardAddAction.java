@@ -13,30 +13,38 @@ public class BoardAddAction implements Action{
 	public ActionForward execute(HttpServletRequest request,
 			  HttpServletResponse response) throws ServletException, IOException{
 		response.setContentType("text/html;charset=utf-8");
+		
+		HttpSession session = request.getSession();
+		String empno = (String) session.getAttribute("empno");
+//		String empno = request.getParameter("loginboardid");
+		System.out.println("empno="+empno);
+
+//		String notice = "N";
+//		if(empno == "ADMIN") {
+//			notice = "Y";
+//		}
+		
 		BoardDAO boarddao = new BoardDAO();
 		BoardBean boarddata = new BoardBean();
 		ActionForward forward=new ActionForward();
 		boolean result=false;
-		
-		HttpSession session = request.getSession();
-		String empno = (String) session.getAttribute("empno");
 		
 		boarddata.setBoard_name(request.getParameter("board_name"));
 		boarddata.setBoard_pass(request.getParameter("board_pass"));
 		boarddata.setBoard_subject(request.getParameter("board_subject"));
 		boarddata.setBoard_content(request.getParameter("editordata"));
 		boarddata.setBoard_dept(request.getParameter("department"));
-		if(empno == "ADMIN") {
-			boarddata.setBoard_notice("Y");
-		}else{
-			boarddata.setBoard_notice("N");
-		}
-			
+		boarddata.setBoard_notice(request.getParameter("notice"));
+		
+		System.out.println("notice="+boarddata.getBoard_notice());
+//		System.out.println("notice="+notice);
+//		boarddata.setBoard_notice(notice);
+		
 		result=boarddao.boardInsert(boarddata);
 			
 		if(result==false) {
 			System.out.println("게시판 등록 실패");
-			forward.setPath("error/error.jsp");
+			forward.setPath("sjKim/error/error.jsp");
 			request.setAttribute("message", "게시판 등록 실패입니다.");
 			forward.setRedirect(false);
 			return forward;

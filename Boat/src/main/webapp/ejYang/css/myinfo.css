@@ -1,9 +1,13 @@
 .info-wrap{
 	width: 75%;
     margin: auto;
-    margin-top: 250px;
     margin-bottom: 250px;
     padding: 50px;
+    padding-left: 200px;
+}
+.info-h2{
+	margin-top: 250px;
+	text-align: center;
 }
 .info{
 	display: inline-block;

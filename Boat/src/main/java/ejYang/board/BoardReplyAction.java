@@ -35,7 +35,7 @@ public class BoardReplyAction implements Action{
 			forward=new ActionForward();
 			forward.setRedirect(false);
 			request.setAttribute("message", "답장 저장 실패입니다.");
-			forward.setPath("error/error.jsp");
+			forward.setPath("jsKim/error/error.jsp");
 			return forward;
 		}
 		

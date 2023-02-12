@@ -4,7 +4,7 @@
 	}
 	section.notice {
 	  padding-top: 100px;
-	  padding-bottom: 150px;
+	  padding-bottom: 300px;
 	}
 	
 	.page-title {
@@ -291,4 +291,8 @@
 	.board-table thead tr{
 		background-color: rgb(238,247,250);
 		font-size: 15px;
+	}
+	.bolist{
+		text-decoration: none;
+		color : black;
 	}
