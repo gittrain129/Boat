@@ -12,6 +12,7 @@ public class MemberIdCheckAction implements Action {
 	@Override
 	public ActionForward execute (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		MemberDAO dao = new MemberDAO();
 		int result = dao.isEmpno(request.getParameter("empno"));
 		response.getWriter().print(result);

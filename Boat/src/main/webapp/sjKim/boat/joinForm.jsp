@@ -6,14 +6,16 @@
 <title>회원가입</title>
 <link href="${pageContext.request.contextPath}/sjKim/css/join.css" rel="stylesheet" type="text/css">
 <style>
-	#opener_message{
-		margin-top: -10px;
+
+	span{
+		font-size: 15px;
 		margin-bottom: 10px;
 	}
 </style>
 
 <script src="${pageContext.request.contextPath}/sjKim/js/jquery-3.6.3.js"></script>
-<script src="${pageContext.request.contextPath}/sjKim/js/validate.js"></script>
+<script src="${pageContext.request.contextPath}/sjKim/js/join.js"></script>
+<script src="${pageContext.request.contextPath}/sjKim/js/submit.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 </head>
@@ -32,17 +34,23 @@
 			<legend>회원가입</legend>
 				<div class="top_block1">
 					<label for="id" >사원번호</label>
-					<div style="width:600px">
-						<input type='text' placeholder='사원번호를 입력하세요..' name='empno' id='empno' style="width:60%">
-						<input type='button' value="ID중복검사" id="idcheck" ><input type="hidden" id="result">
-						<div id="opener_message"></div>
-					</div>
+
+						<input type='text' placeholder='사원번호를 입력하세요..' name='empno' id='empno' style="width:550px" maxLength="12" required>
+						<span id="message"></span>
+			
+					
+					<label for="dept" style="padding-top: 10px;">부서명</label>
+					<input type='text' placeholder='부서명을 입력하세요..' name='dept' id='dept' style="width:550px;" >
+					
+					<label for="deptno" style="padding-top: 10px;">부서번호</label>
+					<input type='text' placeholder='부서번호를 입력하세요..' name='deptno' id='deptno' style="width:550px;" >
 				
 					<label for="name" style="padding-top: 10px;">이름</label>
 					<input type='text' placeholder='성함을 입력하세요..' name='name' id='name' style="width:550px;" >
 					
 					<label for="age" style="padding-top: 10px;">나이</label>
-					<input type='text' placeholder='나이를 입력하세요..' name='age' id='age' style="width:550px;" >
+					<input type='text' placeholder='나이를 입력하세요..' name='age' id='age' style="width:550px;" maxLength="3" required>
+					<span id="message"></span>
 				</div>
 				
 				<div class="top_block2">
@@ -75,18 +83,11 @@
 					<b>-</b>
 					<input type='text' placeholder='주민번호 뒷자리' maxLength="7" 
 							name='jumin2' id='jumin2'  >
-							
+					<span id="jumin_message"></span><span id="jumin2_message" style="border-left:100px; rigth:0;"></span>		
 							
 				<label for="email">이메일</label>
-					<input type='text' name='email' id='email'> @
-					<input type='text' name='domain' id='domain'>
-						<select name='sel' id='sel' >
-							<option value="">직접입력</option>
-							<option value="naver.com">naver.com</option>
-							<option value="daum.net">daum.net</option>
-							<option value="nate.com">nate.com</option>
-							<option value="gmail.com">gmail.com</option>
-						</select>
+					<input type='text' name='email' placeholder='Enter email' maxLength="30" required>
+					<span id="email_message"></span>
 						
 						
 				
@@ -95,8 +96,10 @@
 				<label>성별</label>
 				<div class="container2"> 
 				<!--  type="radio"는 readOnly가 작동하지 않아 onclick="return false"로 해결합니다. -->
-					<input type='radio' name='gender' value='m' id='gender1' onclick="return false">남자
-					<input type='radio' name='gender' value='f' id='gender2' onclick="return false">여자
+					<input type='radio' name='gender' value='m' id='gender1' checked>남자
+					<input type='radio' name='gender' value='f' id='gender2' >여자
+					
+					
 				</div>
 
 				<label for="post">우편번호</label>

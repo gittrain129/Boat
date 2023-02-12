@@ -35,19 +35,27 @@ public class MemberUpdateProcessAction implements Action {
 		try {
 			MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "utf-8", new DefaultFileRenamePolicy());
 			String empno = multi.getParameter("empno");
+			String dept = multi.getParameter("dept");
+			int deptno = Integer.parseInt(multi.getParameter("deptno"));
+			String name = multi.getParameter("name");
 			int age = Integer.parseInt(multi.getParameter("age"));
+			int post = Integer.parseInt(multi.getParameter("post"));
+			String address = multi.getParameter("address");
 			String gender = multi.getParameter("gender");
 			String email = multi.getParameter("email");
+			String memberfile = multi.getParameter("memberfile");
+			String intro = multi.getParameter("intro");
+			String imgsrc = multi.getParameter("imgsrc");
 			
-			String memberfile = multi.getFilesystemName("memberfile");
-			System.out.println("memberfile=" + memberfile);
+			String memberfile1 = multi.getFilesystemName("memberfile");
+			System.out.println("memberfile=" + memberfile1);
 			Member m = new Member();
 			m.setEmail(email);			m.setGender(gender);
 			m.setEmpno(empno);						//m.setPassword(password);
-			m.setMemberfile(memberfile);
+			m.setMemberfile(memberfile1);
 			
-			if(memberfile != null) { //파일을 선택한 경우
-				m.setMemberfile(memberfile);
+			if(memberfile1 != null) { //파일을 선택한 경우
+				m.setMemberfile(memberfile1);
 			}
 			//기존 파일 그대로 사용하는 경우
 			else if(multi.getParameter("check") != "") {
