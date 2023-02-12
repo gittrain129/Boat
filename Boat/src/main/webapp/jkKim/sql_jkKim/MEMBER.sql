@@ -126,3 +126,23 @@ select rownum, empno, name, dept, email, imgsrc from member where empno not like
 
 
 
+
+
+
+
+
+
+insert into member (empno, dept, deptno, name, age, password, jumin, address, post, gender, email, memberfile, intro,imgsrc) 
+				values ('231010','홍보팀',10,'김정근',99,'123456','9201291011111','12345해운데',12345,'m','pkm129@naver.com','/image/image_sample','hi','image/image_sample.png')
+					
+
+
+
+
+
+
+
+
+
+
+
