@@ -244,7 +244,7 @@ li.login-item {
 		     	    	<li class="login-item" ><a class="login-link" style="color:black;">${empno}님이 로그인 되었습니다.</a></li>
 		     	    	<li class="login-item" ><a class="login-link" style="color:black;"href="${pageContext.request.contextPath}/memberUpdate.net">&nbsp;| 정보수정 |</a></li>
 		     	    	<c:if test="${empno=='ADMIN'}">
-		     	    		<li class="login-item"><a class="login-link" style="color:black" href="${pageContext.request.contextPath}/memberList.net">&nbsp;관리자 |</a></li>
+		     	    		<li class="login-item"><a class="login-link" style="color:black" href="${pageContext.request.contextPath}/jkKim/adminView.jk">&nbsp;관리자 |</a></li>
 		     	    	</c:if>
 		     			<li class="login-item"><a class="login-link" style="color:black;" href="${pageContext.request.contextPath}/logout.net">&nbsp;로그아웃</a></li>
 		     		</c:if>
