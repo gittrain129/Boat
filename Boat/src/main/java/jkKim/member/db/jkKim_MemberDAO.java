@@ -69,6 +69,7 @@ public class jkKim_MemberDAO {
 			// DB에서 가져온 데이터를 VO객체에 담습니다.
 			while (rs.next()) {
 				jkKim_Member b = new jkKim_Member();
+				b.setEmpno(rs.getString("empno"));
 				b.setName(rs.getString("name"));
 				b.setDept(rs.getString("dept"));
 				b.setEmail(rs.getString("email"));

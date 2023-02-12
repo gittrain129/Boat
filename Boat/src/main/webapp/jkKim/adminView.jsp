@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
   <head>
-  <title>주소록</title>
+  <title>관리자모아보기</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -11,7 +11,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
- <script src=${pageContext.request.contextPath}/jkKim/js/addressView3.js></script>
+ <script src=${pageContext.request.contextPath}/jkKim/js/adminView.js></script>
  <style>
  
 #dept{
@@ -27,7 +27,9 @@
     margin-top: 10%;
 		}
  
-
+#ori-email-tag:hover{
+cursor:pointer;
+}
  
  </style>
 
@@ -84,6 +86,9 @@
             <div class="card-body">
               <h5 class="card-title">${m.name }</h5>
               <p class="card-text" id="ori-email-tag" onclick="send_empno()">이메일: ${m.email }</p>
+              <form name="empnoform" id="email-tag" method="post"  action="${pageContext.request.contextPath}/email.ne" style="display:none">
+              <input type=radio id="empno" name="empno" style="display:none" value=${m.empno } checked></input>
+              </form>
               <!-- <a href="#" class="btn btn-primary">More</a>  -->
               <!-- onClick 이메일로 연결하기 -->
             </div> <!-- 카드바디 3가지 끝 -->
@@ -154,14 +159,15 @@
     <jsp:include page="/sjKim/boat/footer.jsp" /> 
    </footer>
    
-
+     <script>
+   function send_empno(){
+	   document.getElementById('email-tag').submit();
+	    
+		
+	}
    
    
-   
-   
-   
-   
-   
+   </script>
    
   </body>
   
