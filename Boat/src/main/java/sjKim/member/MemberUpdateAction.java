@@ -24,7 +24,7 @@ public class MemberUpdateAction implements Action {
 		Member m = mdao.member_info(empno);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("member/updateForm.jsp");
+		forward.setPath("sjKim/boat/updateForm.jsp");
 		forward.setRedirect(false);
 		request.setAttribute("memberinfo", m);
 		

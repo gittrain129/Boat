@@ -22,8 +22,10 @@
 	<form name='myform' method="post" action='joinProcess.net' id='myform' enctype="multipart/form-data" >
 	  <div class="container">
 		
-		<div class="logo">       				
-			<img src="${pageContext.request.contextPath}/sjKim/image/main_logo.jpg" style="width: 200px; height: 200px;">				
+		<div class="logo">  
+		  <a href="${pageContext.request.contextPath}/index.jsp">      				
+			<img src="${pageContext.request.contextPath}/sjKim/image/main_logo.jpg" style="width: 200px; height: 200px;">	
+		  </a>			
 	 	</div>
 	 	
 		<fieldset>
@@ -67,9 +69,9 @@
 					<input type='password' placeholder='비밀번호를 입력하세요..' name='password' id='password' >
 				
 					
-				<label for="jumin1">주민번호</label>
+				<label for="jumin">주민번호</label>
 					<input type='text' placeholder='주민번호 앞자리' maxLength="6" 
-							name='jumin1' id='jumin1'  > 
+							name='jumin' id='jumin'  > 
 					<b>-</b>
 					<input type='text' placeholder='주민번호 뒷자리' maxLength="7" 
 							name='jumin2' id='jumin2'  >

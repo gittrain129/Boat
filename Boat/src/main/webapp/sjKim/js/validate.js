@@ -42,7 +42,7 @@ $(document).ready(function() {
 	});
 
 
-	$("#jumin1").keyup(function() {
+	$("#jumin").keyup(function() {
 		if ($.trim($(this).val()).length == 6) {
 			pattern = /^[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|[3][01])$/;
 			if (pattern.test($(this).val())) {
@@ -122,23 +122,23 @@ $(document).ready(function() {
 			return false;
 		}
 
-		const jumin1 = $("#jumin1");
-		if ($.trim($("#jumin1").val()) == "") {
+		const jumin = $("#jumin");
+		if ($.trim($("#jumin").val()) == "") {
 			alert("주민번호 앞자리를 입력 하세요");
-			jumin1.focus();
+			jumin.focus();
 			return false;
 		}
 
-		if ($.trim(jumin1.val()).length != 6) {
+		if ($.trim(jumin.val()).length != 6) {
 			alert("주민번호 앞자리 6자리를 입력 하세요");
-			jumin1.val("").focus();
+			jumin.val("").focus();
 			return false;
 		}
 
-		if (!$.isNumeric(jumin1.val())) {
+		if (!$.isNumeric(jumin.val())) {
 			alert("숫자만 입력 가능 합니다.");
-			jumin1.val("");
-			jumin1.focus();
+			jumin.val("");
+			jumin.focus();
 			return false;
 		}
 		const jumin2 = $("#jumin2");
