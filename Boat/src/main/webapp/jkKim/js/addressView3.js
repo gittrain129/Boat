@@ -47,6 +47,7 @@ function ajax(sdata){
          
          
          if (data.listcount > 0) {//총 개수가 0보다 큰 경우
+           $("#no_result").remove();
             $("#cardbody").remove();
             
             let output = "<div class='row' id='cardbody'>";
@@ -63,7 +64,7 @@ function ajax(sdata){
             let name = item.name;
             output += "<div class='card-header'>" + dept + "</div>" 
             let imgsrc = "/Boat"+item.imgsrc;
-            output += "<img src="+  imgsrc + " width='100%'/>"
+            output += "<img src="+  imgsrc + " onerror=\"this.src='${pageContext.request.contextPath}/image/ano.png'\" style='object-fit:cover;' />"
             output += "<div class='card-body'>"
             output += "<h5 class='card-title'>" + name +"</h5>"
             let email = item.email;
@@ -77,6 +78,7 @@ function ajax(sdata){
          })
          output += "</div>"
          console.log(output);
+       
           $("#whole-body").append(output)
           
           
@@ -112,7 +114,8 @@ function ajax(sdata){
             else{
 			$("#cardbody").remove();
 			$(".pagination").empty();
-			let output = "<h3> 결과값이 없습니다</h3>";
+			let output = "<h3 id='no_result'> 결과값이 없습니다</h3>";
+			$("#no_result").remove();
 			$("#whole-body").append(output)
 		}
                 

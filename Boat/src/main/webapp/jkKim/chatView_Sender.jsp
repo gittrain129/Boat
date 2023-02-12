@@ -234,7 +234,8 @@ sage {
                     });
                     peer.on('error', function (err) {
                         console.log(err);
-                        alert('' + err);
+                        //alert('' + err);
+                        alert('연결 대상 수신창이 열려있지않습니다')
                     });
                     
                 };

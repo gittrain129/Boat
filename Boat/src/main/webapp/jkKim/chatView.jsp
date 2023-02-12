@@ -238,7 +238,7 @@ sage {
                         // 한번에 한명만 연결되게함
                         if (conn && conn.open) {
                             c.on('open', function() {
-                                c.send("Already connected to another client");
+                                c.send("다른사람과 연결중입니다");
                                 setTimeout(function() { c.close(); }, 500);
                             });
                             return;
@@ -250,7 +250,7 @@ sage {
                         ready();
                     });
                     peer.on('disconnected', function () {
-                        status.innerHTML = "Connection lost. Please reconnect";
+                        status.innerHTML = "연결이 끊겼습니다. 종료 후 다시시작해주세요";
                         console.log('Connection lost. Please reconnect');
 
                        
@@ -260,12 +260,13 @@ sage {
                     });
                     peer.on('close', function() {
                         conn = null;
-                        status.innerHTML = "Connection destroyed. Please refresh";
+                        status.innerHTML = "연결이 끊겼습니다. 종료 후 다시시작해주세요";
                         console.log('Connection destroyed');
                     });
                     peer.on('error', function (err) {
                         console.log(err);
-                        alert('' + err);
+                        //alert('' + err);
+                        alert('연결 문제 발생시 재시작해주세요')
                     });
                 };
 
@@ -281,7 +282,7 @@ sage {
                         addyourMessage(data);
                     });
                     conn.on('close', function () {
-                        status.innerHTML = "Connection reset<br>Awaiting connection...";
+                        status.innerHTML = "상대방이 나갔습니다<br>연결 대기중";
                         conn = null;
                     });
                 }
