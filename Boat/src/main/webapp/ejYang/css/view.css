@@ -39,7 +39,7 @@
 	  width: 60%;
 	  margin: 0 auto;
 	  margin-top: 250px;
-	  margin-bottom: 150px;
+	  margin-bottom: 250px;
 	}
 	
 	#board-list  table  thead  tr  th:nth-child(1){width:10%}
@@ -396,4 +396,8 @@ a:hover {
 
 .hide{
 	display:none;
+}
+.bolist{
+	text-decoration: none;
+	color : black;
 }

@@ -38,10 +38,10 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 						}else if(lev==2){
 							comment_reply=' comment-list-item--reply lev2';
 						}
-						const profile=this.imgsrc;
-						let src='ejYang/image/profile.png';
+						const profile=this.memberfile;
+						let src ='image/profile.png';
 						if(profile){
-							src='ejYang/memberupload/'+profile;
+							src='memberupload/'+profile;
 						}
 						
 						const date = this.b_reg_date.substr(0,16);

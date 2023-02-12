@@ -11,6 +11,7 @@
  <body>
 <section class="notice">
     <%-- 게시글이 있는 경우 --%>
+    <c:if test="${listcount > 0 }">
     <div id="board-search">
         <div class="container">
         <h2>내 글 보기</h2>
@@ -83,7 +84,7 @@
                     		</c:when>
                     		<c:otherwise>	
                     			<%-- 제목이 너무 길면 '...'으로 처리 --%>
-			 		      	  	<a href="FileBoadrdDetailAction.filebo?num=${b.board_num}">
+			 		      	  	<a href="FileBoadDetailAction.filebo?num=${b.board_num}">
 			 		      	  		<c:if test="${b.board_subject.length()>=20}">
 			 		      	  		  <c:out value="${b.board_subject.substring(0,20)}..."/>
 			 		      	  		</c:if>
@@ -124,7 +125,7 @@
 			      <a class="arrow prev gray"></a>
 			     </c:if>
 			     <c:if test="${page > 1 }">
-			      <a class="arrow prev" href="BoardList.bo?page=${page-1}"></a>
+			      <a class="arrow prev" href="MyBoardList.my?page=${page-1}"></a>
 			     </c:if>
 			     
 			     <c:forEach var="a" begin="${startpage}" end="${endpage}">
@@ -132,7 +133,7 @@
  						<a class="page-link active">${a}</a>
  					</c:if>
  					<c:if test="${a != page }">
-					 	<a href="BoardList.bo?page=${a}" class="page-link">${a}</a>
+					 	<a href="MyBoardList.my?page=${a}" class="page-link">${a}</a>
  					</c:if>
  				 </c:forEach>
  				 
@@ -140,7 +141,7 @@
 			      <a class="arrow next gray"></a>
  				 </c:if>
  				 <c:if test="${page < maxpage }">
-			      <a class="arrow next" href="BoardList.bo?page=${page+1}"></a>
+			      <a class="arrow next" href="MyBoardList.my?page=${page+1}"></a>
  				 </c:if>
 			   </div>
 			</div>	
@@ -149,6 +150,40 @@
 				
         </div>
     </div>
+    </c:if>
+    
+    <%-- 게시글이 없는 경우 --%>
+ 	<c:if test="${listcount == 0 }">
+ 		<div id="board-search">
+        <div class="container">
+        <h2>내 글 보기</h2>
+        <p></p>
+            <div class="search-window">
+            <span>총 글 개수 : ${listcount}</span>
+            </div>
+        </div>
+    </div>
+   
+  <!-- board list area -->
+    <div id="board-list">
+        <div class="container">
+            <table class="board-table">
+                <thead>
+                <tr>
+                    <th scope="col" class="th-num">번호</th>
+                    <th scope="col" class="th-cate">카테고리</th>
+                    <th scope="col" class="th-title">제목</th>
+                    <th scope="col" class="th-dept">부서</th>
+                    <th scope="col" class="th-name">작성자</th>
+                    <th scope="col" class="th-count">조회수</th>
+                    <th scope="col" class="th-date">작성일</th>
+                </tr>
+                </thead>
+             </table>
+        </div>
+    </div>
+ 	<br><h3 style="text-align:center">등록된 글이 없습니다.</h3>
+ 	</c:if>
 </section>
 <jsp:include page="/sjKim/boat/footer.jsp" />
  </body>

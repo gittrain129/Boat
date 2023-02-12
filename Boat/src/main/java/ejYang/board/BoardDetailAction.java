@@ -27,7 +27,7 @@ public class BoardDetailAction implements Action{
 			ActionForward forward=new ActionForward();
 			forward.setRedirect(false);
 			request.setAttribute("message", "데이터를 읽지 못했습니다.");
-			forward.setPath("error/error.jsp");
+			forward.setPath("sjKim/error/error.jsp");
 			return forward;
 		}
 		System.out.println("상세보기 성공");

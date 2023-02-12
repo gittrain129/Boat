@@ -48,7 +48,7 @@ public class BoardModifyAction implements Action{
 			System.out.println("게시판 수정 실패");
 			forward.setRedirect(false);
 			request.setAttribute("message", "게시판 수정이 되지 않았습니다.");
-			forward.setPath("error/error.jsp");
+			forward.setPath("jsKim/error/error.jsp");
 			return forward;
 		}
 			

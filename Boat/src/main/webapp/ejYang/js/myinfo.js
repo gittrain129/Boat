@@ -2,27 +2,59 @@ $(function(){
 	if($('#headerloginid').val()!=''){
 		$('#work').html(getCookie('work'));
 		$('#out').html(getCookie('out'));
-		$('#outin').html(' - '+getCookie('outin'));
+		$('#outin').html(getCookie('outin'));
 		$('#leaves').html(getCookie('leaves'));
 		
-		let tday_hw = Number(getCookie('work').substring(7,8)*60);//출근 시
-		let tday_mmw = Number(getCookie('work').substring(10,12));//출근 분
-		let work_h = tday_hw + tday_mmw;//출근 시간
+		//오늘 근무시간
+		//let work_h = '';
+		//if(getCookie('work').length == 14){
+			//let tday_hw = Number(getCookie('work').substring(7,9)*60);//출근 시
+			//let tday_mmw = Number(getCookie('work').substring(11,13));//출근 분
+			//work_h = tday_hw + tday_mmw;//출근 시간
+		//}else{
+			//let tday_hw = Number(getCookie('work').substring(7,8)*60);//출근 시
+			//let tday_mmw = Number(getCookie('work').substring(10,12));//출근 분
+			//work_h = tday_hw + tday_mmw;//출근 시간
+		//}
 		
-		let tday_ho = Number(getCookie('out').substring(7,8)*60);//외출 시
-		let tday_mmo = Number(getCookie('out').substring(10,12));//외출 분
-		let out_h = tday_ho + tday_mmo;//외출 시간
+		//let out_h = '';
+		//if(getCookie('out').length == 14){
+			//let tday_ho = Number(getCookie('out').substring(7,9)*60);//외출 시
+			//let tday_mmo = Number(getCookie('out').substring(11,13));//외출 분
+			//out_h = tday_ho + tday_mmo;//외출 시간
+		//}else{
+			//let tday_ho = Number(getCookie('out').substring(7,8)*60);//외출 시
+			//let tday_mmo = Number(getCookie('out').substring(10,12));//외출 분
+			//out_h = tday_ho + tday_mmo;//외출 시간
+		//}
 		
-		let tday_hoi = Number(getCookie('outin').substring(7,8)*60);//복귀 시
-		let tday_mmi = Number(getCookie('outin').substring(10,12));//복귀 분
-		let outin_h = tday_hoi + tday_mmi;//복귀 시간
+		//let outin_h = '';
+		//if(getCookie('outin').length == 14){
+			//let tday_hoi = Number(getCookie('outin').substring(7,9)*60);//복귀 시
+			//let tday_mmi = Number(getCookie('outin').substring(11,13));//복귀 분
+			//outin_h = tday_hoi + tday_mmi;//복귀 시간
+		//}else{
+			//let tday_hoi = Number(getCookie('outin').substring(7,8)*60);//복귀 시
+			//let tday_mmi = Number(getCookie('outin').substring(10,12));//복귀 분
+			//outin_h = tday_hoi + tday_mmi;//복귀 시간
+		//}
 		
-		let tday_hl = Number(getCookie('leaves').substring(7,8)*60);//퇴근 시
-		let tday_mml = Number(getCookie('leaves').substring(10,12));//퇴근 분
-		let leaves_h = tday_hl + tday_mml;//퇴근 시간
-		
-		let todaytimeMSec = leaves_h-outin_h+out_h-work_h;//퇴근-복귀 + 외출-출근
-		let todaytimeMin = Math.floor(todaytimeMSec / 60)+'시간 '+todaytimeMSec%60+'분';
+		//let leaves_h = '';
+		//if(getCookie('leaves').length == 14){
+			//let tday_hl = Number(getCookie('leaves').substring(7,9)*60);//퇴근 시
+			//let tday_mml = Number(getCookie('leaves').substring(11,13));//퇴근 분
+			//leaves_h = tday_hl + tday_mml;//퇴근 시간
+		//}else{
+			//let tday_hl = Number(getCookie('leaves').substring(7,8)*60);//퇴근 시
+			//let tday_mml = Number(getCookie('leaves').substring(10,12));//퇴근 분
+			//leaves_h = tday_hl + tday_mml;//퇴근 시간
+		//}
+		//let todaytimeMSec = leaves_h-outin_h+out_h-work_h;//퇴근-복귀 + 외출-출근
+		//console.log(work_h);
+		//console.log(out_h);
+		//console.log(outin_h);
+		//console.log(getCookie('leaves').length);
+		//let todaytimeMin = Math.floor(todaytimeMSec / 60)+'시간 '+todaytimeMSec%60+'분';
 		
 		//출근 눌렀으면 출근 다시 못누르게
 		if(checkCookie('work')==true){
@@ -49,13 +81,8 @@ $(function(){
 			$('#outs').prop("disabled", true);
 			$('#leave').prop("disabled", true);
 			
-			$('#gu').html(todaytimeMin);//오늘 근무시간
+			//$('#gu').html(todaytimeMin);//오늘 근무시간
 		}
-		
-		//내 정보 수정으로 이동
-		$('.infomodify').click(function(){
-			location.href="memberUpdate.net";
-		});
 		
 		$('#inout').change(function(){
 			let output="";

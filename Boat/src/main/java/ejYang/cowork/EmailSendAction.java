@@ -45,7 +45,7 @@ public class EmailSendAction implements Action {
         try {
             msg.setSentDate(new Date());
             
-            msg.setFrom(new InternetAddress("dmswjddid37@naver.com", "ADMIN"));//admin 메일로 변경
+            msg.setFrom(new InternetAddress(sender, "ADMIN"));//admin 메일로 변경
             InternetAddress to = new InternetAddress(receiver);         
             msg.setRecipient(Message.RecipientType.TO, to);            
             msg.setSubject(subject, "UTF-8");            
@@ -53,16 +53,17 @@ public class EmailSendAction implements Action {
             
             Transport.send(msg);
             
+            //${pageContext.request.contextPath}
             out.println("<script>");
     		out.println("alert('메일이 정상적으로 전송되었습니다.');");
-    		out.println("location.href='BoardList.bo';");
+    		out.println("location.href='${pageContext.request.contextPath}/adminView.jk';");
     		out.println("</script>");
             return null;
         } catch(Exception ae) {            
             System.out.println("EmailSend 오류 : " + ae.getMessage());   
             out.println("<script>");
     		out.println("alert('메일 전송을 실패했습니다.');");
-    		out.println("location.href='BoardList.bo';");
+    		out.println("location.href='${pageContext.request.contextPath}/adminView.jk';");
     		out.println("</script>");
             return null;
         }

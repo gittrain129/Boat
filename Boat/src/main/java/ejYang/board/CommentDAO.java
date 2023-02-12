@@ -87,7 +87,7 @@ public class CommentDAO {
 			sort="desc";//최신순
 		}
 		String sql = "select B_C_NUM, B_C_ID, B_CONTENT, B_REG_DATE, B_COMMENT_RE_LEV, "
-				+ "			 B_COMMENT_RE_SEQ, B_COMMENT_RE_REF, MEMBER.IMGSRC "
+				+ "			 B_COMMENT_RE_SEQ, B_COMMENT_RE_REF, MEMBER.memberfile "
 				+ "from BOARD_COMMENT join MEMBER "
 				+ "on	 	BOARD_COMMENT.B_C_ID = MEMBER.EMPNO "
 				+ "where 	B_COMMENT_NUM = ? "
@@ -111,7 +111,7 @@ public class CommentDAO {
 				object.addProperty("b_comment_re_lev", rs.getInt(5));
 				object.addProperty("b_comment_re_seq", rs.getInt(6));
 				object.addProperty("b_comment_re_ref", rs.getInt(7));
-				object.addProperty("imgsrc", rs.getString(8));
+				object.addProperty("memberfile", rs.getString(8));
 				array.add(object);
 			}
 			

@@ -43,9 +43,10 @@
  <body>
 <section class="notice">
     <%-- 게시글이 있는 경우 --%>
+    <input type="hidden" name = "loginboard" id = "loginboard" value ="${empno}">
     <div id="board-search">
         <div class="container">
-        <h2>업무 게시판</h2>
+        <h2><a class = "bolist" href="${pageContext.request.contextPath}/BoardList.bo" target="_self">업무 게시판</a></h2>
         <p>업무 게시판 입니다.</p>
             <div class="search-window">
                 <form action="BoardList.bo" class="search-form" method="post">

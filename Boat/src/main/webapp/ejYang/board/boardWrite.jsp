@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
  <head>
   <jsp:include page="/sjKim/boat/header.jsp" />
@@ -14,6 +15,13 @@
  <h1>게시글 쓰기</h1>
 <div class="container">
   <form action="BoardAddAction.bo" method="post" name="boardform">
+	<%-- <input type="hidden" id="loginboardid" value="${empno}" name="loginboardid">--%>
+	<c:if test="${empno == 'ADMIN'}">
+		<input type="hidden" id="notice" value="Y" name="notice">
+	</c:if>
+	<c:if test="${empno != 'ADMIN'}">
+		<input type="hidden" id="notice" value="N" name="notice">
+	</c:if>
     <div class="row">
       <div class="col-25">
         <label for="board_subject">제목</label>

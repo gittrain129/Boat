@@ -10,15 +10,16 @@
  </head>
  
  <body>
+ 	<div class="info-h2">
+ 	<h1>내 정보 보기</h1>
+ 	</div>
  	<div class="info-wrap">
- 	<h2>내 정보 보기</h2>
  	<div class="info">
  	<section>
  		<h1>${myinfo.dept}</h1>
  		<h2>&nbsp;</h2>
 	 	<div class="memberfile">
-	 		<img src="${pageContext.request.contextPath}/ejYang/image/profile.png">
-	 		<%-- 멤버 완성되면 경로 수정 --%>
+	 		<img src="${pageContext.request.contextPath}${myinfo.imgsrc}">
 		</div>
 	</section>
 	</div>
@@ -30,7 +31,12 @@
 			<p>이름 : ${myinfo.name}</p>
 			<p>생년월일 : ${myinfo.jumin.substring(0,6)}</p>
 			<p>메일주소 : ${myinfo.email}</p>
-			<p>성별 : ${myinfo.gender}</p>
+			<c:if test="${myinfo.gender == 'm'}">
+				<p>성별 : 남자</p>
+			</c:if>
+			<c:if test="${myinfo.gender == 'f'}">
+				<p>성별 : 여자</p>
+			</c:if>
 			<p>주소 : ${myinfo.address}</p><br>
 		</section>
 		<%--<div class="dropdown_inout">						
@@ -44,9 +50,9 @@
 		<section class="alt2">
 			<h2>근태관리</h2>
 			출근시간 : <span id="work"></span><p></p>
-			외   출 : <span id="out"></span><span id="outin"></span><p></p>
+			외   출 : <span id="out"></span><p></p>
+			복   귀 : <span id="outin"></span><p></p>
 			퇴근시간 : <span id="leaves"></span><p></p>
-			오늘 근무 시간 : <span id="gu"></span>
 		</section>
 		<section>
 			<button class="infomodify">내 정보 수정</button>
@@ -54,6 +60,12 @@
 	</section>
 	</div>
 	</div>
+ <script>
+	//내 정보 수정으로 이동
+	$('.infomodify').click(function(){
+		location.href="memberUpdate.net";
+	});
+ </script>
  <jsp:include page="/sjKim/boat/footer.jsp" />
  </body>
 </html>

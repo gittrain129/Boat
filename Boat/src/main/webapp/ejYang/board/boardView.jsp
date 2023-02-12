@@ -21,9 +21,9 @@
   </script>
  </head>
  <body>
-  <input type="hidden" id="loginid" value="HONG" name="loginid"><%-- view.js에서 사용하기 위해 추가합니다. --%>
+  <input type="hidden" id="loginid" value="${empno}" name="loginid"><%-- view.js에서 사용하기 위해 추가합니다. --%>
   <div class="containers">
-  <h2>업무 게시판</h2>
+  <h2><a class = "bolist" href="${pageContext.request.contextPath}/BoardList.bo" target="_self">업무 게시판</a></h2>
   <p>업무 게시판 입니다.</p>
     <div id="board-list">
       <table class="board-table">
@@ -71,7 +71,7 @@
       	</ul>
       	<div class="comment-write">
       	  <div class="comment-write-area">
-      	  	<b class="comment-write-area-name">${id}</b>
+      	  	<b class="comment-write-area-name">${empno}</b>
       	  	<span class="comment-write-area-count">0/200</span>
       	  	<textarea placeholder="댓글을 남겨보세요" rows="1" 
       	  			  class="comment-write-area-text" maxLength="200"></textarea>

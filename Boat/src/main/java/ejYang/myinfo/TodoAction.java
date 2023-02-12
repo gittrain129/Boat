@@ -1,6 +1,7 @@
 package ejYang.myinfo;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,19 @@ public class TodoAction implements Action {
 		//로그인 세션
 		HttpSession session = request.getSession();
 		String empno = (String) session.getAttribute("empno");
-				
+		
+		//로그인 안하면
+		if(empno == null) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 후 이용하시길 바랍니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+			return null;
+		}
+		
 		MemberDAO mdao = new MemberDAO();
 		Member m = new Member();
 		m = mdao.member_info(empno);
