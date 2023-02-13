@@ -33,7 +33,7 @@
  
  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
  <link href ="${pageContext.request.contextPath}/jhLee/css/calendar.css"  rel ="stylesheet">
  
  <script>
@@ -219,22 +219,27 @@
 	          	 	object.title = title;
 	        	  	 object.empno = empno;
 	        	         if (confirm("삭제하시겠습니까?")) {
-	            	     $.ajax({
-	            	                type: "POST",
-	            	                url: "${pageContext.request.contextPath}/project_calendardelete.cal",
-									data : object,
-	            	                success: function (result) {
-	            	                  console.log("삭제완료");
-	            	                  arg.event.remove();
-	            					 location.reload();
-	            	                },error:function(error){
-	            		alert('등록한 글만 삭제 가능합니다.')
-	            		setTimeout(function(){
-    	   							location.reload();},2000);
-	            		console.log(error);
-	            	}
-	            	
-	            	})//ajax 끝 
+	        		 $.ajax({
+	 	            	                type: "POST",
+	 	            	                url: "${pageContext.request.contextPath}/project_calendardelete.cal",
+	 									data : object,
+	 	            	                success: function (result) {
+	 	            	                  console.log("삭제완료");
+	 	            	console.log(result)
+	 	            	if(result==false){
+	 	            		alert('등록한 글만 삭제 가능합니다.')
+	 	            		setTimeout(function(){
+	    							location.reload();},1500);	}
+	 	            	
+	 	            	                  arg.event.remove();
+	 	            					 location.reload();
+	 	            	                },error:function(error){
+	 	            		
+	 	            		console.log(error);
+	 	            	
+	 	            	}
+	 	            	
+	 	            	})//ajax 끝 
 	            	}else{
 	            		console.log('삭제 실패');
 	            	}
