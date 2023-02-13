@@ -39,6 +39,7 @@
     <div class="container"> <!-- 카드+ 페이지 전체포함한 div -->
     
 	<c:if test="${listcount > 0 }">
+	
 	<div id="whole-body">
       <div class="row" > <!--  카드 포함한 div -->
 
@@ -54,31 +55,32 @@
 	</select>	
 	</div>
 	
-	<div class="container" id="search_body2" style="width:50%; position:relative; left:315px;">
+	<div class="container" id="search_body2" style="width:50%; position:relative; left:170px;">
             <div class="row">
-            <input type="text" name="search" id="search" class="col-8 ml-3">
+            <input type="text" name="search" id="search" class="col ml-3">
             <button class="btn btn-info" name="search-btn" id="search-btn">검색</button>
          </div>
       
    </div>
-	
 	<!-- 부서선택 셀렉트 바 끝 -->
 
-     <div class="row" id="cardbody">
+     <div class="row" id="cardbody" style="width:100%">
       <c:forEach var="m" items="${memberlist }">
       <!-- 1인 카드 시작 -->
       
-        <div class='col-3' >
+        <div class='col-md-3' >
           <p> </p>
-          <div class="card">
+          <div class="card" style="height:376px">
           
             <div class="card-header">
               ${m.dept }
             </div>
-            <img src=${pageContext.request.contextPath}${m.imgsrc} onerror="this.src='${pageContext.request.contextPath}/image/ano.png'"  style="object-fit:cover;" />
+            <div style="width:100%; height:210px; object-fit:cover;">
+            <img src=${pageContext.request.contextPath}${m.imgsrc} onerror="this.src='${pageContext.request.contextPath}/image/ano.png'"  style="width:100%; height:100%; object-fit:cover;" />
+            </div>
             <div class="card-body">
               <h5 class="card-title">${m.name }</h5>
-              <p class='card-text'>이메일: ${m.email } </p>
+              <p class='card-text'>이메일 :<br> ${m.email } </p>
              <!--  <p class="card-text" id="ori-email-tag" onclick="send_empno()">이메일: ${m.email }</p> -->
               <!-- <a href="#" class="btn btn-primary">More</a>  -->
               <!-- onClick 이메일로 연결하기 -->
