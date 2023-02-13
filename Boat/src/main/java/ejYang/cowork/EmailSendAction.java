@@ -56,14 +56,14 @@ public class EmailSendAction implements Action {
             //${pageContext.request.contextPath}
             out.println("<script>");
     		out.println("alert('메일이 정상적으로 전송되었습니다.');");
-    		out.println("location.href='${pageContext.request.contextPath}/adminView.jk';");
+    		out.println("location.href='adminView.jk';");
     		out.println("</script>");
             return null;
         } catch(Exception ae) {            
             System.out.println("EmailSend 오류 : " + ae.getMessage());   
             out.println("<script>");
     		out.println("alert('메일 전송을 실패했습니다.');");
-    		out.println("location.href='${pageContext.request.contextPath}/adminView.jk';");
+    		out.println("location.href='adminView.jk';");
     		out.println("</script>");
             return null;
         }

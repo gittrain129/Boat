@@ -27,7 +27,8 @@ drop sequence BOARD_COM_SEQ;
 --시퀀스를 생성합니다.
 create sequence BOARD_COM_SEQ;
 
-delete comm;
+delete BOARD_COMMENT
+WHERE B_C_ID = 'dltnstls'
 
 select*from BOARD_COMMENT;
 
