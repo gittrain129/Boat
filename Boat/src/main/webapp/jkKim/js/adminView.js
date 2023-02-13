@@ -51,22 +51,24 @@ function ajax(sdata){
          $("#no_result").remove();
             $("#cardbody").remove();
             
-            let output = "<div class='row' id='cardbody'>";
+            let output = "<div class='row' id='cardbody' style='width:100%'>";
             
             $(data.memberlist).each(
 	
 			function(index, item){
             
-            output += " <div class='col-3'>"
+            output += " <div class='col-md-3'>"
             output += "<p> </p>"
             let dept = item.dept;
             
-            output += "<div class='card'>"
+            output += "<div class='card' style='height:376px'>"
             let name = item.name;
-            output += "<div class='card-header'>" + dept + "</div>" 
+            output += "<div class='card-header'>" + dept + "</div>"
+            output +=  "<div style='width:100%; height:210px; object-fit:cover;'>" 
             let imgsrc = "/Boat"+item.imgsrc;
             //output += "<img src="+  imgsrc + " width='100%'/>"
-            output += "<img src="+  imgsrc + " onerror=\"this.src='${pageContext.request.contextPath}/image/ano.png'\"  style='object-fit:cover;' />"
+            output += "<img src="+  imgsrc + " onerror=\"this.src='${pageContext.request.contextPath}/image/ano.png'\" style='width:100%; height:100%; object-fit:cover;' />"
+            output += "</div>"
             output += "<div class='card-body'>"
             output += "<h5 class='card-title'>" + name +"</h5>"
             let email = item.email;

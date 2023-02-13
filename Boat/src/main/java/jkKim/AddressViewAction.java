@@ -30,21 +30,19 @@ public class AddressViewAction implements jkKim_Action {
 			
 			int page = 1; 	
 			int limit = 8; //한화면에 주소록 사진 4개씩 2줄만 노출 
+			
 			if(request.getParameter("page") != null) {
 				page= Integer.parseInt(request.getParameter("page"));
 				System.out.println("넘어온 페이지 = " + page);
 			}
 			
 			
-			//추가
+			/*
 			if(request.getParameter("limit") != null) {
 				limit = Integer.parseInt(request.getParameter("limit"));
 				System.out.println("넘어온 limit = " + limit);
 			}
-			
-			
-			
-		
+			*/
 			//추가된부분********************
 			if(request.getParameter("dept") != null) {
 				int num = Integer.parseInt(request.getParameter("dept")); 
@@ -54,6 +52,7 @@ public class AddressViewAction implements jkKim_Action {
 			if(request.getParameter("name2") != null) {
 				dept_sql = " where name like '%" + request.getParameter("name2")+"%'";
 			}
+			
 			System.out.println("MemberDAO로 넘어가는 string = " + dept_sql);
 			
 			
@@ -65,8 +64,7 @@ public class AddressViewAction implements jkKim_Action {
 			
 			memberlist = mdao.getMemberList(page, limit, dept_sql);
 			
-				//찾았다가 셀렉트바 갔다가 작동하는지 테스트 ㄱ
-			
+						
 			/* 총페이지수 = (db에 저장된 총 리스트의 수 + 한 페이지에서 보여주는 리스트의 수 -1) / 한페이지에서 보여주는 리스트의 수
 			 * 
 			 */

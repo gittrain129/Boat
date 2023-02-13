@@ -41,8 +41,8 @@ IMGSRC VARCHAR2(150)
  
  
  
-   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
- VALUES('231002','홍보팀','10','123456','123456','홍동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','m','hgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
+   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE)
+ VALUES('231002','홍보팀','10','123456','123456','홍동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','m','hgd123@boat.com','01012345678','안녕하세요 반갑습니다');
  
     INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
  VALUES('232002','개발팀','20','123456','123456','박동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','m','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
@@ -56,7 +56,7 @@ IMGSRC VARCHAR2(150)
   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
  VALUES('235002','영업팀','50','123456','123456','최동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','m','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
- delete from member where name='gildong'
+ delete from member where name='홍동길'
  
  
  
@@ -69,8 +69,9 @@ IMGSRC VARCHAR2(150)
  
  
  
- 
- 
+ update member set imgsrc = '/image/profile.png' where deptno='20'
+  update member set imgsrc = '/image/image_sample1.png' where deptno='50'
+  update member set imgsrc = '/image/back.png' where deptno='30'
  
  
  
