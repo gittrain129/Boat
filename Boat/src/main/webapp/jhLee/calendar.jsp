@@ -259,6 +259,7 @@
  <br>
  <button id = "everyevent" style = "width : 100px; height : 50px; background-color : rgb(0, 173, 238); color; color :  white; margin-bottom : 20px; border : none;">전체보기</button>
         <select class="form-control" id ="dept">
+  			<option value ="" class="">팀별 일정 확인하기</option>
   			<option value ="홍보팀" class="ad">홍보팀</option>
   			<option value ="개발팀" class = "devel">개발팀</option>
   			<option value ="인사팀" class = "hire">인사팀</option>
