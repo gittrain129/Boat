@@ -751,19 +751,23 @@ public class BoardDAO {
 			String sql = "SELECT * FROM( "
 					+ "select ROWNUM RNUM, J.* from "
 					+ "(select * from BOARD "
+					+ "WHERE BOARD_NOTICE = 'N' "
 					+ "ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J "
 					+ "WHERE ROWNUM <	(select RNUM from "
 					+ "				(select ROWNUM RNUM, J.* from "
 					+ "				(select * from BOARD "
+					+ "				WHERE BOARD_NOTICE = 'N' "
 					+ "				ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J) "
 					+ "				WHERE BOARD_NUM = ?) "
 					+ ") WHERE RNUM = (SELECT MAX(RNUM) from "
 					+ "				(select ROWNUM RNUM, J.* from "
 					+ "				(select * from BOARD "
+					+ "				WHERE BOARD_NOTICE = 'N' "
 					+ "				ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J "
 					+ "				WHERE ROWNUM <	(select RNUM from "
 					+ "								(select ROWNUM RNUM, J.* from "
 					+ "								(select * from BOARD "
+					+ "								WHERE BOARD_NOTICE = 'N' "
 					+ "								ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J) "
 					+ "								WHERE BOARD_NUM = ?))) ";
 			
@@ -823,19 +827,23 @@ public class BoardDAO {
 					+ "(SELECT * FROM( "
 					+ "	select ROWNUM RNUM, J.* from "
 					+ "			(select * from BOARD "
+					+ "			WHERE BOARD_NOTICE = 'N' "
 					+ "			ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J "
 					+ ") WHERE RNUM > (select RNUM from "
 					+ "								(select ROWNUM RNUM, J.* from "
 					+ "									(select * from BOARD "
+					+ "									WHERE BOARD_NOTICE = 'N' "
 					+ "									ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J) "
 					+ "						WHERE BOARD_NUM = ?) "
 					+ ") WHERE RNUM = (SELECT MIN(RNUM) FROM( "
 					+ "					select ROWNUM RNUM, J.* from "
 					+ "							(select * from BOARD "
+					+ "							WHERE BOARD_NOTICE = 'N' "
 					+ "							ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J "
 					+ "				) WHERE RNUM > (select RNUM from "
 					+ "												(select ROWNUM RNUM, J.* from "
 					+ "													(select * from BOARD "
+					+ "													WHERE BOARD_NOTICE = 'N' "
 					+ "													ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J) "
 					+ "										WHERE BOARD_NUM = ?)) ";
 			
@@ -888,12 +896,6 @@ public class BoardDAO {
 		ResultSet rs = null;
 		int x = 0;
 		
-		if(department.equals("selected"))
-			department = "";
-		else
-			department = "AND BOARD_DEPT = '"+department+"'";
-		System.out.println("department= "+department);	
-		
 		try {
 			con = ds.getConnection();
 			String sql = "select count(*) from BOARD "
@@ -938,10 +940,106 @@ public class BoardDAO {
 
 
 	//ajax 검색
-	public List<BoardBean> getBoardList(String string, String search_word, String department, String string2, int page,
+	public List<BoardBean> getBoardList(String search_field, String search_word, String department, String search_listse, int page,
 			int limit) {
-		// TODO Auto-generated method stub
-		return null;
+		List<BoardBean> list = new ArrayList<BoardBean>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "select*from(select rownum rnum, j.* "
+					+ "				from (SELECT BOARD.*, NVL(CNT, 0) AS CNT "
+					+ "					FROM BOARD LEFT OUTER JOIN (SELECT B_COMMENT_NUM, COUNT(*) CNT FROM BOARD_COMMENT "
+					+ "													GROUP BY B_COMMENT_NUM)	"
+					+ "					ON BOARD_NUM = B_COMMENT_NUM  "
+					+ "					where "+ search_field + " like ? "
+					+ "					AND BOARD_NOTICE = 'Y' "
+					+ 					department
+					+ "					ORDER BY " + search_listse
+					+ "					BOARD_RE_REF DESC, "
+					+ "					BOARD_RE_SEQ ASC) j "
+					+ "				where rownum<= ?) "
+					+ "	where rnum >= ? and rnum <= ? "
+					+ "UNION ALL "
+					+ "select*from(select rownum rnum, j.* "
+					+ "				from (SELECT BOARD.*, NVL(CNT, 0) AS CNT "
+					+ "					FROM BOARD LEFT OUTER JOIN (SELECT B_COMMENT_NUM, COUNT(*) CNT FROM BOARD_COMMENT "
+					+ "													GROUP BY B_COMMENT_NUM)	"
+					+ "					ON BOARD_NUM = B_COMMENT_NUM  "
+					+ "					where "+ search_field + " like ? "
+					+ "					AND BOARD_NOTICE = 'N' "
+					+ 					department
+					+ "					ORDER BY " + search_listse
+					+ "					BOARD_RE_REF DESC, "
+					+ "					BOARD_RE_SEQ ASC) j "
+					+ "				where rownum<= ?) "
+					+ "	where rnum >= ? and rnum <= ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+search_word+"%");
+			
+			//한 페이지당 10개씩 목록인 경우 1페이지, 2페이지, 3페이지, 4페이지 ...
+			int startrow = (page - 1) * limit + 1;//읽기 시작할 row 번호(1  11 21 31 ...
+			int endrow = startrow + limit -1;		//읽을 마지막 row 번호(10 20 30 40 ...
+			
+			pstmt.setInt(2, endrow);
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, endrow);
+			pstmt.setString(5, "%"+search_word+"%");
+			pstmt.setInt(6, endrow);
+			pstmt.setInt(7, startrow);
+			pstmt.setInt(8, endrow);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardBean board = new BoardBean();
+				board.setBoard_num(rs.getInt("board_num"));
+				board.setBoard_name(rs.getString("board_name"));
+				board.setBoard_subject(rs.getString("board_subject"));
+				board.setBoard_content(rs.getString("board_content"));
+				board.setBoard_dept(rs.getString("board_dept"));
+				board.setBoard_re_ref(rs.getInt("board_re_ref"));
+				board.setBoard_re_lev(rs.getInt("board_re_lev"));
+				board.setBoard_re_seq(rs.getInt("board_re_seq"));
+				board.setBoard_readcount(rs.getInt("board_readcount"));
+				board.setBoard_date(rs.getString("board_date"));
+				board.setBoard_notice(rs.getString("board_notice"));
+				board.setCnt(rs.getInt("cnt"));;
+				list.add(board);
+			}
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println("getBoardList()2 에러: " + ex);
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close(); 
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if(pstmt != null) {
+				try {
+					pstmt.close(); 
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if(conn != null) {
+				try {
+					conn.close(); 	
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		return list;
 	}
 
 	

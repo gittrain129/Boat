@@ -65,7 +65,7 @@ function ajax(sdata){
             output += "<div class='card-header'>" + dept + "</div>" 
             output +=  "<div style='width:100%; height:210px; object-fit:cover;'>"
             let imgsrc = "/Boat"+item.imgsrc;
-            output += "<img src="+  imgsrc + " onerror=\"this.src='${pageContext.request.contextPath}/image/ano.png'\" style='width:100%; height:100%; object-fit:cover;' />"
+            output += "<img src="+  imgsrc + " onerror=\"this.src='../image/ano.png'\" style='width:100%; height:100%; object-fit:cover;' />"
             output += "</div>" 
             output += "<div class='card-body'>"
             output += "<h5 class='card-title'>" + name +"</h5>"

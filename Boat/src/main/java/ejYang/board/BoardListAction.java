@@ -136,13 +136,18 @@ public class BoardListAction implements Action{
 			
 			//부서명
 			String department =request.getParameter("department");
+			if(department.equals("selected"))
+				department = "";
+			else
+				department = "AND BOARD_DEPT = '"+department+"'";
 			
 			//정렬
-			//int listse =Integer.parseInt(request.getParameter("listse"));
-			String[] search_listse = new String[] {"BOARD_NAME","BOARD_SUBJECT"};
+			int listse = -1;
+			listse =Integer.parseInt(request.getParameter("listse"));
+			String[] search_listse = new String[] {"BOARD_DATE DESC,","BOARD_READCOUNT DESC,","CNT DESC,",""};
 			
 			listcount = boarddao.getListCount(search_field[index], search_word, department);
-			//boardlist = boarddao.getBoardList(search_field[index], search_word, department, search_listse[listse], page, limit);
+			boardlist = boarddao.getBoardList(search_field[index], search_word, department, search_listse[listse], page, limit);
 			
 			//ajax 검색
 			

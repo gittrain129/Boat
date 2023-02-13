@@ -52,7 +52,13 @@ $("#upfile2").change(function(){
 			alert("비밀번호를 입력하세요");
 			$("board_pass").focus();
 			return false;	
+			}else{
+			if(!$.isNumeric($("#fileboard_pass").val())){
+				alert("비밀번호는 숫자로 입력해 주세요");
+				$("#board_pass").val('').focus();
+			return false;
 			}
+		}
 			
 			
 			const name=$.trim($("#board_name").val());
