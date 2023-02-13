@@ -33,7 +33,7 @@
  
  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
- 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
  <link href ="${pageContext.request.contextPath}/jhLee/css/calendar.css"  rel ="stylesheet">
  
  <script>
@@ -45,25 +45,25 @@
 	var allEvent =null;
 	var deptevent = null;
  $(document).ready(function(){
-	      console.log(sessionStorage.getItem('dept')+'세션값넘어가나요')
-	      
+	     console.log('dept정한 달력 페이지')
 	      var calendarEl = document.getElementById('calendar');
-	      var sedept = sessionStorage.getItem('dept');
 	  	var dept = $('#dept').val();
 	  	$('#everyevent').click(function(){
 	  		location.href="${pageContext.request.contextPath}/project_calendarstart.cal";	
-
 	  	})
+	  	
 	    $('#dept').change(function(){
 			 dept = $('#dept').val();
 	  	console.log(dept)
-	  	 sessionStorage.setItem('dept', dept);
+	  	//var empno = ${empno}
 	      	location.href="${pageContext.request.contextPath}/project_calendarshow.cal?dept="+dept;
-	      
 	
+			sessionStorage.removeItem('dept');
+			sessionStorage.setItem('dept', dept)
+			
 			})
-
-	     
+	    var sessiondept =  sessionStorage.getItem('dept');
+	  	$('#dept').val(sessiondept);
 	      allEvent =${callist}
 		 
 	      
@@ -104,9 +104,14 @@
     	   			success:function(response){
     	   				console.log('success'+response
     	   					)	
-    	   				if(response==-1){
-    	   					alert('본인이 작성한 일정만 수정 가능합니다.')
-    	   				}
+    	   					if(response==-1){
+        	   					alert('본인이 작성한 일정만 수정 가능합니다.');
+        	   					setTimeout(function(){
+        	   							location.reload();},1500);
+        	   				}else{
+        	   					
+        	   				swal("Good job!", "성공적으로 수정되었습니다.", "success");
+        	   				}
     	   			
     	   			},
     	   			error:function(request,status,error){
@@ -224,6 +229,8 @@
 	            					 location.reload();
 	            	                },error:function(error){
 	            		alert('등록한 글만 삭제 가능합니다.')
+	            		setTimeout(function(){
+    	   							location.reload();},2000);
 	            		console.log(error);
 	            	}
 	            	

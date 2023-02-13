@@ -33,7 +33,7 @@
  
  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
- 
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
  <link href ="${pageContext.request.contextPath}/jhLee/css/calendar.css"  rel ="stylesheet">
  
  <script>
@@ -45,35 +45,28 @@
 	var allEvent =null;
 	var deptevent = null;
  $(document).ready(function(){
-	      
+	      console.log('달력 전체페이지')
 	      
 	      var calendarEl = document.getElementById('calendar');
 	      
 	  	var dept = $('#dept').val();
 	 	$('#everyevent').click(function(){
 	  		location.href="${pageContext.request.contextPath}/project_calendarstart.cal";	
-
+	  			sessionStorage.removeItem('dept');
+	  		sessionStorage.setItem('dept', dept)
 	  	})
+	  	    var sessiondept =  sessionStorage.getItem('dept');
+	  	$('#dept').val(sessiondept);
 	  	
 	    $('#dept').change(function(){
 			 dept = $('#dept').val();
 	  		console.log(dept)
-	      console.log("1deptevent="+deptevent)
-	      sessionStorage.setItem('dept', dept);
-	  		
-	  		setCookie("dept123",dept,"1") //변수, 변수값, 저장기간
+	  		//var empno = ${empno}
 	      	location.href="${pageContext.request.contextPath}/project_calendarshow.cal?dept="+dept;
 	
-
 			})
-
-	      if(!dept){
-				console.log(dept)
-	      }else{
-	      }
 	      allEvent =${callist}
 		 
-	      console.log("2deptevent="+deptevent)
 	      
 	      
 	      
@@ -113,9 +106,13 @@
     	   				console.log('success'+response
     	   					)	
     	   				if(response==-1){
-    	   					alert('본인이 작성한 일정만 수정 가능합니다.')
+    	   					alert('본인이 작성한 일정만 수정 가능합니다.');
+    	   					setTimeout(function(){
+    	   							location.reload();},1500);
+    	   				}else{
+    	   					
+    	   				swal("Good job!", "성공적으로 수정되었습니다.", "success");
     	   				}
-    	   			
     	   			},
     	   			error:function(request,status,error){
     	   				console.log('updateerror')
@@ -227,12 +224,21 @@
 	            	                url: "${pageContext.request.contextPath}/project_calendardelete.cal",
 									data : object,
 	            	                success: function (result) {
+	            		 console.log("삭제완료");
+	 	            	                  arg.event.remove();
+	 	            					 location.reload();
+	            		}else{
 	            	                  console.log("삭제완료");
-	            	                  arg.event.remove();
 	            					 location.reload();
+   								
+   							}
+	            	
 	            	                },error:function(error){
 	            		alert('등록한 글만 삭제 가능합니다.')
+	            		setTimeout(function(){
+    	   							location.reload();},2000);
 	            		console.log(error);
+	            	
 	            	}
 	            	
 	            	})//ajax 끝 

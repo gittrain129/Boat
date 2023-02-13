@@ -265,12 +265,11 @@ public class CalendarDAO {
 
 	}
 	public JsonArray getCalList(String dept) {
-
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from  boat_Calendar where dept = ? ";
-		
+		String sql ="select * from  boat_Calendar where dept = ? ";
+	
 		JsonArray list = new JsonArray();
 		try {
 			con = ds.getConnection();

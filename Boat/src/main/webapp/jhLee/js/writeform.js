@@ -6,10 +6,6 @@ $(document).ready(function(){
 	        lang : "ko-KR",
 	        height: 300
 	      });
-	      
-	      
-	      
-
 
 	$('#deptbutton+div a').click(function(){
 			const dept =$(this).text();

@@ -24,10 +24,10 @@ public class CalShowAction implements Action {
 		
 		
 		String dept =  request.getParameter("dept");
+		//String empno =  request.getParameter("empno");
 		
 		
 		callist = caldao.getCalList(dept);
-		
 		response.setContentType("application/json;charset=utf-8");
 		response.getWriter().print(callist);
 		

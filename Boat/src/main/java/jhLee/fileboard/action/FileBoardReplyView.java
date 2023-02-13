@@ -5,9 +5,11 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jhLee.fileboard.db.FileDAO;
 import jhLee.fileboard.db.FileboBean;
+import jhLee.fileboard.member.Member;
 
 public class FileBoardReplyView implements Action {
 
@@ -19,6 +21,12 @@ public class FileBoardReplyView implements Action {
 		ActionForward forward = new ActionForward();
 		FileboBean filebo = new FileboBean();
 		FileDAO filedao = new FileDAO();
+		
+		Member m = new Member();
+		HttpSession session = request.getSession();
+		String empno = (String) session.getAttribute("empno");
+		m = filedao.memberinfo(empno);
+		
 		
 		int num = Integer.parseInt(request.getParameter("num"));  
 		
@@ -34,6 +42,7 @@ public class FileBoardReplyView implements Action {
 		System.out.println("답변 페이지 이동 완료");
 		
 		request.setAttribute("boarddata", filebo);
+		request.setAttribute("member", m);
 		forward.setRedirect(false);
 		forward.setPath("jhLee/file_board/File_bo_reply.jsp");
 		return forward;
