@@ -1,6 +1,7 @@
 package jhLee.calendar;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -33,8 +34,20 @@ public class Calupdate implements Action {
 		int update = caldao.update(cal);
 		if(update ==1) {
 			System.out.println("캘린더데이터 날짜수정 성공");
+			return null;
+		}else if(update ==-1){
+			System.out.println("업데이트 실패");
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('비밀번호가 다릅니다.')");
+			//out.println("history.back();");
+			out.println("</script>");
+			out.close();
+			return null;
 		}
 		return null;
+	
 	}
 
 }

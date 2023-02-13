@@ -235,7 +235,9 @@ public class CalendarDAO {
 				System.out.println("데이터 삽입이 모두완료되었습니다.");
 			}else {
 				System.out.println("수정실패");
+				result =-1;
 			}
+			System.out.println("update result = "+result);
 		} catch (Exception ex) {
 			System.out.println("update() 에러: " + ex);
 			

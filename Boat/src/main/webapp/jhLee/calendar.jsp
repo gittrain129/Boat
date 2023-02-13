@@ -43,6 +43,7 @@
  	var object = null;
  	var upobj = null;
 	var allEvent =null;
+	var deptevent = null;
  $(document).ready(function(){
 	      
 	      
@@ -52,6 +53,9 @@
 	    $('#dept').change(function(){
 			 dept = $('#dept').val();
 	  	console.log(dept)
+	    deptevent=loadingEvents(dept);
+	      console.log("1deptevent="+deptevent)
+	      
 			})
 
 	      if(!dept){
@@ -61,7 +65,8 @@
 	      }
 	      allEvent =${callist}
 		 
-	  
+	      deptevent=loadingEvents(dept);
+	      console.log("2deptevent="+deptevent)
 	      
 	      
 	      
@@ -79,7 +84,7 @@
 	        			  },
 	          
 	       		   editable: true, //재수정여부 가능
-	     		eventDrop:function(event){
+	     			eventDrop:function(event){
 	     			console.log(event)
 	     			console.log(event.event.start)
 	     			console.log(event.event.title)
@@ -119,39 +124,7 @@
 	              console.log(arg);
 	          	console.log('이벤트 변경 및 추가');
 	            },
-	        /*     eventChange: function(obj) { // 이벤트가 수정되면 발생하는 이벤트
-	              console.log(obj);
-	          	console.log('이벤트 수정함');
-	          	upobj = new Object();
-	            var start = obj.start;
-	          // 	var startmoment =moment(start).format("YYYY-MM-DD");
-	           	 var end = obj.end;
-	           //	 var endmoment = moment(end).format("YYYY-MM-DD");
-	           		upobj.title =  title;
-	           		upobj.start = start
-	           		upobj.end = end;
-	           		upobj.allDay = obj.allDay;
-	           		color = 	 $('#color').val();
-	           		upobj.color = color;
-	           		upobj.empno = $('#empno').val();
-	           		console.log("13131331"+upobj)
-	         		$.ajax({
-	    	   			type:'POST',
-	    	   			url:'${pageContext.request.contextPath}/project_calupdate.cal',
-	    	   			data:upobj,
-	    	   			async:true,
-	    	   			success:function(rdata){
-	    	   				console.log('모든 데이터 저장하였습니다.');
-	    	   				$('#title').val("");		
-	    	   				
-	    	   			
-	    	   			}, 
-	    	   			error:function(request,status,error){
-	    	   				console.log('saveerror')
-	    	   			},
-	    	   			complete:function(){}
-	    	   		})  
-	            },*/
+	      
 	            eventRemove: function(obj){ // 이벤트가 삭제되면 발생하는 이벤트
 	              console.log(obj);
 	          	console.log('이벤트 삭제함');
