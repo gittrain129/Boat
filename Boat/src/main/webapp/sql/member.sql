@@ -5,7 +5,7 @@ drop table member cascade constraints purge;
 
 select * from member;
 
-update member set empno = 'ADMIN';
+
 
 
 create table MEMBER(

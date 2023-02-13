@@ -79,25 +79,24 @@ public class MemberDAO {
 			
 			// PreparedStatement 객체 얻기
 			pstmt = conn.prepareStatement(
-					"insert into member (empno, dept, deptno, name, age, password, jumin, address, post, gender, email, memberfile, intro, imgsrc) "
-					+"values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into member (empno, dept, name, age, password, jumin, address, post, gender, email, memberfile, intro, imgsrc) "
+					+"values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			
 			
 			String img = "/memberupload/";
 			pstmt.setString(1, m.getEmpno());
 			pstmt.setString(2, m.getDept());
-			pstmt.setInt(3, m.getDeptno());
-			pstmt.setString(4, m.getName());
-			pstmt.setInt(5, m.getAge());
-			pstmt.setString(6, m.getPassword());
-			pstmt.setString(7, m.getJumin());
-			pstmt.setString(8, m.getAddress());
-			pstmt.setString(9, m.getPost());
-			pstmt.setString(10, m.getGender());
-			pstmt.setString(11, m.getEmail());
-			pstmt.setString(12, m.getMemberfile());
-			pstmt.setString(13, m.getIntro());
-			pstmt.setString(14,img+ m.getMemberfile());
+			pstmt.setString(3, m.getName());
+			pstmt.setInt(4, m.getAge());
+			pstmt.setString(5, m.getPassword());
+			pstmt.setString(6, m.getJumin());
+			pstmt.setString(7, m.getAddress());
+			pstmt.setString(8, m.getPost());
+			pstmt.setString(9, m.getGender());
+			pstmt.setString(10, m.getEmail());
+			pstmt.setString(11, m.getMemberfile());
+			pstmt.setString(12, m.getIntro());
+			pstmt.setString(13,img+ m.getMemberfile());
 			
 			result = pstmt.executeUpdate(); //삽입 성공시 result는 1
 			
@@ -241,24 +240,23 @@ public class MemberDAO {
 		try {
 			con = ds.getConnection();
 			
-			String sql = "update member set dept = ?, deptno = ?, name = ?, age = ?, post = ?, address = ?, gender = ?, email = ?, memberfile = ?, intro = ?, imgsrc = ? "
+			String sql = "update member set dept = ?, name = ?, age = ?, post = ?, address = ?, gender = ?, email = ?, memberfile = ?, intro = ?, imgsrc = ? "
 					   + " where empno = ?";
 			
 			String img = "/memberupload/";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m.getDept());
-			pstmt.setInt(2, m.getDeptno());
-			pstmt.setString(3, m.getName());
-			pstmt.setInt(4, m.getAge());
-			pstmt.setString(5, m.getPost());
-			pstmt.setString(6, m.getAddress());
-			pstmt.setString(7, m.getGender());
-			pstmt.setString(8, m.getEmail());
-			pstmt.setString(9, m.getMemberfile());
-			pstmt.setString(10, m.getIntro());
-			pstmt.setString(11,img+ m.getMemberfile());
+			pstmt.setString(2, m.getName());
+			pstmt.setInt(3, m.getAge());
+			pstmt.setString(4, m.getPost());
+			pstmt.setString(5, m.getAddress());
+			pstmt.setString(6, m.getGender());
+			pstmt.setString(7, m.getEmail());
+			pstmt.setString(8, m.getMemberfile());
+			pstmt.setString(9, m.getIntro());
+			pstmt.setString(10,img+ m.getMemberfile());
 			
-			pstmt.setString(12, m.getEmpno());
+			pstmt.setString(11, m.getEmpno());
 			result = pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -532,19 +530,22 @@ public class MemberDAO {
 	
 	
 	
-	public int delete(String id) {
+	public int delete(String empno) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		int result=0;
 		try {
+			System.out.println(empno);
 			con = ds.getConnection();
-			String sql="delete from member where id = ? ";			
+			String sql="delete from member where empno = ? ";	
+			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, empno);
+			
 			result=pstmt.executeUpdate();
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			System.out.println("List<Member> getList() 에러: " + ex);
+			System.out.println("delete 에러: " + ex);
 		} finally {
 			if (pstmt != null)
 				try {

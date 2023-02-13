@@ -36,7 +36,6 @@ public class MemberUpdateProcessAction implements Action {
 			MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "utf-8", new DefaultFileRenamePolicy());
 			String empno = multi.getParameter("empno");
 			String dept = multi.getParameter("dept");
-			int deptno = Integer.parseInt(multi.getParameter("deptno"));
 			String name = multi.getParameter("name");
 			int age = Integer.parseInt(multi.getParameter("age"));
 			String password = multi.getParameter("password");
@@ -51,8 +50,8 @@ public class MemberUpdateProcessAction implements Action {
 			System.out.println("memberfile=" + memberfile);
 			
 			Member m = new Member();
-			m.setEmail(email);			m.setGender(gender);		m.setDept(dept);
-			m.setDeptno(deptno);		m.setName(name);			m.setAge(age);
+			m.setEmail(email);			m.setGender(gender);		m.setDept(dept);		
+			m.setName(name);			m.setAge(age);
 			m.setPost(post);			m.setAddress(address);		m.setGender(gender);
 			m.setEmpno(empno);			m.setPassword(password);	m.setIntro(intro);
 			m.setMemberfile(memberfile);	m.setImgsrc(imgsrc);

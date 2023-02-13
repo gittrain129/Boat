@@ -10,14 +10,36 @@
 <title>회원관리 시스템 관리자모드(회원정보)</title>
 <jsp:include page="header.jsp" />
 <style>
+	
+	.table-bordered td, .table-bordered th {
+    border: 2px solid lightgray;
+}
+
+
 	tr>td:nth-child(odd){font-weight: bold}
 	td{text-align:center}
 	.container{width:50%}
 </style>
+
+ <script>
+ 	$(function() {
+ 		$("tr[id='delete']").click(function(event) {
+ 			const answer = confirm("정말 삭제하시겠습니까?");
+ 			console.log(answer); //취소를 클릭한 경우-false
+ 			if (!answer) { //취소를 클릭한 경우 
+ 				event.preventDefault(); //이동하지 않습니다.
+ 			}
+ 		})
+ 	})
+ </script>
+ 
 </head>
 <body>
-	<div class="container">
+	<div class="container" style="margin-top: 20%" >
 		<table class="table table-bordered">
+			<tr>
+				<td colspan=2 style="background-color:#18a8f1; border:none; color:white;">회원상세정보 [관리자모드]</td>				
+			</tr>
 			<tr>
 				<td>사진업로드</td>
 				<td>${memberinfo.memberfile}</td>
@@ -31,10 +53,6 @@
 				<td>${memberinfo.dept}</td>
 			</tr>
 			<tr>
-				<td>부서번호</td>
-				<td>${memberinfo.deptno}</td>
-			</tr>
-			<tr>
 				<td>이름</td>
 				<td>${memberinfo.name}</td>
 			</tr>
@@ -45,11 +63,6 @@
 			<tr>
 				<td>비밀번호</td>
 				<td>${memberinfo.password}</td>
-			</tr>
-			
-			<tr>
-				<td>나이</td>
-				<td>${memberinfo.age}</td>
 			</tr>
 			<tr>
 				<td>이메일</td>
@@ -70,10 +83,16 @@
 			<tr>
 				<td>자기소개</td>
 				<td>${memberinfo.intro}</td>
-			</tr>	
+			</tr>
+			<br>	
 			<tr>
-				<td colspan=2>
-				<a href="memberList.net">리스트로 돌아가기</a></td>				
+				<td colspan=2 style="background-color:#18a8f1; border:none;">
+				<a href="${pageContext.request.contextPath}/jkKim/adminView.jk" style="color:white;">리스트로 돌아가기</a></td>			
+			</tr>
+			<br>
+			<tr id="delete" name="delete">
+				<td colspan=2 style="background-color:red; border:none;">
+				<a href="${pageContext.request.contextPath}/memberDelete.net?empno=${memberinfo.empno}" style="color:white;">회원 삭제하기</a></td>
 			</tr>	
 		</table>
 	</div>
