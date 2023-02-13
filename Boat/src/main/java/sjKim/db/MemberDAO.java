@@ -241,7 +241,7 @@ public class MemberDAO {
 		try {
 			con = ds.getConnection();
 			
-			String sql = "update member set dept = ?, deptno = ?, name = ?, age = ?, post = ?, address = ?, gender = ?, email = ?, memberfile = ?, intro = ? imgsrc = ? "
+			String sql = "update member set dept = ?, deptno = ?, name = ?, age = ?, post = ?, address = ?, gender = ?, email = ?, memberfile = ?, intro = ?, imgsrc = ? "
 					   + " where empno = ?";
 			
 			String img = "/memberupload/";

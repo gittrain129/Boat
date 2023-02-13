@@ -54,7 +54,7 @@ span{
 								<c:set var='src' value='${"memberupload/"}${memberinfo.memberfile}'/>
 								<input type="hidden" name="check" value="${memberinfo.memberfile}"> <%-- 파일이 있는데 변경하지 않은 경우 --%>
 							</c:if>
-							<img src="${src}" width="130px" alt="profile">	
+							<img src="${src}" onerror="this.src='${pageContext.request.contextPath}/image/ano.png'"  width="130px" alt="profile">	
 						</span>
 	
 							<input type="file" id="memberfile" name="memberfile" accept="image/*" style="display:none;">
@@ -79,8 +79,8 @@ span{
 							
 					<label>성별</label>
 					<div class="container2">
-						<input type='radio' name='gender' value='남' ><span>남자</span>
-						<input type='radio' name='gender' value='여' ><span>여자</span>
+						<input type='radio' name='gender' value='m' ><span>남자</span>
+						<input type='radio' name='gender' value='f' ><span>여자</span>
 					</div>
 						
 					<label for="post">우편번호</label>
