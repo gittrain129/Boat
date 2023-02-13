@@ -224,19 +224,17 @@
 	            	                url: "${pageContext.request.contextPath}/project_calendardelete.cal",
 									data : object,
 	            	                success: function (result) {
-	            		 console.log("삭제완료");
-	 	            	                  arg.event.remove();
-	 	            					 location.reload();
-	            		}else{
 	            	                  console.log("삭제완료");
-	            					 location.reload();
-   								
-   							}
-	            	
-	            	                },error:function(error){
+	            	console.log(result)
+	            	if(result==false){
 	            		alert('등록한 글만 삭제 가능합니다.')
 	            		setTimeout(function(){
-    	   							location.reload();},2000);
+   							location.reload();},1500);	}
+	            	
+	            	                  arg.event.remove();
+	            					 location.reload();
+	            	                },error:function(error){
+	            		
 	            		console.log(error);
 	            	
 	            	}
