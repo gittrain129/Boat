@@ -58,7 +58,7 @@
            </div>
       
            <div class="content">
-           <c:out value =" ${boarddata.FILE_CONTENT}" escapeXml="false" />
+           <c:out value =" ${boarddata.FILE_CONTENT}" escapeXml="true" />
            </div>
          
         </div>

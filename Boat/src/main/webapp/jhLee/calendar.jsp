@@ -45,36 +45,34 @@
 	var allEvent =null;
 	var deptevent = null;
  $(document).ready(function(){
-	      
+	      console.log(sessionStorage.getItem('dept')+'세션값넘어가나요')
 	      
 	      var calendarEl = document.getElementById('calendar');
-	      
+	      var sedept = sessionStorage.getItem('dept');
 	  	var dept = $('#dept').val();
+	  	$('#everyevent').click(function(){
+	  		location.href="${pageContext.request.contextPath}/project_calendarstart.cal";	
+
+	  	})
 	    $('#dept').change(function(){
 			 dept = $('#dept').val();
 	  	console.log(dept)
-	    deptevent=loadingEvents(dept);
-	      console.log("1deptevent="+deptevent)
+	  	 sessionStorage.setItem('dept', dept);
+	      	location.href="${pageContext.request.contextPath}/project_calendarshow.cal?dept="+dept;
 	      
+	
 			})
 
-	      if(!dept){
-				console.log(dept)
-	    	  allEvent=loadingEvents(dept);
-	      }else{
-	      }
+	     
 	      allEvent =${callist}
 		 
-	      deptevent=loadingEvents(dept);
-	      console.log("2deptevent="+deptevent)
-	      
 	      
 	      
 	      // full-calendar 생성하기
 	      calendar = new FullCalendar.Calendar(calendarEl, {
-	    		events :allEvent,
-	    		
-	        	height: '600px', // calendar 높이 설정
+	    
+				  		events :allEvent
+	        	,height: '600px', // calendar 높이 설정
 	       		 expandRows: true, // 화면에 맞게 높이 재설정
 	        
 	       		 headerToolbar: {
@@ -104,7 +102,11 @@
     	   			data:upobj,
     	   			async:true,
     	   			success:function(response){
-    	   				console.log('success')	
+    	   				console.log('success'+response
+    	   					)	
+    	   				if(response==-1){
+    	   					alert('본인이 작성한 일정만 수정 가능합니다.')
+    	   				}
     	   			
     	   			},
     	   			error:function(request,status,error){
@@ -243,30 +245,7 @@
    var loadingobj=null;
    
    
-		function loadingEvents(info){
-			loadingobj = new Object();
-			loadingobj.dept = info;
-			 	   var return_value = null;
-			    		$.ajax({
-			    			type:'POST',
-			    			url:'${pageContext.request.contextPath}/project_calendarshow.cal',
-			    			data:loadingobj,
-			    			dataType:"json",
-			    			async:false,//  동기화
-			    			success:function(result){
-			    				return_value = result;
-			    				console.log('이벤트 가져왔습니다.');
-			    				console.log(result);
-			    				console.log('다음');
-			    				console.log(return_value);
-			    			},
-			    			error:function(request,status,error){
-			    				console.log('loadingeventserror')
-			    			},
-			    			complete:function(){}
-			    		}) 
-			 	return return_value;   
-			    }
+	
 
  </script>
 </head>
@@ -278,9 +257,8 @@
  <div id = cal_wrap>
  <br>
  <br>
- 
+ <button id = "everyevent" style = "width : 100px; height : 50px; background-color : rgb(0, 173, 238); color; color :  white; margin-bottom : 20px; border : none;">전체보기</button>
         <select class="form-control" id ="dept">
-  			<option value ="" class="ad">전체보기</option>
   			<option value ="홍보팀" class="ad">홍보팀</option>
   			<option value ="개발팀" class = "devel">개발팀</option>
   			<option value ="인사팀" class = "hire">인사팀</option>
