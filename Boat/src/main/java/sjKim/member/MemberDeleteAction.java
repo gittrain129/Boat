@@ -14,10 +14,10 @@ public class MemberDeleteAction implements Action {
 			throws ServletException, IOException {
 		
 		MemberDAO mdao = new MemberDAO();
-		String id = request.getParameter("id");
+		String empno = request.getParameter("empno");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		int result = mdao.delete(id);
+		int result = mdao.delete(empno);
 		if(result == 1) {
 			out.println("<scrpit>");
 			out.println("alert('삭제 성공입니다.');");
