@@ -63,18 +63,26 @@ function ajax(sdata){
             
             output += "<div class='card' style='height:376px'>"
             let name = item.name;
-            output += "<div class='card-header'>" + dept + "</div>"
+            output += " <div class='card-header' onclick='send_empno2()' id='onclickpart1'>" + dept + "</div>"
             output +=  "<div style='width:100%; height:210px; object-fit:cover;'>" 
             let imgsrc = "/Boat"+item.imgsrc;
             //output += "<img src="+  imgsrc + " width='100%'/>"
-            output += "<img src="+  imgsrc + " onerror=\"this.src='${pageContext.request.contextPath}/image/ano.png'\" style='width:100%; height:100%; object-fit:cover;' />"
+            output += "<img src="+  imgsrc + " id='onclickpart2' onclick='send_empno2()' onerror=\"this.src='../image/ano.png'\" style='width:100%; height:100%; object-fit:cover;' />"
             output += "</div>"
             output += "<div class='card-body'>"
-            output += "<h5 class='card-title'>" + name +"</h5>"
+            output += "<h5 class='card-title' id='onclickpart3' onclick='send_empno2()'>" + name +"</h5>"
             let email = item.email;
             output += "<p class='card-text' id='ori-email-tag' onclick='send_empno()'>이메일: " + email + "</p>"
             //output += "<p class='card-text'>이메일: " + email + "</p>"
             //output += " <a href='#' class='btn btn-primary'>More</a>"
+            output += "<form name='empnoform' id='email-tag' method='post'  action='../email.ne' style='display:none'>"
+            let empno = item.empno;
+			output += "<input type=radio id='empno' name='empno' style='display:none' value=" + empno + " checked></input>"
+			output += "</form>"
+             output += "<form name='empnoform2' id='empno-tag' method='post'  action='../memberInfo.net' style='display:none'>"
+			output += "<input type=radio id='empno' name='empno' style='display:none' value=" + empno + " checked></input>"
+			output += "</form>"
+            
             output += "</div>"
             output += "</div>"
             output += "</div>"
