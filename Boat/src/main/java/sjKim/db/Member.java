@@ -15,7 +15,7 @@ public class Member {
 	private int age;
 	private String jumin;
 	private String address;
-	private int post;
+	private String post;
 	private String gender;
 	private String email;
 	private int phone;
@@ -84,10 +84,10 @@ public class Member {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getPost() {
+	public String getPost() {
 		return post;
 	}
-	public void setPost(int post) {
+	public void setPost(String post) {
 		this.post = post;
 	}
 	public String getGender() {

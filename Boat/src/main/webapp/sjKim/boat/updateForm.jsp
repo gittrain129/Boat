@@ -39,7 +39,7 @@ span{
 						<input type='text' placeholder='성함을 입력하세요..' name='name' id='name' style="width:550px;" value="${memberinfo.name}">
 						
 						<label for="age" style="padding-top: 10px;">나이</label>
-						<input type='text' placeholder='나이를 입력하세요..' name='age' id='age' style="width:550px;" maxLength="3" value="${memberinfo.age}" maxLength="3" required>
+						<input type='text' placeholder='나이를 입력하세요..' name='age' id='age' style="width:550px;" maxLength="3" value="${memberinfo.age}" required>
 						<span id="message"></span>
 				</div>
 				

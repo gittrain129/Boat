@@ -37,7 +37,7 @@
             <input id="empno" type="text" placeholder="사원번호" name="empno" required />
           </li>
           <li>
-            <input id="password" type="password" placeholder="비밀번호" minlength="4" name="password"  required />
+            <input id="password" type="password" placeholder="비밀번호" minLength="4" name="password"  required />
           </li>
           <li>
             <input type="checkbox" id="remember" name="remember" value="store"/><label for="chk_id">아이디저장</label>

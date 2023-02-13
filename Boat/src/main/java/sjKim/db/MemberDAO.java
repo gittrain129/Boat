@@ -79,9 +79,10 @@ public class MemberDAO {
 			
 			// PreparedStatement 객체 얻기
 			pstmt = conn.prepareStatement(
-					"insert into member (empno, dept, deptno, name, age, password, jumin, address, post, gender, email, memberfile, intro,imgsrc) "
+					"insert into member (empno, dept, deptno, name, age, password, jumin, address, post, gender, email, memberfile, intro, imgsrc) "
 					+"values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-	
+			
+			
 			String img = "/memberupload/";
 			pstmt.setString(1, m.getEmpno());
 			pstmt.setString(2, m.getDept());
@@ -91,7 +92,7 @@ public class MemberDAO {
 			pstmt.setString(6, m.getPassword());
 			pstmt.setString(7, m.getJumin());
 			pstmt.setString(8, m.getAddress());
-			pstmt.setInt(9, m.getPost());
+			pstmt.setString(9, m.getPost());
 			pstmt.setString(10, m.getGender());
 			pstmt.setString(11, m.getEmail());
 			pstmt.setString(12, m.getMemberfile());
@@ -187,14 +188,19 @@ public class MemberDAO {
 			if(rs.next()) {
 				m = new Member();
 				m.setEmpno(rs.getString(1));
-				m.setPassword(rs.getString(2));
-				m.setJumin(rs.getString(3));
-				m.setAddress(rs.getString(4));
-				m.setPost(rs.getInt(5));
-				m.setGender(rs.getString(6));
-				m.setEmail(rs.getString(7));
-				m.setMemberfile(rs.getString(8));
-				m.setIntro(rs.getString(9));
+				m.setDept(rs.getString(2));
+				m.setDeptno(rs.getInt(3));
+				m.setName(rs.getString(4));
+				m.setAge(rs.getInt(5));
+				m.setPassword(rs.getString(6));
+				m.setJumin(rs.getString(7));
+				m.setAddress(rs.getString(8));
+				m.setPost(rs.getString(9));
+				m.setGender(rs.getString(10));
+				m.setEmail(rs.getString(11));
+				m.setMemberfile(rs.getString(12));
+				m.setIntro(rs.getString(13));
+				m.setImgsrc(rs.getString(14));
 
 			}
 		}catch (Exception e) {
@@ -242,7 +248,7 @@ public class MemberDAO {
 			pstmt.setInt(2, m.getDeptno());
 			pstmt.setString(3, m.getName());
 			pstmt.setInt(4, m.getAge());
-			pstmt.setInt(5, m.getPost());
+			pstmt.setString(5, m.getPost());
 			pstmt.setString(6, m.getAddress());
 			pstmt.setString(7, m.getGender());
 			pstmt.setString(8, m.getEmail());
@@ -347,7 +353,7 @@ public class MemberDAO {
 				m.setEmpno(rs.getString("empno"));
 				m.setPassword(rs.getString(2));
 				m.setAddress(rs.getString(3));
-				m.setPost(rs.getInt(4));
+				m.setPost(rs.getString(4));
 				m.setGender(rs.getString(5));
 				m.setEmail(rs.getString(6));
 				m.setMemberfile(rs.getString(7));
@@ -468,7 +474,7 @@ public class MemberDAO {
 				m.setEmpno(rs.getString("empno"));
 				m.setPassword(rs.getString(2));
 				m.setAddress(rs.getString(3));
-				m.setPost(rs.getInt(4));
+				m.setPost(rs.getString(4));
 				m.setGender(rs.getString(5));
 				m.setEmail(rs.getString(6));
 				m.setMemberfile(rs.getString(7));

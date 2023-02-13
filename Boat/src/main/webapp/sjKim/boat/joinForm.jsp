@@ -73,7 +73,7 @@
 				</div>
 				
 				
-				<label for="pass" style="padding-top: 10px;">비밀번호</label>
+				<label for="password" style="padding-top: 10px;">비밀번호</label>
 					<input type='password' placeholder='비밀번호를 입력하세요..' name='password' id='password' >
 				
 					

@@ -158,7 +158,7 @@ li.login-item {
 
 
 </style>
- <link rel="stylesheet" href="jhLee/css/heder.css">
+ 
  <script src="${pageContext.request.contextPath}/jhLee/js/header.js"></script>
 <script src="${pageContext.request.contextPath}/sjKim/js/header.js"></script>
 <input type="hidden" id="headerloginid" value="${empno}" name="headerloginid">

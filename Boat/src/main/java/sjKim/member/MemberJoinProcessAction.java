@@ -40,7 +40,7 @@ public class MemberJoinProcessAction implements Action {
 		int age = Integer.parseInt(multi.getParameter("age"));
 		String jumin = multi.getParameter("jumin");	
 		String address = multi.getParameter("address");
-		int post = Integer.parseInt(multi.getParameter("post"));
+		String post = multi.getParameter("post");
 		String gender = multi.getParameter("gender");
 		String email = multi.getParameter("email");		
 		String memberfile = multi.getFilesystemName("memberfile");
@@ -58,6 +58,8 @@ public class MemberJoinProcessAction implements Action {
 		
 		if(memberfile != null) { //파일을 선택한 경우
 			m.setMemberfile(memberfile);
+		}else {
+			m.setMemberfile("ano.png");
 		}
 		//기존 파일 그대로 사용하는 경우
 	//	else if(request.getParameter("check") != "") {

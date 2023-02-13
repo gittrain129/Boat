@@ -36,6 +36,7 @@
 .login > ul li input[type="checkbox"] + label {
   height: 36px;
   line-height: 36px;
+  font-size: 15px;
 }
 .login > ul li input[type="checkbox"] + label:before {
   content: "";
