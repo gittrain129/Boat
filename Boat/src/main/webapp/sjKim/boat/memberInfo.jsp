@@ -19,6 +19,10 @@
 	tr>td:nth-child(odd){font-weight: bold}
 	td{text-align:center}
 	.container{width:50%}
+
+body{
+	margin-bottom:20%;
+}
 </style>
 
  <script>
@@ -26,8 +30,11 @@
  		$("tr[id='delete']").click(function(event) {
  			const answer = confirm("정말 삭제하시겠습니까?");
  			console.log(answer); //취소를 클릭한 경우-false
+ 			
  			if (!answer) { //취소를 클릭한 경우 
  				event.preventDefault(); //이동하지 않습니다.
+ 			} else {
+ 				console.log(del_comp);
  			}
  		})
  	})
@@ -41,8 +48,15 @@
 				<td colspan=2 style="background-color:#18a8f1; border:none; color:white;">회원상세정보 [관리자모드]</td>				
 			</tr>
 			<tr>
-				<td>사진업로드</td>
-				<td>${memberinfo.memberfile}</td>
+				<td style="line-height: 120px;">사진업로드</td>
+				<c:if test='${empty memberinfo.memberfile}'>
+					<c:set var='src' value='sjKim/image/profile.png'/>
+				</c:if>
+				<c:if test='${!empty memberinfo.memberfile}'>
+					<c:set var='src' value='${"memberupload/"}${memberinfo.memberfile}'/>
+					<input type="hidden" name="check" value="${memberinfo.memberfile}">
+				</c:if>
+				<td><img src="${src}" onerror="this.src='${pageContext.request.contextPath}/image/ano.png'"  width="130px" alt="profile"></td>
 			</tr>
 			<tr>
 				<td>아이디</td>
@@ -91,10 +105,11 @@
 			</tr>
 			<br>
 			<tr id="delete" name="delete">
-				<td colspan=2 style="background-color:red; border:none;">
+				<td colspan=2 style="background-color:#d34747; border:none;">
 				<a href="${pageContext.request.contextPath}/memberDelete.net?empno=${memberinfo.empno}" style="color:white;">회원 삭제하기</a></td>
 			</tr>	
 		</table>
 	</div>
 </body>
+<jsp:include page="footer.jsp" />
 </html>

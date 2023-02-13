@@ -63,7 +63,7 @@
 				</div>
 				
 				<div class="top_block2">
-					<label style="text-align: center; margin-top:50px;">
+					<label style="text-align: center; margin-top:80px;">
 						
 						<span id="showImage">
 							<c:if test='${empty memberinfo.memberfile}'>
