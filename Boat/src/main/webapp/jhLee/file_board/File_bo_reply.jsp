@@ -52,7 +52,7 @@
          <div class="form-group ">
         <label for = "board_name">글쓴이</label><br>
         <div class="btn-group">
-            <button type="button" class="btn btn-secondary" id = "deptsel">부서</button>
+            <button type="button" class="btn btn-secondary" id = "deptsel">${member.dept}</button>
             <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" id = "deptbutton">
             </button>
               <div class="dropdown-menu" >
@@ -64,7 +64,7 @@
               </div>
             </div>
             <input type="hidden" name = "dept" id = "dept">
-       		<input name="board_name" id="board_name" value="${boarddata.FILE_NAME}" type="text"  class="form-control writer"
+       		<input name="board_name" id="board_name" value="${member.name}" type="text"  class="form-control writer"
        			placeholder="이름을 입력하세요" >
   	  </div>
         

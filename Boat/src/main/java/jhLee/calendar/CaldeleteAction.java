@@ -1,6 +1,7 @@
 package jhLee.calendar;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,14 @@ public class CaldeleteAction implements Action {
 		 
 		 if(result ==true) {
 			 System.out.println("++삭제 완료");
-		 }
+		 }else if(result ==false){
+				System.out.println("삭제 실패");
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.print(result);
+				
+				return null;   
+			}
 		
 		return null;
 	}

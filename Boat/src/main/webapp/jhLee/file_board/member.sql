@@ -19,13 +19,15 @@ create table MEMBER(
  MEMBERFILE VARCHAR2(50),
  IMGSRC VARCHAR2(150)
  );
+ 
+ update member set dept = 1, deptno = 1, name = 1, age = 1, post = 1, address = 1, gender = 1, email = 1, memberfile = 1, intro = 1 imgsrc = 1  where empno = 'ADMIN'
  update member set password = 1234;
  update member set MEMBERFILE = "";
+ update member set password =123456 where empno ='ADMIN'
  
  INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,EMAIL,PHONE,MEMBERFILE,IMGSRC)
  VALUES('ADMIN','','','1','123456','홍길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','admin@boat.com','01012345678','안녕하세요 반갑습니다','/uploadImage/adminImage');
  
- update member set password =123456 where empno ='ADMIN'
  
   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,EMAIL,PHONE,MEMBERFILE,IMGSRC)
  VALUES('231001','홍보팀','10','123456','123456','홍길동','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','hgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');

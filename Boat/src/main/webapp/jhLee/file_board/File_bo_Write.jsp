@@ -28,7 +28,7 @@
         <input name="board_subject" id="board_subject" type="text" maxlength="100"
         class="form-control" placeholder="제목을 입력하세요">
     </div>
-    <input type ="hidden" name ="empno" value="${empno}">
+    <input type ="hidden" name ="empno" value="${member.empno}">
  	
 
  	<div class="form-group">
@@ -40,7 +40,7 @@
     <div class="form-group">
         <label>글쓴이</label><br>
         <div class="btn-group" id = "">
-            <button type="button" class="btn btn-secondary" id ="deptsel" >부서</button>
+            <button type="button" class="btn btn-secondary" id ="deptsel" >${member.dept}</button>
             <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" id = "deptbutton">
             </button>
             
@@ -52,9 +52,9 @@
                 <a class="dropdown-item" href="#">영업팀</a>
               </div>
             </div>
-       		<input name="board_name" id="board_name" value="" type="text"  class="form-control writer"
-       			placeholder="이름을 입력하세요">
-            <input type="hidden" name = "dept" id = "dept">
+       		<input name="board_name" id="board_name" type="text"  class="form-control writer"
+       			placeholder="이름을 입력하세요" value ="${member.name}">
+            <input type="hidden" name = "dept" id = "dept" value = "${member.dept}">
   	  </div>
         
     

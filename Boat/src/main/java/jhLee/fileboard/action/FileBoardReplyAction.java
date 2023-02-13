@@ -6,12 +6,14 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import jhLee.fileboard.db.FileDAO;
 import jhLee.fileboard.db.FileboBean;
+import jhLee.fileboard.member.Member;
 
 public class FileBoardReplyAction implements Action {
 
@@ -24,6 +26,8 @@ public class FileBoardReplyAction implements Action {
 		ActionForward forward = new ActionForward();
 		FileboBean filebo = new FileboBean();
 		FileDAO filedao = new FileDAO();
+		
+	
 		
 		String realFolder="";
 		String saveFolder ="fileupload";

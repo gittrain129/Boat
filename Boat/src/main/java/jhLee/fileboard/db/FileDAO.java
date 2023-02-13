@@ -11,6 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import ejYang.member.Member;
+
 public class FileDAO {
 	private DataSource ds;
 
@@ -948,6 +950,65 @@ public class FileDAO {
 		return board;
 
 
+	}
+	public jhLee.fileboard.member.Member memberinfo(String empno) {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		jhLee.fileboard.member.Member m = null;
+		try {
+			conn = ds.getConnection();
+			
+			String select_sql = "select*from MEMBER where EMPNO = ?";
+			pstmt = conn.prepareStatement(select_sql.toString());
+			pstmt.setString(1, empno);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				m = new jhLee.fileboard.member.Member();
+				m.setEmpno(rs.getString(1));
+				m.setDept(rs.getString(2));
+				m.setDeptno(rs.getInt(3));
+				m.setPassword(rs.getString(4));
+				m.setPwcheck(rs.getString(5));
+				m.setName(rs.getString(6));
+				m.setJumin(rs.getString(7));
+				m.setAddress(rs.getString(8));
+				m.setPost(rs.getInt(9));
+				m.setGender(rs.getString(10));
+				m.setEmail(rs.getString(11));
+				m.setMemberfile(rs.getString(13));
+				m.setImgsrc(rs.getString(14));
+			}
+			
+		}catch(Exception se) {
+			se.printStackTrace();
+			System.out.println("member_info() 에러:" + se);
+		}finally {
+			
+			try {
+				if(rs != null)
+					rs.close(); 
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+			try {
+				if(pstmt != null)
+					pstmt.close(); 
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+			try {
+				if(conn != null)
+					conn.close(); 	
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return m;
 	}
 
 
