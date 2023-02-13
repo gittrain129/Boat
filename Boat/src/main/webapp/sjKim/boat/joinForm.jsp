@@ -40,10 +40,19 @@
 			
 					
 					<label for="dept" style="padding-top: 10px;">부서명</label>
-					<input type='text' placeholder='부서명을 입력하세요..' name='dept' id='dept' style="width:550px;" >
+					<div     style="border: 2px solid #18a8f1;
+								    padding: 1.5% 1%;
+								    word-spacing: 10px;
+								    margin-bottom: 20px;
+								    width: 550px;
+								    text-align: center;">
+						<input type='radio' name='dept' value='홍보팀' checked><span>홍보팀</span>
+						<input type='radio' name='dept' value='개발팀' ><span>개발팀</span>
+						<input type='radio' name='dept' value='인사팀' ><span>인사팀</span>
+						<input type='radio' name='dept' value='기획팀' ><span>기획팀</span>
+						<input type='radio' name='dept' value='영업팀' ><span>영업팀</span>
+					</div>
 					
-					<label for="deptno" style="padding-top: 10px;">부서번호</label>
-					<input type='text' placeholder='부서번호를 입력하세요..' name='deptno' id='deptno' style="width:550px;" >
 				
 					<label for="name" style="padding-top: 10px;">이름</label>
 					<input type='text' placeholder='성함을 입력하세요..' name='name' id='name' style="width:550px;" >

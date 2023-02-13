@@ -15,6 +15,7 @@ public class MemberDeleteAction implements Action {
 		
 		MemberDAO mdao = new MemberDAO();
 		String empno = request.getParameter("empno");
+		System.out.println(empno);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		int result = mdao.delete(empno);
