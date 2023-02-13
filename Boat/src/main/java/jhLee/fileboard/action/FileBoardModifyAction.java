@@ -102,7 +102,7 @@ public class FileBoardModifyAction implements Action {
 			
 			forward.setRedirect(true);
 			//수정한 글 내용을 보여주기 위해 글 내용 보기 페이지로 이동하기 위해 경로를 설정합니다.
-			forward.setPath("FileBoadrdDetailAction.filebo?num="+boarddata.getFILE_NUM());
+			forward.setPath("FileBoadDetailAction.filebo?num="+boarddata.getFILE_NUM());
 			return forward;
 			
 		}catch(IOException e) {

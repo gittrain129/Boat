@@ -105,7 +105,7 @@
 		 </div><%--div class filedown끝 --%>
 		 <%-- </c:if>--%>
      
-        </div>
+     
         <div class="bt_wrap">
         
            
@@ -197,11 +197,11 @@
 		
 	</div><%--card-body end --%>		
 	 							
-								
-								<%--댓글 입력 js ajax추가부분 --%>
+						
 								
 								
                         </div>
+                           </div>		
 <%-- class="card bg-light">end --%>
 <%-- class="comment end --%>
 

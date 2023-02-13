@@ -221,6 +221,11 @@
 			                		  
 			                		  
 	            });
+	            $('#undo').click(function(){
+	            	$('#title').val("");
+	            	 location.reload();
+	    	   			
+	            })
 	            calendar.unselect();  //ok
 	            },   eventClick: function (arg) {
 	            	console.log(arg)
@@ -263,6 +268,8 @@
 	   
 	    }
    var loadingobj=null;
+   
+   
 		function loadingEvents(info){
 			loadingobj = new Object();
 			loadingobj.dept = info;
@@ -345,7 +352,7 @@
 			</select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">돌아가기</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id ="undo">돌아가기</button>
         <button type="button" class="btn btn-primary" id ="saveBtn">&nbsp;&nbsp;일정 저장&nbsp;&nbsp;</button>
       </div>
     </div>
