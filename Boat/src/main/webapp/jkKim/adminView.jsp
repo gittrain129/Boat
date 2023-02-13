@@ -93,21 +93,26 @@ opacity:0.6;
           <p> </p>
           <div class="card" style="height:376px">
           
-            <div class="card-header" onclick="send_empno2()" id="onclickpart1">
+            <div class="card-header" onclick="location.href='../memberInfo.net?empno=${m.empno}'" id="onclickpart1">
               ${m.dept }
             </div>
             <div style="width:100%; height:210px; object-fit:cover;">
-            <img src=${pageContext.request.contextPath}${m.imgsrc} id="onclickpart2" onclick="send_empno2()" onerror="this.src='${pageContext.request.contextPath}/image/ano.png'" style="width:100%; height:100%; object-fit:cover;" />
+            <img src=${pageContext.request.contextPath}${m.imgsrc} id="onclickpart2" onclick="location.href='../memberInfo.net?empno=${m.empno}'" onerror="this.src='${pageContext.request.contextPath}/image/ano.png'" style="width:100%; height:100%; object-fit:cover;" />
             </div>
             <div class="card-body">
-              <h5 class="card-title" id="onclickpart3" onclick="send_empno2()" >${m.name }</h5>
-              <p class="card-text" id="ori-email-tag" onclick="send_empno()" style="z-index:50;">이메일: ${m.email }</p>
+              <h5 class="card-title" id="onclickpart3" onclick="location.href='../memberInfo.net?empno=${m.empno}'" >${m.name }</h5>
+              <p class="card-text" id="ori-email-tag" onclick="location.href='../email.ne?empno=${m.empno}'">이메일: ${m.email }</p>
+              
+              
+              <!-- 
               <form name="empnoform" id="email-tag" method="post"  action="${pageContext.request.contextPath}/email.ne" style="display:none">
               <input type=radio id="empno" name="empno" style="display:none" value=${m.empno } checked></input>
               </form>
               <form name="empnoform2" id="empno-tag" method="post"  action="${pageContext.request.contextPath}/memberInfo.net" style="display:none">
               <input type=radio id="empno" name="empno" style="display:none" value=${m.empno } checked></input>
               </form>
+               -->
+               
               <!-- <a href="#" class="btn btn-primary">More</a>  -->
               <!-- onClick 이메일로 연결하기 -->
             </div> <!-- 카드바디 3가지 끝 -->
@@ -178,19 +183,7 @@ opacity:0.6;
     <jsp:include page="/sjKim/boat/footer.jsp" /> 
    </footer>
    
-     <script>
-   function send_empno(){
-	   document.getElementById('email-tag').submit();
-	  
-	}
-   
-   function send_empno2(){
-	   document.getElementById('empno-tag').submit();
-	  
-	}
-   
-   
-   </script>
+    
    
   </body>
   

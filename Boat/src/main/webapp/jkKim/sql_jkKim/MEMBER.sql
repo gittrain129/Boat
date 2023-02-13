@@ -56,6 +56,8 @@ IMGSRC VARCHAR2(150)
   INSERT INTO member (EMPNO, DEPT, DEPTNO, PASSWORD,PWCHECK,NAME,JUMIN,ADDRESS,POST,GENDER,EMAIL,PHONE,MEMBERFILE,IMGSRC)
  VALUES('235002','영업팀','50','123456','123456','최동길','8811221012345','서울특별시 종로구 율곡로10길 105 디아망', '12345','m','bgd123@boat.com','01012345678','안녕하세요 반갑습니다','/image/image_sample.png');
  
+ update member set memberfile= '/image_sample1.png'
+ 
  delete from member where name='홍동길'
  
  
@@ -126,7 +128,7 @@ select count(*) from member where empno not like '%ADMIN%'
 select rownum, empno, name, dept, email, imgsrc from member where empno not like '%ADMIN%' order by deptno asc 
 
 
-
+update member set imgsrc = 'no' where deptno=20;
 
 
 
