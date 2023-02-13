@@ -49,6 +49,7 @@ public class MemberUpdateProcessAction implements Action {
 			
 			String memberfile = multi.getFilesystemName("memberfile");
 			System.out.println("memberfile=" + memberfile);
+			
 			Member m = new Member();
 			m.setEmail(email);			m.setGender(gender);		m.setDept(dept);
 			m.setDeptno(deptno);		m.setName(name);			m.setAge(age);

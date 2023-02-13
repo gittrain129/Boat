@@ -30,13 +30,13 @@ span{
 						<input type='text' name='empno' id='empno' style="width:550px" value="${memberinfo.empno}" readonly>
 					
 						<label for="dept" style="padding-top: 10px;">부서명</label>
-						<input type='text' placeholder='부서명을 입력하세요..' name='dept' id='dept' style="width:550px;" value="${memberinfo.dept}" >
+						<input type='text' placeholder='부서명을 입력하세요..' name='dept' id='dept' style="width:550px;" value="${memberinfo.dept}" required>
 						
 						<label for="deptno" style="padding-top: 10px;">부서번호</label>
-						<input type='text' placeholder='부서번호를 입력하세요..' name='deptno' id='deptno' style="width:550px;" value="${memberinfo.deptno}">
+						<input type='text' placeholder='부서번호를 입력하세요..' name='deptno' id='deptno' style="width:550px;" value="${memberinfo.deptno}" required>
 					
 						<label for="name" style="padding-top: 10px;">이름</label>
-						<input type='text' placeholder='성함을 입력하세요..' name='name' id='name' style="width:550px;" value="${memberinfo.name}">
+						<input type='text' placeholder='성함을 입력하세요..' name='name' id='name' style="width:550px;" value="${memberinfo.name}" required>
 						
 						<label for="age" style="padding-top: 10px;">나이</label>
 						<input type='text' placeholder='나이를 입력하세요..' name='age' id='age' style="width:550px;" maxLength="3" value="${memberinfo.age}" required>
@@ -89,11 +89,11 @@ span{
 				
 							
 					<label for="address">주소</label>
-					<input type='text' size='50' name='address' id='address' value="${memberinfo.address}">
+					<input type='text' size='50' name='address' id='address' value="${memberinfo.address}" required>
 				
 				
 					<label for="intro">자기소개</label>
-					<textarea rows='10' name="intro" id="intro" maxLength="100" value="${memberinfo.intro}"></textarea>
+					<textarea rows='10' name="intro" id="intro" maxLength="100" required>${memberinfo.intro}</textarea>
 					
 					
 					<div class= "clearfix">

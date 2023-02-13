@@ -190,18 +190,20 @@ public class MemberDAO {
 				m.setEmpno(rs.getString(1));
 				m.setDept(rs.getString(2));
 				m.setDeptno(rs.getInt(3));
-				m.setName(rs.getString(4));
-				m.setAge(rs.getInt(5));
-				m.setPassword(rs.getString(6));
+				m.setPassword(rs.getString(4));
+				m.setPwcheck(rs.getString(5));
+				m.setName(rs.getString(6));				
 				m.setJumin(rs.getString(7));
 				m.setAddress(rs.getString(8));
 				m.setPost(rs.getString(9));
 				m.setGender(rs.getString(10));
 				m.setEmail(rs.getString(11));
-				m.setMemberfile(rs.getString(12));
-				m.setIntro(rs.getString(13));
+				m.setPhone(rs.getInt(12));
+				m.setMemberfile(rs.getString(13));
 				m.setImgsrc(rs.getString(14));
-
+				m.setRegister_date(rs.getString(15));
+				m.setIntro(rs.getString(16));		
+				m.setAge(rs.getInt(17));
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -255,6 +257,7 @@ public class MemberDAO {
 			pstmt.setString(9, m.getMemberfile());
 			pstmt.setString(10, m.getIntro());
 			pstmt.setString(11,img+ m.getMemberfile());
+			
 			pstmt.setString(12, m.getEmpno());
 			result = pstmt.executeUpdate();
 		}catch (Exception e) {
@@ -350,14 +353,23 @@ public class MemberDAO {
 			
 			while(rs.next()) {
 				Member m = new Member();
-				m.setEmpno(rs.getString("empno"));
-				m.setPassword(rs.getString(2));
-				m.setAddress(rs.getString(3));
-				m.setPost(rs.getString(4));
-				m.setGender(rs.getString(5));
-				m.setEmail(rs.getString(6));
-				m.setMemberfile(rs.getString(7));
-				m.setIntro(rs.getString(8));
+				m.setEmpno(rs.getString(1));
+				m.setDept(rs.getString(2));
+				m.setDeptno(rs.getInt(3));
+				m.setPassword(rs.getString(4));
+				m.setPwcheck(rs.getString(5));
+				m.setName(rs.getString(6));				
+				m.setJumin(rs.getString(7));
+				m.setAddress(rs.getString(8));
+				m.setPost(rs.getString(9));
+				m.setGender(rs.getString(10));
+				m.setEmail(rs.getString(11));
+				m.setPhone(rs.getInt(12));
+				m.setMemberfile(rs.getString(13));
+				m.setImgsrc(rs.getString(14));
+				m.setRegister_date(rs.getString(15));
+				m.setIntro(rs.getString(16));		
+				m.setAge(rs.getInt(17));
 				list.add(m);				
 			}
 			
@@ -399,7 +411,7 @@ public class MemberDAO {
 		try {
 			con = ds.getConnection();
 			String sql = "select count(*) from member "
-					   + "where empno != 'admin' "
+					   + "where empno != 'ADMIN' "
 					   + " and " + field + " like ?"; //and name like '%홍길동%'
 			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
@@ -471,14 +483,23 @@ public class MemberDAO {
 			
 			while(rs.next()) {
 				Member m = new Member();
-				m.setEmpno(rs.getString("empno"));
-				m.setPassword(rs.getString(2));
-				m.setAddress(rs.getString(3));
-				m.setPost(rs.getString(4));
-				m.setGender(rs.getString(5));
-				m.setEmail(rs.getString(6));
-				m.setMemberfile(rs.getString(7));
-				m.setIntro(rs.getString(8));
+				m.setEmpno(rs.getString(1));
+				m.setDept(rs.getString(2));
+				m.setDeptno(rs.getInt(3));
+				m.setPassword(rs.getString(4));
+				m.setPwcheck(rs.getString(5));
+				m.setName(rs.getString(6));				
+				m.setJumin(rs.getString(7));
+				m.setAddress(rs.getString(8));
+				m.setPost(rs.getString(9));
+				m.setGender(rs.getString(10));
+				m.setEmail(rs.getString(11));
+				m.setPhone(rs.getInt(12));
+				m.setMemberfile(rs.getString(13));
+				m.setImgsrc(rs.getString(14));
+				m.setRegister_date(rs.getString(15));
+				m.setIntro(rs.getString(16));		
+				m.setAge(rs.getInt(17));
 				list.add(m);				
 			}
 			
