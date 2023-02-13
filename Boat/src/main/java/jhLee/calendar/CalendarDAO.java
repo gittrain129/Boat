@@ -154,7 +154,7 @@ public class CalendarDAO {
 
 			while (rs.next()) {// 더이상 읽을 데이터가 없을때까지 반복
 				JsonObject json = new JsonObject();
-				json.addProperty("id", rs.getInt("schedule_code"));
+				//json.addProperty("id", rs.getInt("schedule_code"));
 				json.addProperty("title", rs.getString("event_name"));
 				json.addProperty("start", rs.getString("start_date"));
 				json.addProperty("end", rs.getString("end_date"));
@@ -292,6 +292,7 @@ public class CalendarDAO {
 				
 				list.add(json);
 			}
+			System.out.println(list);
 			return list;
 
 		} catch (Exception ex) {

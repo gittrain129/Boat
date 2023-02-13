@@ -50,6 +50,8 @@ public class CalendarFrontController extends javax.servlet.http.HttpServlet {
 				case "/project_calendardelete.cal":
 					action = new CaldeleteAction();
 					break;
+				
+					//dept 확인 후 
 				case "/project_calendarshow.cal":
 					action = new CalShowAction();
 					break;

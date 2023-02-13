@@ -39,12 +39,9 @@ public class Calupdate implements Action {
 			System.out.println("업데이트 실패");
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('비밀번호가 다릅니다.')");
-			//out.println("history.back();");
-			out.println("</script>");
-			out.close();
-			return null;
+			out.print(update);
+			
+			return null;   
 		}
 		return null;
 	
