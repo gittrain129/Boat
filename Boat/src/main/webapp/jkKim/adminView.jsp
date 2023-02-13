@@ -29,6 +29,20 @@
  
 #ori-email-tag:hover{
 cursor:pointer;
+text-decoration:underline; color:#8600E4
+}
+
+#onclickpart1:hover{
+cursor:pointer;
+opacity:0.6;
+}
+#onclickpart2:hover{
+cursor:pointer;
+opacity:0.6;
+}
+#onclickpart3:hover{
+cursor:pointer;
+opacity:0.6;
 }
  
  </style>
@@ -41,6 +55,10 @@ cursor:pointer;
     <div class="container"> <!-- 카드+ 페이지 전체포함한 div -->
     
 	<c:if test="${listcount > 0 }">
+	
+
+	
+	
 	
   		<div id="whole-body">
       <div class="row" > <!--  카드 포함한 div -->
@@ -57,9 +75,9 @@ cursor:pointer;
 	</select>	
 	</div>
 	
-	<div class="container" id="search_body2" style="width:50%; position:relative; left:170px;">
+	<div class="container" id="search_body2" style="width:50%; position:relative; left:315px;">
             <div class="row">
-            <input type='text' name='search' id='search' class=" col ml-3">
+            <input type='text' name='search' id='search' class=" col-8 ml-3">
             <button class="btn btn-info" name='search-btn' id='search-btn'>검색</button>
          </div>
       
@@ -67,24 +85,25 @@ cursor:pointer;
 	
 	<!-- 부서선택 셀렉트 바 끝 -->
 
-     <div class="row" id="cardbody" style="width:100%">
+     <div class="row" id="cardbody">
       <c:forEach var="m" items="${memberlist }">
       <!-- 1인 카드 시작 -->
       
-        <div class="col-md-3">
+        <div class="col-3" id="bodybody">
           <p> </p>
-          <div class="card" style="height:376px">
+          <div class="card">
           
-            <div class="card-header">
+            <div class="card-header" onclick="send_empno2()" id="onclickpart1">
               ${m.dept }
             </div>
-             <div style="width:100%; height:210px; object-fit:cover;">
-            <img src=${pageContext.request.contextPath}${m.imgsrc} onerror="this.src='${pageContext.request.contextPath}/image/ano.png'" style="width:100%; height:100%; object-fit:cover;" />
-           </div>
+            <img src=${pageContext.request.contextPath}${m.imgsrc} id="onclickpart2" onclick="send_empno2()" onerror="this.src='${pageContext.request.contextPath}/image/ano.png'" style="object-fit:cover;" />
             <div class="card-body">
-              <h5 class="card-title">${m.name }</h5>
-              <p class="card-text" id="ori-email-tag" onclick="send_empno()">이메일: ${m.email }</p>
+              <h5 class="card-title" id="onclickpart3" onclick="send_empno2()" >${m.name }</h5>
+              <p class="card-text" id="ori-email-tag" onclick="send_empno()" style="z-index:50;">이메일: ${m.email }</p>
               <form name="empnoform" id="email-tag" method="post"  action="${pageContext.request.contextPath}/email.ne" style="display:none">
+              <input type=radio id="empno" name="empno" style="display:none" value=${m.empno } checked></input>
+              </form>
+              <form name="empnoform2" id="empno-tag" method="post"  action="${pageContext.request.contextPath}/memberInfo.net" style="display:none">
               <input type=radio id="empno" name="empno" style="display:none" value=${m.empno } checked></input>
               </form>
               <!-- <a href="#" class="btn btn-primary">More</a>  -->
@@ -160,8 +179,12 @@ cursor:pointer;
      <script>
    function send_empno(){
 	   document.getElementById('email-tag').submit();
-	    
-		
+	  
+	}
+   
+   function send_empno2(){
+	   document.getElementById('empno-tag').submit();
+	  
 	}
    
    
