@@ -19,7 +19,12 @@
  		<h1>${myinfo.dept}</h1>
  		<h2>&nbsp;</h2>
 	 	<div class="memberfile">
-	 		<img src="${pageContext.request.contextPath}${myinfo.imgsrc}">
+	 		<c:if test="${myinfo.imgsrc == null}">
+	 			<img src="${pageContext.request.contextPath}/ejYang/image/profile.png">
+	 		</c:if>
+	 		<c:if test="${myinfo.imgsrc != null}">
+	 			<img src="${pageContext.request.contextPath}${myinfo.imgsrc}">
+	 		</c:if>
 		</div>
 	</section>
 	</div>
