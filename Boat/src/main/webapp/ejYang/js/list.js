@@ -22,8 +22,8 @@ function ajax(sdata){
 		dataType : "json",
 		cache : false,
 		success : function(data){
-			$("#country").val(0).prop("selected", true);
-			$('input').attr("placeholder", "작성자를 입력하세요.");
+			//$("#country").val(0).prop("selected", true);
+			//$('input').attr("placeholder", "작성자를 입력하세요.");
 			$(".search-window").find("span").text("총 글 개수 : " + data.listcount);
 			
 			if(data.listcount > 0){//총갯수가 0보다 큰 경우
@@ -44,10 +44,11 @@ function ajax(sdata){
 						output += (num--) + '</td>'
 					}
 					const blank_count = item.board_re_lev * 2 + 1;
+					console.log('blank_count='+blank_count);
 					let blank = '&nbsp;';
 					let blank1 = '&nbsp;';
-					for(let i = 0; i <blank_count; i++){
-						blank += '&nbsp&nbsp;';
+					for(let i = 1; i <blank_count; i++){
+						blank += '&nbsp;';
 					}
 					
 					let img="";
@@ -68,9 +69,12 @@ function ajax(sdata){
 					}
 					
 					output += '<td class="title-td"><div>' + blank + img
-					output += '<a href="BoardDetailAction.bo?num='+ item.board_num + '">'
+					
+					if($('#loginboard')==null){
+						output += '<a href="BoardDetailAction.bo?num='+ item.board_num + '">'
+					}
 					output += subject.replace(/</g,'&lt;').replace(/>/g,'&gt;')
-									+ '</a>'+blank1+'[' + item.cnt + ']'+blank1	
+									+ '</a>'+blank1+'[' + item.cnt + ']'
 					output += img2 + '</div></td>'
 					output += '<td><div>' + item.board_dept + '</div></td>'
 					output += '<td><div>' + item.board_name + '</div></td>'
@@ -112,6 +116,11 @@ function ajax(sdata){
 				
 				$('.page_nation').append(output)
 			}//if(data.listcount)>0 end
+			else{
+				$('tbody').empty();
+				output = '<tr><td colspan="6"><h2>글이 없습니다.</h2></td></tr>'
+				$('tbody').append(output)
+			}
 		},//success end
 		error : function(){
 			console.log('에러')
@@ -123,20 +132,6 @@ function ajax(sdata){
 $(function(){
 	//let search_field = $('#country').val();
 	//console.log('search_field='+search_field)	
-	
-	//검색 클릭 후 응답화면에는 검색시 선택한 필드가 선택되도록 합니다.
-	let selectedValue = '${search_field}'
-	if(selectedValue != -1)
-		$('#country').val(selectedValue);
-	else
-		selectedValue=0;	//선택된 필드가 없는 경우 기본적으로 작성자를 선택하도록 합니다.
-	
-	console.log('selectedValue='+selectedValue)	
-	
-	//검색 후 selectedValue값에 따라 placeholder가 나타나도록 합니다.
-	const message = ["작성자를","제목을"];
-	$('input').attr("placeholder", message[selectedValue] + " 입력하세요.");
-	
 	
 	
 	
@@ -152,10 +147,37 @@ $(function(){
 		go(1);
 	});//button click end
 	
+	
+	//검색 클릭 후 응답화면에는 검색시 선택한 필드가 선택되도록 합니다.
+	let selectedValue = '${search_field}'
+	if(selectedValue != -1)
+		$('#country').val(selectedValue);
+	else
+		selectedValue=0;	//선택된 필드가 없는 경우 기본적으로 작성자를 선택하도록 합니다.
+	console.log('selectedValue='+selectedValue)	
+	
+	
+	//검색 후 selectedValue값에 따라 placeholder가 나타나도록 합니다.
+	const message = ["작성자를","제목을"];
+	$('input').attr("placeholder", message[selectedValue] + " 입력하세요.");
+	
+	
+	
+	//부서명 변경한 경우
+	$("#department").change(function(){
+		go(1);
+	});
+	
+	//정렬 변경한 경우
+	$("#listse").change(function(){
+		go(1);
+	});
+	
 	//검색어 입력창에 placeholder가 나타나도록 합니다.
 	$('#country').change(function(){
 		selectedValue = $(this).val();
 		$("input").val('');
+		const message = ["작성자를","제목을"];
 		$("input").attr("placeholder",message[selectedValue] + " 입력하세요.");
 	})//$('#country').change end
 	

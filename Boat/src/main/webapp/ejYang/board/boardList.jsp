@@ -78,8 +78,10 @@
 	 		      	  		&nbsp;
 	 		      	  	</c:if>
 	 		      	  	
+	 		      	  	<c:if test="${!empty empno}">
 	 		      	  	<%-- 제목이 너무 길면 '...'으로 처리 --%>
 	 		      	  	<a href="BoardDetailAction.bo?num=${b.board_num}">
+	 		      	  	</c:if>
 	 		      	  		<c:if test="${b.board_subject.length()>=20}">
 	 		      	  		  <c:out value="${b.board_subject.substring(0,20)}..."/>
 	 		      	  		</c:if>
@@ -88,6 +90,7 @@
 	 		      	  		  
 	 		      	  		</c:if>
 	 		      	  	</a>&nbsp;[${b.cnt}]
+	 		      	  	
 	 		      	  	<c:if test="${b.board_date > nowday}">
 	 		      	  		<img src="${pageContext.request.contextPath}/ejYang/image/new.jpg" id="new">
 	 		      	  	</c:if>
@@ -128,7 +131,7 @@
  				 </c:if>
 			   </div>
 			   <select id="department" name="department">
-		          <option value="selected" selected>부서명</option>
+		          <option value="selected">부서명</option>
 		          <option value="홍보팀">홍보팀</option>
 		          <option value="개발팀">개발팀</option>
 		          <option value="인사팀">인사팀</option>
@@ -136,7 +139,7 @@
 		          <option value="영업팀">영업팀</option>
 		       </select>
 			   <select id="listse" name="listse">
-		          <option value="selecteds" selected>정렬</option>
+		          <option value="3" selected>정렬</option>
 		          <option value="0">최신순</option>
 		          <option value="1">조회순</option>
 		          <option value="2">댓글순</option>

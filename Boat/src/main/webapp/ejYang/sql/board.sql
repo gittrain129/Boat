@@ -111,42 +111,50 @@ ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC
 SELECT * FROM(
 select ROWNUM RNUM, J.* from
 (select * from BOARD
+WHERE BOARD_NOTICE = 'N'
 ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J
 WHERE ROWNUM <	(select RNUM from
 				(select ROWNUM RNUM, J.* from
 				(select * from BOARD
+				WHERE BOARD_NOTICE = 'N'
 				ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J)
-				WHERE BOARD_NUM = 16)
+				WHERE BOARD_NUM = 6)
 ) WHERE RNUM = (SELECT MAX(RNUM) from
 				(select ROWNUM RNUM, J.* from
 				(select * from BOARD
+				WHERE BOARD_NOTICE = 'N'
 				ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J
 				WHERE ROWNUM <	(select RNUM from
 								(select ROWNUM RNUM, J.* from
 								(select * from BOARD
+								WHERE BOARD_NOTICE = 'N'
 								ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J)
-								WHERE BOARD_NUM = 16)))
+								WHERE BOARD_NUM = 6)))
 
 --이전글 쿼리
 SELECT * FROM
 (SELECT * FROM(
 	select ROWNUM RNUM, J.* from
 			(select * from BOARD
+			WHERE BOARD_NOTICE = 'N'
 			ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J
 ) WHERE RNUM > (select RNUM from
 								(select ROWNUM RNUM, J.* from
 									(select * from BOARD
+									WHERE BOARD_NOTICE = 'N'
 									ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J)
-						WHERE BOARD_NUM = 16)		
+						WHERE BOARD_NUM = 6)		
 ) WHERE RNUM = (SELECT MIN(RNUM) FROM(
 					select ROWNUM RNUM, J.* from
 							(select * from BOARD
+							WHERE BOARD_NOTICE = 'N'
 							ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J
 				) WHERE RNUM > (select RNUM from
 												(select ROWNUM RNUM, J.* from
 													(select * from BOARD
+													WHERE BOARD_NOTICE = 'N'
 													ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) J)
-										WHERE BOARD_NUM = 16))
+										WHERE BOARD_NUM = 6))
 
 
 
@@ -199,4 +207,72 @@ select*from(select rownum rnum, j.*
 where rnum>=1 and rnum<=13;
 
 
+--ajax 검색 기본
+select*from(select rownum rnum, j.* 
+			from (SELECT BOARD.*, NVL(CNT, 0) AS CNT 
+					FROM BOARD LEFT OUTER JOIN (SELECT B_COMMENT_NUM, COUNT(*) CNT FROM BOARD_COMMENT 
+												GROUP BY B_COMMENT_NUM)	
+					ON BOARD_NUM = B_COMMENT_NUM  
+					where BOARD_NAME = '홍길동'
+					AND BOARD_NOTICE = 'Y'
+					AND BOARD_DEPT like '홍보팀'
+					ORDER BY BOARD_RE_REF DESC, 
+					BOARD_RE_SEQ ASC) j 
+			where rownum<= 3) 
+where rnum >= 1 and rnum <= 3
+UNION ALL
+select*from(select rownum rnum, j.* 
+			from (SELECT BOARD.*, NVL(CNT, 0) AS CNT 
+					FROM BOARD LEFT OUTER JOIN (SELECT B_COMMENT_NUM, COUNT(*) CNT FROM BOARD_COMMENT 
+												GROUP BY B_COMMENT_NUM)	
+					ON BOARD_NUM = B_COMMENT_NUM  
+					where BOARD_NAME = '홍길동'
+					AND BOARD_NOTICE = 'N'
+					AND BOARD_DEPT like '홍보팀'
+					ORDER BY BOARD_RE_REF DESC, 
+					BOARD_RE_SEQ ASC) j 
+			where rownum<= 3) 
+where rnum >= 1 and rnum <= 3
+
+--ajax 검색 최신순 BOARD_DATE
+select*from(select rownum rnum, j.* 
+			from (SELECT BOARD.*, NVL(CNT, 0) AS CNT 
+					FROM BOARD LEFT OUTER JOIN (SELECT B_COMMENT_NUM, COUNT(*) CNT FROM BOARD_COMMENT 
+												GROUP BY B_COMMENT_NUM)	
+					ON BOARD_NUM = B_COMMENT_NUM  
+					where BOARD_NAME = '홍길동'
+					AND BOARD_DEPT like '홍보팀'
+					ORDER BY BOARD_DATE DESC,
+					BOARD_RE_REF DESC, 
+					BOARD_RE_SEQ ASC) j --추가된 부분
+			where rownum<= 3) 
+where rnum >= 1 and rnum <= 3
+
+--ajax 검색 조회순 BOARD_READCOUNT
+select*from(select rownum rnum, j.* 
+			from (SELECT BOARD.*, NVL(CNT, 0) AS CNT 
+					FROM BOARD LEFT OUTER JOIN (SELECT B_COMMENT_NUM, COUNT(*) CNT FROM BOARD_COMMENT 
+												GROUP BY B_COMMENT_NUM)	
+					ON BOARD_NUM = B_COMMENT_NUM  
+					where BOARD_NAME = '홍길동'
+					AND BOARD_DEPT like '홍보팀'
+					ORDER BY BOARD_READCOUNT DESC,	--추가된 부분
+					BOARD_RE_REF DESC,
+					BOARD_RE_SEQ ASC) j 
+			where rownum<= 3) 
+where rnum >= 1 and rnum <= 3
+
+--ajax 검색 댓글순 CNT
+select*from(select rownum rnum, j.* 
+			from (SELECT BOARD.*, NVL(CNT, 0) AS CNT 
+					FROM BOARD LEFT OUTER JOIN (SELECT B_COMMENT_NUM, COUNT(*) CNT FROM BOARD_COMMENT 
+												GROUP BY B_COMMENT_NUM)	
+					ON BOARD_NUM = B_COMMENT_NUM  
+					where BOARD_NAME = '홍길동'
+					AND BOARD_DEPT like '홍보팀'
+					ORDER BY CNT DESC,	--추가된 부분
+					BOARD_RE_REF DESC,
+					BOARD_RE_SEQ ASC) j 
+			where rownum<= 3) 
+where rnum >= 1 and rnum <= 3
 
