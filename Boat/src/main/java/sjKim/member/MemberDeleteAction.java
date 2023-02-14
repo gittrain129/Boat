@@ -19,10 +19,11 @@ public class MemberDeleteAction implements Action {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		int result = mdao.delete(empno);
+		
 		if(result == 1) {
-			out.println("<scrpit>");
+			out.println("<script>");
 			out.println("alert('삭제 성공입니다.');");
-			out.println("location.href='memberList.net'");
+			out.println("location.href='jkKim/adminView.jk'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");

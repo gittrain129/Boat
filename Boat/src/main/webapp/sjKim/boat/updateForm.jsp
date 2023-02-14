@@ -2,9 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
+<jsp:include page="header.jsp" />
 <title>회원관리 시스템 회원수정 페이지</title>
 <link href="${pageContext.request.contextPath}/sjKim/css/update.css" rel="stylesheet" type="text/css">
 <style>
+body{
+	margin-top: 20%;
+}
 
 span{
 		font-size: 15px;
@@ -30,7 +34,12 @@ span{
 						<input type='text' name='empno' id='empno' style="width:550px" value="${memberinfo.empno}" readonly>
 					
 						<label for="dept" style="padding-top: 10px;">부서명</label>
-						<div class="container3" style="width:550px">
+						<div     style="border: 2px solid #18a8f1;
+								    padding: 1.5% 1%;
+								    word-spacing: 10px;
+								    margin-bottom: 20px;
+								    width: 550px;
+								    text-align: center;">
 							<input type='radio' name='dept' value='홍보팀' checked><span>홍보팀</span>
 							<input type='radio' name='dept' value='개발팀' ><span>개발팀</span>
 							<input type='radio' name='dept' value='인사팀' ><span>인사팀</span>
@@ -48,8 +57,8 @@ span{
 					
 					
 				<div class="top_block2">
-					<label style="text-align: center; margin-top:50px;">
-						<span id="filename">${memberinfo.memberfile}</span>
+					<label style="text-align: center; margin-top:80px;">
+
 						<span id="showImage">
 							<c:if test='${empty memberinfo.memberfile}'>
 								<c:set var='src' value='sjKim/image/profile.png'/>
@@ -188,6 +197,7 @@ span{
 	
 	</script>
 </body>
+<jsp:include page="footer.jsp" />
 </html>
 
 
