@@ -28,6 +28,9 @@ public class CaldeleteAction implements Action {
 		 
 		 if(result ==true) {
 			 System.out.println("++삭제 완료");
+			 response.setContentType("text/html;charset=utf-8");
+			 PrintWriter out = response.getWriter();
+			 out.print(result);
 		 }else if(result ==false){
 				System.out.println("삭제 실패");
 				response.setContentType("text/html;charset=utf-8");

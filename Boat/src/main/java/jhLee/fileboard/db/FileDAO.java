@@ -671,7 +671,7 @@ public class FileDAO {
 			pstmt.setInt(9, re_seq);
 			pstmt.setInt(10, 0);//board_readcount(조회수)는0
 			pstmt.setString(11,filebo.getDEPT());//
-			pstmt.setString(11,filebo.getFIlE_EMPNO());
+			pstmt.setString(12,filebo.getFIlE_EMPNO());
 					if(pstmt.executeUpdate()==1) {
 						con.commit();//commit합니다.
 					}else {
