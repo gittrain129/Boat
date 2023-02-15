@@ -223,10 +223,13 @@
 	 	            	                type: "POST",
 	 	            	                url: "${pageContext.request.contextPath}/project_calendardelete.cal",
 	 									data : object,
+	 									async:false,
 	 	            	                success: function (result) {
 	 	            	                  console.log("삭제완료");
-	 	            	console.log(result)
-	 	            	if(result==false){
+	 	            				console.log("1=" + result)
+	 	            				console.log(result=='false')
+	 	            				
+	 	            				if(result=='false'){
 	 	            		alert('등록한 글만 삭제 가능합니다.')
 	 	            		setTimeout(function(){
 	    							location.reload();},1500);	}

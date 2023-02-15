@@ -79,7 +79,7 @@ public class FileBoardReplyAction implements Action {
 		System.out.println("답장 완료");
 		forward.setRedirect(true);
 		// 글 답변 페이지 경로 지정합니다.
-		forward.setPath("FileBoadrdDetailAction.filebo?num="+result);
+		forward.setPath("FileBoadDetailAction.filebo?num="+result);
 		return forward;
 		}catch(IOException ex) {
 			ex.printStackTrace();
